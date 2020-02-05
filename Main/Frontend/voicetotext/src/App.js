@@ -3,8 +3,9 @@ import logo from './pchlogo.png';
 import './App.css';
 
 
-import Home from './Home';
 
+import Home from './Home';
+import FileUpload from './FileUpload';
 
 
 class App extends Component {
@@ -17,7 +18,12 @@ class App extends Component {
 
 
         </header>
+
+        <FileUpload/>>
+            
         <Home/>
+
+
       </div>
       
       
