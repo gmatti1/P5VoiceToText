@@ -1,3 +1,13 @@
+.Navbar {
+ padding: 20px;
+}
+
+.App-logobig {
+/* animation: App-logo-spin infinite 20s linear; */
+  height: 100px;
+  justify-content: center;
+}
+
 .App-bg {
   margin: 0;
   position: absolute;
@@ -5,7 +15,7 @@
   opacity:0.95;
   width: 100%;  
   height:400px;
-  top: 60%;
+  top: 58%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   
@@ -15,11 +25,11 @@
   margin: 0;
   position: absolute;
   background: rgb(0, 0, 0); /* Fallback color */
-  background: rgba(0, 0, 0, 0.7); /* Black background with 0.5 opacity */
+  background: rgba(0, 0, 0, 0.75); /* Black background with 0.5 opacity */
   height: 200px;
   color: #f1f1f1;
   width: 100%;
-  top: 60%;
+  top: 58%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   
@@ -30,8 +40,8 @@
   position: relative;  
   text-align: center;
   font-size: 2.5em;
-  font-weight: 300;
-  font-family: New Century Schoolbook, TeX Gyre Schola, serif;
+  font-weight: 450;
+  font-family: Josefin Sans;
   top: 50%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
