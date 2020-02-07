@@ -10,6 +10,7 @@ import FileUpload from './FileUpload';
 
 class App extends Component {
   render() {
+
     return (
       <div className="App">
         <header className="App-header">
@@ -19,7 +20,7 @@ class App extends Component {
 
         </header>
 
-        <FileUpload/>>
+        <FileUpload/>
             
         <Home/>
 
