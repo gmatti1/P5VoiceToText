@@ -11,33 +11,37 @@ class Home extends Component {
 
         this.state = {
             columnDefs: [
-                {headerName: 'Category', field: 'category'},
-                {headerName: 'Value', field: 'value'}
+                {headerName: 'Converted Text', field: 'category'}
             ],
             rowData: [
-                {category: 'Identification', value: 'Celica'},
-                {category: 'Mechanism', value: 'Mondeo'},
-                {category: 'Injuries', value: 'Boxter'},
-                {category: 'Signs and Symptoms', value: 'Boxter'},
-                {category: 'Treatment', value: 'Boxter'},
-                {category: 'Allergies', value: 'Boxter'},
-                {category: 'Medications', value: 'Boxter'},
-                {category: 'Background', value: 'Boxter'},
-                {category: 'Other Info', value: 'Boxter'}
+                {category: 'Test data'}
             ]
         }
     }
 
     render() {
         return (
-            <div
-                className="ag-theme-balham"
-                style={{ height: '300px', width: '420px', paddingLeft: '500px' }}
-            >
-                <AgGridReact
-                    columnDefs={this.state.columnDefs}
-                    rowData={this.state.rowData}>
-                </AgGridReact>
+            <div>
+                <div
+                    className="ag-theme-balham"
+                    style={{ height: '300px', width: '420px', paddingLeft: '500px' }}
+                >
+                    <AgGridReact
+                        columnDefs={this.state.columnDefs}
+                        rowData={this.state.rowData}>
+                    </AgGridReact>
+                </div>
+
+                <div
+                    className="ag-theme-balham"
+                    style={{ height: '300px', width: '420px', paddingLeft: '500px' }}
+                >
+                    <AgGridReact
+                        columnDefs={this.state.columnDefs}
+                        rowData={this.state.rowData}>
+                    </AgGridReact>
+                </div>
+            
             </div>
         );
     }
