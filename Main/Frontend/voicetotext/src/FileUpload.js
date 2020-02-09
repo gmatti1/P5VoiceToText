@@ -6,40 +6,40 @@ class FileUpload extends React.Component {
   constructor(props) {
     super(props);
     this.state ={
-      file:null
+      isFileUploaded:null,
     }
+
     this.OnSubmittingForm = this.OnSubmittingForm.bind(this)
-    this.onChangingForm = this.onChangingForm.bind(this)
     this.Upload_file = this.Upload_file.bind(this)
   }
+
   Upload_file(file){
-    const url = 'http://example.com/file-upload';
+    
     const formData = new FormData();
-    formData.append('file',file)
-    const config = {
-        headers: {
-            'content-type': 'multipart/form-data'
+    formData.append('file', this.uploadInput.files[0])
+
+    fetch('/uploadVoiceFile', {
+      method: 'POST',
+      body: formData,
+    }).then((response) => {
+      response.json().then(data => {
+                this.setState({isFileUploaded:data});
+                console.log(this.state.isFileUploaded)
+            })
         }
-    }
-    return  post(url, formData,config)
+      );
   }
+
   OnSubmittingForm(e){
     e.preventDefault() 
-    this.Upload_file(this.state.file).then((response)=>{
-      console.log(response.data);
-    })
-  }
- 
- 
-  onChangingForm(e) {
-    this.setState({file:e.target.files[0]})
+    this.Upload_file()
   }
 
   render() {
     return (
       <form onSubmit={this.OnSubmittingForm}>
         <h1>Please upload the audio file</h1>
-        <input type="file" onChangingForm={this.onChangingForm} />
+        <input type="file" ref={(ref) => { this.uploadInput = ref; }} name='voiceFile' />
         <button type="submit">Upload</button>
       </form>
    )
