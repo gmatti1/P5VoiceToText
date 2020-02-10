@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import WebFont from 'webfontloader';
 
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import App from './App';
+
+
+
 ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
 
 WebFont.load({
   google: {
