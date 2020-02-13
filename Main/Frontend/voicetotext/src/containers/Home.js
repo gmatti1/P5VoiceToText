@@ -47,25 +47,28 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <div
+	  <div className ='Textdata'>
+        <div 
           className='ag-theme-balham'
-          style={{ height: '200px', width: '200px', margin: 'auto' }}
+          style={{ height: '400px', width: '500px' }}
         >
-          <AgGridReact
+          <AgGridReact 
             columnDefs={this.state.columnDefs1}
             rowData={this.state.rowData1}
           ></AgGridReact>
         </div>
-
+       </div>
+	   <div className ='Categorydata'>
         <div
           className='ag-theme-balham'
-          style={{ height: '300px', width: '400px', margin: 'auto' }}
+          style={{ height: '400px', width: '500px' }}
         >
-          <AgGridReact
+          <AgGridReact className="Categorydata"
             columnDefs={this.state.columnDefs}
             rowData={this.state.rowData}
           ></AgGridReact>
         </div>
+		</div>
       </div>
     );
   }

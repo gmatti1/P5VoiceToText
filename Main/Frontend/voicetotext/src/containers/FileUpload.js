@@ -34,6 +34,17 @@ class FileUpload extends React.Component {
 
   render() {
     return (
+      <form onSubmit={this.OnSubmittingForm}>
+        <h1 className="Uploadheader">Please upload the audio file here</h1>
+        <input className ="Input"
+          type='file'
+          ref={ref => {
+            this.uploadInput = ref;
+          }}
+          name='voiceFile'
+        />
+        <button className="Buttonformat" type='submit'>Upload</button>
+      </form>
       <div className='chooseFileUpload'>
         <form onSubmit={this.OnSubmittingForm}>
           <h2>Please upload the audio file</h2>
