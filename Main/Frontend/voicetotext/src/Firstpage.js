@@ -18,14 +18,14 @@ function Firstpage() {
 				
 			</header>
 			<header className="App-footer">
-				<Link
-    activeClass="active"
-    to="main"
-    spy={true}
-    smooth={true}
-    offset={0}
-    duration= {500}
-> <a href="#"><img src={arrow} className="Arrow" alt="arrow" /></a> </Link>
+				<Link activeClass="active"
+						to="main"
+						spy={true}
+						smooth={true}
+						offset={0}
+						duration= {500}>
+						<a href="#"><img src={arrow} className="Arrow" alt="arrow" /></a> 
+				</Link>
 			</header>
 			
 	</div>
