@@ -1,6 +1,6 @@
 import React from 'react';
-import './App.css';
-import logo from './pchlogo.png';
+import './../styles/App.css';
+import logo from './../assets/pchlogo.png';
 
 function Navbar() {
   return (

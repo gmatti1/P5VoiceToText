@@ -1,9 +1,9 @@
-import React from 'react';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Navbar from './Navbar';
-import arrow from './arrow.png';
-import { Link } from 'react-scroll';
+import React from './../../node_modules/react';
+import './../styles/App.css';
+import './../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import Navbar from './../navigation/Navbar';
+import arrow from './../assets/arrow.png';
+import { Link } from './../../node_modules/react-scroll';
 
 function Firstpage() {
   return (

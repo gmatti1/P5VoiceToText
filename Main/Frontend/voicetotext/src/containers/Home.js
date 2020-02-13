@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { AgGridReact } from 'ag-grid-react';
-import 'ag-grid-community/dist/styles/ag-grid.css';
-import 'ag-grid-community/dist/styles/ag-theme-balham.css';
-import './index.css';
+import React, { Component } from './../../node_modules/react';
+import { AgGridReact } from './../../node_modules/ag-grid-react';
+import './../../node_modules/ag-grid-community/dist/styles/ag-grid.css';
+import './../../node_modules/ag-grid-community/dist/styles/ag-theme-balham.css';
+import './../styles/index.css';
 
 class Home extends Component {
   constructor(props) {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from './../../node_modules/react';
 
 class FileUpload extends React.Component {
   constructor(props) {

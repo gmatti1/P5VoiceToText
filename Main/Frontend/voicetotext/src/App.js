@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import './App.css';
+import './styles/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Secondpage from './Secondpage';
-import Firstpage from './Firstpage';
+import Secondpage from './components/Secondpage';
+import Firstpage from './components/Firstpage';
 
 class App extends Component {
   render() {
