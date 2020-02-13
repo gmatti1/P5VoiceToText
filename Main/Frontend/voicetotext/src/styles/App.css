@@ -72,8 +72,6 @@
   opacity: 0.5;
 }
 
-
-.App-footer{
 .Arrow:hover {
   opacity: 0.5;
 }
@@ -103,9 +101,7 @@
 
 .Secondpage {
   height: 100vh;
-  background-color:#FFE4E1;
-  height: 200vh;
-  background-color: #e6f7ff;
+  background-color: #FFE4E1;
   font-color: black;
   font-size: 2.5em;
   font-weight: 450;
@@ -173,41 +169,9 @@
   top: 130%;
   border: 2px solid #DB7093;
   border-radius: 5px;
-.container {
-  width: auto;
-  margin: 0 auto;
-  padding-left: 20%;
-  font-size: 1.5em;
 }
 
-.chooseFileUpload {
-  font-size: 0.5em;
-  text-align: center;
-  padding-top: 50px;
-}
 
-.uploadSubmit {
-  padding: 30%;
-}
 
-.wrapper {
-  display: flex;
-  padding: 50px;
-}
 
-.convertedText {
-  border: 1px solid black;
-  width: 50%;
-  height: 400px;
-  margin-right: 20px;
-  padding: 10px;
-  text-align: center;
-}
 
-.categorizedText {
-  border: 1px solid black;
-  width: 50%;
-  margin-right: 20px;
-  padding: 10px;
-  text-align: center;
-}
