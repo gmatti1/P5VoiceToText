@@ -1,6 +1,29 @@
-.App {
-  text-align: center;
+.Firstpage {
+	height: 102vh;
+	
 }
+
+.Navbarsize {
+ padding: 20px;
+}
+
+.App-logobig {
+/* animation: App-logo-spin infinite 20s linear; */
+  height: 100px;
+  justify-content: center;
+}
+
+.App-bg {
+  margin: 0;
+  position: absolute;
+  background-image: url(medical-wallpaper.jpg);
+  opacity:0.95;
+  width: 100%;  
+  height:400px;
+  top: 58%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  
 
 .App-logo {
  /* animation: App-logo-spin infinite 20s linear; */
@@ -19,11 +42,68 @@
   font-size: 1.6em;
 }
 
-.App-intro {
-  font-size: large;
+.Appheaderfp {
+  margin: 0;
+  position: absolute;
+  background: rgb(0, 0, 0); /* Fallback color */
+  background: rgba(0, 0, 0, 0.75); /* Black background with 0.5 opacity */
+  height: 200px;
+  color: #f1f1f1;
+  width: 100%;
+  top: 58%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+  
+.Arrow {
+	margin: 0;
+  position: absolute;
+  height: 40px;
+  width: 150px;
+	top: 1%;
+	left :50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.Arrow:hover 
+{
+     opacity: 0.5;
 }
+
+
+
+.App-footer{
+  margin: 0;
+  position: absolute;
+  background-color: white;
+  height: 60px;
+  width: 100%;
+  top: 97.6%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.Apptitlefp {
+  margin:0;
+  position: relative;  
+  text-align: center;
+  font-size: 2.5em;
+  font-weight: 450;
+  font-family: Josefin Sans;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.Secondpage {
+	height: 200vh;
+	background-color:pink;
+	font-color: black;
+   font-size: 2.5em;
+  font-weight: 450;
+}
+
