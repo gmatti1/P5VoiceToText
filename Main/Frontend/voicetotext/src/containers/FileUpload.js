@@ -1,4 +1,5 @@
-import React from './../../node_modules/react';
+import React from 'react';
+import './../styles/App.css';
 
 class FileUpload extends React.Component {
   constructor(props) {
@@ -33,22 +34,22 @@ class FileUpload extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.OnSubmittingForm}>
-        <h1>Please upload the audio file</h1>
-        <input
-          type='file'
-          ref={ref => {
-            this.uploadInput = ref;
-          }}
-          name='voiceFile'
-        />
-        <button type='submit'>Upload</button>
-      </form>
+      <div className='chooseFileUpload'>
+        <form onSubmit={this.OnSubmittingForm}>
+          <h2>Please upload the audio file</h2>
+
+          <input
+            type='file'
+            ref={ref => {
+              this.uploadInput = ref;
+            }}
+            name='voiceFile'
+          />
+          <button type='submit'>Upload</button>
+        </form>
+      </div>
     );
   }
 }
 
 export default FileUpload;
-
-// References https://gist.github.com/AshikNesin
-//References: react website
