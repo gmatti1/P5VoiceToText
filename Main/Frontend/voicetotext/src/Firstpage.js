@@ -8,11 +8,11 @@ import { Link, animateScroll as scroll } from "react-scroll";
 function Firstpage() {
   
     return (
-      <div className="Firstpa"> 
+      <div className="Firstpage"> 
 	  <Navbar />
 		<div className="App-bg" />
-			<header className="App-header">
-				<h1 className="App-title">
+			<header className="Appheaderfp">
+				<h1 className="Apptitlefp">
 					Voice-To-Text Application of Pediatric IMIST-AMBO Criteria
 				</h1>
 				

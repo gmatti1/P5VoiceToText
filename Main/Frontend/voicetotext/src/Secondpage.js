@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function Secondpage() {
   
     return (
-      <div className="Secondpa" id="main"> 
+      <div className="Secondpage" id="main"> 
 	  <p>helloooo page 2</p>
 	  </div>
 
