@@ -8,7 +8,7 @@ import Home from './Home';
 import FileUpload from './FileUpload';
 
 
-class App extends Component {
+class Secondpage extends Component {
   render() {
 
     return (
@@ -33,4 +33,4 @@ class App extends Component {
 }
 
 
-export default App;
+export default Secondpage;
