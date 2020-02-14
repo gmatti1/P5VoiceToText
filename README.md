@@ -23,5 +23,13 @@ Application is live on - http://ser517phcvoicetotext.s3-website-us-west-2.amazon
 
 
 Backend:
+1. Install flask and flask_cors libraries using pip, "pip install flask", "pip install flask_cors" in command prompt
+2. Run Flask by writing "python Backend/P5VoiceToText.py" in command prompt.
+3. Launch "localhost:5000" in the browser to access APIs.
+
+Project Structure:
+Config.py - contains all the configurations and properties.
+P5VoiceToText.py - contains all the Flask APIs 
+resources - contains all the file resouces
 
 
