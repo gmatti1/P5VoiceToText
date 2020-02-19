@@ -31,13 +31,17 @@ class ConvertedText extends Component {
 
   render() {
     return (
-     <div className ='Textdata'> 
-    	<Form>
-			<Form.Group controlId="exampleForm.ControlTextarea1">
-			<Form.Label>Example textarea</Form.Label>
-			<Form.Control as="textarea" rows="10" readOnly value={this.state.value} onChange={this.handleChange} />
-			</Form.Group>
-        </Form>
+     <div className ="Textdata"> 	
+		<div className="form-group">
+            <label className ="LabelTextdata">
+            Converted Text
+            </label>
+            <textarea
+            className="form-control"
+            id="Textarea"
+            rows="13" readOnly value={this.state.value} onChange={this.handleChange}
+            />
+        </div>
 		</div>
     );
   }

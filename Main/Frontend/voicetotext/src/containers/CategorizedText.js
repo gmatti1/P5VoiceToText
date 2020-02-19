@@ -1,6 +1,7 @@
 import React, { Component } from './../../node_modules/react';
 import { AgGridReact } from './../../node_modules/ag-grid-react';
 import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import Table from 'react-bootstrap/Table';
 import './../../node_modules/ag-grid-community/dist/styles/ag-grid.css';
 import './../../node_modules/ag-grid-community/dist/styles/ag-theme-balham.css';
 import './../styles/index.css';
@@ -10,25 +11,20 @@ class CategorizedText extends Component {
     super(props);
 	
 	this.state = {
-      columnDefs: [
-        { headerName: 'Category', field: 'category' },
-        { headerName: 'Value', field: 'value' }
-      ],
-      rowData: [
-        { category: 'Identification', value: 'Celica' },
-        { category: 'Mechanism', value: 'Mondeo' },
-        { category: 'Injuries', value: 'Boxter' },
-        { category: 'Signs and Symptoms', value: 'Boxter' },
-        { category: 'Treatment', value: 'Boxter' },
-        { category: 'Allergies', value: 'Boxter' },
-        { category: 'Medications', value: 'Boxter' },
-        { category: 'Background', value: 'Boxter' },
-        { category: 'Other Info', value: 'Boxter' }
-      ],
-      columnDefs1: [{ headerName: 'Converted Text', field: 'category' }],
-      rowData1: [{ category: 'Test Data' }]
-    };
+		
+	     Identification: 'Celica' ,
+         Mechanism: 'Mondeo' ,
+         Injuries: 'Boxter' ,
+         Symptoms: 'Boxter' ,
+         Treatment: 'Boxter' ,
+         Allergies: 'Boxter' ,
+         Medications: 'Boxter' ,
+         Background: 'Boxter' ,
+         Other: 'Boxter'
+		};
+
   }
+  
   componentDidMount() {
     fetch('/categorizeText').then(response =>
       response.json().then(data => {
@@ -42,14 +38,57 @@ class CategorizedText extends Component {
     return (
     
    <div className ='Categorydata'>
-        <div className='ag-theme-balham' style={{ height: '400px', width: '500px' }}>
-		<AgGridReact className="Categorydata"
-            columnDefs={this.state.columnDefs}
-            rowData={this.state.rowData}
-			style={{ height: '400px', width: '500px' }}
-		
-          ></AgGridReact>
-        </div>
+   <div className="form-group">
+   <label className ="LabelTextdata">
+            Categorized Text
+   </label>
+  <Table striped bordered hover size="sm" responsive className ="TableText">
+  <thead>
+    <tr>     
+      <th>Category</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Identification</td>
+      <td>{this.state.Identification}</td>
+    </tr>
+    <tr>
+      <td>Mechanism</td>
+      <td>{this.state.Mechanism}</td>
+    </tr>
+    <tr>
+      <td>Injuries</td>
+      <td>{this.state.Injuries}</td>
+    </tr>
+	<tr>
+      <td>Symptoms</td>
+      <td colSpan="2">{this.state.Symptoms}</td>
+    </tr>
+	<tr>
+      <td>Treatment</td>
+      <td>{this.state.Treatment}</td>
+    </tr>
+	<tr>
+      <td>Allergies</td>
+      <td>{this.state.Allergies}</td>
+    </tr>
+	<tr>
+      <td>Medications</td>
+      <td>{this.state.Medications}</td>
+    </tr>
+	<tr>
+      <td>Background</td>
+      <td>{this.state.Background}</td>
+    </tr>
+	<tr>
+      <td>Other Info</td>
+      <td>{this.state.Other}</td>
+    </tr>
+  </tbody>
+</Table>
+</div>
 		</div>
     );
   }

@@ -156,6 +156,18 @@
   top: 130%;
   border: 2px solid #DB7093;
   border-radius: 5px;
+  Height:66%;
+  Width: 40%;
+}
+
+.LabelTextdata {
+font-family: Josefin Sans;
+font-size: 0.7em;
+}
+
+#Textarea {
+background: transparent;
+
 }
 
 .Categorydata{
@@ -165,9 +177,15 @@
   top: 130%;
   border: 2px solid #DB7093;
   border-radius: 5px;
+  Height:66%;
+  Width: 40%;
 }
 
+.TableText{
+font-family: Josefin Sans;
+font-size: 0.370em;
 
+}
 
 
 
