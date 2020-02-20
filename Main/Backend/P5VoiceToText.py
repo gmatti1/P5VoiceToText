@@ -16,7 +16,17 @@ def allowed_file(filename):
 @app.route("/")
 @app.route("/home")
 def home():
-	return "Home Page"
+	return """
+    <form action="/convertVoice" method="post" enctype="multipart/form-data">
+	<div>
+	<label for="file">Choose file to upload</label>
+	<input type="file" id="file" name="file" accept=".wav" multiple>
+	</div>
+	<div>
+	<button>Submit</button>
+	</div>
+	</form>
+    """
 
 
 @app.route("/about")
@@ -24,9 +34,20 @@ def about():
 	return "About Page"
 
 
-@app.route("/convertVoice")
+@app.route("/convertVoice", methods=['POST'])
 def convertVoice():
-	text = "Dummy Voice to Text Converted Text"
+	
+	if request.method == 'POST':
+		text = "Dummy Voice to Text Converted Text"
+	else:
+		text = "Dummy Voice to Text Converted Text2"
+	recording = sr.Recognizer()
+	harvard = sr.AudioFile(request.form['file'])
+
+	with harvard as source:
+		audio = recording.record(source, duration=6)
+	print(recording.recognize_google(audio))
+	
 	return jsonify(text)
 
 
@@ -62,4 +83,4 @@ def uploadVoiceFile():
 
 if __name__=='__main__':
 	app.secret_key = os.urandom(24)
-	app.run(debug=True,host="0.0.0.0",use_reloader=False)
+	app.run()
