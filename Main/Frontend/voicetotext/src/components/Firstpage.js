@@ -22,8 +22,7 @@ function Firstpage() {
           spy={true}
           smooth={true}
           offset={0}
-          duration={500}
-        >
+          duration={500}>
           <a href='#'>
             <img src={arrow} className='Arrow' alt='arrow' />
           </a>
