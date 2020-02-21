@@ -10,7 +10,7 @@ class ConvertedText extends Component {
     super(props);
 	
 	this.state = {
-		value: 'Yet remarkably appearance get him his projection. Diverted endeavor bed peculiar men the not desirous. Acuteness abilities ask can offending furnished fulfilled sex. Warrant fifteen exposed ye at mistake. Blush since so in noisy still built up an again. As young ye hopes no he place means. Partiality diminution gay yet entreaties admiration. In mr it he mention perhaps attempt pointed suppose. Unknown ye chamber of warrant of norland arrived. '};
+		value: 'Yet remarkably appearance get him his projection. Diverted endeavor bed peculiar men the not desirous. Acuteness abilities ask can offending furnished fulfilled sex. Warrant fifteen exposed ye at mistake. Blush since so in noisy still built up an again. As young ye hopes no he place means. Partiality diminution gay yet entreaties admiration. In mr it he mention perhaps attempt pointed suppose. Unknown ye chamber of warrant of norland arrived.Blush since so in noisy still built up an again. As young ye hopes no he place means. Partiality diminution gay yet entreaties admiration. In mr it he mention perhaps attempt pointed suppose. Unknown ye chamber of warrant of norland arrived.Blush since so in noisy still built up an again. As young ye hopes no he place means. Partiality diminution gay yet entreaties admiration. In mr it he mention perhaps attempt pointed suppose. Unknown ye chamber of warrant of norland arrived. '};
 		
 				
 	this.handleChange = this.handleChange.bind(this);
@@ -31,17 +31,17 @@ class ConvertedText extends Component {
 
   render() {
     return (
-     <div className ="Textdata"> 	
-		<div className="form-group">
+     <div className ="Textdata"> 			
             <label className ="LabelTextdata">
             Converted Text
             </label>
+			<div className="Textareasize">
             <textarea
             className="form-control"
             id="Textarea"
-            rows="13" readOnly value={this.state.value} onChange={this.handleChange}
+             readOnly value={this.state.value} onChange={this.handleChange}
             />
-        </div>
+			</div>
 		</div>
     );
   }

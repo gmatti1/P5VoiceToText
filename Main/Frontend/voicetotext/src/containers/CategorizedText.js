@@ -37,19 +37,19 @@ class CategorizedText extends Component {
   render() {
     return (
     
-   <div className ='Categorydata'>
-   <div className="form-group">
+   <div className ='Categorydata'> 
    <label className ="LabelTextdata">
             Categorized Text
    </label>
-  <Table striped bordered hover size="sm" responsive className ="TableText">
+   <div className="Tablesize">
+  <Table striped bordered hover size="sm" responsive id ="TableText">
   <thead>
     <tr>     
       <th>Category</th>
       <th>Value</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody >
     <tr>
       <td>Identification</td>
       <td>{this.state.Identification}</td>
