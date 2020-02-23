@@ -4,6 +4,7 @@ from flask import Flask, flash, request
 from flask import jsonify
 from werkzeug.utils import secure_filename
 from flask_cors import CORS, cross_origin
+import speech_recognition as sr
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -16,7 +17,8 @@ def allowed_file(filename):
 @app.route("/")
 @app.route("/home")
 def home():
-	return "Home Page"
+	return "home page"
+    
 
 
 @app.route("/about")
@@ -26,11 +28,17 @@ def about():
 
 @app.route("/convertVoice")
 def convertVoice():
-	text = "Dummy Voice to Text Converted Text"
-	return jsonify(text)
+	
+	recording = sr.Recognizer()
+	harvard = sr.AudioFile('Recording.wav')
+
+	with harvard as source:
+		audio = recording.record(source, duration=6)
+	
+	return recording.recognize_google(audio)
 
 
-@app.route("/categorizeText")
+@app.route('/categorizeText')
 def categorizeText():
 	text = "Dummy Text classified into IMIST-AMBO categories"
 	return jsonify(text)
@@ -62,4 +70,4 @@ def uploadVoiceFile():
 
 if __name__=='__main__':
 	app.secret_key = os.urandom(24)
-	app.run(debug=True,host="0.0.0.0",use_reloader=False)
+	app.run()
