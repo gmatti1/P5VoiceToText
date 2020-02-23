@@ -4,6 +4,7 @@ from flask import Flask, flash, request
 from flask import jsonify
 from werkzeug.utils import secure_filename
 from flask_cors import CORS, cross_origin
+import speech_recognition as sr
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -16,17 +17,8 @@ def allowed_file(filename):
 @app.route("/")
 @app.route("/home")
 def home():
-	return """
-    <form action="/convertVoice" method="post" enctype="multipart/form-data">
-	<div>
-	<label for="file">Choose file to upload</label>
-	<input type="file" id="file" name="file" accept=".wav" multiple>
-	</div>
-	<div>
-	<button>Submit</button>
-	</div>
-	</form>
-    """
+	return "home page"
+    
 
 
 @app.route("/about")
@@ -34,24 +26,19 @@ def about():
 	return "About Page"
 
 
-@app.route("/convertVoice", methods=['POST'])
+@app.route("/convertVoice")
 def convertVoice():
 	
-	if request.method == 'POST':
-		text = "Dummy Voice to Text Converted Text"
-	else:
-		text = "Dummy Voice to Text Converted Text2"
 	recording = sr.Recognizer()
-	harvard = sr.AudioFile(request.form['file'])
+	harvard = sr.AudioFile('Recording.wav')
 
 	with harvard as source:
 		audio = recording.record(source, duration=6)
-	print(recording.recognize_google(audio))
 	
-	return jsonify(text)
+	return recording.recognize_google(audio)
 
 
-@app.route("/categorizeText")
+@app.route('/categorizeText')
 def categorizeText():
 	text = "Dummy Text classified into IMIST-AMBO categories"
 	return jsonify(text)
