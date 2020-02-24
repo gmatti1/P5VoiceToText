@@ -31,6 +31,13 @@ class ClassifyText:
 	def stemming_text(self):
 		print("Get the root of words using Stemming ....")
 
+		ps = PorterStemmer() 
+  
+		words = ["program", "programs", "programer", "programing", "programers"] 
+		
+		for w in words: 
+			print(w, " : ", ps.stem(w))
+
 	def lemmatization_text(self):
 		print("Get the root of words using Lemmatization ....")
 
