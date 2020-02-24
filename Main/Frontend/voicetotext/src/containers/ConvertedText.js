@@ -10,23 +10,24 @@ class ConvertedText extends Component {
     super(props);
 	
 	this.state = {
-		value: 'Yet remarkably appearance get him his projection. Diverted endeavor bed peculiar men the not desirous. Acuteness abilities ask can offending furnished fulfilled sex. Warrant fifteen exposed ye at mistake. Blush since so in noisy still built up an again. As young ye hopes no he place means. Partiality diminution gay yet entreaties admiration. In mr it he mention perhaps attempt pointed suppose. Unknown ye chamber of warrant of norland arrived.Blush since so in noisy still built up an again. As young ye hopes no he place means. Partiality diminution gay yet entreaties admiration. In mr it he mention perhaps attempt pointed suppose. Unknown ye chamber of warrant of norland arrived.Blush since so in noisy still built up an again. As young ye hopes no he place means. Partiality diminution gay yet entreaties admiration. In mr it he mention perhaps attempt pointed suppose. Unknown ye chamber of warrant of norland arrived. '};
-		
-				
+		value: 'Converted text will be displayed here'};
+						
 	this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(event) {
+  handleSubmit = (event) => {
+	 event.preventDefault()	 
+	 const data = this.state;
+	 console.log("Edited text is",data);
+  }
+  
+  handleChange = (event) => {
+	event.preventDefault()
     this.setState({value: event.target.value});
   } 
   
   componentDidMount() {
-    fetch('/convertVoice').then(response =>
-      response.json().then(data => {
-        this.setState({ textConverted: data });
-        console.log(this.state.textConverted);
-      })
-    );
+    this.setState({value: 'Sigh view am high neat half to what. Sent late held than set why wife our. If an blessing building steepest. Agreement distrusts mrs six affection satisfied. Day blushes visitor end company old prevent chapter. Consider declared out expenses her concerns. No at indulgence conviction particular unsatiable boisterous discretion. Direct enough off others say eldest may exeter she. Possible all ignorant supplied get settling marriage recurred. Sigh view am high neat half to what. Sent late held than set why wife our. If an blessing building steepest. Agreement distrusts mrs six affection satisfied. Day blushes visitor end company old prevent chapter. Consider declared out expenses her concerns. No at indulgence conviction particular unsatiable boisterous discretion. Direct enough off others say eldest may exeter she. Possible all ignorant supplied get settling marriage recurred. '});
   }
 
   render() {
@@ -35,13 +36,17 @@ class ConvertedText extends Component {
             <label className ="LabelTextdata">
             Converted Text
             </label>
+			<form onSubmit={this.handleSubmit}>
 			<div className="Textareasize">
             <textarea
             className="form-control"
             id="Textarea"
-             readOnly value={this.state.value} onChange={this.handleChange}
+             value={this.state.value} onChange={this.handleChange}
             />
-			</div>
+			</div>		
+			
+			<Button className="Save" type='submit'>Save</Button>	
+			</form>	
 		</div>
     );
   }
