@@ -12,3 +12,4 @@ DB_STG_IP = ''
 DB_PROD_IP = ''
 
 DB_SCHEMA = 'Phoenix-Hospital'
+IMIST_AMBO_TEMPLATE = 'imist_ambo_category'
