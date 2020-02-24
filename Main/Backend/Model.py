@@ -7,6 +7,8 @@ mydb = client[DB_SCHEMA]
 class IMIST_AMBO:
 
 	def __init__(self):
+		self.mytable = mydb[IMIST_AMBO_TEMPLATE]
+		
 		self.map_keyword_category = [
 			{"keyword": "age",
 			 "category": "identification"},
@@ -171,7 +173,7 @@ class IMIST_AMBO:
 			]
 
 	def insert(self):
-		mydb.imist_ambo_category.insert(self.map_keyword_category)
+		self.mytable.insert(self.map_keyword_category)
 
 if __name__=='__main__':
 	imist_ambo = IMIST_AMBO()

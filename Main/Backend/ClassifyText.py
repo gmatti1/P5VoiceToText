@@ -1,47 +1,76 @@
+from Config import *
+
 import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize 
 from nltk.stem import PorterStemmer
 from string import punctuation
 
+from pymongo import MongoClient
+
 class ClassifyText:
 
 	def __init__(self):
 		self.text = ""
+		self.words = []
+		self.category_keyword = { "identification" : [],
+								  "mechanism" : [],
+								  "injury": [],
+								  "signs": [],
+								  "treatment": [],
+								  "other": [] }
 
+
+	# Removing Stop Words ....
 	def remove_stopwords(self):
-		print("Removing Stop Words ....")
-		example_sent = "This is a sample sentence, showing off the stop words filtration."
+		self.text = "This is a sample sentence, showing off the stop words filtration."
   
-		stop_words = set(stopwords.words('english') + list(punctuation)) 
-		
-		word_tokens = word_tokenize(example_sent) 
-		
+		stop_words = set(stopwords.words('english') + list(punctuation)) 		
+		word_tokens = word_tokenize(self.text) 
 		filtered_sentence = [w for w in word_tokens if not w in stop_words] 
-		
 		filtered_sentence = [] 
-		
 		for w in word_tokens: 
 			if w not in stop_words: 
 				filtered_sentence.append(w) 
-  
-		print(word_tokens) 
-		print(filtered_sentence) 
 
+		self.words = filtered_sentence 
+
+
+
+	# Get the root of words using Stemming ....
 	def stemming_text(self):
-		print("Get the root of words using Stemming ....")
-
 		ps = PorterStemmer() 
-  
-		words = ["program", "programs", "programer", "programing", "programers"] 
+		self.words = ["program", "programs", "programer", "programing", "programers"] 
+		self.words = [ps.stem(word) for word in self.words]
 		
-		for w in words: 
-			print(w, " : ", ps.stem(w))
 
+	# Get the root of words using Lemmatization ....
 	def lemmatization_text(self):
-		print("Get the root of words using Lemmatization ....")
+		print ("Write code for lemmatization")
 
-	if __name__=='__main__':
-		classifyText = ClassifyText()
-		classifyText.remove_stopwords()
-		classifyText.lemmatization_text()
+
+	
+	# Cleaning of Text	
+	def clean_text(self):
+		self.remove_stopwords()
+		self.stemming_text()
+
+
+	# Classify the specific words into IMIST_AMBO categories ....
+	def classify_text_into_categories(self):
+		
+		self.words = ["age", "crush", "spinal"]
+		client = MongoClient(DB_DEV_IP)
+		mydb = client[DB_SCHEMA]
+		mytable = mydb[IMIST_AMBO_TEMPLATE]
+
+		for word in self.words:
+			entries = mytable.find(({'keyword' : word}))
+			for entry in entries:
+				self.category_keyword[entry['category']].append(entry['keyword'])
+
+
+if __name__=='__main__':
+	classifyText = ClassifyText()
+	classifyText.clean_text()
+	classifyText.classify_text_into_categories()
