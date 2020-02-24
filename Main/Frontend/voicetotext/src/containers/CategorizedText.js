@@ -12,7 +12,7 @@ class CategorizedText extends Component {
 	
 	this.state = {
 		
-	     Identification: 'Celica' ,
+	     Identification:'CelicaCelicaCelicaCelicaCelicaCelicaCelicaCelicaCelicaCelicaCelicaCelicaCelica' ,
          Mechanism: 'Mondeo' ,
          Injuries: 'Boxter' ,
          Symptoms: 'Boxter' ,
