@@ -30,7 +30,7 @@ def about():
 def convertVoice():
 	
 	recording = sr.Recognizer()
-	harvard = sr.AudioFile('Recording.wav')
+	harvard = sr.AudioFile('resources\VoiceUploadsRecording.wav')
 
 	with harvard as source:
 		audio = recording.record(source, duration=6)
@@ -65,7 +65,7 @@ def uploadVoiceFile():
     	if os.path.exists(destination):
     		response = True 
 
-    return jsonify(response)
+    return "got it"
 
 
 if __name__=='__main__':
