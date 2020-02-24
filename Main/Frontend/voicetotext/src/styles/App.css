@@ -1,0 +1,192 @@
+.Firstpage {
+ height: 102vh;
+}
+
+.Navbarsize {
+  padding :13px;
+
+ }
+
+#navbg {
+background-color:#004466;
+border-radius: 6px;
+}
+
+.App-logobig {
+  height: 100px;
+  justify-content: center;
+}
+
+.App-baby {
+  height: 100px;
+  justify-content: center;
+}
+
+.App-bg {
+  margin: 0;
+  position: absolute;
+  background-image: url(./../assets/medical-wallpaper.jpg);
+  opacity: 0.95;
+  width: 100%;
+  height: 400px;
+  top: 56%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.App-title {
+  font-size: 1.6em;
+}
+
+.Appheaderfp {
+  margin: 0;
+  position: absolute;
+  background: rgb(0, 68, 102); /* Fallback color */
+  background: rgba(0, 68, 102, 0.75); /* Black background with 0.5     opacity */
+  height: 150px;
+  color: #f1f1f1;
+  width: 100%;
+  top: 56%;
+ -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  
+}
+
+.App-footer {
+  
+  position: absolute;
+  padding :30px;
+  height: 80px;
+  width: 100%;
+  top: 88.8%;
+}
+
+.Arrow {
+  position: absolute;
+  height: 78%;
+  width: 20%;  
+  left: 40%;
+  top:3%;
+}
+
+.Arrow:hover 
+{
+  opacity: 0.8;
+}
+
+.Apptitlefp {
+  margin: 0;
+  position: relative;
+  text-align: center;
+  font-size: 2.5em;
+  font-family: Josefin Sans;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.Secondpage {
+  height: 100vh;
+  background-color: #004466;
+  font-color: white;
+  font-size: 2.5em;
+}
+
+.Uploadheader{
+  font-size: 0.8em;
+  color:white;
+  font-family: Josefin Sans;
+  margin: 0;
+  position: absolute;
+  top: 107%;
+  left :31%;
+}
+
+.Input{
+  font-size: 0.5em;
+  background-color: white;   
+  border: 2px solid #32CD32;
+  font-family: Josefin Sans;
+  position: absolute;
+  left: 27%;
+  top: 116%;
+  height: 6.5%;
+  width:36%;
+  border-radius: 5px;
+}
+
+.Buttonformat{
+  font-size: 0.5em;
+  background-color: white;  
+  border: 2px solid #32CD32;
+  font-family: Josefin Sans;
+  position: absolute;
+  right: 27%;
+  top: 116%;
+  height: 6.5%;
+  width: 10%;
+  border-radius: 5px;
+}
+
+.Buttonformat:hover {
+  background-color: #32CD32;
+  color: white;
+}
+
+.Textdata{
+
+  position: absolute;
+  left: 9%;
+  top: 130%;
+  border: 2px solid #32CD32;
+  border-radius: 5px;
+  Height:69%;
+  Width: 40%;
+}
+
+.LabelTextdata {
+font-family: Josefin Sans;
+font-size: 0.7em;
+color:white;
+
+}
+
+#Textarea {
+
+font-family: Josefin Sans;
+font-size: 0.43em;
+background-color: #e6faff;
+height:340px;
+}
+
+.Textareasize{
+position: absolute;
+width:100%;
+height:340px;
+}
+
+
+.Categorydata{
+
+  position: absolute;
+  right: 9%;
+  top: 130%;
+  border: 2px solid #32CD32;
+  border-radius: 5px;
+  Height:69%;
+  Width: 40%;
+}
+
+.Tablesize{
+position: absolute;
+width:100%;
+height:340px;
+}
+
+#TableText{
+font-family: Josefin Sans;
+font-size: 0.4em;
+background-color: #e6faff;
+
+}
+
