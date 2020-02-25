@@ -1,5 +1,6 @@
 import os
 from Config import *
+from ClassifyText import *
 from flask import Flask, flash, request
 from flask import jsonify
 from werkzeug.utils import secure_filename
@@ -40,7 +41,8 @@ def convertVoice():
 
 @app.route('/categorizeText')
 def categorizeText():
-	text = "Dummy Text classified into IMIST-AMBO categories"
+	classifyText = ClassifyText()
+	text = classifyText.clean_and_classify()
 	return jsonify(text)
 
 

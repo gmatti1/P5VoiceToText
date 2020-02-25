@@ -70,7 +70,14 @@ class ClassifyText:
 				self.category_keyword[entry['category']].append(entry['keyword'])
 
 
+
+	def clean_and_classify(self):
+		self.clean_text()
+		self.classify_text_into_categories()
+		return self.category_keyword
+
+
 if __name__=='__main__':
 	classifyText = ClassifyText()
-	classifyText.clean_text()
-	classifyText.classify_text_into_categories()
+	result = classifyText.clean_and_classify()
+	print(result)
