@@ -12,15 +12,6 @@ class CategorizedText extends Component {
 	
 	this.state = {
 		
-	     identification:'CelicaCelicaCelicaCelicaCelicaCelicaCelicaCelicaCelicaCelicaCelicaCelicaCelica' ,
-         mechanism: 'Mondeo' ,
-         injury: 'Boxter' ,
-         signs: 'Boxter' ,
-         treatment: 'Boxter' ,
-         allergy: 'Boxter' ,
-         medication: 'Boxter' ,
-         background: 'Boxter' ,
-         other: 'Boxter',
          textCategorized:{ "identification" : [],
                   "mechanism" : [],
                   "injury": [],
