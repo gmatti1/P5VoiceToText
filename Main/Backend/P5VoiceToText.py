@@ -26,17 +26,18 @@ def home():
 def about():
 	return "About Page"
 
-
-@app.route("/convertVoice")
+@cross_origin(origin=DEV_IP,headers=['Content- Type','Authorization'])
+@app.route("/convertVoice",methods=['GET','POST'])
 def convertVoice():
 	
 	recording = sr.Recognizer()
-	harvard = sr.AudioFile('resources\VoiceUploadsRecording.wav')
+	harvard = sr.AudioFile('resources/VoiceUploads/Recording.wav')
 
 	with harvard as source:
 		audio = recording.record(source, duration=6)
+		
 	
-	return recording.recognize_google(audio)
+	return jsonify({"data": recording.recognize_google(audio)})
 
 
 @app.route('/categorizeText')
