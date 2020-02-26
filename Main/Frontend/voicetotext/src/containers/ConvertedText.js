@@ -10,45 +10,94 @@ class ConvertedText extends Component {
     super(props);
 	
 	this.state = {
-		value: 'Converted text will be displayed here'};
-						
+		 item: '',
+		 isLoaded : false
+		 
+		};
+			
+
+	
 	this.handleChange = this.handleChange.bind(this);
+	
+	
   }
 
   handleSubmit = (event) => {
 	 event.preventDefault()	 
-	 const data = this.state;
-	 console.log("Edited text is",data);
+	 const data = this.state.item;
+	 console.log("Edited text is : ",data);
   }
   
   handleChange = (event) => {
 	event.preventDefault()
-    this.setState({value: event.target.value});
+    this.setState({value: event.target.item});
   } 
   
+  
+  
   componentDidMount() {
-    this.setState({value: 'Sigh view am high neat half to what. Sent late held than set why wife our. If an blessing building steepest. Agreement distrusts mrs six affection satisfied. Day blushes visitor end company old prevent chapter. Consider declared out expenses her concerns. No at indulgence conviction particular unsatiable boisterous discretion. Direct enough off others say eldest may exeter she. Possible all ignorant supplied get settling marriage recurred. Sigh view am high neat half to what. Sent late held than set why wife our. If an blessing building steepest. Agreement distrusts mrs six affection satisfied. Day blushes visitor end company old prevent chapter. Consider declared out expenses her concerns. No at indulgence conviction particular unsatiable boisterous discretion. Direct enough off others say eldest may exeter she. Possible all ignorant supplied get settling marriage recurred. '});
+   
+    fetch('')
+	.then(res => res.json())
+	.then(json => {
+		this.setState({
+				isLoaded: true,
+			    item: json,
+			})
+		}); 
   }
 
   render() {
-    return (
+	
+	if (!this.state.isLoaded) {
+	
+	 return (
      <div className ="Textdata"> 			
             <label className ="LabelTextdata">
             Converted Text
             </label>
+			
+			<div className ="Textloader"> 
+			
+			<div class="loadingio-spinner-wedges-hgt0iyai7l"><div class="ldio-gqky8tv2eq9">
+            <div><div><div></div></div><div><div></div></div><div><div></div></div>
+			<div><div></div></div></div>
+            </div></div>
+
+			</div> 
+
+		</div>
+    );
+	}
+	
+	else {
+		
+    return (
+     <div className ="Textdata"> 			
+            <label className ="LabelTextdata">
+            Converted Text
+            </label>			
+			
 			<form onSubmit={this.handleSubmit}>
+			
 			<div className="Textareasize">
+						
             <textarea
             className="form-control"
-            id="Textarea"
-             value={this.state.value} onChange={this.handleChange}
-            />
+            id="Textarea"			
+			value = {this.state.item}
+			onChange={this.handleChange}
+            /> 
+			
 			</div>		
 			
 			<Button className="Save" type='submit'>Save</Button>	
 			</form>	
+	
 		</div>
     );
+	
+	}
   }
 }
 
