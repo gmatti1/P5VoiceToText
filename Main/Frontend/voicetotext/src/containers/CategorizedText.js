@@ -20,7 +20,10 @@ class CategorizedText extends Component {
                   "allergy": [],
                   "medication": [],
                   "background": [],
-                  "other": [] }
+                  "other": [] } ,
+				  
+		isLoaded : false
+		
 		};
 
   }
@@ -28,8 +31,9 @@ class CategorizedText extends Component {
   componentDidMount() {
     fetch('/categorizeText').then(response =>
       response.json().then(data => {
-        this.setState({ textCategorized: data });
-        console.log(this.state.textCategorized);      })
+        this.setState({ isLoaded: true, textCategorized: data });
+        console.log(this.state.textCategorized);      
+		})
     );
   }
 
@@ -88,7 +92,31 @@ class CategorizedText extends Component {
     for(var i = 1; i< this.state.textCategorized.other.length; i++)
       other_keywords+= ', ' + this.state.textCategorized.other[i];    
 
+	
+	if (!this.state.isLoaded) {
+		
+	return (	
+	
+	<div className ='Categorydata'> 
+   <label className ="LabelTextdata">
+            Categorized Text
+   </label>
+   
+   <div className ="Textloader"> 
+			
+			<div class="loadingio-spinner-wedges-hgt0iyai7l"><div class="ldio-gqky8tv2eq9">
+            <div><div><div></div></div><div><div></div></div><div><div></div></div>
+			<div><div></div></div></div>
+            </div></div>
 
+			</div> 
+	</div>
+	
+	);
+	}
+	
+	else {
+		
     return (
     
    <div className ='Categorydata'> 
@@ -147,7 +175,7 @@ class CategorizedText extends Component {
     );
   }
 }
-
+}
 export default CategorizedText;
 
 
