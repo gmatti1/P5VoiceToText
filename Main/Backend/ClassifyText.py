@@ -18,6 +18,9 @@ class ClassifyText:
 								  "injury": [],
 								  "signs": [],
 								  "treatment": [],
+								  "allergy": [],
+								  "medication": [],
+								  "background": [],
 								  "other": [] }
 
 
