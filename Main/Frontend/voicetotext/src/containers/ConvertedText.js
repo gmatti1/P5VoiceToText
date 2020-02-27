@@ -59,9 +59,8 @@ class ConvertedText extends Component {
 			
 			<div className ="Textloader"> 
 			
-			<div class="loadingio-spinner-wedges-hgt0iyai7l"><div class="ldio-gqky8tv2eq9">
-            <div><div><div></div></div><div><div></div></div><div><div></div></div>
-			<div><div></div></div></div>
+			<div class="loadingio-spinner-wedges-bdyr6gdft3b"><div class="ldio-fbwe939p7j">
+            <div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div></div>
             </div></div>
 
 			</div> 
