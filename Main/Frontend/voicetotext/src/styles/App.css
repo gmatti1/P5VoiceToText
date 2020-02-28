@@ -513,7 +513,7 @@ top: 40%;
 
 }
 
-@media only screen and (max-width: 900px) and (min-width:500px){
+@media only screen and (max-width: 900px){
 
 .Uploadheader{
  font-size: 0.5em;
