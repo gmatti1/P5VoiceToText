@@ -1,11 +1,13 @@
+
+
+
 .Firstpage {
  height: 102vh;
 }
 
 .Navbarsize {
   padding :13px;
-
- }
+}
 
 #navbg {
 background-color:#004466;
@@ -94,9 +96,10 @@ border-radius: 6px;
   font-family: Josefin Sans;
   margin: 0;
   position: absolute;
+  text-align: center;
   top: 107%; 
-  left:33%;
-  right:30%
+  left:32%;
+  right:31%
 
 }
 
@@ -107,8 +110,8 @@ border-radius: 6px;
   font-family: Josefin Sans;
   position: absolute;
   left: 27%;
-  top: 116%;
-  height: 6.5%;
+  top: 118%;
+  height: 6.3%;
   width:36%;
   border-radius: 5px;
 }
@@ -120,8 +123,8 @@ border-radius: 6px;
   font-family: Josefin Sans;
   position: absolute;
   right: 27%;
-  top: 116%;
-  height: 6.5%;
+  top: 118%;
+  height: 6.3%;
   width: 10%;
   border-radius: 5px;
 }
@@ -203,7 +206,7 @@ height:340px;
 
 #TableText{
 font-family: Josefin Sans;
-font-size: 0.41em;
+font-size: 0.39559em;
 background-color: #e6faff;
 
 }
@@ -321,7 +324,6 @@ top: 40%;
 .ldio-fbwe939p7j div { box-sizing: content-box; }
 
 
-
 @media only screen and (max-width: 500px){
 
 .Firstpage {
@@ -360,9 +362,6 @@ border-radius: 6px;
   transform: translateY(-50%);
 }
 
-.App-title {
-  font-size: 0.7em;
-}
 
 .Appheaderfp {
   margin: 0;
@@ -412,23 +411,22 @@ border-radius: 6px;
 }
 
 .Secondpage {
-  height: 100vh;
+  height: 178vh;
   background-color: #004466;
   font-color: white;
   font-size: 2.5em;
 }
 
 .Uploadheader{
-  font-size: 0.56em;
+ font-size: 0.45em;
   color:white;
   font-family: Josefin Sans;
   margin: 0;
   position: absolute;
   text-align: center;
-  top: 107%; 
-  left:22%;
+  top: 105%; 
+  left:10%;
   right:20%
-
 }
 
 .Input{
@@ -470,7 +468,7 @@ border-radius: 6px;
   border: 2px solid #32CD32;
   border-radius: 5px;
   Height:70%;
-  Width: 43%;
+  Width: 90%;
 }
 
 #Textarea {
@@ -496,21 +494,64 @@ top: 87.3%;
 .Categorydata{
 
   position: absolute;
-  right: 5%;
-  top: 130%;
+  left: 5%;
+  top: 205%;
   border: 2px solid #32CD32;
   border-radius: 5px;
   Height:70%;
-  Width: 43%;
+  Width: 90%;
 }
 
 .Textloader {
 
 position: absolute;
-left:20%;  
-right:20%;
+left:35%;  
+right:35%;
 top: 40%;
 
+}
+
+}
+
+@media only screen and (max-width: 900px) and (min-width:500px){
+
+.Uploadheader{
+ font-size: 0.5em;
+  color:white;
+  font-family: Josefin Sans;
+  margin: 0;
+  position: absolute;
+  text-align: center;
+  top: 105%; 
+  left:22%;
+  right:20%
+}
+
+
+.Input{
+  font-size: 0.4em;
+  background-color: white;   
+  border: 2px solid #32CD32;
+  font-family: Josefin Sans;
+  position: absolute;
+  left: 15%;
+  top: 113%;
+  height: 5%;
+  width:70%;
+  border-radius: 5px;
+}
+
+.Buttonformat{
+  font-size: 0.4em;
+  background-color: white;  
+  border: 2px solid #32CD32;
+  font-family: Josefin Sans;
+  position: absolute;
+  left: 40%;
+  top: 120%;
+  height: 5%;
+  width: 20%;
+  border-radius: 5px;
 }
 
 }
