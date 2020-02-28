@@ -8,7 +8,8 @@ import speech_recognition as sr
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
+CORS(app, resources={r"/*": {"origins": "*"}})
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -25,7 +26,7 @@ def home():
 def about():
 	return "About Page"
 
-@cross_origin(origin=DEV_IP,headers=['Content- Type','Authorization'])
+@cross_origin(origin='*')
 @app.route("/convertVoice",methods=['GET','POST'])
 def convertVoice():
 	
@@ -34,11 +35,11 @@ def convertVoice():
 
 	with harvard as source:
 		audio = recording.record(source, duration=6)
-		
-	
-	return jsonify({"data": recording.recognize_google(audio)})
+	response= jsonify({"data": recording.recognize_google(audio)})
+	response.headers.add('Access-Control-Allow-Origin', '*')
+	return response
 
-
+@cross_origin(origin='*')
 @app.route('/categorizeText')
 def categorizeText():
 	text = "Dummy Text classified into IMIST-AMBO categories"
