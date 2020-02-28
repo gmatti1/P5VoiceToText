@@ -20,5 +20,7 @@ def upload_to_aws(local_file, bucket, s3_file):
         print("Credentials not available")
         return False
 
+#Need to use this URL to COnvert voice to text
+url_s3_audio_file = 'https://voicetotextsourcefile.s3-us-west-2.amazonaws.com/' + 'recoding.wav'
 
 uploaded = upload_to_aws('recording.wav', 'VoiceToTextAudioFiles', 'recording.wav')
