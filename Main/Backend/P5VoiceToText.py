@@ -1,13 +1,16 @@
 import os
 from Config import *
+from ClassifyText import *
 from flask import Flask, flash, request
 from flask import jsonify
 from werkzeug.utils import secure_filename
 from flask_cors import CORS, cross_origin
+import speech_recognition as sr
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
+CORS(app, resources={r"/*": {"origins": "*"}})
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -16,44 +19,32 @@ def allowed_file(filename):
 @app.route("/")
 @app.route("/home")
 def home():
-	return """
-    <form action="/convertVoice" method="post" enctype="multipart/form-data">
-	<div>
-	<label for="file">Choose file to upload</label>
-	<input type="file" id="file" name="file" accept=".wav" multiple>
-	</div>
-	<div>
-	<button>Submit</button>
-	</div>
-	</form>
-    """
+	return "home page"
+    
 
 
 @app.route("/about")
 def about():
 	return "About Page"
 
-
-@app.route("/convertVoice", methods=['POST'])
+@cross_origin(origin='*')
+@app.route("/convertVoice",methods=['GET','POST'])
 def convertVoice():
 	
-	if request.method == 'POST':
-		text = "Dummy Voice to Text Converted Text"
-	else:
-		text = "Dummy Voice to Text Converted Text2"
 	recording = sr.Recognizer()
-	harvard = sr.AudioFile(request.form['file'])
+	harvard = sr.AudioFile('resources/VoiceUploads/Recording.wav')
 
 	with harvard as source:
 		audio = recording.record(source, duration=6)
-	print(recording.recognize_google(audio))
-	
-	return jsonify(text)
+	response= jsonify({"data": recording.recognize_google(audio)})
+	response.headers.add('Access-Control-Allow-Origin', '*')
+	return response
 
-
-@app.route("/categorizeText")
+@cross_origin(origin='*')
+@app.route('/categorizeText')
 def categorizeText():
-	text = "Dummy Text classified into IMIST-AMBO categories"
+	classifyText = ClassifyText()
+	text = classifyText.clean_and_classify()
 	return jsonify(text)
 
 
@@ -78,7 +69,7 @@ def uploadVoiceFile():
     	if os.path.exists(destination):
     		response = True 
 
-    return jsonify(response)
+    return "got it"
 
 
 if __name__=='__main__':

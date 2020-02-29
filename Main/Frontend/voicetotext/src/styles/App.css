@@ -1,13 +1,25 @@
+
+
+
 .Firstpage {
  height: 102vh;
-  height: 102vh;
 }
 
 .Navbarsize {
-  padding: 20px;
+  padding :13px;
+}
+
+#navbg {
+background-color:#004466;
+border-radius: 6px;
 }
 
 .App-logobig {
+  height: 100px;
+  justify-content: center;
+}
+
+.App-baby {
   height: 100px;
   justify-content: center;
 }
@@ -19,68 +31,45 @@
   opacity: 0.95;
   width: 100%;
   height: 400px;
-  top: 58%;
+  top: 56%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
-}
-
-.App-logo {
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  padding-top: 40px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.6em;
 }
 
 .Appheaderfp {
   margin: 0;
   position: absolute;
-  background: rgb(0, 0, 0); /* Fallback color */
-  background: rgba(0, 0, 0, 0.75); /* Black background with 0.5   opacity */
-  height: 200px;
+  background: rgb(0, 68, 102); /* Fallback color */
+  background: rgba(0, 68, 102, 0.75); /* Black background with 0.5     opacity */
+  height: 150px;
   color: #f1f1f1;
   width: 100%;
-  top: 58%;
-  -ms-transform: translateY(-50%);
+  top: 56%;
+ -ms-transform: translateY(-50%);
   transform: translateY(-50%);
+  
+}
+
+.App-footer {
+  
+  position: absolute;
+  padding :30px;
+  height: 80px;
+  width: 100%;
+  top: 88.8%;
 }
 
 .Arrow {
-  margin: 0;
   position: absolute;
-  height: 57px;
-  width: 170px;
-  top: -18%;
-  left :50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  -ms-transform: translateX(-50%);
-  transform: translateX(-50%);
+  height: 78%;
+  width: 20%;  
+  left: 40%;
+  top:3%;
 }
 
 .Arrow:hover 
 {
-  opacity: 0.5;
-}
-
-
-.App-footer {
-  margin: 0;
-  position: absolute;
-  background-color: white;
-  height: 60px;
-  width: 100%;
-  top: 97.6%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+  opacity: 0.8;
 }
 
 .Apptitlefp {
@@ -88,7 +77,6 @@
   position: relative;
   text-align: center;
   font-size: 2.5em;
-  font-weight: 450;
   font-family: Josefin Sans;
   top: 50%;
   -ms-transform: translateY(-50%);
@@ -97,77 +85,473 @@
 
 .Secondpage {
   height: 100vh;
-  background-color: #FFE4E1;
-  font-color: black;
+  background-color: #004466;
+  font-color: white;
   font-size: 2.5em;
-  font-weight: 450;
 }
 
 .Uploadheader{
-  font-size: 0.8em;
+  font-size: 0.7em;
+  color:white;
   font-family: Josefin Sans;
   margin: 0;
   position: absolute;
-  top: 107%;
-  left :50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  -ms-transform: translateX(-50%);
-  transform: translateX(-50%);
+  text-align: center;
+  top: 107%; 
+  left:32%;
+  right:31%
+
 }
 
 .Input{
   font-size: 0.5em;
-  background-color: white; 
-  color: black; 
-  border: 2px solid #DB7093;
+  background-color: white;   
+  border: 2px solid #32CD32;
   font-family: Josefin Sans;
   position: absolute;
-  left: 28%;
-  top: 116%;
-  height: 6.5%;
-  width:35%;
+  left: 27%;
+  top: 118%;
+  height: 6.3%;
+  width:36%;
   border-radius: 5px;
 }
 
 .Buttonformat{
   font-size: 0.5em;
-  background-color: white; 
-  color: black; 
-  border: 2px solid #DB7093;
+  background-color: white;  
+  border: 2px solid #32CD32;
   font-family: Josefin Sans;
   position: absolute;
-  left: 63%;
-  top: 116%;
-  height: 6.5%;
+  right: 27%;
+  top: 118%;
+  height: 6.3%;
   width: 10%;
   border-radius: 5px;
 }
 
 .Buttonformat:hover {
-  background-color: #DB7093;
+  background-color: #32CD32;
   color: white;
 }
 
 .Textdata{
 
   position: absolute;
-  left: 6%;
-  top: 130%;
-  border: 2px solid #DB7093;
+  left: 5%;
+  top: 128%;
+  border: 2px solid #32CD32;
   border-radius: 5px;
+  Height:71.7%;
+  Width: 43%;
+}
+
+.LabelTextdata {
+font-family: Josefin Sans;
+font-size: 0.6em;
+color:white;
+
+}
+
+#Textarea {
+
+font-family: Josefin Sans;
+font-size: 0.43em;
+background-color: #e6faff;
+height:310px;
+}
+
+.Textareasize{
+position: absolute;
+width:100%;
+height:310px;
+}
+
+
+.Save{
+  font-size: 0.4em;
+  background-color: #e6faff;  
+  border: 2px solid #32CD32;
+  font-family: Josefin Sans;
+  position: absolute;
+  left:0%;
+  top: 87%;
+  border-radius: 5px;
+  color:black;
+  width:100%;
+  height:8%;
+
+}
+
+.Save:hover {
+  background-color: #32CD32;
+  
 }
 
 .Categorydata{
 
   position: absolute;
-  left: 54%;
-  top: 130%;
-  border: 2px solid #DB7093;
+  right: 5%;
+  top: 128%;
+  border: 2px solid #32CD32;
   border-radius: 5px;
+  Height:71.7%;
+  Width: 43%;
+}
+
+.Tablesize{
+position: absolute;
+width:100%;
+height:340px;
+}
+
+#TableText{
+font-family: Josefin Sans;
+font-size: 0.39559em;
+background-color: #e6faff;
+
+}
+
+/* width scrollbar */
+::-webkit-scrollbar {
+ height:7px;
+width:7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 15px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background:  #009900; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background:  #006600; 
+}
+
+.Textloader {
+
+position: absolute;
+left:40%;  
+right:40%;
+top: 40%;
+
+}
+
+@keyframes ldio-fbwe939p7j {
+  0% { 
+   transform: rotate(0deg) 
+  }
+  100% { 
+   transform: rotate(360deg) 
+   }
+}
+
+.ldio-fbwe939p7j > div > div {
+  transform-origin: 50px 50px;
+  animation: ldio-fbwe939p7j 3.0303030303030303s linear infinite;
+  opacity: 0.55
+}
+
+.ldio-fbwe939p7j > div > div > div {
+  position: absolute;
+  left: 13px;
+  top: 13px;
+  width: 37px;
+  height: 37px;
+  border-radius: 37px 0 0 0;
+  transform-origin: 50px 50px
+}
+
+.ldio-fbwe939p7j > div div:nth-child(1) {
+  animation-duration: 0.7575757575757576s
+}
+
+.ldio-fbwe939p7j > div div:nth-child(1) > div {
+  background: #e15b64;
+  transform: rotate(0deg);
+}
+
+.ldio-fbwe939p7j > div div:nth-child(2) {
+  animation-duration: 1.0101010101010102s
+}
+
+.ldio-fbwe939p7j > div div:nth-child(2) > div {
+  background: #f47e60;
+  transform: rotate(0deg);
+}
+
+.ldio-fbwe939p7j > div div:nth-child(3) {
+  animation-duration: 1.5151515151515151s
+}
+
+.ldio-fbwe939p7j > div div:nth-child(3) > div {
+  background: #f8b26a;
+  transform: rotate(0deg);
+}
+
+.ldio-fbwe939p7j > div div:nth-child(4) {
+  animation-duration: 3.0303030303030303s
+}
+
+.ldio-fbwe939p7j > div div:nth-child(4) > div {
+  background: #abbd81;
+  transform: rotate(0deg);
+}
+
+.loadingio-spinner-wedges-bdyr6gdft3b {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  overflow: hidden;
+  background: none;
+}
+
+.ldio-fbwe939p7j {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0) scale(1);
+  backface-visibility: hidden;
+  transform-origin: 0 0; 
+}
+
+.ldio-fbwe939p7j div { box-sizing: content-box; }
+
+
+@media only screen and (max-width: 500px){
+
+.Firstpage {
+ height: 102vh;
+}
+
+.Navbarsize {
+  padding :30px 10px 30px;
+
+ }
+
+#navbg {
+background-color:#004466;
+border-radius: 6px;
+}
+
+.App-logobig {
+  height: 90px;
+  justify-content: center;
+}
+
+.App-baby {
+  height: 100px;
+  justify-content: center;
+}
+
+.App-bg {
+  margin: 0;
+  position: absolute;
+  background-image: url(./../assets/medical-wallpaper.jpg);
+  opacity: 0.95;
+  width: 100%;
+  height: 400px;
+  top: 55%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
 
+.Appheaderfp {
+  margin: 0;
+  position: absolute;
+  background: rgb(0, 68, 102); /* Fallback color */
+  background: rgba(0, 68, 102, 0.75); /* Black background with 0.5     opacity */
+  height: 190px;
+  color: #f1f1f1;
+  width: 100%;
+  top: 56%;
+ -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  
+}
+
+.App-footer {
+  
+  position: absolute;
+  padding :15px;
+  height: 90px;
+  width: 100%;
+  top: 86.8%;
+}
+
+.Arrow {
+  position: absolute;
+  height: 78%;
+  width: 20%;  
+  left: 40%;
+  top:3%;
+}
+
+.Arrow:hover 
+{
+  opacity: 0.8;
+}
+
+.Apptitlefp {
+  margin: 0;
+  position: relative;
+  text-align: center;
+  font-size: 2.0em;
+  font-family: Josefin Sans;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.Secondpage {
+  height: 178vh;
+  background-color: #004466;
+  font-color: white;
+  font-size: 2.5em;
+}
+
+.Uploadheader{
+ font-size: 0.45em;
+  color:white;
+  font-family: Josefin Sans;
+  margin: 0;
+  position: absolute;
+  text-align: center;
+  top: 105%; 
+  left:10%;
+  right:20%
+}
+
+.Input{
+  font-size: 0.4em;
+  background-color: white;   
+  border: 2px solid #32CD32;
+  font-family: Josefin Sans;
+  position: absolute;
+  left: 15%;
+  top: 116%;
+  height: 5%;
+  width:70%;
+  border-radius: 5px;
+}
+
+.Buttonformat{
+  font-size: 0.4em;
+  background-color: white;  
+  border: 2px solid #32CD32;
+  font-family: Josefin Sans;
+  position: absolute;
+  left: 40%;
+  top: 122%;
+  height: 5%;
+  width: 20%;
+  border-radius: 5px;
+}
+
+.Buttonformat:hover {
+  background-color: #32CD32;
+  color: white;
+}
+
+.Textdata{
+
+  position: absolute;
+  left: 5%;
+  top: 130%;
+  border: 2px solid #32CD32;
+  border-radius: 5px;
+  Height:70%;
+  Width: 90%;
+}
+
+#Textarea {
+height:320px;
+}
+
+.Textareasize{
+position: absolute;
+width:100%;
+height:320px;
+}
 
 
+.Save{
+top: 87.3%;
+}
 
+.Save:hover {
+  background-color: #32CD32;
+  
+}
+
+.Categorydata{
+
+  position: absolute;
+  left: 5%;
+  top: 205%;
+  border: 2px solid #32CD32;
+  border-radius: 5px;
+  Height:70%;
+  Width: 90%;
+}
+
+.Textloader {
+
+position: absolute;
+left:35%;  
+right:35%;
+top: 40%;
+
+}
+
+}
+
+@media only screen and (max-width: 900px){
+
+.Uploadheader{
+ font-size: 0.5em;
+  color:white;
+  font-family: Josefin Sans;
+  margin: 0;
+  position: absolute;
+  text-align: center;
+  top: 105%; 
+  left:22%;
+  right:20%
+}
+
+
+.Input{
+  font-size: 0.4em;
+  background-color: white;   
+  border: 2px solid #32CD32;
+  font-family: Josefin Sans;
+  position: absolute;
+  left: 15%;
+  top: 113%;
+  height: 5%;
+  width:70%;
+  border-radius: 5px;
+}
+
+.Buttonformat{
+  font-size: 0.4em;
+  background-color: white;  
+  border: 2px solid #32CD32;
+  font-family: Josefin Sans;
+  position: absolute;
+  left: 40%;
+  top: 120%;
+  height: 5%;
+  width: 20%;
+  border-radius: 5px;
+}
+
+}
