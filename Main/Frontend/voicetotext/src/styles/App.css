@@ -1,6 +1,5 @@
 
 
-
 .Firstpage {
  height: 102vh;
 }
@@ -109,7 +108,7 @@ border-radius: 6px;
   border: 2px solid #32CD32;
   font-family: Josefin Sans;
   position: absolute;
-  left: 27%;
+  left: 24%;
   top: 118%;
   height: 6.3%;
   width:36%;
@@ -122,7 +121,7 @@ border-radius: 6px;
   border: 2px solid #32CD32;
   font-family: Josefin Sans;
   position: absolute;
-  right: 27%;
+  right: 29%;
   top: 118%;
   height: 6.3%;
   width: 10%;
@@ -132,6 +131,46 @@ border-radius: 6px;
 .Buttonformat:hover {
   background-color: #32CD32;
   color: white;
+}
+
+.Historybutton{
+  font-size: 0.5em;
+  background-color: white;  
+  border: 2px solid #32CD32;
+  font-family: Josefin Sans;
+  position: absolute;
+  right: 24%;
+  top: 118%;
+  height: 6.3%;
+  width: 4%;
+  border-radius: 5px;
+}
+
+.Historybutton .tooltiptext{
+ visibility: hidden;
+  width: 150px;
+  color: #fff;
+  background: rgb(0, 0, 0); /* Fallback color */
+  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5     opacity */
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.Historybutton:hover .tooltiptext {
+  visibility: visible;
+}
+
+.Histicon{
+
+ position: relative;
+  height:100%;
+  width: 100%;  
+  
 }
 
 .Textdata{
@@ -209,6 +248,18 @@ font-family: Josefin Sans;
 font-size: 0.39559em;
 background-color: #e6faff;
 
+}
+
+.Thirdpage {
+  height: 100vh;
+  background-color: #004466;
+ 
+}
+
+.HistoryComponent{
+ font-family: Josefin Sans;
+ color: white;
+ font-size: 2.5em;
 }
 
 /* width scrollbar */
@@ -321,7 +372,11 @@ top: 40%;
   transform-origin: 0 0; 
 }
 
-.ldio-fbwe939p7j div { box-sizing: content-box; }
+.ldio-fbwe939p7j div { 
+box-sizing: content-box; 
+}
+
+
 
 
 @media only screen and (max-width: 500px){
@@ -553,5 +608,6 @@ top: 40%;
   width: 20%;
   border-radius: 5px;
 }
+
 
 }

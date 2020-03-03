@@ -1,6 +1,8 @@
 import React from 'react';
 import './../styles/App.css';
 import axios from 'axios';
+import hist from './../assets/hist.png';
+import { Link } from './../../node_modules/react-scroll';
 
 class FileUpload extends React.Component {
   constructor(props) {
@@ -45,6 +47,7 @@ fetch(' http://localhost:5000/convertVoice ',{
 
   render() {
     return (
+	<div>
       <form onSubmit={this.OnSubmittingForm}>
         <h1 className="Uploadheader">Please upload the audio file</h1>
         <input className ="Input"
@@ -54,9 +57,20 @@ fetch(' http://localhost:5000/convertVoice ',{
           }}
           name='voiceFile'
         />
-        <button className="Buttonformat" type='submit' >Upload</button>
+        <button className="Buttonformat" type='submit' >Upload</button>		 		
       </form>
-      
+	  <Link
+          activeClass='active'
+          to='hist'
+          spy={true}
+          smooth={true}
+          offset={0}
+          duration={500}>
+            <button className="Historybutton" type='submit'><img src={hist} className='Histicon' alt='History' />
+				<span className="tooltiptext">History : All the Uploaded files before</span>
+			</button>
+        </Link>
+      </div>
     );
   }
 }
