@@ -21,7 +21,7 @@ class ConvertedText extends Component {
 
 	
 	this.handleChange = this.handleChange.bind(this);
-	this.convertText = this.convertText.bind(this);
+
 	
   }
 
@@ -38,7 +38,7 @@ class ConvertedText extends Component {
   
   
   
-   convertText() {
+  componentDidMount() {
 
 	fetch(' http://localhost:5000/convertVoice ',{
   method: 'GET',
@@ -60,9 +60,14 @@ class ConvertedText extends Component {
 	if (!this.state.isLoaded) {
 		
 	 return (
-		
+		<div>
+      
      <div className ="Textdata"> 
-	 		{this.convertText()}
+
+     
+
+       
+	 		
             <label className ="LabelTextdata">
             Converted Text
             </label>
@@ -74,7 +79,7 @@ class ConvertedText extends Component {
 			</div>
 
 			</div> 
-
+</div>
 		</div>
     );
 	}
