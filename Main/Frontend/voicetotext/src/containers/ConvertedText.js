@@ -97,7 +97,8 @@ class ConvertedText extends Component {
             className="form-control"
             id="Textarea"			
 			value = {this.state.tex}
-			onChange={this.handleChange}
+      onChange={this.handleChange}
+    
             /> 
 			
 			</div>		
