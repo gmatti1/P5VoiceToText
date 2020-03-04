@@ -3,16 +3,21 @@ import './../styles/App.css';
 import axios from 'axios';
 import hist from './../assets/hist.png';
 import { Link } from './../../node_modules/react-scroll';
+import ConvertedText from './ConvertedText';
+import { PropTypes } from 'react';
 
 class FileUpload extends React.Component {
   constructor(props) {
     super(props);
+    
     this.state = {
-      isFileUploaded: null
+      isFileUploaded: null,
+      
     };
 
     this.OnSubmittingForm = this.OnSubmittingForm.bind(this);
     this.Upload_file = this.Upload_file.bind(this);
+  
   }
 
  Upload_file(file) {
@@ -21,18 +26,10 @@ class FileUpload extends React.Component {
 Promise.all([fetch('/uploadVoiceFile', {
   method: 'POST',
   body: formData
-}),
-fetch(' http://localhost:5000/convertVoice ',{
-  method: 'GET',
- 
 })
-]).then(([response1,response2]) => {
-  
-  response2.json().then(data => {this.setState({ "data": data });
-    console.log(this.state.data);
-  });
-       
-    });
+])
+this.props.func();
+
   }
   
 

@@ -4,12 +4,15 @@ import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootst
 import './../../node_modules/ag-grid-community/dist/styles/ag-grid.css';
 import './../../node_modules/ag-grid-community/dist/styles/ag-theme-balham.css';
 import './../styles/index.css';
+import FileUpload from './FileUpload';
+import { PropTypes } from 'react';
 
 class ConvertedText extends Component {
   constructor(props) {
     super(props);
 	
 	this.state = {
+		tex:"",
 		 item: '',
 		 isLoaded : false
 		 
@@ -18,7 +21,7 @@ class ConvertedText extends Component {
 
 	
 	this.handleChange = this.handleChange.bind(this);
-	
+	this.convertText = this.convertText.bind(this);
 	
   }
 
@@ -35,33 +38,40 @@ class ConvertedText extends Component {
   
   
   
-  componentDidMount() {
+   convertText() {
+
+	fetch(' http://localhost:5000/convertVoice ',{
+  method: 'GET',
+ 
+}).then((response2) => {
+  
+  response2.json().then(data => {this.setState({ tex: data.data });
+    console.log(this.state.tex);
+  });
+       
+    });
    
-    fetch('')
-	.then(res => res.json())
-	.then(json => {
-		this.setState({
-				isLoaded: true,
-			    item: json,
-			})
-		}); 
+    
   }
 
   render() {
 	
+		
 	if (!this.state.isLoaded) {
-	
+		
 	 return (
-     <div className ="Textdata"> 			
+		
+     <div className ="Textdata"> 
+	 		{this.convertText()}
             <label className ="LabelTextdata">
             Converted Text
             </label>
 			
 			<div className ="Textloader"> 
 			
-			<div class="loadingio-spinner-wedges-bdyr6gdft3b"><div class="ldio-fbwe939p7j">
-            <div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div></div>
-            </div></div>
+			<div>
+			{this.state.tex}
+			</div>
 
 			</div> 
 
@@ -72,7 +82,9 @@ class ConvertedText extends Component {
 	else {
 		
     return (
-     <div className ="Textdata"> 			
+     <div className ="Textdata"> 
+	 		
+
             <label className ="LabelTextdata">
             Converted Text
             </label>			
@@ -84,7 +96,7 @@ class ConvertedText extends Component {
             <textarea
             className="form-control"
             id="Textarea"			
-			value = {this.state.item}
+			value = {this.state.tex}
 			onChange={this.handleChange}
             /> 
 			
@@ -101,3 +113,4 @@ class ConvertedText extends Component {
 }
 
 export default ConvertedText;
+

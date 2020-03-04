@@ -9,7 +9,7 @@ import ConvertedAndCategorizedText from './../containers/ConvertedAndCategorized
 function Secondpage() {
   return (
     <div className='Secondpage' id='main'>
-      <FileUpload />
+      <FileUpload />  
       <ConvertedText />
 	  <CategorizedText />
     </div>
