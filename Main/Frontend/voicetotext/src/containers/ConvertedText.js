@@ -18,8 +18,6 @@ class ConvertedText extends Component {
 		 
 		};
 			
-
-	
 	this.handleChange = this.handleChange.bind(this);
 
 	
@@ -79,7 +77,7 @@ class ConvertedText extends Component {
 			</div>
 
 			</div> 
-</div>
+          </div>
 		</div>
     );
 	}

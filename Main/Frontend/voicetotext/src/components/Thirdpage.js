@@ -6,7 +6,6 @@ import History from '../containers/History';
 function Thirdpage() {
   return (
     <div className='Thirdpage' id='hist'>
-       <h1>third page</h1>
       <History />
     </div>
   );

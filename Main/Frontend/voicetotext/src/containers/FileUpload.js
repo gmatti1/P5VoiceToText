@@ -20,22 +20,18 @@ class FileUpload extends React.Component {
   
   }
 
- Upload_file(file) {
+    Upload_file(file) {
     const formData = new FormData();
     formData.append('file', this.uploadInput.files[0]);
-Promise.all([fetch('/uploadVoiceFile', {
-  method: 'POST',
-  body: formData
+    Promise.all([fetch('/uploadVoiceFile', {
+    method: 'POST',
+    body: formData
 })
 ])
 this.props.func();
 
   }
   
-
- 
-
-
   OnSubmittingForm(e) {
     e.preventDefault();
     this.Upload_file();
@@ -55,7 +51,8 @@ this.props.func();
           name='voiceFile'
         />
         <button className="Buttonformat" type='submit' >Upload</button>		 		
-      </form>
+      </form>	  
+	  <div className="ORtext">or</div>
 	  <Link
           activeClass='active'
           to='hist'
@@ -63,7 +60,8 @@ this.props.func();
           smooth={true}
           offset={0}
           duration={500}>
-            <button className="Historybutton" type='submit'><img src={hist} className='Histicon' alt='History' />
+            <button className="Historybutton" type='submit'>
+			    Select From History
 				<span className="tooltiptext">History : All the Uploaded files before</span>
 			</button>
         </Link>
