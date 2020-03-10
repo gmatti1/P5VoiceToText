@@ -10,8 +10,8 @@ wav_audio = AudioSegment.from_file("audioFile.aac")
 wav_audio.export("audio1.wav", format="wav")
 
 # AWS IAM User credentials
-ACCESS_KEY_ID = 'AKIARH6IQHSVXUVLENNE'
-ACCESS_SECRET_KEY = 'tGTLObhHlXXfu24Z/hXMM7EaPnsh7KfgYM1Wap3g'
+ACCESS_KEY_ID = ''
+ACCESS_SECRET_KEY = ''
 BUCKET_NAME = 'voicetotextsourcefile'
 FILE_NAME = 'audio1.wav' #Note: Replace this text with file name
 S3_FILE_URL = ''
