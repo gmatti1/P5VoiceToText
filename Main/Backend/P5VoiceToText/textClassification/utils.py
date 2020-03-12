@@ -261,4 +261,5 @@ if __name__=='__main__':
 	classifyText.stemming_text()
 	#print(classifyText.words)
 	classifyText.lemmatization_text()
+	insert_into_imist_ambo_template();
 	print(classifyText.words)

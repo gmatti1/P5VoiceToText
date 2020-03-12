@@ -6,7 +6,9 @@ class Imist_ambo_template(db.Document):
 	
 class ConvertedText(db.Document):
     file_name = db.StringField(required=True, unique=True)
-    s3_link = db.StringField(required=True)
-    convertedText = db.StringField(required=True)
-    categorizedText=db.StringField( required=True)
+    convText=db.StringField( required=True)
+class CatergorizedText(db.Document):
+    file_name = db.StringField(required=True, unique=True)
+    cateText=db.StringField( required=True)
+	
 
