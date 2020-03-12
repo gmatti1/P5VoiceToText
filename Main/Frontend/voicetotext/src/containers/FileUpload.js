@@ -28,7 +28,7 @@ Promise.all([fetch('/uploadVoiceFile', {
   body: formData
 })
 ])
-this.props.func();
+
 
   }
   
