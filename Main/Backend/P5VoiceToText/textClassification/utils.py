@@ -25,14 +25,16 @@ class ClassifyText:
 								  "other": [] }
 
 
+
 	def get_voice_text_from_db(self, filename):
 		self.voice_file = Voice_files.objects.filter(filename=filename)[0]
 		self.text = Voice_text_conversion.objects.filter(voiceFile=self.voice_file)[0].converted_text
 
+
+
 	# Removing Stop Words ....
 	def remove_stopwords(self):
 		self.text = self.text.lower()
-  
 		stop_words = set(stopwords.words('english') + list(punctuation)) 		
 		word_tokens = word_tokenize(self.text) 
 		filtered_sentence = [w for w in word_tokens if not w in stop_words] 
@@ -78,6 +80,20 @@ class ClassifyText:
 		self.clean_text()
 		self.classify_text_into_categories()
 		return self.category_keyword
+
+
+	def save_categorizedText_in_db(self):
+		text_categorization = Text_categorization(voiceFile=self.voice_file)
+		text_categorization.identification = self.category_keyword['identification']
+		text_categorization.mechanism = self.category_keyword['mechanism']
+		text_categorization.injury = self.category_keyword['injury']
+		text_categorization.signs = self.category_keyword['signs']
+		text_categorization.treatment = self.category_keyword['treatment']
+		text_categorization.allergy = self.category_keyword['allergy']
+		text_categorization.medication = self.category_keyword['medication']
+		text_categorization.background = self.category_keyword['background']
+		text_categorization.other = self.category_keyword['other']
+		text_categorization.save()
 
 
 	def insert_into_imist_ambo_template(self):
@@ -250,6 +266,7 @@ class ClassifyText:
 		arr = [Imist_ambo_template(**data) for data in map_keyword_category]
 		Imist_ambo_template.objects.insert(arr, load_bulk=False)
 
+
 	def test_db(self):
 		voice_file = Voice_files(filename="test_shefali1.mp3", s3link="some s3link of aws").save()
 		text = "A 23 year old female fell off of a cycle and injured her head and neck. She is currently on ventillation. She is also pregnant."
@@ -266,13 +283,3 @@ class ClassifyText:
 		text_categorization.background = self.category_keyword['background']
 		text_categorization.other = self.category_keyword['other']
 		text_categorization.save()
-
-
-if __name__=='__main__':
-	classifyText = ClassifyText()
-	classifyText.remove_stopwords()
-	#print(classifyText.words)
-	classifyText.stemming_text()
-	#print(classifyText.words)
-	classifyText.lemmatization_text()
-	print(classifyText.words)

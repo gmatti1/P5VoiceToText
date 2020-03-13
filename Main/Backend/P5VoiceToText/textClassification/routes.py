@@ -15,4 +15,5 @@ def categorizeText():
 	classifyText = ClassifyText()
 	classifyText.get_voice_text_from_db("test_shefali1.mp3")
 	text = classifyText.clean_and_classify()
+	classifyText.save_categorizedText_in_db()
 	return jsonify(text)
