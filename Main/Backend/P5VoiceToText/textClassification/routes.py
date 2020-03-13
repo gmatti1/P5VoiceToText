@@ -17,3 +17,10 @@ def categorizeText():
 	text = classifyText.clean_and_classify()
 	classifyText.save_categorizedText_in_db()
 	return jsonify(text)
+
+@cross_origin(origin=cors_ip,headers=cors_header)
+@textClassification.route('/savedCategorizeText')
+def get_categorizeText_from_selected_file():
+	classifyText = ClassifyText()
+	text = classifyText.get_categorizedText_from_db("test_shefali1.mp3")
+	return jsonify(text)

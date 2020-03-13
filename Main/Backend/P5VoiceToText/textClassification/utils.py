@@ -96,6 +96,22 @@ class ClassifyText:
 		text_categorization.save()
 
 
+
+	def get_categorizedText_from_db(self, filename):
+		self.voice_file = Voice_files.objects.filter(filename=filename)[0]
+		text_categorization = Text_categorization.objects.filter(voiceFile=self.voice_file)[0]
+		self.category_keyword['identification'] = text_categorization.identification
+		self.category_keyword['mechanism'] = text_categorization.mechanism
+		self.category_keyword['injury'] = text_categorization.injury
+		self.category_keyword['signs'] = text_categorization.signs
+		self.category_keyword['treatment'] = text_categorization.treatment
+		self.category_keyword['allergy'] = text_categorization.allergy
+		self.category_keyword['medication'] = text_categorization.medication
+		self.category_keyword['background'] = text_categorization.background
+		self.category_keyword['other'] = text_categorization.other
+		return self.category_keyword
+
+
 	def insert_into_imist_ambo_template(self):
 		map_keyword_category = [
 			{"keyword": "age",
