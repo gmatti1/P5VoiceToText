@@ -13,5 +13,6 @@ cors_header = Config.CORS_HEADERS
 @textClassification.route('/categorizeText')
 def categorizeText():
 	classifyText = ClassifyText()
+	classifyText.get_voice_text_from_db("test_shefali1.mp3")
 	text = classifyText.clean_and_classify()
 	return jsonify(text)

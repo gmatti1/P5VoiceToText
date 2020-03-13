@@ -10,8 +10,9 @@ from P5VoiceToText.models import Imist_ambo_template, Voice_files, Voice_text_co
 
 class ClassifyText:
 
-	def __init__(self):
-		self.text = "He was running and eating at same time. He has bad habit of swimming after playing long hours in the Sun."
+	def __init__(self): 
+		self.voice_file = None
+		self.text = ""
 		self.words = []
 		self.category_keyword = { "identification" : [],
 								  "mechanism" : [],
@@ -24,9 +25,12 @@ class ClassifyText:
 								  "other": [] }
 
 
+	def get_voice_text_from_db(self, filename):
+		self.voice_file = Voice_files.objects.filter(filename=filename)[0]
+		self.text = Voice_text_conversion.objects.filter(voiceFile=self.voice_file)[0].converted_text
+
 	# Removing Stop Words ....
 	def remove_stopwords(self):
-		#self.text = "This is a sample sentence, showing off the stop words filtration."
 		self.text = self.text.lower()
   
 		stop_words = set(stopwords.words('english') + list(punctuation)) 		
@@ -63,9 +67,6 @@ class ClassifyText:
 
 	# Classify the specific words into IMIST_AMBO categories ....
 	def classify_text_into_categories(self):
-		
-		self.words = ["femal", "fall"]
-
 		for word in self.words:
 			imist_ambos = Imist_ambo_template.objects.filter(keyword=word)
 			for entry in imist_ambos:
@@ -106,6 +107,8 @@ class ClassifyText:
 			{"keyword": "cycl",
 			 "category": "mechanism"},
 			{"keyword": "fall",
+			 "category": "mechanism"},
+			{"keyword": "fell",
 			 "category": "mechanism"},
 			{"keyword": "burn",
 			 "category": "mechanism"},
