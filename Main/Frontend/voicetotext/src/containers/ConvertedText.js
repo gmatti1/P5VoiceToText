@@ -12,44 +12,30 @@ class ConvertedText extends Component {
     super(props);
 	
 	this.state = {
-		tex:"",
-		 item: '',
-		 isLoaded : false
-		 
+		title:'',
+		isLoaded : false		 
 		};
 			
 	this.handleChange = this.handleChange.bind(this);
-
-	
   }
 
   handleSubmit = (event) => {
 	 event.preventDefault()	 
-	 const data = this.state.item;
+	 const data = this.state.title;
 	 console.log("Edited text is : ",data);
   }
   
   handleChange = (event) => {
 	event.preventDefault()
-    this.setState({value: event.target.item});
+    this.setState({title: event.target.value});
   } 
   
   
-  
-  componentDidMount() {
-
-	fetch(' http://localhost:5000/convertVoice ',{
-  method: 'GET',
- 
-}).then((response2) => {
-  
-  response2.json().then(data => {this.setState({ tex: data.data });
-    console.log(this.state.tex);
-  });
-       
-    });
-   
-    
+  componentDidMount()
+  {
+	 fetch('https://jsonplaceholder.typicode.com/todos/1') 
+	 .then(response => response.json())
+	 .then(title => this.setState({isLoaded : true, title:title.title}))
   }
 
   render() {
@@ -58,13 +44,9 @@ class ConvertedText extends Component {
 	if (!this.state.isLoaded) {
 		
 	 return (
-		<div>
+		
       
-     <div className ="Textdata"> 
-
-     
-
-       
+     <div className ="Textdata">      
 	 		
             <label className ="LabelTextdata">
             Converted Text
@@ -72,13 +54,13 @@ class ConvertedText extends Component {
 			
 			<div className ="Textloader"> 
 			
-			<div>
-			{this.state.tex}
-			</div>
+			<div class="loadingio-spinner-wedges-bdyr6gdft3b"><div class="ldio-fbwe939p7j">
+            <div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div></div>
+            </div></div>
 
 			</div> 
           </div>
-		</div>
+		
     );
 	}
 	
@@ -99,8 +81,8 @@ class ConvertedText extends Component {
             <textarea
             className="form-control"
             id="Textarea"			
-			value = {this.state.tex}
-      onChange={this.handleChange}
+			value = {this.state.title}
+            onChange={this.handleChange}
     
             /> 
 			
