@@ -29,11 +29,20 @@ class CategorizedText extends Component {
   }
   
   componentDidMount() {
-    fetch('/categorizeText').then(response =>
-      response.json().then(data => {
+    let v = {
+      "filename":"test_shefali1.mp3"
+    }
+
+    fetch('/savedCategorizeText',{
+        method: 'POST',
+        body: JSON.stringify(v),
+        headers: { 'Content-type': 'application/json' }
+      })
+      .then(response =>
+        response.json().then(data => {
         this.setState({ isLoaded: true, textCategorized: data });
         console.log(this.state.textCategorized);      
-		})
+		  })
     );
   }
 
