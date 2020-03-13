@@ -5,10 +5,8 @@ from nltk.stem import PorterStemmer
 from string import punctuation
 from nltk.stem import WordNetLemmatizer
 
-import json
-
 from P5VoiceToText import db
-from P5VoiceToText.models import Imist_ambo_template
+from P5VoiceToText.models import Imist_ambo_template, Voice_files, Voice_text_conversion, Text_categorization
 
 class ClassifyText:
 
@@ -66,13 +64,12 @@ class ClassifyText:
 	# Classify the specific words into IMIST_AMBO categories ....
 	def classify_text_into_categories(self):
 		
-		self.words = ["femal", "mal", "spinal"]
-		
+		self.words = ["femal", "fall"]
+
 		for word in self.words:
-			entries = Imist_ambo_template.objects.filter(keyword=word).to_json()
-			entries = json.loads(entries)
-			for entry in entries:
-				self.category_keyword[entry['category']].append(entry['keyword'])
+			imist_ambos = Imist_ambo_template.objects.filter(keyword=word)
+			for entry in imist_ambos:
+				self.category_keyword[entry.category].append(entry.keyword)
 
 
 
@@ -124,8 +121,6 @@ class ClassifyText:
 			 "category": "mechanism"},
 			{"keyword": "fatal",
 			 "category": "mechanism"},
-			{"keyword": "eject",
-			 "category": "mechanism"},
 			{"keyword": "penetr",
 			 "category": "injury"},
 			{"keyword": "blunt",
@@ -157,8 +152,6 @@ class ClassifyText:
 			{"keyword": "rigid abdomen",
 			 "category": "injury"},
 			{"keyword": "fractur",
-			 "category": "injury"},
-			{"keyword": "pelvi",
 			 "category": "injury"},
 			{"keyword": "facial burn",
 			 "category": "injury"},
@@ -251,8 +244,26 @@ class ClassifyText:
 			{"keyword": "anticoagul therapi",
 			 "category": "other"}
 			]
-		arr = [Imist_ambo_template(**data) for data in array]
+		arr = [Imist_ambo_template(**data) for data in map_keyword_category]
 		Imist_ambo_template.objects.insert(arr, load_bulk=False)
+
+	def test_db(self):
+		voice_file = Voice_files(filename="test_shefali1.mp3", s3link="some s3link of aws").save()
+		text = "A 23 year old female fell off of a cycle and injured her head and neck. She is currently on ventillation. She is also pregnant."
+		voice_text_conversion = Voice_text_conversion(converted_text=text, voiceFile=voice_file).save()
+		voice_file = Voice_files.objects.filter(filename="test_file1")
+		text_categorization = Text_categorization(voiceFile=voice_file[0])
+		text_categorization.identification = self.category_keyword['identification']
+		text_categorization.mechanism = self.category_keyword['mechanism']
+		text_categorization.injury = self.category_keyword['injury']
+		text_categorization.signs = self.category_keyword['signs']
+		text_categorization.treatment = self.category_keyword['treatment']
+		text_categorization.allergy = self.category_keyword['allergy']
+		text_categorization.medication = self.category_keyword['medication']
+		text_categorization.background = self.category_keyword['background']
+		text_categorization.other = self.category_keyword['other']
+		text_categorization.save()
+
 
 if __name__=='__main__':
 	classifyText = ClassifyText()
