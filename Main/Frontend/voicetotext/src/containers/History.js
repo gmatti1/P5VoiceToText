@@ -30,7 +30,7 @@ class History extends Component {
 			</div> 
 			
             <div className ="Historylist">	
-				 <select className ="Historyselect" >{
+				 <select size = "10" className ="Historyselect" >{
 					 this.state.files.map(file => 
 					 <option value="file.value">{file.name}
 					 </option>)
