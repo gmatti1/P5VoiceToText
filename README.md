@@ -27,12 +27,18 @@ Application is live on - http://ser517phcvoicetotext.s3-website-us-west-2.amazon
 #### Follow below steps to run the project:
 
 1. Install flask and flask_cors libraries using pip, "pip install flask", "pip install flask_cors" in command prompt
-2. Run Flask by writing "python Backend/P5VoiceToText/run.py" in command prompt.
+2. Run Flask by writing "python Backend/run.py" in command prompt.
 3. Launch "localhost:5000" in the browser to access APIs.
 
 #### Project Structure: <br>
-Config.py - contains all the configurations and properties. <br>
-P5VoiceToText.py - contains all the Flask APIs <br>
-resources - contains all the file resouces 
-
-
+In Backend directory: <br>
+run.py - used for running the backend server of the application. <br>
+In Backend/P5VoiceToText directory: <br>
+resources - contains all the file resouces <br>
+config.py - contains all the configuration properties related to Database connection and Folder/File Path <br>
+models.py - contains models that helps to connect, create and edit the schema in database <br>
+main - package that contains basic pages of the application - Home, About Us <br>
+errors - package that contains APIs for Error Handling <br>
+uploadOrSelectFiles - package that contains APIs for uploading or selecting audio files <br>
+voiceToTextConversion - package that contains APIs for voice to text conversion functionality <br>
+textClassification - package that contains APIs for categorizing the text into IMIST-AMBO categories <br>
