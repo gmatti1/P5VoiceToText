@@ -31,9 +31,9 @@ Application is live on - http://ser517phcvoicetotext.s3-website-us-west-2.amazon
 3. Launch "localhost:5000" in the browser to access APIs.
 
 #### Project Structure: <br>
-In Backend directory: <br>
+##### In Backend directory: <br>
 run.py - used for running the backend server of the application. <br>
-In Backend/P5VoiceToText directory: <br>
+###### In Backend/P5VoiceToText directory: <br>
 resources - contains all the file resouces <br>
 config.py - contains all the configuration properties related to Database connection and Folder/File Path <br>
 models.py - contains models that helps to connect, create and edit the schema in database <br>
