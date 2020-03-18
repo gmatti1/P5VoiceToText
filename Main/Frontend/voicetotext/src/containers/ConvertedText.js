@@ -10,58 +10,14 @@ import { PropTypes } from 'react';
 class ConvertedText extends Component {
   constructor(props) {
     super(props);
-	
-	this.state = {
-		title:'',
-		isLoaded : false		 
-		};
-			
-	this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleSubmit = (event) => {
-	 event.preventDefault()	 
-	 const data = this.state.title;
-	 console.log("Edited text is : ",data);
-  }
-  
-  handleChange = (event) => {
-	event.preventDefault()
-    this.setState({title: event.target.value});
-  } 
-  
-  
-  componentDidMount()
-  {
-	 fetch('https://jsonplaceholder.typicode.com/todos/1') 
-	 .then(response => response.json())
-	 .then(title => this.setState({isLoaded : true, title:title.title}))
   }
 
   render() {
 	
 		
-	if (!this.state.isLoaded) {
+	if (!this.props.isLoaded) {
 		
-	 return (
-		
-      
-     <div className ="Textdata">      
-	 		
-            <label className ="LabelTextdata">
-            Converted Text
-            </label>
-			
-			<div className ="Textloader"> 
-			
-			<div class="loadingio-spinner-wedges-bdyr6gdft3b"><div class="ldio-fbwe939p7j">
-            <div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div></div>
-            </div></div>
-
-			</div> 
-          </div>
-		
-    );
+	 return (null);
 	}
 	
 	else {
@@ -74,15 +30,15 @@ class ConvertedText extends Component {
             Converted Text
             </label>			
 			
-			<form onSubmit={this.handleSubmit}>
+			<form onSubmit={this.props.handleSubmit}>
 			
 			<div className="Textareasize">
 						
             <textarea
             className="form-control"
             id="Textarea"			
-			value = {this.state.title}
-            onChange={this.handleChange}
+			value = {this.props.title.title}
+            onChange={this.props.handleChange}
     
             /> 
 			

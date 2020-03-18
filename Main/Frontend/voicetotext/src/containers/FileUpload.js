@@ -3,7 +3,8 @@ import './../styles/App.css';
 import axios from 'axios';
 import hist from './../assets/hist.png';
 import { Link } from './../../node_modules/react-scroll';
-import ConvertedText from './ConvertedText';
+import ConvertedText from '../containers/ConvertedText';
+import CategorizedText from '../containers/CategorizedText';
 import { PropTypes } from 'react';
 
 class FileUpload extends React.Component {
@@ -12,7 +13,8 @@ class FileUpload extends React.Component {
     
     this.state = {
       isFileUploaded: null,
-      
+      title:'',
+	  isLoaded : false	
     };
 
     this.OnSubmittingForm = this.OnSubmittingForm.bind(this);
@@ -26,8 +28,8 @@ class FileUpload extends React.Component {
     Promise.all([fetch('/uploadVoiceFile', {
     method: 'POST',
     body: formData
-})
-])
+    })
+    ])
 this.props.func();
 
   }
@@ -37,6 +39,24 @@ this.props.func();
     this.Upload_file();
   }
   
+   handleSubmit = (event) => {
+	 event.preventDefault()	 
+	 const data = this.state.title;
+	 console.log("Edited text is : ",data);
+  }
+  
+  handleChange = (event) => {
+	event.preventDefault()
+    this.setState({title: event.target.value});
+  } 
+  
+  
+  componentDidMount()
+  {
+	 fetch('https://jsonplaceholder.typicode.com/todos/1') 
+	 .then(response => response.json())
+	 .then(title => this.setState({isLoaded : true, title:title}))
+  }
 
   render() {
     return (
@@ -65,6 +85,11 @@ this.props.func();
 				<span className="tooltiptext">History : All the Uploaded files before</span>
 			</button>
         </Link>
+		
+		 <ConvertedText isLoaded = {this.state.isLoaded} title = {this.state.title} handleSubmit = {this.handleSubmit.bind(this)} 
+		 handleChange = {this.handleChange.bind(this)}/>
+	     <CategorizedText />
+		 
       </div>
     );
   }
