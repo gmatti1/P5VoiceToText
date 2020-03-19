@@ -18,6 +18,15 @@ def categorizeText():
 	text = classifyText.clean_and_classify()
 	classifyText.save_categorizedText_in_db()
 	return jsonify(text)
+	
+@cross_origin(origin=cors_ip,headers=cors_header)
+@textClassification.route('/addtoDB', methods = ['GET', 'POST'])
+def AddDatatoDb():
+	classify= ClassifyText()
+	method=classify.insert_into_imist_ambo_template()
+	method()
+	
+
 
 @cross_origin(origin=cors_ip,headers=cors_header)
 @textClassification.route('/savedCategorizeText', methods = ['GET', 'POST'])
