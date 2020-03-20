@@ -14,6 +14,7 @@ class ClassifyText:
 		self.voice_file = None
 		self.text = ""
 		self.words = []
+		self.mapwords_original_to_root = {}
 		self.category_keyword = { "identification" : [],
 								  "mechanism" : [],
 								  "injury": [],
@@ -47,32 +48,28 @@ class ClassifyText:
 
 
 
-	# Get the root of words using Stemming ....
-	def stemming_text(self):
+	# Get the root of words using Stemming and Lemmatization ....
+	def stemming_and_lemmatization_text(self):
 		ps = PorterStemmer() 
-		self.words = [ps.stem(word) for word in self.words]
+		wordnet_lemmatizer = WordNetLemmatizer()
+		for word in self.words:
+			stem = ps.stem(word)
+			lemma = wordnet_lemmatizer.lemmatize(stem)
+			self.mapwords_original_to_root[word] = lemma
 		
 
-	# Get the root of words using Lemmatization ....
-	def lemmatization_text(self):
-		wordnet_lemmatizer = WordNetLemmatizer()
-		self.words = [wordnet_lemmatizer.lemmatize(word) for word in self.words]
-
-
-	
 	# Cleaning of Text	
 	def clean_text(self):
 		self.remove_stopwords()
-		self.stemming_text()
-		self.lemmatization_text()
+		self.stemming_and_lemmatization_text()
 
 
 	# Classify the specific words into IMIST_AMBO categories ....
 	def classify_text_into_categories(self):
-		for word in self.words:
-			imist_ambos = Imist_ambo_template.objects.filter(keyword=word)
-			for entry in imist_ambos:
-				self.category_keyword[entry.category].append(entry.keyword)
+		for original, root in self.mapwords_original_to_root.items():
+			imist_ambos = Imist_ambo_template.objects.filter(keyword=root)
+			if len(imist_ambos):
+				self.category_keyword[imist_ambos[0].category].append(original)
 
 
 
