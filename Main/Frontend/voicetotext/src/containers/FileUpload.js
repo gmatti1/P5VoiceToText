@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import './../styles/App.css';
 import axios from 'axios';
 import hist from './../assets/hist.png';
 import { Link } from './../../node_modules/react-scroll';
-import ConvertedText from '../containers/ConvertedText';
+import { slowImport } from '../containers/Helper';
+//import ConvertedText from '../containers/ConvertedText';
 import CategorizedText from '../containers/CategorizedText';
 import { PropTypes } from 'react';
+const ConvertedText = React.lazy(() => slowImport(import('../containers/ConvertedText'), 1000));
+
 
 class FileUpload extends React.Component {
   constructor(props) {
@@ -14,7 +17,7 @@ class FileUpload extends React.Component {
     this.state = {
       isFileUploaded: null,
       title:'',
-	  isLoaded : false	
+	  loading : false	
     };
 
     this.OnSubmittingForm = this.OnSubmittingForm.bind(this);
@@ -36,7 +39,7 @@ this.props.func();
   
   OnSubmittingForm(e) {
     e.preventDefault();
-    this.Upload_file();
+    this.fetchcall();
   }
   
    handleSubmit = (event) => {
@@ -50,16 +53,33 @@ this.props.func();
     this.setState({title: event.target.value});
   } 
   
-  
-  componentDidMount()
-  {
-	 fetch('https://jsonplaceholder.typicode.com/todos/1') 
-	 .then(response => response.json())
-	 .then(title => this.setState({isLoaded : true, title:title}))
-  }
+  /* componentDidMount() {
 
+	fetch(' http://localhost:5000/convertVoice ',{
+  method: 'GET',
+
+}).then((response2) => {
+
+  response2.json().then(data => {this.setState({ tex: data.data });
+    console.log(this.state.tex);
+  });
+ 
+    });  */
+
+  
+  
+  fetchcall(){
+	    this.setState({loading : true});
+		fetch('https://jsonplaceholder.typicode.com/todos/1')
+       .then(response => response.json())
+	   .then(title => this.setState({title:title}))
+	}	  
+  
+ 
+ 
   render() {
     return (
+	
 	<div>
       <form onSubmit={this.OnSubmittingForm}>
         <h1 className="Uploadheader">Please upload the audio file</h1>
@@ -70,7 +90,8 @@ this.props.func();
           }}
           name='voiceFile'
         />
-        <button className="Buttonformat" type='submit' >Upload</button>		 		
+        <button className="Buttonformat" type='submit' >Upload  
+			</button>		 		
       </form>	  
 	  <div className="ORtext">or</div>
 	  <Link
@@ -86,11 +107,39 @@ this.props.func();
 			</button>
         </Link>
 		
-		 <ConvertedText isLoaded = {this.state.isLoaded} title = {this.state.title} handleSubmit = {this.handleSubmit.bind(this)} 
+		  <div className ="Textdata"> 
+	 		
+
+            <label className ="LabelTextdata">
+            Converted Text
+            </label>			
+			
+			
+ {!this.state.loading ? (
+                     <div></div>
+              ) : (
+                      <Suspense fallback = {<div><div className ="Textloader"> 
+			
+			<div class="loadingio-spinner-wedges-bdyr6gdft3b"><div class="ldio-fbwe939p7j">
+            <div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div></div>
+            </div></div>
+
+			</div> </div> }>
+			
+			
+			 <ConvertedText loading = {this.state.loading} title = {this.state.title} handleSubmit = {this.handleSubmit.bind(this)} 
 		 handleChange = {this.handleChange.bind(this)}/>
+			
+			</Suspense>
+			
+					 ) }
+		</div>
+		
+		
 	     <CategorizedText />
 		 
       </div>
+	 
     );
   }
 }

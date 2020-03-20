@@ -15,7 +15,7 @@ class ConvertedText extends Component {
   render() {
 	
 		
-	if (!this.props.isLoaded) {
+	if (!this.props.loading) {
 		
 	 return (null);
 	}
@@ -23,13 +23,8 @@ class ConvertedText extends Component {
 	else {
 		
     return (
-     <div className ="Textdata"> 
-	 		
-
-            <label className ="LabelTextdata">
-            Converted Text
-            </label>			
-			
+	
+			<div>
 			<form onSubmit={this.props.handleSubmit}>
 			
 			<div className="Textareasize">
