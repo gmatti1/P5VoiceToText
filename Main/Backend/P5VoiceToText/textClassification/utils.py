@@ -66,6 +66,19 @@ class ClassifyText:
 
 	# Classify the specific words into IMIST_AMBO categories ....
 	def classify_text_into_categories(self):
+		idx = 0
+		age_word = ""
+		for i in range(0, len(self.words)):
+			if self.words[i]=='age' or self.words[i]=='old':
+				age_word = self.words[i]
+				idx = i
+				break
+
+		if (age_word=='old' or age_word=='age') and self.words[i-2].isnumeric(): #ex: 23 year old, 23 years of age
+			self.category_keyword['identification'].append(self.words[i-2]+" "+self.words[i-1])
+		elif age_word=='age' and self.words[i+1].isnumeric(): #ex. age is 23 years
+			self.category_keyword['identification'].append(self.words[i+1]+" "+self.words[i+2])
+
 		for original, root in self.mapwords_original_to_root.items():
 			imist_ambos = Imist_ambo_template.objects.filter(keyword=root)
 			if len(imist_ambos):
@@ -281,8 +294,8 @@ class ClassifyText:
 
 
 	def test_db(self):
-		voice_file = Voice_files(filename="test_shefali1.mp3", s3link="some s3link of aws").save()
-		text = "A 23 year old female fell off of a cycle and injured her head and neck. She is currently on ventillation. She is also pregnant."
+		voice_file = Voice_files(filename="test_gangadhar1.mp3", s3link="some s3link of aws 1").save()
+		text = "Phoenix soon. Judy, this is Sean. Go ahead. Trauma. I got Ah. I mean you 10 minutes. Okay. 12 year old. Best dream. A history of white. I'm sorry. He was a pedestrian walking. Got hit by a vehicle. Okay, Okay. Multi system trauma. Okay. Thank you."
 		voice_text_conversion = Voice_text_conversion(converted_text=text, voiceFile=voice_file).save()
 		voice_file = Voice_files.objects.filter(filename="test_file1")
 		text_categorization = Text_categorization(voiceFile=voice_file[0])
