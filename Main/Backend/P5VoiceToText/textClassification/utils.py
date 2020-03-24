@@ -13,8 +13,7 @@ class ClassifyText:
 	def __init__(self): 
 		self.voice_file = None
 		self.text = ""
-		self.words = []
-		self.mapwords_original_to_root = {}
+		self.sentences = []
 		self.category_keyword = { "identification" : [],
 								  "mechanism" : [],
 								  "injury": [],
@@ -34,61 +33,63 @@ class ClassifyText:
 
 
 	# Removing Stop Words ....
-	def remove_stopwords(self):
-		self.text = self.text.lower()
+	def remove_stopwords(self, sentence):
+		sentence = sentence.lower()
 		stop_words = set(stopwords.words('english') + list(punctuation)) 		
-		word_tokens = word_tokenize(self.text) 
+		word_tokens = word_tokenize(sentence) 
 		filtered_sentence = [w for w in word_tokens if not w in stop_words] 
 		filtered_sentence = [] 
 		for w in word_tokens: 
 			if w not in stop_words: 
 				filtered_sentence.append(w) 
 
-		self.words = filtered_sentence 
+		return filtered_sentence 
 
 
 
 	# Get the root of words using Stemming and Lemmatization ....
-	def stemming_and_lemmatization_text(self):
+	def stemming_and_lemmatization_text(self, words):
 		ps = PorterStemmer() 
 		wordnet_lemmatizer = WordNetLemmatizer()
-		for word in self.words:
-			stem = ps.stem(word)
-			lemma = wordnet_lemmatizer.lemmatize(stem)
-			self.mapwords_original_to_root[word] = lemma
+		words = [wordnet_lemmatizer.lemmatize(ps.stem(word)) for word in words]
+		return words
 		
 
 	# Cleaning of Text	
-	def clean_text(self):
-		self.remove_stopwords()
-		self.stemming_and_lemmatization_text()
+	def clean_text(self, sentence):
+		words = self.remove_stopwords(sentence)
+		words = self.stemming_and_lemmatization_text(words)
+		return words
 
 
 	# Classify the specific words into IMIST_AMBO categories ....
-	def classify_text_into_categories(self):
+	def classify_text_into_categories(self, sentence, words):
 		idx = 0
 		age_word = ""
-		for i in range(0, len(self.words)):
-			if self.words[i]=='age' or self.words[i]=='old':
-				age_word = self.words[i]
+		for i in range(0, len(words)):
+			if words[i]=='age' or words[i]=='old':
+				age_word = words[i]
 				idx = i
 				break
 
-		if (age_word=='old' or age_word=='age') and self.words[i-2].isnumeric(): #ex: 23 year old, 23 years of age
-			self.category_keyword['identification'].append(self.words[i-2]+" "+self.words[i-1])
-		elif age_word=='age' and self.words[i+1].isnumeric(): #ex. age is 23 years
-			self.category_keyword['identification'].append(self.words[i+1]+" "+self.words[i+2])
+		if (age_word=='old' or age_word=='age') and words[i-2].isnumeric() and (sentence not in self.category_keyword['identification']): #ex: 23 year old, 23 years of age
+			self.category_keyword['identification'].append(sentence)
+		elif age_word=='age' and words[i+1].isnumeric() and (sentence not in self.category_keyword['identification']): #ex. age is 23 years
+			self.category_keyword['identification'].append(sentence)
 
-		for original, root in self.mapwords_original_to_root.items():
-			imist_ambos = Imist_ambo_template.objects.filter(keyword=root)
-			if len(imist_ambos):
-				self.category_keyword[imist_ambos[0].category].append(original)
+		for word in words:
+			imist_ambos = Imist_ambo_template.objects.filter(keyword=word)
+			if len(imist_ambos) and (sentence not in self.category_keyword[imist_ambos[0].category]):
+				self.category_keyword[imist_ambos[0].category].append(sentence)
 
 
 
 	def clean_and_classify(self):
-		self.clean_text()
-		self.classify_text_into_categories()
+		self.sentences = self.text.split('.')
+
+		for sentence in self.sentences:
+			words = self.clean_text(sentence)
+			self.classify_text_into_categories(sentence, words)
 		return self.category_keyword
 
 
@@ -154,6 +155,8 @@ class ClassifyText:
 			 "category": "mechanism"},
 			{"keyword": "burn",
 			 "category": "mechanism"},
+			{"keyword": "hit",
+			 "category": "mechanism"},
 			{"keyword": "explos",
 			 "category": "mechanism"},
 			{"keyword": "trap",
@@ -170,6 +173,8 @@ class ClassifyText:
 			 "category": "injury"},
 			{"keyword": "blunt",
 			 "category": "injury"},
+			{"keyword": "blunt",
+			 "category": "trauma"},
 			{"keyword": "head",
 			 "category": "injury"},
 			{"keyword": "neck",
