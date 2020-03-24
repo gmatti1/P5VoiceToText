@@ -14,7 +14,6 @@ cors_header = Config.CORS_HEADERS
 @cross_origin(origin=cors_ip,headers=cors_header)
 @voiceToTextConversion.route("/convertVoice",methods=['GET','POST'])
 def convertVoice():
-	
 	recording = sr.Recognizer()
 	harvard = sr.AudioFile(upload_folder+'/Recording.wav')
 

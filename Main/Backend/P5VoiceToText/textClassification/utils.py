@@ -299,9 +299,13 @@ class ClassifyText:
 
 
 	def test_db(self):
-		voice_file = Voice_files(filename="test_gangadhar1.mp3", s3link="some s3link of aws 1").save()
+		voice_file = Voice_files(filename="mediahandler4.aac", s3link="some s3link of aws 4").save()
 		text = "Phoenix soon. Judy, this is Sean. Go ahead. Trauma. I got Ah. I mean you 10 minutes. Okay. 12 year old. Best dream. A history of white. I'm sorry. He was a pedestrian walking. Got hit by a vehicle. Okay, Okay. Multi system trauma. Okay. Thank you."
+
+		'''
 		voice_text_conversion = Voice_text_conversion(converted_text=text, voiceFile=voice_file).save()
+		print("Connection to db successful")
+		
 		voice_file = Voice_files.objects.filter(filename="test_file1")
 		text_categorization = Text_categorization(voiceFile=voice_file[0])
 		text_categorization.identification = self.category_keyword['identification']
@@ -314,3 +318,4 @@ class ClassifyText:
 		text_categorization.background = self.category_keyword['background']
 		text_categorization.other = self.category_keyword['other']
 		text_categorization.save()
+		'''
