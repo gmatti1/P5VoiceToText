@@ -311,7 +311,7 @@ class ClassifyText:
 			 "category": "other"}
 			]
 		arr = [Imist_ambo_template(**data) for data in map_keyword_category]
-		Imist_ambo_template.objects.insert(arr, load_bulk=False)
+		Imist_ambo_template.objects.insert(arr, load_bulk=True)
 
 
 	def test_db(self):
