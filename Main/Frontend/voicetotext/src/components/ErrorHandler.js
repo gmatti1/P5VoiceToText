@@ -13,6 +13,7 @@ class ErrorHandler extends React.Component {
   
     componentDidCatch(error, info) {
       this.setState({ errorOccurred: true })
+      
     
     }
   

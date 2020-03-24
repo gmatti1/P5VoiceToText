@@ -15,7 +15,13 @@ class App extends Component {
         <Secondpage />
 		<Thirdpage />
     <ErrorHandler>
+  <Secondpage/>
+</ErrorHandler>
+    <ErrorHandler>
   <Firstpage/>
+</ErrorHandler>
+<ErrorHandler>
+  <Thirdpage/>
 </ErrorHandler>
       </div>
     );
