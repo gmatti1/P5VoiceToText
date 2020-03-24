@@ -14,9 +14,7 @@ class App extends Component {
         <Firstpage />
         <Secondpage />
 		<Thirdpage />
-    <ErrorHandler>
-  <Secondpage/>
-</ErrorHandler>
+    
     <ErrorHandler>
   <Firstpage/>
 </ErrorHandler>
