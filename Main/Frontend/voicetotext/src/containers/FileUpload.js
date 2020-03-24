@@ -28,7 +28,7 @@ class FileUpload extends React.Component {
     body: formData
 })
 ])
-this.props.func();
+//this.props.func();
 
   }
   

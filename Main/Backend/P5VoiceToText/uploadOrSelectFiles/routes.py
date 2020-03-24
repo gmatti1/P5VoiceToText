@@ -2,7 +2,7 @@ from flask import request, flash, jsonify, Blueprint
 from flask_cors import cross_origin
 
 from P5VoiceToText.config import Config
-from P5VoiceToText.uploadOrSelectFiles.utils import allowed_extensions
+from P5VoiceToText.uploadOrSelectFiles.utils import allowed_extensions, allowed_file
 
 import os
 from werkzeug.utils import secure_filename
