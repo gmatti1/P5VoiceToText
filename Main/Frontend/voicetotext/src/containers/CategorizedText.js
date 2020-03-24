@@ -7,47 +7,12 @@ import './../../node_modules/ag-grid-community/dist/styles/ag-theme-balham.css';
 import './../styles/index.css';
 
 class CategorizedText extends Component {
-  constructor(props) {
-    super(props);
-	
-	this.state = {
-		
-         textCategorized:{ "identification" : [],
-                  "mechanism" : [],
-                  "injury": [],
-                  "signs": [],
-                  "treatment": [],
-                  "allergy": [],
-                  "medication": [],
-                  "background": [],
-                  "other": [] } ,
-				  
-		isLoaded : false
-		
-		};
-
-  }
+	constructor(props) {
+		super(props);
+	}
   
-  componentDidMount() {
-    let v = {
-      "filename":"test_shefali1.mp3"
-    }
-
-    fetch('/savedCategorizeText',{
-        method: 'POST',
-        body: JSON.stringify(v),
-        headers: { 'Content-type': 'application/json' }
-      })
-      .then(response =>
-        response.json().then(data => {
-        this.setState({ isLoaded: true, textCategorized: data });
-        console.log(this.state.textCategorized);      
-		  })
-    );
-  }
-
-  render() {
-    var identification_keywords = "";
+	render() {
+  /*  var identification_keywords = "";
     if(this.state.textCategorized.identification.length >= 1)
       identification_keywords = this.state.textCategorized.identification[0];
     for(var i = 1; i< this.state.textCategorized.identification.length; i++)
@@ -99,90 +64,74 @@ class CategorizedText extends Component {
     if(this.state.textCategorized.other.length >= 1)
       other_keywords = this.state.textCategorized.other[0];
     for(var i = 1; i< this.state.textCategorized.other.length; i++)
-      other_keywords+= ', ' + this.state.textCategorized.other[i];    
-
-	
-	if (!this.state.isLoaded) {
+      other_keywords+= ', ' + this.state.textCategorized.other[i];    */
 		
-	return (	
+		
+	if (!this.props.loading) {
+		
+	return (null);
 	
-	<div className ='Categorydata'> 
-   <label className ="LabelTextdata">
-            Categorized Text
-   </label>
-   
-   <div className ="Textloader"> 
-			
-			<div class="loadingio-spinner-wedges-bdyr6gdft3b"><div class="ldio-fbwe939p7j">
-            <div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div></div>
-            </div></div>
-
-			</div> 
-	</div>
-	
-	);
 	}
 	
-	else {
+	else 
+	
+	{
 		
     return (
     
-   <div className ='Categorydata'> 
-   <label className ="LabelTextdata">
-            Categorized Text
-   </label>
-   <div className="Tablesize">
-  <Table striped bordered hover size="sm" responsive id ="TableText">
-  <thead>
-    <tr>     
-      <th>Category</th>
-      <th>Value</th>
-    </tr>
-  </thead>
-  <tbody >
-    <tr>
-      <td>Identification</td>
-      <td>{identification_keywords}</td>
-    </tr>
-    <tr>
-      <td>Mechanism</td>
-      <td>{mechanism_keywords}</td>
-    </tr>
-    <tr>
-      <td>Injuries</td>
-      <td>{injury_keywords}</td>
-    </tr>
-	<tr>
-      <td>Signs</td>
-      <td colSpan="2">{signs_keywords}</td>
-    </tr>
-	<tr>
-      <td>Treatment</td>
-      <td>{treatment_keywords}</td>
-    </tr>
-	<tr>
-      <td>Allergies</td>
-      <td>{allergy_keywords}</td>
-    </tr>
-	<tr>
-      <td>Medications</td>
-      <td>{medication_keywords}</td>
-    </tr>
-	<tr>
-      <td>Background</td>
-      <td>{background_keywords}</td>
-    </tr>
-	<tr>
-      <td>Other Info</td>
-      <td>{other_keywords}</td>
-    </tr>
-  </tbody>
-</Table>
-</div>
-		</div>
+  
+	<div className="Tablesize">
+		<Table striped bordered hover size="sm" responsive id ="TableText">
+			<thead>
+				<tr>     
+					<th>Category</th>
+					<th>Value</th>
+				</tr>
+			</thead>
+			<tbody >
+				<tr>
+					<td>Identification</td>
+					<td>identification_keywords</td>
+				</tr>
+				<tr>
+					<td>Mechanism</td>
+					<td>mechanism_keywords</td>
+				</tr>
+				<tr>
+					<td>Injuries</td>
+					<td>injury_keywords</td>
+				</tr>
+				<tr>
+					<td>Signs</td>
+					<td colSpan="2">signs_keywords</td>
+				</tr>
+				<tr>
+					<td>Treatment</td>
+					<td>treatment_keywords</td>
+				</tr>
+				<tr>
+					<td>Allergies</td>
+					<td>allergy_keywords</td>
+				</tr>
+				<tr>
+					<td>Medications</td>
+					<td>medication_keywords</td>
+				</tr>
+				<tr>
+					<td>Background</td>
+					<td>{this.props.textCategorized.title}</td>
+				</tr>
+				<tr>
+					<td>Other Info</td>
+					<td>other_keywords</td>
+				</tr>
+			</tbody>
+		</Table>
+	</div>
+		
     );
-  }
-}
+	}
+	}
 }
 export default CategorizedText;
 

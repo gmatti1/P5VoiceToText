@@ -2,24 +2,27 @@ import React, { Component } from './../../node_modules/react';
 import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import './../styles/index.css';
 import './../styles/App.css';
+import Files from '../containers/Files';
 
 class History extends Component {
  
-  state ={
+   constructor(props) {
+    super(props);
+    
+    this.state ={	
 	 files:[]
   }
   
-  componentDidMount()
-  {
-	 fetch('https://jsonplaceholder.typicode.com/users') 
+  }
+  
+  componentDidMount() {
+	   fetch('https://jsonplaceholder.typicode.com/users') 
 	 .then(response => response.json())
 	 .then(files => this.setState({files:files}))
+	  
   }
  
-  OnSubmitForm(e) {
-    e.preventDefault();    
-  }
- 
+  
   render() {		
 	return (    
 	    <div className ="HistoryComponent"> 
@@ -29,13 +32,8 @@ class History extends Component {
 			<button className="HistoryUploadbutton" type='submit' >Upload selected file</button>				
 			</div> 
 			
-            <div className ="Historylist">	
-				 <select size = "10" className ="Historyselect" >{
-					 this.state.files.map(file => 
-					 <option value="file.value">{file.name}
-					 </option>)
-				}</select>
-			</div>
+			<Files files = {this.state.files}/>
+           
 		</form>
         </div>	
     );

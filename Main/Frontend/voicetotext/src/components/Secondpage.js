@@ -10,8 +10,7 @@ function Secondpage() {
   return (
     <div className='Secondpage' id='main'>
       <FileUpload />  
-      <ConvertedText />
-	  <CategorizedText />
+      
     </div>
   );
 }
