@@ -5,9 +5,13 @@ import Table from 'react-bootstrap/Table';
 import './../../node_modules/ag-grid-community/dist/styles/ag-grid.css';
 import './../../node_modules/ag-grid-community/dist/styles/ag-theme-balham.css';
 import './../styles/index.css';
-
+let hasError = false;
+let data = {};
+let isLoading= false;
 class CategorizedText extends Component {
   constructor(props) {
+    
+
     super(props);
 	
 	this.state = {
@@ -27,23 +31,40 @@ class CategorizedText extends Component {
 		};
 
   }
+
+  
+
+
+
+
   
   componentDidMount() {
     let v = {
       "filename":"test_shefali1.mp3"
     }
 
-    fetch('/savedCategorizeText',{
+
+    function fetchData() {
+      return fetch('/savedCategorizeText',{
         method: 'POST',
         body: JSON.stringify(v),
         headers: { 'Content-type': 'application/json' }
       })
-      .then(response =>
-        response.json().then(data => {
-        this.setState({ isLoaded: true, textCategorized: data });
-        console.log(this.state.textCategorized);      
-		  })
-    );
+        .then(handleFetchResponse)
+        .catch(handleFetchResponse);
+    }
+    fetchData().then(data=>{
+      this.setState({ isLoaded: true, textCategorized: data });
+        console.log(this.state.textCategorized);   
+    });
+
+    function handleFetchResponse(response) {
+      hasError = !response.ok;
+      isLoading = false;
+      return response.ok && response.json ? response.json() : data;
+    }
+
+    
   }
 
   render() {

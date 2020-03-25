@@ -8,17 +8,21 @@ import { Link } from './../../node_modules/react-scroll';
 class ErrorHandler extends React.Component {
     constructor(props) {
       super(props)
-      this.state = { errorOccurred: false }
+      this.state = { hasError: false }
     }
   
     componentDidCatch(error, info) {
-      this.setState({ errorOccurred: true })
+      this.setState({ hasError: true })
       
     
     }
   
     render() {
-      return this.state.errorOccurred ? <h1>Something went wrong!</h1> : this.props.children
+      if (this.state.hasError) {
+        
+        return <h1>Something went wrong.</h1>;
+      }
+      return this.props.children;
     }
   }
 

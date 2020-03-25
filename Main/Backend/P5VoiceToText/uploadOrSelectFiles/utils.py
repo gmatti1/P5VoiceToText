@@ -1,4 +1,4 @@
-from P5VoiceToText.config import Config
+from P5VoiceToText import Config
 
 allowed_extensions = Config.ALLOWED_EXTENSIONS
 
