@@ -1,6 +1,7 @@
 from flask import request, flash, jsonify, Blueprint, render_template
 from flask_cors import cross_origin
 from P5VoiceToText.config import Config
+from P5VoiceToText.files.voiceTextConversionUtils import VoiceText
 
 import os
 import time
@@ -110,9 +111,39 @@ def get_text_category_file(filename):
 @cross_origin(origin=cors_ip,headers=cors_header)
 @files.route("/files/<filename>/text", methods=['GET'])
 def get_text_file(filename):
+	audiofile = AudioFile()
+	voice_text = VoiceText()
+	audiofile.filename = filename
+	try:
+		if audiofile.check_filename_exists():
+			voice_text.get_voice_text_from_db(filename)
+			if	len(voice_text.converted_text) > 0:
+				print("The entry is already present")
+				message = {
+					"text": voice_text.converted_text
+				}
+				return jsonify(message), 200
 
+			# perform voice to text AWS and store it in DB
+			audiofile.get_s3Link()
+			# audiofile has s3Link and filename
+			voice_text.aws_voice_to_text(audiofile)
+			message = {
+				"text": voice_text.converted_text
+			}
+			voice_text.store_voice_text(filename)
+			return jsonify(message), 200
+		else:
+			message = {
+				"message": "File not found in out records"
+			}
+			return jsonify(message), 404
+	except:
+		message = {
+			"message": "Internal Server Error, something went wrong"
+		}
+		return jsonify(message), 500
 
-	return "Not Implemented: Get text of the file : " + filename
 
 
 

@@ -26,6 +26,13 @@ class AudioFile:
         voice_file = Voice_files.objects(filename__exact =self.filename)
         return len(voice_file) > 0
 
+    def get_s3Link(self):
+        voice_file = Voice_files.objects(filename__exact=self.filename)
+        self.s3link = voice_file[0].s3link
+
+    def get_voice_file_from_db(self):
+        return Voice_files.objects.filter(filename=self.filename)[0]
+
     def change_media(self, complete_file_path):
         wav_audio = AudioSegment.from_file(complete_file_path)
         newfilename = os.path.splitext(self.filename)[0]
