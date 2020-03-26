@@ -2,7 +2,7 @@ import boto3
 import time
 import requests
 
-from P5VoiceToText.models import Imist_ambo_template, Voice_files, Voice_text_conversion, Text_categorization
+from P5VoiceToText.models import Voice_text_conversion
 from P5VoiceToText.files.voiceFilesUtils import AudioFile
 
 from P5VoiceToText.config import Config
@@ -13,6 +13,7 @@ from botocore.client import Config as ConfigAWS
 aws_access_key_id = Config.ACCESS_KEY_ID
 aws_access_secret_key = Config.ACCESS_SECRET_KEY
 aws_bucket_name = Config.BUCKET_NAME
+
 
 class VoiceText:
     def __init__(self):

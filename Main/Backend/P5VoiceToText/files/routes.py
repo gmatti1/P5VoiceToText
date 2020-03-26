@@ -117,7 +117,7 @@ def get_text_file(filename):
 	try:
 		if audiofile.check_filename_exists():
 			voice_text.get_voice_text_from_db(filename)
-			if	len(voice_text.converted_text) > 0:
+			if len(voice_text.converted_text) > 0:
 				print("The entry is already present")
 				message = {
 					"text": voice_text.converted_text
@@ -144,6 +144,11 @@ def get_text_file(filename):
 		}
 		return jsonify(message), 500
 
+
+@cross_origin(origin=cors_ip,headers=cors_header)
+@files.route("/files/<filename>/categories", methods=['GET'])
+def get_category_file(filename):
+	return "Not Implemented: Get categories of the file : " + filename
 
 
 

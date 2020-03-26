@@ -10,7 +10,7 @@ class Voice_files(db.Document):
 
 class Voice_text_conversion(db.Document):
 	voiceFile = db.ReferenceField(Voice_files)
-	converted_text = db.StringField(required=True, unique=True)
+	converted_text = db.StringField(required=True)
 
 class Text_categorization(db.Document):
 	voiceFile = db.ReferenceField(Voice_files)
