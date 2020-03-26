@@ -34,7 +34,7 @@ class ConvertedText extends Component {
             id="Textarea"			
 			value = {this.props.title.title}
             onChange={this.props.handleChange}
-    
+			required
             /> 
 			
 			</div>		
