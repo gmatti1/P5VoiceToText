@@ -70,13 +70,13 @@ class FileUpload extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    const data = this.state.title;
+    const data = this.state.convertedText;
     console.log('Edited text is : ', data);
   };
 
   handleChange = event => {
     event.preventDefault();
-    this.setState({ title: event.target.value });
+    this.setState({ convertedText: event.target.value });
   };
 
   fetchcalltext() {
@@ -153,7 +153,7 @@ class FileUpload extends React.Component {
             <Suspense fallback={<Loader />}>
               <ConvertedText
                 loading={this.state.loading}
-                title={this.state.convertedText}
+                convertedText={this.state.convertedText}
                 handleSubmit={this.handleSubmit.bind(this)}
                 handleChange={this.handleChange.bind(this)}
               />

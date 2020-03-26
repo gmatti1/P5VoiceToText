@@ -12,7 +12,7 @@ class Files extends Component {
       <div className='Historylist'>
         <select size='10' className='Historyselect' required>
           {this.props.files.map(file => (
-            <option value='file.value'>{file.name}</option>
+            <option value='file.value'>{file}</option>
           ))}
         </select>
       </div>

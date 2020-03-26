@@ -13,9 +13,9 @@ class History extends Component {
   }
 
   componentDidMount() {
-    fetch('https://jsonplaceholder.typicode.com/users')
+    fetch('http://localhost:5000/files')
       .then(response => response.json())
-      .then(files => this.setState({ files: files }));
+      .then(files => this.setState({ files: files['files'] }));
   }
 
   render() {

@@ -20,7 +20,7 @@ class ConvertedText extends Component {
               <textarea
                 className='form-control'
                 id='Textarea'
-                value={this.props.title}
+                value={this.props.convertedText}
                 onChange={this.props.handleChange}
                 required
               />

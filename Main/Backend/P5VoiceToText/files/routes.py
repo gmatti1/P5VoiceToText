@@ -24,7 +24,21 @@ aws_bucket_name = Config.BUCKET_NAME
 
 @files.route("/files", methods=['GET'])
 def get_all_files():
-	return "Not Implemented: Fetch all the files from AWS and return it"
+	try:
+		audio_file = AudioFile()
+		voice_files = audio_file.get_all_files_db()
+		files = []
+		for voice_file in voice_files:
+			files.append(voice_file.filename)
+		message = {
+			"files": files
+		}
+		return jsonify(message), 200
+	except:
+		message = {
+			"message": "Internal Server Error, something went wrong"
+		}
+		return jsonify(message), 500
 
 
 @cross_origin(origin=cors_ip,headers=cors_header)
@@ -143,6 +157,13 @@ def get_text_file(filename):
 			"message": "Internal Server Error, something went wrong"
 		}
 		return jsonify(message), 500
+
+
+@cross_origin(origin=cors_ip,headers=cors_header)
+@files.route("/files/<filename>/text", methods=['PUT'])
+def update_text_file(filename):
+	return "Not implemented: Save the data to backend"
+
 
 
 @cross_origin(origin=cors_ip,headers=cors_header)

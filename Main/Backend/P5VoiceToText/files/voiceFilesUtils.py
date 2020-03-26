@@ -33,6 +33,11 @@ class AudioFile:
     def get_voice_file_from_db(self):
         return Voice_files.objects.filter(filename=self.filename)[0]
 
+    def get_all_files_db(self):
+        voice_files = Voice_files.objects.filter()
+        return voice_files
+        # print( "Check this " + str(voice_file[0].filename))
+
     def change_media(self, complete_file_path):
         wav_audio = AudioSegment.from_file(complete_file_path)
         newfilename = os.path.splitext(self.filename)[0]
