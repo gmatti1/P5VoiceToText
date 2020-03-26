@@ -1,11 +1,8 @@
 import React, { Component } from './../../node_modules/react';
-import { AgGridReact } from './../../node_modules/ag-grid-react';
-import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { Button } from 'react-bootstrap';
 import './../../node_modules/ag-grid-community/dist/styles/ag-grid.css';
 import './../../node_modules/ag-grid-community/dist/styles/ag-theme-balham.css';
 import './../styles/index.css';
-import FileUpload from './FileUpload';
-import { PropTypes } from 'react';
 
 class ConvertedText extends Component {
   constructor(props) {
@@ -13,41 +10,30 @@ class ConvertedText extends Component {
   }
 
   render() {
-	
-		
-	if (!this.props.loading) {
-		
-	 return (null);
-	}
-	
-	else {
-		
-    return (
-	
-			<div>
-			<form onSubmit={this.props.handleSubmit}>
-			
-			<div className="Textareasize">
-						
-            <textarea
-            className="form-control"
-            id="Textarea"			
-			value = {this.props.title.title}
-            onChange={this.props.handleChange}
-			required
-            /> 
-			
-			</div>		
-			
-			<Button className="Save" type='submit'>Save</Button>	
-			</form>	
-	
-		</div>
-    );
-	
-	}
+    if (!this.props.loading) {
+      return null;
+    } else {
+      return (
+        <div>
+          <form onSubmit={this.props.handleSubmit}>
+            <div className='Textareasize'>
+              <textarea
+                className='form-control'
+                id='Textarea'
+                value={this.props.title}
+                onChange={this.props.handleChange}
+                required
+              />
+            </div>
+
+            <Button className='Save' type='submit'>
+              Save
+            </Button>
+          </form>
+        </div>
+      );
+    }
   }
 }
 
 export default ConvertedText;
-
