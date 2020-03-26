@@ -77,10 +77,26 @@ class ClassifyText:
 		elif age_word=='age' and words[i+1].isnumeric() and (sentence not in self.category_keyword['identification']): #ex. age is 23 years
 			self.category_keyword['identification'].append(sentence)
 
-		for word in words:
-			imist_ambos = Imist_ambo_template.objects.filter(keyword=word)
+
+		for i in range(0, len(words)):
+			#unigrams
+			imist_ambos = Imist_ambo_template.objects.filter(keyword=words[i])
 			if len(imist_ambos) and (sentence not in self.category_keyword[imist_ambos[0].category]):
 				self.category_keyword[imist_ambos[0].category].append(sentence)
+
+			#bigrams
+			if i<(len(words)-1):
+				search_keyword = words[i]+" "+words[i+1]
+				imist_ambos = Imist_ambo_template.objects.filter(keyword=search_keyword)
+				if len(imist_ambos) and (sentence not in self.category_keyword[imist_ambos[0].category]):
+					self.category_keyword[imist_ambos[0].category].append(sentence)
+
+			#trigrams		
+			if i<(len(words)-2):
+				search_keyword = words[i]+" "+words[i+1]+" "+words[i+2]
+				imist_ambos = Imist_ambo_template.objects.filter(keyword=search_keyword)				
+				if len(imist_ambos) and (sentence not in self.category_keyword[imist_ambos[0].category]):
+					self.category_keyword[imist_ambos[0].category].append(sentence)
 
 
 
@@ -295,7 +311,7 @@ class ClassifyText:
 			 "category": "other"}
 			]
 		arr = [Imist_ambo_template(**data) for data in map_keyword_category]
-		Imist_ambo_template.objects.insert(arr, load_bulk=False)
+		Imist_ambo_template.objects.insert(arr, load_bulk=True)
 
 
 	def test_db(self):
