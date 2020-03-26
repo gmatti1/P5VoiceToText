@@ -39,15 +39,18 @@ class FileUpload extends React.Component {
 	}
 
     Upload_file(file) {
-		const formData = new FormData();
-		formData.append('file', this.uploadInput.files[0]);
-		Promise.all([fetch('/uploadVoiceFile', {
-		method: 'POST',
-		body: formData
-		})
-		])
-		this.props.func();
-	}
+
+    const formData = new FormData();
+    formData.append('file', this.uploadInput.files[0]);
+    Promise.all([fetch('/uploadVoiceFile', {
+    method: 'POST',
+    body: formData
+})
+])
+//this.props.func();
+
+  }
+
   
 	OnSubmittingForm(e) {
 		e.preventDefault();
