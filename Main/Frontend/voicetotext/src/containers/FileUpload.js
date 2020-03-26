@@ -36,7 +36,8 @@ class FileUpload extends React.Component {
 							  "other": [] } ,  */
       loading: false,
       filename: '',
-      convertedText: ''
+      convertedText: '',
+      disabled: false
     };
 
     this.OnSubmittingForm = this.OnSubmittingForm.bind(this);
@@ -66,6 +67,7 @@ class FileUpload extends React.Component {
     e.preventDefault();
     this.Upload_file();
     // this.fecthcallcategory(); //Call this method once fetching text is successful
+    this.setState({ disabled: true });
   }
 
   handleSubmit = event => {
@@ -73,7 +75,7 @@ class FileUpload extends React.Component {
     const data = this.state.convertedText;
 
     var myBody = {
-      'text': data
+      text: data
     };
 
     fetch('http://localhost:5000/files/' + this.state.filename + '/text', {
@@ -94,6 +96,12 @@ class FileUpload extends React.Component {
     this.setState({ convertedText: event.target.value });
   };
 
+  handleChangeupload = event => {
+    if (event.target.value != null) {
+      this.setState({ disabled: false });
+    }
+  };
+
   fetchcalltext() {
     this.setState({ loading: true });
     fetch('http://localhost:5000/files/' + this.state.filename + '/text')
@@ -112,6 +120,23 @@ class FileUpload extends React.Component {
       .then(textCategorized =>
         this.setState({ textCategorized: textCategorized })
       );
+
+    /*  componentDidMount() {
+		let v = {
+		"filename":"test_shefali1.mp3"
+		}
+		fetch('/savedCategorizeText',{
+        method: 'POST',
+        body: JSON.stringify(v),
+        headers: { 'Content-type': 'application/json' }
+		})
+		.then(response =>
+        response.json().then(data => {
+        this.setState({ isLoaded: true, textCategorized: data });
+        console.log(this.state.textCategorized);      
+		})
+		);
+		}   */
   }
 
   componentShouldUpdate(prevProps) {
@@ -133,8 +158,13 @@ class FileUpload extends React.Component {
             }}
             name='voiceFile'
             required
+            onChange={this.handleChangeupload}
           />
-          <button className='Buttonformat' type='submit'>
+          <button
+            className='Buttonformat'
+            type='submit'
+            disabled={this.state.disabled}
+          >
             Upload
           </button>
         </form>
