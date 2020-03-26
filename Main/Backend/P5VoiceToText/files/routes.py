@@ -162,9 +162,33 @@ def get_text_file(filename):
 @cross_origin(origin=cors_ip,headers=cors_header)
 @files.route("/files/<filename>/text", methods=['PUT'])
 def update_text_file(filename):
-	return "Not implemented: Save the data to backend"
+	# try:
+		content = request.json
+		if content and 'text' not in content:
+			print("In here")
+			message = {
+				"message": "text is not present in the request"
+			}
+			return jsonify(message), 400
 
+		audio_file = AudioFile()
+		audio_file.filename = filename
+		if not audio_file.check_filename_exists():
+			message = {
+				"message": "File not fount in our records"
+			}
+			return jsonify(message), 404
 
+		voice_text = VoiceText()
+		voice_text.converted_text = content['text']
+		voice_text.store_voice_text(filename)
+
+		return '', 200
+	# except:
+	# 	message = {
+	# 		"message": "Internal Server Error, something went wrong"
+	# 	}
+	# 	return jsonify(message), 500
 
 @cross_origin(origin=cors_ip,headers=cors_header)
 @files.route("/files/<filename>/categories", methods=['GET'])

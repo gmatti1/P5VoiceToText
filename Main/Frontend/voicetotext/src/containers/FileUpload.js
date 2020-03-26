@@ -71,7 +71,22 @@ class FileUpload extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
     const data = this.state.convertedText;
-    console.log('Edited text is : ', data);
+
+    var myBody = {
+      'text': data
+    };
+
+    fetch('http://localhost:5000/files/' + this.state.filename + '/text', {
+      method: 'PUT',
+      body: myBody,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(response => {
+      console.log('Completed it');
+    });
+
+    console.log('Edited here text is : ', data);
   };
 
   handleChange = event => {

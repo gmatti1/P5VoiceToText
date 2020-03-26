@@ -5,7 +5,7 @@ class Config:
 	CORS_HEADERS = ['Content-Type','Authorization']
 	UPLOAD_FOLDER = os.path.abspath(os.path.dirname(__file__))+'/resources/VoiceUploads/'
 	ALLOWED_EXTENSIONS = {'mp3', 'mp4','wav', 'flac', 'm4a', 'aac', 'm4b'}
-	AWS_ALLOWED_EXTENSIONS = {'mp3', 'mp4','wav', 'flac'}
+	AWS_ALLOWED_EXTENSIONS = {'wav'}
 
 	DEV_IP = 'localhost'
 	STG_IP = ''

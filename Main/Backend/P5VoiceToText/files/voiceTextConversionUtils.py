@@ -32,6 +32,14 @@ class VoiceText:
             return
         self.converted_text = text[0].converted_text
 
+    def update_voice_text(self, filename):
+        audio_file = AudioFile()
+        audio_file.filename = filename
+        self.voice_file = audio_file.get_voice_file_from_db()
+        text = Voice_text_conversion.objects.find(voiceFile=self.voice_file).first()
+        text.converted_text = self.converted_text
+        text.save()
+
     def store_voice_text(self, filename):
         audio_file = AudioFile()
         audio_file.filename = filename
