@@ -16,9 +16,11 @@ def create_app(config_class=Config):
 	db.init_app(app)
 
 	from P5VoiceToText.files.routes import files
-	from P5VoiceToText.textClassification.routes import textClassification
+	from P5VoiceToText.convertedText.routes import convertedText
+	from P5VoiceToText.categorizedText.routes import categorizedText
 
 	app.register_blueprint(files)
-	app.register_blueprint(textClassification)
+	app.register_blueprint(convertedText)
+	app.register_blueprint(categorizedText)
 
 	return app

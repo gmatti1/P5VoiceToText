@@ -1,12 +1,11 @@
 from flask import request, flash, jsonify, Blueprint, render_template
 from flask_cors import cross_origin
 from P5VoiceToText.config import Config
-from P5VoiceToText.files.voiceTextConversionUtils import VoiceText
 
 import os
 import time
 from werkzeug.utils import secure_filename
-from P5VoiceToText.files.voiceFilesUtils import AudioFile
+from P5VoiceToText.files.utils import AudioFile
 
 files = Blueprint('files', __name__)
 
@@ -16,10 +15,6 @@ cors_ip = Config.DEV_IP
 cors_header = Config.CORS_HEADERS
 allowed_extensions = Config.ALLOWED_EXTENSIONS
 aws_allowed_extensions = Config.AWS_ALLOWED_EXTENSIONS
-
-aws_access_key_id = Config.ACCESS_KEY_ID
-aws_access_secret_key = Config.ACCESS_SECRET_KEY
-aws_bucket_name = Config.BUCKET_NAME
 
 
 @files.route("/files", methods=['GET'])
@@ -34,6 +29,30 @@ def get_all_files():
 			"files": files
 		}
 		return jsonify(message), 200
+	except:
+		message = {
+			"message": "Internal Server Error, something went wrong"
+		}
+		return jsonify(message), 500
+
+
+@files.route("/files/<filename>", methods=['GET'])
+def get_file(filename):
+	try:
+		audio_file = AudioFile()
+		audio_file.filename = filename
+		voice_file = audio_file.get_voice_file_from_db()
+		file = voice_file.filename
+		if file==filename:
+			message = {
+				"file": file
+			}
+			return jsonify(message), 200
+		else:
+			message = {
+				"message": "File not found"
+			}
+			return jsonify(message), 404
 	except:
 		message = {
 			"message": "Internal Server Error, something went wrong"
@@ -114,87 +133,3 @@ def add_new_file():
 			"message": "Internal Server Error, something went wrong"
 		}
 		return jsonify(message), 500
-
-
-@cross_origin(origin=cors_ip,headers=cors_header)
-@files.route("/files/<filename>", methods=['GET'])
-def get_text_category_file(filename):
-	return "Not Implemented: Get text and category of the file : " + filename
-
-
-@cross_origin(origin=cors_ip,headers=cors_header)
-@files.route("/files/<filename>/text", methods=['GET'])
-def get_text_file(filename):
-	audiofile = AudioFile()
-	voice_text = VoiceText()
-	audiofile.filename = filename
-	try:
-		if audiofile.check_filename_exists():
-			voice_text.get_voice_text_from_db(filename)
-			if len(voice_text.converted_text) > 0:
-				print("The entry is already present")
-				message = {
-					"text": voice_text.converted_text
-				}
-				return jsonify(message), 200
-
-			# perform voice to text AWS and store it in DB
-			audiofile.get_s3Link()
-			# audiofile has s3Link and filename
-			voice_text.aws_voice_to_text(audiofile)
-			message = {
-				"text": voice_text.converted_text
-			}
-			voice_text.store_voice_text(filename)
-			return jsonify(message), 200
-		else:
-			message = {
-				"message": "File not found in out records"
-			}
-			return jsonify(message), 404
-	except:
-		message = {
-			"message": "Internal Server Error, something went wrong"
-		}
-		return jsonify(message), 500
-
-
-@cross_origin(origin=cors_ip,headers=cors_header)
-@files.route("/files/<filename>/text", methods=['PUT'])
-def update_text_file(filename):
-	# try:
-		content = request.json
-		if content and 'text' not in content:
-			print("In here")
-			message = {
-				"message": "text is not present in the request"
-			}
-			return jsonify(message), 400
-
-		audio_file = AudioFile()
-		audio_file.filename = filename
-		if not audio_file.check_filename_exists():
-			message = {
-				"message": "File not fount in our records"
-			}
-			return jsonify(message), 404
-
-		voice_text = VoiceText()
-		voice_text.converted_text = content['text']
-		voice_text.store_voice_text(filename)
-
-		return '', 200
-	# except:
-	# 	message = {
-	# 		"message": "Internal Server Error, something went wrong"
-	# 	}
-	# 	return jsonify(message), 500
-
-@cross_origin(origin=cors_ip,headers=cors_header)
-@files.route("/files/<filename>/categories", methods=['GET'])
-def get_category_file(filename):
-	return "Not Implemented: Get categories of the file : " + filename
-
-
-
-
