@@ -28,7 +28,7 @@ class History extends Component {
   
     console.log(this.state.selected);
     
-	//alert('This functionality is under construction. Sorry for the inconvenience');
+	alert('This functionality is under construction. Sorry for the inconvenience');
   }
  
   handleChange(event){

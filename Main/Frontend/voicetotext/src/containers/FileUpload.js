@@ -12,10 +12,10 @@ import equal from 'fast-deep-equal';
 
 
 const ConvertedText = React.lazy(() =>
-  slowImport(import('../containers/ConvertedText'), 1000)
+  slowImport(import('../containers/ConvertedText'), 65000)
 );
 const CategorizedText = React.lazy(() =>
-  slowImport(import('../containers/CategorizedText'), 1000)
+  slowImport(import('../containers/CategorizedText'), 65000)
 );
 
 const History = React.lazy(() =>
