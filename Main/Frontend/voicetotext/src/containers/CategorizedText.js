@@ -79,39 +79,39 @@ class CategorizedText extends Component {
             <tbody>
               <tr>
                 <td>Identification</td>
-                <td>identification_keywords</td>
+                <td>{this.props.textCategorized.identification}</td>
               </tr>
               <tr>
                 <td>Mechanism</td>
-                <td>mechanism_keywords</td>
+                <td>{this.props.textCategorized.mechanism}</td>
               </tr>
               <tr>
                 <td>Injuries</td>
-                <td>injury_keywords</td>
+                <td>{this.props.textCategorized.injury}</td>
               </tr>
               <tr>
                 <td>Signs</td>
-                <td colSpan='2'>signs_keywords</td>
+                <td colSpan='2'>{this.props.textCategorized.signs}</td>
               </tr>
               <tr>
                 <td>Treatment</td>
-                <td>treatment_keywords</td>
+                <td>{this.props.textCategorized.treatment}</td>
               </tr>
               <tr>
                 <td>Allergies</td>
-                <td>allergy_keywords</td>
+                <td>{this.props.textCategorized.allergy}</td>
               </tr>
               <tr>
                 <td>Medications</td>
-                <td>medication_keywords</td>
+                <td>{this.props.textCategorized.medication}</td>
               </tr>
               <tr>
                 <td>Background</td>
-                <td>{this.props.textCategorized.title}</td>
+                <td>{this.props.textCategorized.background}</td>
               </tr>
               <tr>
                 <td>Other Info</td>
-                <td>other_keywords</td>
+                <td>{this.props.textCategorized.other}</td>
               </tr>
             </tbody>
           </Table>

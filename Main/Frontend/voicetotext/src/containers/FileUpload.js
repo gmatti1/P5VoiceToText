@@ -114,20 +114,30 @@ class FileUpload extends React.Component {
       }
     })
       .then(response => response.json())
-      .then(title =>
+      .then(title =>{
         this.setState({
           convertedText: title['text']
         })
-      );
+        console.log(title);
+      })
+      .then(data =>{
+        this.fecthcallcategory()
+      });
   }
 
   fecthcallcategory() {
     this.setState({ loading: true });
-    fetch('https://jsonplaceholder.typicode.com/todos/1')
+    fetch('http://localhost:5000/categorizedText/' + this.state.filename, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
       .then(response => response.json())
-      .then(textCategorized =>
+      .then(textCategorized => {
+        console.log(textCategorized);
         this.setState({ textCategorized: textCategorized })
-      );
+      });
 
     /*  componentDidMount() {
 		let v = {
