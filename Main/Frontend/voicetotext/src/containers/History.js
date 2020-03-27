@@ -17,6 +17,11 @@ class History extends Component {
       .then(response => response.json())
       .then(files => this.setState({ files: files['files'] }));
   }
+  
+  OnSubmitForm(e) {
+    e.preventDefault();
+	alert('This functionality is under construction. Sorry for the inconvenience');
+  }
 
   render() {
     return (

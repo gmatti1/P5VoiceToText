@@ -9,6 +9,8 @@ import History from '../containers/History';
 import Loader from '../containers/Loader';
 import { PropTypes } from 'react';
 import equal from 'fast-deep-equal';
+//import styled from 'styled-components';
+
 
 const ConvertedText = React.lazy(() =>
   slowImport(import('../containers/ConvertedText'), 1000)
@@ -66,6 +68,7 @@ class FileUpload extends React.Component {
   OnSubmittingForm(e) {
     e.preventDefault();
     this.Upload_file();
+	alert('Your file has been uploaded. Result will be displayed in some time. Thank you for your patience!')
     // this.fecthcallcategory(); //Call this method once fetching text is successful
     this.setState({ disabled: true });
   }
@@ -148,6 +151,7 @@ class FileUpload extends React.Component {
   render() {
     return (
       <div>
+	  
         <form onSubmit={this.OnSubmittingForm}>
           <h1 className='Uploadheader'>Please upload the audio file</h1>
           <input
