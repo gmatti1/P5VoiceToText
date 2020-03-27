@@ -191,7 +191,7 @@ class FileUpload extends React.Component {
             type='submit'
             onclick={this.fetchlist}
           >
-            Select From History
+            Go To History
             <span className='tooltiptext'>
               History : All the Uploaded files before
             </span>
