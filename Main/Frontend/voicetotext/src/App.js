@@ -13,10 +13,16 @@ class App extends Component {
   render() {
     return (
       <div className='App'>
+        <ErrorHandler>
         <Firstpage />
+        </ErrorHandler>
+        <ErrorHandler>
         <Secondpage />
-		<Thirdpage />
-  
+        </ErrorHandler>
+	
+      <ErrorHandler>
+      <Thirdpage />
+      </ErrorHandler>
       </div>
     );
   }
