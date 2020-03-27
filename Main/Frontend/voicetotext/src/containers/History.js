@@ -25,7 +25,9 @@ class History extends Component {
   
   OnSubmitForm(e) {
     e.preventDefault();
+  
     console.log(this.state.selected);
+    
 	//alert('This functionality is under construction. Sorry for the inconvenience');
   }
  
