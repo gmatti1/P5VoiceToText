@@ -13,16 +13,54 @@ cors_header = Config.CORS_HEADERS
 @cross_origin(origin=cors_ip,headers=cors_header)
 @categorizedText.route('/categorizedText/<filename>', methods = ['POST'])
 def textCategorization(filename):
-	classifyText = ClassifyText()
-	classifyText.get_voice_text_from_db(filename)
-	text = classifyText.clean_and_classify()
-	classifyText.save_categorizedText_in_db()
-	return jsonify(text)
+	try:
+		classifyText = ClassifyText()
+		if not classifyText.if_voice_file_exists(filename):
+			message = {
+				"message": "File not found in our records"
+			}
+			return jsonify(message), 404
+		if not classifyText.if_converted_text_exists(filename):
+			message = {
+				"message": "Converted Text not found in our records"
+			}
+			return jsonify(message), 404
+
+		if classifyText.if_categorized_text_exists(filename):
+			print("Categorized Text already exists")
+			text = classifyText.get_categorizedText_from_db(filename)
+			return jsonify(text)
+
+		text = classifyText.clean_and_classify()
+		classifyText.save_categorizedText_in_db()
+		return jsonify(text)
+	except:
+		message = {
+			"message": "Internal Server Error, something went wrong"
+		}
+		return jsonify(message), 500
+
 
 # When User selects a file, get Categorized Text from DB
 @cross_origin(origin=cors_ip,headers=cors_header)
 @categorizedText.route('/categorizedText/<filename>', methods = ['GET'])
 def get_categorizedText(filename):
-	classifyText = ClassifyText()
-	text = classifyText.get_categorizedText_from_db(filename)
-	return jsonify(text)
+	try:
+		classifyText = ClassifyText()
+		if not classifyText.if_voice_file_exists(filename):
+			message = {
+				"message": "File not found in our records"
+			}
+			return jsonify(message), 404
+		if not classifyText.if_categorized_text_exists(filename):
+			message = {
+				"message": "Categorized Text not found in our records"
+			}
+			return jsonify(message), 404
+		text = classifyText.get_categorizedText_from_db(filename)
+		return jsonify(text)
+	except:
+		message = {
+			"message": "Internal Server Error, something went wrong"
+		}
+		return jsonify(message), 500
