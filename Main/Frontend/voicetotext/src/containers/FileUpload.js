@@ -81,7 +81,7 @@ class FileUpload extends React.Component {
       text: data
     };
 
-    fetch('http://localhost:5000/files/' + this.state.filename + '/text', {
+    fetch('http://localhost:5000/convertedText/' + this.state.filename, {
       method: 'PUT',
       body: myBody,
       headers: {
@@ -107,7 +107,12 @@ class FileUpload extends React.Component {
 
   fetchcalltext() {
     this.setState({ loading: true });
-    fetch('http://localhost:5000/files/' + this.state.filename + '/text')
+    fetch('http://localhost:5000/convertedText/' + this.state.filename, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
       .then(response => response.json())
       .then(title =>
         this.setState({

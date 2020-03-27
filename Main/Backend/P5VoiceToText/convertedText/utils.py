@@ -3,7 +3,7 @@ import time
 import requests
 
 from P5VoiceToText.models import Voice_text_conversion
-from P5VoiceToText.files.voiceFilesUtils import AudioFile
+from P5VoiceToText.files.utils import AudioFile
 
 from P5VoiceToText.config import Config
 
@@ -32,11 +32,19 @@ class VoiceText:
             return
         self.converted_text = text[0].converted_text
 
+
+    def check_voice_text_exists(self, filename):
+        audio_file = AudioFile()
+        audio_file.filename = filename
+        self.voice_file = audio_file.get_voice_file_from_db()
+        text = Voice_text_conversion.objects.filter(voiceFile=self.voice_file)
+        return len(text) > 0
+
     def update_voice_text(self, filename):
         audio_file = AudioFile()
         audio_file.filename = filename
         self.voice_file = audio_file.get_voice_file_from_db()
-        text = Voice_text_conversion.objects.find(voiceFile=self.voice_file).first()
+        text = Voice_text_conversion.objects.filter(voiceFile=self.voice_file)[0]
         text.converted_text = self.converted_text
         text.save()
 
