@@ -24,13 +24,21 @@ class ClassifyText:
 								  "background": [],
 								  "other": [] }
 
+	def if_voice_file_exists(self, filename):
+		self.voice_file = Voice_files.objects.filter(filename=filename)
+		return len(self.voice_file) > 0
 
-
-	def get_voice_text_from_db(self, filename):
+	def if_converted_text_exists(self, filename):
 		self.voice_file = Voice_files.objects.filter(filename=filename)[0]
-		self.text = Voice_text_conversion.objects.filter(voiceFile=self.voice_file)[0].converted_text
+		voice_text_conversion = Voice_text_conversion.objects.filter(voiceFile=self.voice_file)
+		if len(voice_text_conversion)>0:
+			self.text = voice_text_conversion[0].converted_text
+		return len(voice_text_conversion) > 0
 
-
+	def if_categorized_text_exists(self, filename):
+		self.voice_file = Voice_files.objects.filter(filename=filename)[0]
+		text_categorization = Text_categorization.objects.filter(voiceFile=self.voice_file)
+		return len(text_categorization) > 0 
 
 	# Removing Stop Words ....
 	def remove_stopwords(self, sentence):
