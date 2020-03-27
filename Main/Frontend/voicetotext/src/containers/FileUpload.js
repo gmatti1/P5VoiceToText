@@ -122,12 +122,12 @@ class FileUpload extends React.Component {
   }
 
   fecthcallcategory() {
-    this.setState({ loading: true });
+   /* this.setState({ loading: true });
     fetch('https://jsonplaceholder.typicode.com/todos/1')
       .then(response => response.json())
       .then(textCategorized =>
         this.setState({ textCategorized: textCategorized })
-      );
+      );  */
 
     /*  componentDidMount() {
 		let v = {
