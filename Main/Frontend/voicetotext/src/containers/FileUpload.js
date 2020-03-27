@@ -118,16 +118,24 @@ class FileUpload extends React.Component {
         this.setState({
           convertedText: title['text']
         })
+      )
+      .then(data =>
+        this.fecthcallcategory()
       );
   }
 
   fecthcallcategory() {
     this.setState({ loading: true });
-    fetch('https://jsonplaceholder.typicode.com/todos/1')
+    fetch('http://localhost:5000/categorizedText/' + this.state.filename, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
       .then(response => response.json())
-      .then(textCategorized =>
+      .then(textCategorized =>{
         this.setState({ textCategorized: textCategorized })
-      );
+      });  
 
     /*  componentDidMount() {
 		let v = {
@@ -191,7 +199,7 @@ class FileUpload extends React.Component {
             type='submit'
             onclick={this.fetchlist}
           >
-            Select From History
+            Go To History
             <span className='tooltiptext'>
               History : All the Uploaded files before
             </span>
