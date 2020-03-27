@@ -64,3 +64,35 @@ def get_categorizedText(filename):
 			"message": "Internal Server Error, something went wrong"
 		}
 		return jsonify(message), 500
+
+
+# When User edits ConvertedText, CategorizationText is updated
+@cross_origin(origin=cors_ip,headers=cors_header)
+@categorizedText.route('/categorizedText/<filename>', methods = ['PUT'])
+def update_categorizedText(filename):
+	try:
+		classifyText = ClassifyText()
+		if not classifyText.if_voice_file_exists(filename):
+			message = {
+				"message": "File not found in our records"
+			}
+			return jsonify(message), 404
+		if not classifyText.if_converted_text_exists(filename):
+			message = {
+				"message": "Converted Text not found in our records"
+			}
+			return jsonify(message), 404
+		if not classifyText.if_categorized_text_exists(filename):
+			message = {
+				"message": "Categorized Text not found in our records"
+			}
+			return jsonify(message), 404
+
+		text = classifyText.clean_and_classify()
+		classifyText.save_categorizedText_in_db()
+		return jsonify(text)
+	except:
+		message = {
+			"message": "Internal Server Error, something went wrong"
+		}
+		return jsonify(message), 500
