@@ -13,8 +13,7 @@ class ClassifyText:
 	def __init__(self): 
 		self.voice_file = None
 		self.text = ""
-		self.words = []
-		self.mapwords_original_to_root = {}
+		self.sentences = []
 		self.category_keyword = { "identification" : [],
 								  "mechanism" : [],
 								  "injury": [],
@@ -25,57 +24,96 @@ class ClassifyText:
 								  "background": [],
 								  "other": [] }
 
+	def if_voice_file_exists(self, filename):
+		self.voice_file = Voice_files.objects.filter(filename=filename)
+		return len(self.voice_file) > 0
 
-
-	def get_voice_text_from_db(self, filename):
+	def if_converted_text_exists(self, filename):
 		self.voice_file = Voice_files.objects.filter(filename=filename)[0]
-		self.text = Voice_text_conversion.objects.filter(voiceFile=self.voice_file)[0].converted_text
+		voice_text_conversion = Voice_text_conversion.objects.filter(voiceFile=self.voice_file)
+		if len(voice_text_conversion)>0:
+			self.text = voice_text_conversion[0].converted_text
+		return len(voice_text_conversion) > 0
 
-
+	def if_categorized_text_exists(self, filename):
+		self.voice_file = Voice_files.objects.filter(filename=filename)[0]
+		text_categorization = Text_categorization.objects.filter(voiceFile=self.voice_file)
+		return len(text_categorization) > 0 
 
 	# Removing Stop Words ....
-	def remove_stopwords(self):
-		self.text = self.text.lower()
+	def remove_stopwords(self, sentence):
+		sentence = sentence.lower()
 		stop_words = set(stopwords.words('english') + list(punctuation)) 		
-		word_tokens = word_tokenize(self.text) 
+		word_tokens = word_tokenize(sentence) 
 		filtered_sentence = [w for w in word_tokens if not w in stop_words] 
 		filtered_sentence = [] 
 		for w in word_tokens: 
 			if w not in stop_words: 
 				filtered_sentence.append(w) 
 
-		self.words = filtered_sentence 
+		return filtered_sentence 
 
 
 
 	# Get the root of words using Stemming and Lemmatization ....
-	def stemming_and_lemmatization_text(self):
+	def stemming_and_lemmatization_text(self, words):
 		ps = PorterStemmer() 
 		wordnet_lemmatizer = WordNetLemmatizer()
-		for word in self.words:
-			stem = ps.stem(word)
-			lemma = wordnet_lemmatizer.lemmatize(stem)
-			self.mapwords_original_to_root[word] = lemma
+		words = [wordnet_lemmatizer.lemmatize(ps.stem(word)) for word in words]
+		return words
 		
 
 	# Cleaning of Text	
-	def clean_text(self):
-		self.remove_stopwords()
-		self.stemming_and_lemmatization_text()
+	def clean_text(self, sentence):
+		words = self.remove_stopwords(sentence)
+		words = self.stemming_and_lemmatization_text(words)
+		return words
 
 
 	# Classify the specific words into IMIST_AMBO categories ....
-	def classify_text_into_categories(self):
-		for original, root in self.mapwords_original_to_root.items():
-			imist_ambos = Imist_ambo_template.objects.filter(keyword=root)
-			if len(imist_ambos):
-				self.category_keyword[imist_ambos[0].category].append(original)
+	def classify_text_into_categories(self, sentence, words):
+		idx = 0
+		age_word = ""
+		for i in range(0, len(words)):
+			if words[i]=='age' or words[i]=='old':
+				age_word = words[i]
+				idx = i
+				break
+
+		if (age_word=='old' or age_word=='age') and words[i-2].isnumeric() and (sentence not in self.category_keyword['identification']): #ex: 23 year old, 23 years of age
+			self.category_keyword['identification'].append(sentence)
+		elif age_word=='age' and words[i+1].isnumeric() and (sentence not in self.category_keyword['identification']): #ex. age is 23 years
+			self.category_keyword['identification'].append(sentence)
+
+
+		for i in range(0, len(words)):
+			#unigrams
+			imist_ambos = Imist_ambo_template.objects.filter(keyword=words[i])
+			if len(imist_ambos) and (sentence not in self.category_keyword[imist_ambos[0].category]):
+				self.category_keyword[imist_ambos[0].category].append(sentence)
+
+			#bigrams
+			if i<(len(words)-1):
+				search_keyword = words[i]+" "+words[i+1]
+				imist_ambos = Imist_ambo_template.objects.filter(keyword=search_keyword)
+				if len(imist_ambos) and (sentence not in self.category_keyword[imist_ambos[0].category]):
+					self.category_keyword[imist_ambos[0].category].append(sentence)
+
+			#trigrams		
+			if i<(len(words)-2):
+				search_keyword = words[i]+" "+words[i+1]+" "+words[i+2]
+				imist_ambos = Imist_ambo_template.objects.filter(keyword=search_keyword)				
+				if len(imist_ambos) and (sentence not in self.category_keyword[imist_ambos[0].category]):
+					self.category_keyword[imist_ambos[0].category].append(sentence)
 
 
 
 	def clean_and_classify(self):
-		self.clean_text()
-		self.classify_text_into_categories()
+		self.sentences = self.text.split('.')
+
+		for sentence in self.sentences:
+			words = self.clean_text(sentence)
+			self.classify_text_into_categories(sentence, words)
 		return self.category_keyword
 
 
@@ -141,6 +179,8 @@ class ClassifyText:
 			 "category": "mechanism"},
 			{"keyword": "burn",
 			 "category": "mechanism"},
+			{"keyword": "hit",
+			 "category": "mechanism"},
 			{"keyword": "explos",
 			 "category": "mechanism"},
 			{"keyword": "trap",
@@ -157,6 +197,8 @@ class ClassifyText:
 			 "category": "injury"},
 			{"keyword": "blunt",
 			 "category": "injury"},
+			{"keyword": "blunt",
+			 "category": "trauma"},
 			{"keyword": "head",
 			 "category": "injury"},
 			{"keyword": "neck",
@@ -277,13 +319,17 @@ class ClassifyText:
 			 "category": "other"}
 			]
 		arr = [Imist_ambo_template(**data) for data in map_keyword_category]
-		Imist_ambo_template.objects.insert(arr, load_bulk=False)
+		Imist_ambo_template.objects.insert(arr, load_bulk=True)
 
 
 	def test_db(self):
-		voice_file = Voice_files(filename="test_shefali1.mp3", s3link="some s3link of aws").save()
-		text = "A 23 year old female fell off of a cycle and injured her head and neck. She is currently on ventillation. She is also pregnant."
+		voice_file = Voice_files(filename="mediahandler4.aac", s3link="some s3link of aws 4").save()
+		text = "Phoenix soon. Judy, this is Sean. Go ahead. Trauma. I got Ah. I mean you 10 minutes. Okay. 12 year old. Best dream. A history of white. I'm sorry. He was a pedestrian walking. Got hit by a vehicle. Okay, Okay. Multi system trauma. Okay. Thank you."
+
+		'''
 		voice_text_conversion = Voice_text_conversion(converted_text=text, voiceFile=voice_file).save()
+		print("Connection to db successful")
+		
 		voice_file = Voice_files.objects.filter(filename="test_file1")
 		text_categorization = Text_categorization(voiceFile=voice_file[0])
 		text_categorization.identification = self.category_keyword['identification']
@@ -296,3 +342,4 @@ class ClassifyText:
 		text_categorization.background = self.category_keyword['background']
 		text_categorization.other = self.category_keyword['other']
 		text_categorization.save()
+		'''

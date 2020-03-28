@@ -114,7 +114,7 @@ border-radius: 6px;
   border-radius: 5px;
 }
 
-.Buttonformat{
+.Buttonformat:enabled{
   font-size: 0.5em;
   background-color: white;  
   border: 2px solid #32CD32;
@@ -127,7 +127,20 @@ border-radius: 6px;
   border-radius: 5px;
 }
 
-.Buttonformat:hover {
+.Buttonformat:disabled{
+  font-size: 0.5em;
+  background-color: white;  
+  border: 2px solid #32CD32;
+  font-family: Josefin Sans;
+  position: absolute;
+  right: 40%;
+  top: 118%;
+  height: 6.3%;
+  width: 10%;
+  border-radius: 5px;
+}
+
+.Buttonformat:enabled:hover {
   background-color: #32CD32;
   color: white;
 }
@@ -174,6 +187,9 @@ border-radius: 6px;
   /* Position the tooltip */
   position: absolute;
   z-index: 1;
+  top: 100%;
+  left: 50%;
+  margin-left: -60px;
 }
 
 .Historybutton:hover .tooltiptext {
@@ -559,30 +575,44 @@ border-radius: 6px;
   border: 2px solid #32CD32;
   font-family: Josefin Sans;
   position: absolute;
-  left: 15%;
+  left: 12%;
   top: 113%;
   height: 5.7%;
-  width:70%;
+  width:76%;
   border-radius: 5px;
 }
 
-.Buttonformat{
+.Buttonformat:disabled{
   font-size: 0.4em;
   background-color: white;  
   border: 2px solid #32CD32;
   font-family: Josefin Sans;
   position: absolute;
-  left: 15%;
+  left: 12%;
   top: 120%;
   height: 5.7%;
   width: 20%;
   border-radius: 5px;
 }
 
-.Buttonformat:hover {
+.Buttonformat:enabled{
+  font-size: 0.4em;
+  background-color: white;  
+  border: 2px solid #32CD32;
+  font-family: Josefin Sans;
+  position: absolute;
+  left: 12%;
+  top: 120%;
+  height: 5.7%;
+  width: 20%;
+  border-radius: 5px;
+}
+
+.Buttonformat:enabled:hover {
   background-color: #32CD32;
   color: white;
 }
+
 
 .Textdata{
 
@@ -641,7 +671,7 @@ top: 40%;
   color: white;  
   font-family: Josefin Sans;
   position: absolute;
-  left:35%;
+  left:32%;
   top: 120%; 
   height:5.7%;
   width: 8%;
@@ -656,17 +686,18 @@ top: 40%;
   border: 2px solid #32CD32;
   font-family: Josefin Sans;
   position: absolute;
-  right: 15%;
+  right: 12%;
   top: 120%;
   height: 5.7%;
-  width: 42%;
+  width: 48%;
   border-radius: 5px;
 }
 
 .Historybutton .tooltiptext{
  visibility: hidden;
-  width: 150px;
+  width: 90px;
   color: #fff;
+  data-placement:bottom;
   background: rgb(0, 0, 0); /* Fallback color */
   background: rgba(0, 0, 0, 0.5); /* Black background with 0.5     opacity */
   text-align: center;
@@ -676,6 +707,9 @@ top: 40%;
   /* Position the tooltip */
   position: absolute;
   z-index: 1;
+  top: 100%;
+  left: 50%;
+  margin-left: -60px;
 }
 
 .Historybutton:hover .tooltiptext {
@@ -718,7 +752,6 @@ top: 40%;
 
 }
 
-
 @media only screen and (max-width: 1000px){
 
 .Uploadheader{
@@ -741,7 +774,16 @@ top: 40%;
   width:70%;
 }
 
-.Buttonformat{
+.Buttonformat:enabled{
+  font-size: 0.4em;
+  position: absolute;
+  left: 15%;
+  top: 120%;
+  height: 5.6%;
+  width: 20%;
+}
+
+.Buttonformat:disabled{
   font-size: 0.4em;
   position: absolute;
   left: 15%;
