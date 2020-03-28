@@ -39,6 +39,6 @@ config.py - contains all the configuration properties related to Database connec
 models.py - contains models that helps to connect, create and edit the schema in database <br>
 main - package that contains basic pages of the application - Home, About Us <br>
 errors - package that contains APIs for Error Handling <br>
-uploadOrSelectFiles - package that contains APIs for uploading or selecting audio files <br>
-voiceToTextConversion - package that contains APIs for voice to text conversion functionality <br>
-textClassification - package that contains APIs for categorizing the text into IMIST-AMBO categories <br>
+files - package that contains APIs for uploading or selecting audio files <br>
+convertedText - package that contains APIs for voice to text conversion functionality <br>
+categorizedText - package that contains APIs for categorizing the text into IMIST-AMBO categories <br>
