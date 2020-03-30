@@ -10,16 +10,19 @@ class History extends Component {
 
     this.state = {
       files: [],
-      selected: null
+      selected: null,
+	  search: ''
     };
     this.OnSubmitForm = this.OnSubmitForm.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
-    fetch('http://localhost:5000/files')
+    //fetch('http://localhost:5000/files')
+	fetch('https://jsonplaceholder.typicode.com/todos')
       .then(response => response.json())
-      .then(files => this.setState({ files: files['files'] }));
+    //  .then(files => this.setState({ files: files['files'] }));
+	.then(files => this.setState({ files: files }));
   }
   
   
@@ -35,8 +38,18 @@ class History extends Component {
     console.log(event.target.value);
     this.setState({selected: event.target.value});
   }
+  
+  updateSearch(event) {
+	  this.setState({search: event.target.value.substr(0,20)});
+  }	  
 
   render() {
+	let filteredFiles = this.state.files.filter(
+	  (file) => {
+		  return file.title.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
+	  }	
+	);  
+	  
     return (
       <div className='HistoryComponent'>
         <form onSubmit={this.OnSubmitForm}>
@@ -49,11 +62,17 @@ class History extends Component {
 
           <div className='Historylist'>
             <select size='10' value={this.state.select} onChange={this.handleChange}  className='Historyselect' required>
-              {this.state.files.map(file => (
-                <option value={file}>{file}</option>
+              {filteredFiles.map(file => (
+                <option value={file}>{file.title}</option>
               ))}
             </select>
           </div>
+		  <div className='SearchHist'>
+		  <input className='Search' type = "text" placeholder="&#xf002; Search filename.."
+				value={this.state.search}
+				onChange={this.updateSearch.bind(this)}
+		  />
+		  </div>
         </form>
       </div>
     );
