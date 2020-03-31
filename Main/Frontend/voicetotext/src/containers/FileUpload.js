@@ -98,20 +98,9 @@ class FileUpload extends React.Component {
         'Content-Type': 'application/json'
       }
 
-    }).then(response => {
-      if(!response.ok){
-        throw response  
-      }
-      console.log('Completed it');
-    }).catch(err=>{
-      
-        console.log(err);
-    
     })
-
-    console.log('Edited here text is : ', data);
-
-    }).then(response => 
+//console.log('Edited here text is : ', data)
+ .then(response => 
       this.updateCategorizedText()
     );
 
@@ -179,17 +168,7 @@ class FileUpload extends React.Component {
     this.setState({ loading: true });
 
     fetch('https://jsonplaceholder.typicode.com/todos/1')
-      .then(response => {
-        if(!response.ok){
-          throw response
-        }
-        response.json()
-      }
-).catch(err=>{
-
-    console.log(err);
-  
-}).then(textCategorized =>
+      .then(textCategorized =>
 
     fetch('http://localhost:5000/categorizedText/' + file, {
       method: 'POST',
@@ -201,7 +180,7 @@ class FileUpload extends React.Component {
       .then(textCategorized =>{
 
         this.setState({ textCategorized: textCategorized })
-      });  
+      }))
 
     /*  componentDidMount() {
 		let v = {
