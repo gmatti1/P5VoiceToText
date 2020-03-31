@@ -5,16 +5,21 @@ import { slowImport } from '../containers/Helper';
 //import ConvertedText from '../containers/ConvertedText';
 //import CategorizedText from '../containers/CategorizedText';
 import Thirdpage from '../components/Thirdpage';
-import History from '../containers/History';
 import Loader from '../containers/Loader';
 import { PropTypes } from 'react';
 import equal from 'fast-deep-equal';
+//import styled from 'styled-components';
+
 
 const ConvertedText = React.lazy(() =>
-  slowImport(import('../containers/ConvertedText'), 1000)
+  slowImport(import('../containers/ConvertedText'), 65000)
 );
 const CategorizedText = React.lazy(() =>
-  slowImport(import('../containers/CategorizedText'), 1000)
+  slowImport(import('../containers/CategorizedText'), 65000)
+);
+
+const History = React.lazy(() =>
+  slowImport(import('../containers/History'), 1000)
 );
 
 class FileUpload extends React.Component {
@@ -44,8 +49,8 @@ class FileUpload extends React.Component {
     this.Upload_file = this.Upload_file.bind(this);
   }
 
-  async Upload_file(file) {
-    await this.getTextHelper();
+  Upload_file(file) {
+    this.getTextHelper();
   }
 
   getTextHelper = () => {
@@ -60,17 +65,20 @@ class FileUpload extends React.Component {
       }
       response.json().then(data => {
         this.setState({ isLoaded: true, filename: data['filename'] });
-        console.log(this.state.filename);
-        this.fetchcalltext();
+      })
+      .then(data=>{
+        this.fetchcalltext(this.state.filename);
       });
     }).catch(err=>{
       console.log(err);
     });
+
   };
 
   OnSubmittingForm(e) {
     e.preventDefault();
     this.Upload_file();
+	alert('Your file has been uploaded. Result will be displayed in some time. Thank you for your patience!')
     // this.fecthcallcategory(); //Call this method once fetching text is successful
     this.setState({ disabled: true });
   }
@@ -83,12 +91,13 @@ class FileUpload extends React.Component {
       text: data
     };
 
-    fetch('http://localhost:5000/files/' + this.state.filename + '/text', {
+    fetch('http://localhost:5000/convertedText/' + this.state.filename, {
       method: 'PUT',
-      body: myBody,
+      body: JSON.stringify(myBody),
       headers: {
         'Content-Type': 'application/json'
       }
+
     }).then(response => {
       if(!response.ok){
         throw response  
@@ -101,10 +110,29 @@ class FileUpload extends React.Component {
     })
 
     console.log('Edited here text is : ', data);
+
+    }).then(response => 
+      this.updateCategorizedText()
+    );
+
   };
+
+  updateCategorizedText(){
+    fetch('http://localhost:5000/categorizedText/' + this.state.filename, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json())
+    .then(textCategorized =>{
+      console.log(textCategorized);
+      this.setState({ textCategorized: textCategorized })
+    }); 
+  }
 
   handleChange = event => {
     event.preventDefault();
+    console.log(event.target.value);
     this.setState({ convertedText: event.target.value });
   };
 
@@ -114,8 +142,11 @@ class FileUpload extends React.Component {
     }
   };
 
-  fetchcalltext() {
+  fetchcalltext(file) {
+    //event.preventDefault();
+    console.log("here");
     this.setState({ loading: true });
+
     fetch('http://localhost:5000/files/' + this.state.filename + '/text')
       .then(response =>{ 
         if(!response.ok){
@@ -126,15 +157,27 @@ class FileUpload extends React.Component {
             console.log(err);
           
         })
+    fetch('http://localhost:5000/convertedText/' + file, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+
       .then(title =>
         this.setState({
           convertedText: title['text']
         })
+      )
+      .then(data =>
+        this.fecthcallcategory(file)
       );
   }
 
-  fecthcallcategory() {
+  fecthcallcategory(file) {
     this.setState({ loading: true });
+
     fetch('https://jsonplaceholder.typicode.com/todos/1')
       .then(response => {
         if(!response.ok){
@@ -147,8 +190,18 @@ class FileUpload extends React.Component {
     console.log(err);
   
 }).then(textCategorized =>
+
+    fetch('http://localhost:5000/categorizedText/' + file, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(textCategorized =>{
+
         this.setState({ textCategorized: textCategorized })
-      );
+      });  
 
     /*  componentDidMount() {
 		let v = {
@@ -177,6 +230,7 @@ class FileUpload extends React.Component {
   render() {
     return (
       <div>
+	  
         <form onSubmit={this.OnSubmittingForm}>
           <h1 className='Uploadheader'>Please upload the audio file</h1>
           <input
@@ -211,7 +265,7 @@ class FileUpload extends React.Component {
             type='submit'
             onclick={this.fetchlist}
           >
-            Select From History
+            Go To History
             <span className='tooltiptext'>
               History : All the Uploaded files before
             </span>
