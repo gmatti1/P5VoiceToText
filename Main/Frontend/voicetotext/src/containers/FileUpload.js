@@ -70,7 +70,7 @@ class FileUpload extends React.Component {
         this.fetchcalltext(this.state.filename);
       });
     }).catch(err=>{
-      console.log(err);
+      console.log(err+ " this error is catched");
     });
 
   };
@@ -100,9 +100,16 @@ class FileUpload extends React.Component {
 
     })
 //console.log('Edited here text is : ', data)
- .then(response => 
+ .then(response => {
+
+  if(!response.ok){
+    throw response
+  }
+  
       this.updateCategorizedText()
-    );
+ }).catch(err=>{
+  console.log(err);
+});
 
   };
 
@@ -112,7 +119,16 @@ class FileUpload extends React.Component {
       headers: {
         'Content-Type': 'application/json'
       }
-    }).then(response => response.json())
+    }).then(response =>{ 
+      if(!response.ok){
+        throw response
+      }
+      response.json()
+      
+      
+    }).catch(err=>{
+      console.log(err);
+    })
     .then(textCategorized =>{
       console.log(textCategorized);
       this.setState({ textCategorized: textCategorized })
@@ -152,9 +168,18 @@ class FileUpload extends React.Component {
         'Content-Type': 'application/json'
       }
     })
-      .then(response => response.json())
-
-      .then(title =>
+      .then(response =>{
+        
+        if(!response.ok){
+          throw response
+        }
+        
+        response.json()
+      }).catch(err=>{
+          
+        console.log(err);
+      
+    }).then(title =>
         this.setState({
           convertedText: title['text']
         })
@@ -176,7 +201,20 @@ class FileUpload extends React.Component {
         'Content-Type': 'application/json'
       }
     })
-      .then(response => response.json())
+      .then(response => 
+        
+        {
+          if(!response.ok){
+            throw response
+          }
+          response.json()
+        
+        
+        }).catch(err=>{
+          
+          console.log(err);
+        
+      })
       .then(textCategorized =>{
 
         this.setState({ textCategorized: textCategorized })

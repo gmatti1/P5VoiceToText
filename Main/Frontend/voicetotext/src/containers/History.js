@@ -18,8 +18,15 @@ class History extends Component {
 
   componentDidMount() {
     fetch('http://localhost:5000/files')
-      .then(response => response.json())
-      .then(files => this.setState({ files: files['files'] }));
+      .then(response =>{
+        
+        if(!response.ok){
+          throw response
+        }
+        
+        response.json()}).then(files => this.setState({ files: files['files'] })).catch(err=>{
+          console.log(err+ " this error is catched");
+        })
   }
   
   
