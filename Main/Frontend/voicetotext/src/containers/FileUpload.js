@@ -60,12 +60,17 @@ class FileUpload extends React.Component {
       method: 'POST',
       body: formData
     }).then(response => {
+      if(!response.ok){
+        throw response
+      }
       response.json().then(data => {
         this.setState({ isLoaded: true, filename: data['filename'] });
       })
       .then(data=>{
         this.fetchcalltext(this.state.filename);
       });
+    }).catch(err=>{
+      console.log(err);
     });
 
   };
@@ -92,9 +97,24 @@ class FileUpload extends React.Component {
       headers: {
         'Content-Type': 'application/json'
       }
+
+    }).then(response => {
+      if(!response.ok){
+        throw response  
+      }
+      console.log('Completed it');
+    }).catch(err=>{
+      
+        console.log(err);
+    
+    })
+
+    console.log('Edited here text is : ', data);
+
     }).then(response => 
       this.updateCategorizedText()
     );
+
   };
 
   updateCategorizedText(){
@@ -126,6 +146,17 @@ class FileUpload extends React.Component {
     //event.preventDefault();
     console.log("here");
     this.setState({ loading: true });
+
+    fetch('http://localhost:5000/files/' + this.state.filename + '/text')
+      .then(response =>{ 
+        if(!response.ok){
+          throw response
+        }
+        response.json()}).catch(err=>{
+          
+            console.log(err);
+          
+        })
     fetch('http://localhost:5000/convertedText/' + file, {
       method: 'POST',
       headers: {
@@ -133,6 +164,7 @@ class FileUpload extends React.Component {
       }
     })
       .then(response => response.json())
+
       .then(title =>
         this.setState({
           convertedText: title['text']
@@ -145,6 +177,20 @@ class FileUpload extends React.Component {
 
   fecthcallcategory(file) {
     this.setState({ loading: true });
+
+    fetch('https://jsonplaceholder.typicode.com/todos/1')
+      .then(response => {
+        if(!response.ok){
+          throw response
+        }
+        response.json()
+      }
+).catch(err=>{
+
+    console.log(err);
+  
+}).then(textCategorized =>
+
     fetch('http://localhost:5000/categorizedText/' + file, {
       method: 'POST',
       headers: {
@@ -153,6 +199,7 @@ class FileUpload extends React.Component {
     })
       .then(response => response.json())
       .then(textCategorized =>{
+
         this.setState({ textCategorized: textCategorized })
       });  
 
