@@ -66,6 +66,13 @@ def get_categorizedText(filename):
 		return jsonify(message), 500
 
 
+# @cross_origin(origin=cors_ip,headers=cors_header)
+# @categorizedText.route('/categorizedText/add_imistambo', methods = ['POST'])
+# def add_imistambot():
+# 	classifyText = ClassifyText()
+# 	classifyText.insert_into_imist_ambo_template()
+
+
 # When User edits ConvertedText, CategorizationText is updated
 @cross_origin(origin=cors_ip,headers=cors_header)
 @categorizedText.route('/categorizedText/<filename>', methods = ['PUT'])

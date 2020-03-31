@@ -22,7 +22,8 @@ def voiceToTextConversion(filename):
 		if len(voice_text.converted_text) > 0:
 			print("The entry is already present")
 			message = {
-				"text": voice_text.converted_text
+				"text": voice_text.converted_text,
+				"stats": voice_text.text_stats
 			}
 			return jsonify(message), 200
 
@@ -31,7 +32,8 @@ def voiceToTextConversion(filename):
 		# audiofile has s3Link and filename
 		voice_text.aws_voice_to_text(audiofile)
 		message = {
-			"text": voice_text.converted_text
+			"text": voice_text.converted_text,
+			"stats": voice_text.text_stats
 		}
 		voice_text.store_voice_text(filename)
 		return jsonify(message), 200
@@ -59,7 +61,8 @@ def get_convertedText(filename):
 			voice_text.get_voice_text_from_db(filename)
 			if len(voice_text.converted_text) > 0:
 				message = {
-					"text": voice_text.converted_text
+					"text": voice_text.converted_text,
+					"stats": voice_text.text_stats
 				}
 				return jsonify(message), 200
 
