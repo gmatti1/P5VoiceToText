@@ -1,14 +1,14 @@
 .Firstpage {
- height: 102vh;
+  height: 102vh;
 }
 
 .Navbarsize {
-  padding :13px;
+  padding: 13px;
 }
 
 #navbg {
-background-color:#004466;
-border-radius: 6px;
+  background-color: #004466;
+  border-radius: 6px;
 }
 
 .App-logobig {
@@ -37,20 +37,23 @@ border-radius: 6px;
   margin: 0;
   position: absolute;
   background: rgb(0, 68, 102); /* Fallback color */
-  background: rgba(0, 68, 102, 0.75); /* Black background with 0.5     opacity */
+  background: rgba(
+    0,
+    68,
+    102,
+    0.75
+  ); /* Black background with 0.5     opacity */
   height: 150px;
   color: #f1f1f1;
   width: 100%;
   top: 56%;
- -ms-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
   transform: translateY(-50%);
-  
 }
 
 .App-footer {
-  
   position: absolute;
-  padding :30px;
+  padding: 30px;
   height: 80px;
   width: 100%;
   top: 88.8%;
@@ -59,13 +62,12 @@ border-radius: 6px;
 .Arrow {
   position: absolute;
   height: 78%;
-  width: 20%;  
+  width: 20%;
   left: 40%;
-  top:3%;
+  top: 3%;
 }
 
-.Arrow:hover 
-{
+.Arrow:hover {
   opacity: 0.8;
 }
 
@@ -87,37 +89,35 @@ border-radius: 6px;
   font-size: 2.5em;
 }
 
-.Uploadheader{
+.Uploadheader {
   font-size: 0.7em;
-  color:white;
+  color: white;
   font-family: Josefin Sans;
   margin: 0;
   position: absolute;
   text-align: center;
-  top: 107%; 
-  left:32%;
-  right:31%
-
+  top: 107%;
+  left: 32%;
+  right: 31%;
 }
 
-
-.Input{
+.Input {
   font-size: 0.5em;
-  background-color: white;   
-  border: 2px solid #32CD32;
+  background-color: white;
+  border: 2px solid #32cd32;
   font-family: Josefin Sans;
   position: absolute;
   left: 17.5%;
   top: 118%;
   height: 6.3%;
-  width:32.5%;
+  width: 32.5%;
   border-radius: 5px;
 }
 
-.Buttonformat:enabled{
+.Buttonformat:enabled {
   font-size: 0.5em;
-  background-color: white;  
-  border: 2px solid #32CD32;
+  background-color: white;
+  border: 2px solid #32cd32;
   font-family: Josefin Sans;
   position: absolute;
   right: 40%;
@@ -127,10 +127,10 @@ border-radius: 6px;
   border-radius: 5px;
 }
 
-.Buttonformat:disabled{
+.Buttonformat:disabled {
   font-size: 0.5em;
-  background-color: white;  
-  border: 2px solid #32CD32;
+  background-color: white;
+  border: 2px solid #32cd32;
   font-family: Josefin Sans;
   position: absolute;
   right: 40%;
@@ -141,30 +141,28 @@ border-radius: 6px;
 }
 
 .Buttonformat:enabled:hover {
-  background-color: #32CD32;
+  background-color: #32cd32;
   color: white;
 }
 
-.ORtext{
+.ORtext {
   font-size: 0.5em;
-  color: white;  
+  color: white;
   font-family: Josefin Sans;
   position: absolute;
   right: 37%;
-  top: 118%; 
+  top: 118%;
   height: 6.3%;
   width: 3%;
-  border: 2px solid #32CD32;
+  border: 2px solid #32cd32;
   border-radius: 5px;
   text-align: center;
 }
 
-
-
-.Historybutton{
+.Historybutton {
   font-size: 0.5em;
-  background-color: white;  
-  border: 2px solid #32CD32;
+  background-color: white;
+  border: 2px solid #32cd32;
   font-family: Josefin Sans;
   position: absolute;
   right: 17.5%;
@@ -174,8 +172,8 @@ border-radius: 6px;
   border-radius: 5px;
 }
 
-.Historybutton .tooltiptext{
- visibility: hidden;
+.Historybutton .tooltiptext {
+  visibility: hidden;
   width: 150px;
   color: #fff;
   background: rgb(0, 0, 0); /* Fallback color */
@@ -196,202 +194,187 @@ border-radius: 6px;
   visibility: visible;
 }
 
-.Histicon{
-
- position: relative;
-  height:100%;
-  width: 100%;  
-  
+.Histicon {
+  position: relative;
+  height: 100%;
+  width: 100%;
 }
 
-.Textdata{
-
+.Textdata {
   position: absolute;
   left: 3%;
   top: 128%;
-  border: 2px solid #32CD32;
+  border: 2px solid #32cd32;
   border-radius: 5px;
-  Height:71.7%;
-  Width: 45%;
+  height: 71.7%;
+  width: 45%;
 }
 
 .LabelTextdata {
-font-family: Josefin Sans;
-font-size: 0.6em;
-color:white;
+  font-family: Josefin Sans;
+  font-size: 0.6em;
+  color: white;
+}
 
+.LabelConfidenceData {
+  float: right;
 }
 
 #Textarea {
-
-font-family: Josefin Sans;
-font-size: 0.43em;
-background-color: #e6faff;
-height:310px;
+  font-family: Josefin Sans;
+  font-size: 0.43em;
+  background-color: #e6faff;
+  height: 310px;
 }
 
-.Textareasize{
-position: absolute;
-width:100%;
-height:310px;
+.Textareasize {
+  position: absolute;
+  width: 100%;
+  height: 310px;
 }
 
-
-.Save{
+.Save {
   font-size: 0.4em;
-  background-color: #e6faff;  
-  border: 2px solid #32CD32;
+  background-color: #e6faff;
+  border: 2px solid #32cd32;
   font-family: Josefin Sans;
   position: absolute;
-  left:0%;
+  left: 0%;
   top: 87%;
   border-radius: 5px;
-  color:black;
-  width:100%;
-  height:8%;
-
+  color: black;
+  width: 100%;
+  height: 8%;
 }
 
 .Save:hover {
-  background-color: #32CD32;
-  
+  background-color: #32cd32;
 }
 
-.Categorydata{
-
+.Categorydata {
   position: absolute;
   right: 3%;
   top: 128%;
-  border: 2px solid #32CD32;
+  border: 2px solid #32cd32;
   border-radius: 5px;
-  Height:71.7%;
-  Width: 45%;
+  height: 71.7%;
+  width: 45%;
 }
 
-.Tablesize{
-position: absolute;
-width:100%;
-height:340px;
+.Tablesize {
+  position: absolute;
+  width: 100%;
+  height: 340px;
 }
 
-#TableText{
-font-family: Josefin Sans;
-font-size: 0.39559em;
-background-color: #e6faff;
-
+#TableText {
+  font-family: Josefin Sans;
+  font-size: 0.39559em;
+  background-color: #e6faff;
 }
 
 .Thirdpage {
   height: 100vh;
   background-color: #004466;
   padding-top: 3%;
- 
 }
 
 .HistoryComponent {
-  border: 2px solid #32CD32;
+  border: 2px solid #32cd32;
   border-radius: 5px;
   padding: 2%;
   margin-left: 3%;
   margin-right: 3%;
   flex-direction: column;
-  height:550px;
-}
- 
-.Historytext{
-font-family: Josefin Sans;
-font-size: 1.6em;
-color:white;
-padding: 1%;
-border: 4px solid #32CD32;
-border-radius: 5px;
-
+  height: 550px;
 }
 
-.HistoryUploadbutton
-{
+.Historytext {
+  font-family: Josefin Sans;
+  font-size: 1.6em;
+  color: white;
+  padding: 1%;
+  border: 4px solid #32cd32;
+  border-radius: 5px;
+}
+
+.HistoryUploadbutton {
   font-size: 0.8em;
-  background-color: white;  
-  border: 2px solid #32CD32;
+  background-color: white;
+  border: 2px solid #32cd32;
   font-family: Josefin Sans;
   position: absolute;
   height: 6.3%;
   width: 30%;
   border-radius: 5px;
-  right:6%;
+  right: 6%;
 }
 
 .HistoryUploadbutton:hover {
-  background-color: #32CD32;
-  color: white; 
+  background-color: #32cd32;
+  color: white;
 }
 
-.Historylist{
-
+.Historylist {
 }
 
-.Historyselect
-{
+.Historyselect {
   font-family: Josefin Sans;
   font-size: 1.4em;
   position: absolute;
   width: 90%;
   height: 40%;
-  top:230%;
+  top: 230%;
   border-radius: 5px;
-  border: 4px solid #32CD32;
+  border: 4px solid #32cd32;
   padding: 1%;
   background-color: #003652;
   color: white;
-   
 }
-
 
 /* width scrollbar */
 ::-webkit-scrollbar {
- height:7px;
-width:7px;
+  height: 7px;
+  width: 7px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey; 
+  box-shadow: inset 0 0 5px grey;
   border-radius: 15px;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background:  #009900; 
+  background: #009900;
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background:  #006600; 
+  background: #006600;
 }
 
 .Textloader {
-
-position: absolute;
-left:40%;  
-right:40%;
-top: 40%;
-
+  position: absolute;
+  left: 40%;
+  right: 40%;
+  top: 40%;
 }
 
 @keyframes ldio-fbwe939p7j {
-  0% { 
-   transform: rotate(0deg) 
+  0% {
+    transform: rotate(0deg);
   }
-  100% { 
-   transform: rotate(360deg) 
-   }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .ldio-fbwe939p7j > div > div {
   transform-origin: 50px 50px;
   animation: ldio-fbwe939p7j 3.0303030303030303s linear infinite;
-  opacity: 0.55
+  opacity: 0.55;
 }
 
 .ldio-fbwe939p7j > div > div > div {
@@ -401,11 +384,11 @@ top: 40%;
   width: 37px;
   height: 37px;
   border-radius: 37px 0 0 0;
-  transform-origin: 50px 50px
+  transform-origin: 50px 50px;
 }
 
 .ldio-fbwe939p7j > div div:nth-child(1) {
-  animation-duration: 0.7575757575757576s
+  animation-duration: 0.7575757575757576s;
 }
 
 .ldio-fbwe939p7j > div div:nth-child(1) > div {
@@ -414,7 +397,7 @@ top: 40%;
 }
 
 .ldio-fbwe939p7j > div div:nth-child(2) {
-  animation-duration: 1.0101010101010102s
+  animation-duration: 1.0101010101010102s;
 }
 
 .ldio-fbwe939p7j > div div:nth-child(2) > div {
@@ -423,7 +406,7 @@ top: 40%;
 }
 
 .ldio-fbwe939p7j > div div:nth-child(3) {
-  animation-duration: 1.5151515151515151s
+  animation-duration: 1.5151515151515151s;
 }
 
 .ldio-fbwe939p7j > div div:nth-child(3) > div {
@@ -432,7 +415,7 @@ top: 40%;
 }
 
 .ldio-fbwe939p7j > div div:nth-child(4) {
-  animation-duration: 3.0303030303030303s
+  animation-duration: 3.0303030303030303s;
 }
 
 .ldio-fbwe939p7j > div div:nth-child(4) > div {
@@ -454,369 +437,343 @@ top: 40%;
   position: relative;
   transform: translateZ(0) scale(1);
   backface-visibility: hidden;
-  transform-origin: 0 0; 
+  transform-origin: 0 0;
 }
 
-.ldio-fbwe939p7j div { 
-box-sizing: content-box; 
+.ldio-fbwe939p7j div {
+  box-sizing: content-box;
 }
 
+@media only screen and (max-width: 500px) {
+  .Firstpage {
+    height: 102vh;
+  }
 
+  .Navbarsize {
+    padding: 30px 10px 30px;
+  }
 
+  #navbg {
+    background-color: #004466;
+    border-radius: 6px;
+  }
 
-@media only screen and (max-width: 500px){
+  .App-logobig {
+    height: 90px;
+    justify-content: center;
+  }
 
-.Firstpage {
- height: 102vh;
+  .App-baby {
+    height: 100px;
+    justify-content: center;
+  }
+
+  .App-bg {
+    margin: 0;
+    position: absolute;
+    background-image: url(./../assets/medical-wallpaper.jpg);
+    opacity: 0.95;
+    width: 100%;
+    height: 400px;
+    top: 55%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+
+  .Appheaderfp {
+    margin: 0;
+    position: absolute;
+    background: rgb(0, 68, 102); /* Fallback color */
+    background: rgba(
+      0,
+      68,
+      102,
+      0.75
+    ); /* Black background with 0.5     opacity */
+    height: 190px;
+    color: #f1f1f1;
+    width: 100%;
+    top: 56%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+
+  .App-footer {
+    position: absolute;
+    padding: 15px;
+    height: 90px;
+    width: 100%;
+    top: 86.8%;
+  }
+
+  .Arrow {
+    position: absolute;
+    height: 78%;
+    width: 20%;
+    left: 40%;
+    top: 3%;
+  }
+
+  .Arrow:hover {
+    opacity: 0.8;
+  }
+
+  .Apptitlefp {
+    margin: 0;
+    position: relative;
+    text-align: center;
+    font-size: 2em;
+    font-family: Josefin Sans;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+
+  .Secondpage {
+    height: 178vh;
+    background-color: #004466;
+    font-color: white;
+    font-size: 2.5em;
+  }
+
+  .Uploadheader {
+    font-size: 0.5em;
+    color: white;
+    font-family: Josefin Sans;
+    margin: 0;
+    position: absolute;
+    text-align: center;
+    top: 105%;
+    left: 15%;
+    right: 15%;
+  }
+
+  .Input {
+    font-size: 0.4em;
+    background-color: white;
+    border: 2px solid #32cd32;
+    font-family: Josefin Sans;
+    position: absolute;
+    left: 12%;
+    top: 113%;
+    height: 5.7%;
+    width: 76%;
+    border-radius: 5px;
+  }
+
+  .Buttonformat:disabled {
+    font-size: 0.4em;
+    background-color: white;
+    border: 2px solid #32cd32;
+    font-family: Josefin Sans;
+    position: absolute;
+    left: 12%;
+    top: 120%;
+    height: 5.7%;
+    width: 20%;
+    border-radius: 5px;
+  }
+
+  .Buttonformat:enabled {
+    font-size: 0.4em;
+    background-color: white;
+    border: 2px solid #32cd32;
+    font-family: Josefin Sans;
+    position: absolute;
+    left: 12%;
+    top: 120%;
+    height: 5.7%;
+    width: 20%;
+    border-radius: 5px;
+  }
+
+  .Buttonformat:enabled:hover {
+    background-color: #32cd32;
+    color: white;
+  }
+
+  .Textdata {
+    position: absolute;
+    left: 5%;
+    top: 130%;
+    border: 2px solid #32cd32;
+    border-radius: 5px;
+    height: 70%;
+    width: 90%;
+  }
+
+  #Textarea {
+    height: 320px;
+  }
+
+  .Textareasize {
+    position: absolute;
+    width: 100%;
+    height: 320px;
+  }
+
+  .Save {
+    top: 87.3%;
+  }
+
+  .Save:hover {
+    background-color: #32cd32;
+  }
+
+  .Categorydata {
+    position: absolute;
+    left: 5%;
+    top: 205%;
+    border: 2px solid #32cd32;
+    border-radius: 5px;
+    height: 70%;
+    width: 90%;
+  }
+
+  .Textloader {
+    position: absolute;
+    left: 35%;
+    right: 35%;
+    top: 40%;
+  }
+
+  .ORtext {
+    font-size: 0.5em;
+    color: white;
+    font-family: Josefin Sans;
+    position: absolute;
+    left: 32%;
+    top: 120%;
+    height: 5.7%;
+    width: 8%;
+    border: 2px solid #32cd32;
+    border-radius: 5px;
+    text-align: center;
+  }
+
+  .Historybutton {
+    font-size: 0.4em;
+    background-color: white;
+    border: 2px solid #32cd32;
+    font-family: Josefin Sans;
+    position: absolute;
+    right: 12%;
+    top: 120%;
+    height: 5.7%;
+    width: 48%;
+    border-radius: 5px;
+  }
+
+  .Historybutton .tooltiptext {
+    visibility: hidden;
+    width: 90px;
+    color: #fff;
+    data-placement: bottom;
+    background: rgb(0, 0, 0); /* Fallback color */
+    background: rgba(0, 0, 0, 0.5); /* Black background with 0.5     opacity */
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    margin-left: -60px;
+  }
+
+  .Historybutton:hover .tooltiptext {
+    visibility: visible;
+  }
+
+  .Histicon {
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+
+  .HistoryUploadbutton {
+    font-size: 0.7em;
+    width: 50%;
+    right: 7%;
+  }
+
+  .Historyselect {
+    position: absolute;
+    font-size: 1.4em;
+    width: 90%;
+    height: 40%;
+    top: 302%;
+  }
+
+  .Thirdpage {
+    height: 100vh;
+    background-color: #004466;
+    padding-top: 3%;
+  }
 }
 
-.Navbarsize {
-  padding :30px 10px 30px;
+@media only screen and (max-width: 1000px) {
+  .Uploadheader {
+    font-size: 0.5em;
+    margin: 0;
+    position: absolute;
+    text-align: center;
+    top: 105%;
+    left: 22%;
+    right: 20%;
+  }
 
- }
+  .Input {
+    font-size: 0.4em;
+    position: absolute;
+    left: 15%;
+    top: 113%;
+    height: 5.6%;
+    width: 70%;
+  }
 
-#navbg {
-background-color:#004466;
-border-radius: 6px;
-}
+  .Buttonformat:enabled {
+    font-size: 0.4em;
+    position: absolute;
+    left: 15%;
+    top: 120%;
+    height: 5.6%;
+    width: 20%;
+  }
 
-.App-logobig {
-  height: 90px;
-  justify-content: center;
-}
+  .Buttonformat:disabled {
+    font-size: 0.4em;
+    position: absolute;
+    left: 15%;
+    top: 120%;
+    height: 5.6%;
+    width: 20%;
+  }
 
-.App-baby {
-  height: 100px;
-  justify-content: center;
-}
+  .ORtext {
+    font-size: 0.5em;
+    position: absolute;
+    left: 35%;
+    top: 120%;
+    height: 5.7%;
+    width: 10%;
+    text-align: center;
+  }
 
-.App-bg {
-  margin: 0;
-  position: absolute;
-  background-image: url(./../assets/medical-wallpaper.jpg);
-  opacity: 0.95;
-  width: 100%;
-  height: 400px;
-  top: 55%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-}
+  .Historybutton {
+    font-size: 0.4em;
+    position: absolute;
+    right: 15%;
+    top: 120%;
+    height: 5.7%;
+    width: 40%;
+  }
 
-
-.Appheaderfp {
-  margin: 0;
-  position: absolute;
-  background: rgb(0, 68, 102); /* Fallback color */
-  background: rgba(0, 68, 102, 0.75); /* Black background with 0.5     opacity */
-  height: 190px;
-  color: #f1f1f1;
-  width: 100%;
-  top: 56%;
- -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  
-}
-
-.App-footer {
-  
-  position: absolute;
-  padding :15px;
-  height: 90px;
-  width: 100%;
-  top: 86.8%;
-}
-
-.Arrow {
-  position: absolute;
-  height: 78%;
-  width: 20%;  
-  left: 40%;
-  top:3%;
-}
-
-.Arrow:hover 
-{
-  opacity: 0.8;
-}
-
-.Apptitlefp {
-  margin: 0;
-  position: relative;
-  text-align: center;
-  font-size: 2.0em;
-  font-family: Josefin Sans;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-}
-
-.Secondpage {
-  height: 178vh;
-  background-color: #004466;
-  font-color: white;
-  font-size: 2.5em;
-}
-
-.Uploadheader{
- font-size: 0.5em;
-  color:white;
-  font-family: Josefin Sans;
-  margin: 0;
-  position: absolute;
-  text-align: center;
-  top: 105%; 
-  left:15%;
-  right:15%
-}
-
-.Input{
-  font-size: 0.4em;
-  background-color: white;   
-  border: 2px solid #32CD32;
-  font-family: Josefin Sans;
-  position: absolute;
-  left: 12%;
-  top: 113%;
-  height: 5.7%;
-  width:76%;
-  border-radius: 5px;
-}
-
-.Buttonformat:disabled{
-  font-size: 0.4em;
-  background-color: white;  
-  border: 2px solid #32CD32;
-  font-family: Josefin Sans;
-  position: absolute;
-  left: 12%;
-  top: 120%;
-  height: 5.7%;
-  width: 20%;
-  border-radius: 5px;
-}
-
-.Buttonformat:enabled{
-  font-size: 0.4em;
-  background-color: white;  
-  border: 2px solid #32CD32;
-  font-family: Josefin Sans;
-  position: absolute;
-  left: 12%;
-  top: 120%;
-  height: 5.7%;
-  width: 20%;
-  border-radius: 5px;
-}
-
-.Buttonformat:enabled:hover {
-  background-color: #32CD32;
-  color: white;
-}
-
-
-.Textdata{
-
-  position: absolute;
-  left: 5%;
-  top: 130%;
-  border: 2px solid #32CD32;
-  border-radius: 5px;
-  Height:70%;
-  Width: 90%;
-}
-
-#Textarea {
-height:320px;
-}
-
-.Textareasize{
-position: absolute;
-width:100%;
-height:320px;
-}
-
-
-.Save{
-top: 87.3%;
-}
-
-.Save:hover {
-  background-color: #32CD32;
-  
-}
-
-.Categorydata{
-
-  position: absolute;
-  left: 5%;
-  top: 205%;
-  border: 2px solid #32CD32;
-  border-radius: 5px;
-  Height:70%;
-  Width: 90%;
-}
-
-.Textloader {
-
-position: absolute;
-left:35%;  
-right:35%;
-top: 40%;
-
-}
-
-
-.ORtext{
-  font-size: 0.5em;
-  color: white;  
-  font-family: Josefin Sans;
-  position: absolute;
-  left:32%;
-  top: 120%; 
-  height:5.7%;
-  width: 8%;
-  border: 2px solid #32CD32;
-  border-radius: 5px;
-  text-align: center;
-}
-
-.Historybutton{
-  font-size: 0.4em;
-  background-color: white;  
-  border: 2px solid #32CD32;
-  font-family: Josefin Sans;
-  position: absolute;
-  right: 12%;
-  top: 120%;
-  height: 5.7%;
-  width: 48%;
-  border-radius: 5px;
-}
-
-.Historybutton .tooltiptext{
- visibility: hidden;
-  width: 90px;
-  color: #fff;
-  data-placement:bottom;
-  background: rgb(0, 0, 0); /* Fallback color */
-  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5     opacity */
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-
-  /* Position the tooltip */
-  position: absolute;
-  z-index: 1;
-  top: 100%;
-  left: 50%;
-  margin-left: -60px;
-}
-
-.Historybutton:hover .tooltiptext {
-  visibility: visible;
-}
-
-.Histicon{
-
- position: relative;
-  height:100%;
-  width: 100%;  
-  
-}
-
-
-.HistoryUploadbutton
-{
-  font-size: 0.7em;
-  width: 50%;
-  right:7%;
-}
-
-.Historyselect
-{
-  position: absolute;
-  font-size: 1.4em;
-  width: 90%;
-  height: 40%;
-  top:302%;
-   
-}
-
-
-.Thirdpage {
-  height: 100vh;
-  background-color: #004466;
-  padding-top: 3%;
- 
-}
-
-}
-
-@media only screen and (max-width: 1000px){
-
-.Uploadheader{
- font-size: 0.5em;
-  margin: 0;
-  position: absolute;
-  text-align: center;
-  top: 105%; 
-  left:22%;
-  right:20%
-}
-
-
-.Input{
-  font-size: 0.4em;
-  position: absolute;
-  left: 15%;
-  top: 113%;
-  height: 5.6%;
-  width:70%;
-}
-
-.Buttonformat:enabled{
-  font-size: 0.4em;
-  position: absolute;
-  left: 15%;
-  top: 120%;
-  height: 5.6%;
-  width: 20%;
-}
-
-.Buttonformat:disabled{
-  font-size: 0.4em;
-  position: absolute;
-  left: 15%;
-  top: 120%;
-  height: 5.6%;
-  width: 20%;
-}
-
-.ORtext{
-  font-size: 0.5em;
-  position: absolute;
-  left:35%;
-  top: 120%; 
-  height:5.7%;
-  width: 10%;
-  text-align: center;
-}
-
-.Historybutton{
-  font-size: 0.4em;
-  position: absolute;
-  right: 15%;
-  top: 120%;
-  height: 5.7%;
-  width: 40%;
-}
-
-.HistoryUploadbutton
-{
-  font-size: 0.7em;
-  width: 60%;
-  right:7%;
-
-}
-
+  .HistoryUploadbutton {
+    font-size: 0.7em;
+    width: 60%;
+    right: 7%;
+  }
 }

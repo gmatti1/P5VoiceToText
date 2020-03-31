@@ -10,7 +10,6 @@ import { PropTypes } from 'react';
 import equal from 'fast-deep-equal';
 //import styled from 'styled-components';
 
-
 const ConvertedText = React.lazy(() =>
   slowImport(import('../containers/ConvertedText'), 65000)
 );
@@ -42,7 +41,8 @@ class FileUpload extends React.Component {
       loading: false,
       filename: '',
       convertedText: '',
-      disabled: false
+      disabled: false,
+      stats: []
     };
 
     this.OnSubmittingForm = this.OnSubmittingForm.bind(this);
@@ -60,20 +60,23 @@ class FileUpload extends React.Component {
       method: 'POST',
       body: formData
     }).then(response => {
-      response.json().then(data => {
-        this.setState({ isLoaded: true, filename: data['filename'] });
-      })
-      .then(data=>{
-        this.fetchcalltext(this.state.filename);
-      });
+      response
+        .json()
+        .then(data => {
+          this.setState({ isLoaded: true, filename: data['filename'] });
+        })
+        .then(data => {
+          this.fetchcalltext(this.state.filename);
+        });
     });
-
   };
 
   OnSubmittingForm(e) {
     e.preventDefault();
     this.Upload_file();
-	alert('Your file has been uploaded. Result will be displayed in some time. Thank you for your patience!')
+    alert(
+      'Your file has been uploaded. Result will be displayed in some time. Thank you for your patience!'
+    );
     // this.fecthcallcategory(); //Call this method once fetching text is successful
     this.setState({ disabled: true });
   }
@@ -92,22 +95,21 @@ class FileUpload extends React.Component {
       headers: {
         'Content-Type': 'application/json'
       }
-    }).then(response => 
-      this.updateCategorizedText()
-    );
+    }).then(response => this.updateCategorizedText());
   };
 
-  updateCategorizedText(){
+  updateCategorizedText() {
     fetch('http://localhost:5000/categorizedText/' + this.state.filename, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       }
-    }).then(response => response.json())
-    .then(textCategorized =>{
-      console.log(textCategorized);
-      this.setState({ textCategorized: textCategorized })
-    }); 
+    })
+      .then(response => response.json())
+      .then(textCategorized => {
+        console.log(textCategorized);
+        this.setState({ textCategorized: textCategorized });
+      });
   }
 
   handleChange = event => {
@@ -124,7 +126,7 @@ class FileUpload extends React.Component {
 
   fetchcalltext(file) {
     //event.preventDefault();
-    console.log("here");
+    console.log('here');
     this.setState({ loading: true });
     fetch('http://localhost:5000/convertedText/' + file, {
       method: 'POST',
@@ -135,12 +137,11 @@ class FileUpload extends React.Component {
       .then(response => response.json())
       .then(title =>
         this.setState({
-          convertedText: title['text']
+          convertedText: title['text'],
+          stats: title['stats']
         })
       )
-      .then(data =>
-        this.fecthcallcategory(file)
-      );
+      .then(data => this.fecthcallcategory(file));
   }
 
   fecthcallcategory(file) {
@@ -152,9 +153,9 @@ class FileUpload extends React.Component {
       }
     })
       .then(response => response.json())
-      .then(textCategorized =>{
-        this.setState({ textCategorized: textCategorized })
-      });  
+      .then(textCategorized => {
+        this.setState({ textCategorized: textCategorized });
+      });
 
     /*  componentDidMount() {
 		let v = {
@@ -183,7 +184,6 @@ class FileUpload extends React.Component {
   render() {
     return (
       <div>
-	  
         <form onSubmit={this.OnSubmittingForm}>
           <h1 className='Uploadheader'>Please upload the audio file</h1>
           <input
@@ -219,15 +219,12 @@ class FileUpload extends React.Component {
             onclick={this.fetchlist}
           >
             Go To History
-            <span className='tooltiptext'>
-              History : All the Uploaded files before
-            </span>
+            <span className='tooltiptext'>Previously uploaded files</span>
           </button>
         </Link>
 
         <div className='Textdata'>
           <label className='LabelTextdata'>Converted Text</label>
-
           {!this.state.loading ? (
             <div></div>
           ) : (
