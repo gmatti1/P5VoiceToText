@@ -18,11 +18,9 @@ class History extends Component {
   }
 
   componentDidMount() {
-    //fetch('http://localhost:5000/files')
-	fetch('https://jsonplaceholder.typicode.com/todos')
+    fetch('http://localhost:5000/files')
       .then(response => response.json())
-    //  .then(files => this.setState({ files: files['files'] }));
-	.then(files => this.setState({ files: files }));
+	  .then(files => this.setState({ files: files['files'] }));
   }
   
   
@@ -46,7 +44,7 @@ class History extends Component {
   render() {
 	let filteredFiles = this.state.files.filter(
 	  (file) => {
-		  return file.title.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
+		  return file.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
 	  }	
 	);  
 	  
@@ -63,7 +61,7 @@ class History extends Component {
           <div className='Historylist'>
             <select size='10' value={this.state.select} onChange={this.handleChange}  className='Historyselect' required>
               {filteredFiles.map(file => (
-                <option value={file}>{file.title}</option>
+                <option value={file}>{file}</option>
               ))}
             </select>
           </div>
