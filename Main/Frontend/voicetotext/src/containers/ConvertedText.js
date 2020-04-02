@@ -3,6 +3,15 @@ import { Button } from 'react-bootstrap';
 import './../../node_modules/ag-grid-community/dist/styles/ag-grid.css';
 import './../../node_modules/ag-grid-community/dist/styles/ag-theme-balham.css';
 import './../styles/index.css';
+import styled from 'styled-components';
+
+const HoverText = styled.textarea`
+	color: #000;
+	:hover {
+		color: #ed1212;
+		cursor: pointer;
+	}
+`
 
 class ConvertedText extends Component {
   constructor(props) {
@@ -17,13 +26,14 @@ class ConvertedText extends Component {
         <div>
           <form onSubmit={this.props.handleSubmit}>
             <div className='Textareasize'>
-              <textarea
+              <HoverText
                 className='form-control'
                 id='Textarea'
                 value={this.props.convertedText}
                 onChange={this.props.handleChange}
                 required
               />
+			  <span className="texttooltip">Tooltip texto</span>
             </div>
 
             <Button className='Save' type='submit'>

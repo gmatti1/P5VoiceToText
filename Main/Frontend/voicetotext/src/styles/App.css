@@ -237,6 +237,31 @@ height:310px;
 }
 
 
+.Textareasize .texttooltip{
+ visibility: hidden;
+  width: 150px;
+  color: #fff;
+  background: rgb(0, 0, 0); /* Fallback color */
+  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5     opacity */
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.Textareasize:hover .texttooltip {
+  visibility: visible;
+}
+
+
+
+
 .Save{
   font-size: 0.4em;
   background-color: #e6faff;  
