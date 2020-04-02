@@ -238,29 +238,40 @@ height:310px;
 
 
 .Textareasize .texttooltip{
- visibility: hidden;
-  width: 150px;
+  visibility: hidden;
+  width: 44%;
   color: #fff;
   background: rgb(0, 0, 0); /* Fallback color */
-  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5     opacity */
+  background: rgba(0, 0, 0, 0.4); /* Black background with 0.5     opacity */
   text-align: center;
   border-radius: 6px;
   padding: 5px 0;
-
+  font-family: Josefin Sans;
+  font-size: 0.48em;
   /* Position the tooltip */
   position: absolute;
   z-index: 1;
+  top: -11%;
+  left: 60%;
+  margin-left: -40px;
+  border: 0.5px solid #32CD32;
+}
+
+.Textareasize .texttooltip::after {
+  content: "";
+  position: absolute;
   top: 100%;
   left: 50%;
-  margin-left: -60px;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: green transparent transparent transparent;
+  
 }
 
 .Textareasize:hover .texttooltip {
   visibility: visible;
 }
-
-
-
 
 .Save{
   font-size: 0.4em;

@@ -8,7 +8,7 @@ import styled from 'styled-components';
 const HoverText = styled.textarea`
 	color: #000;
 	:hover {
-		color: #ed1212;
+		color: #b30000;
 		cursor: pointer;
 	}
 `
@@ -33,7 +33,7 @@ class ConvertedText extends Component {
                 onChange={this.props.handleChange}
                 required
               />
-			  <span className="texttooltip">Tooltip texto</span>
+			  <span className="texttooltip">Text Accuracy:   </span>
             </div>
 
             <Button className='Save' type='submit'>
