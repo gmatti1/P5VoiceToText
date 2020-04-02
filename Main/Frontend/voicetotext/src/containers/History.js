@@ -1,7 +1,7 @@
 import React, { Component } from './../../node_modules/react';
 import './../styles/index.css';
 import './../styles/App.css';
-import Select, { components } from 'react-select';
+//import Select, { components } from 'react-select';
 import Files from '../containers/Files';
 import FileUpload from './FileUpload';
 class History extends Component {
@@ -19,8 +19,9 @@ class History extends Component {
 
   componentDidMount() {
     fetch('http://localhost:5000/files')
-      .then(response => response.json())
-	  .then(files => this.setState({ files: files['files'] }));
+      .then(response =>
+        
+        response.json()).then(files => this.setState({ files: files['files'] }))
   }
   
   
