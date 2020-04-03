@@ -4,6 +4,7 @@ from nltk.tokenize import word_tokenize
 from nltk.stem import PorterStemmer
 from string import punctuation
 from nltk.stem import WordNetLemmatizer
+import re
 
 from P5VoiceToText import db
 from P5VoiceToText.models import Imist_ambo_template, Voice_files, Voice_text_conversion, Text_categorization
@@ -109,9 +110,11 @@ class ClassifyText:
 
 
 	def clean_and_classify(self):
+		self.text = re.sub(r"(\d)\.(\d)", r"\1[PROTECTED_DOT]\2", self.text)
 		self.sentences = self.text.split('.')
 
 		for sentence in self.sentences:
+			sentence = sentence.replace("[PROTECTED_DOT]", ".")
 			words = self.clean_text(sentence)
 			self.classify_text_into_categories(sentence, words)
 		return self.category_keyword
@@ -207,6 +210,10 @@ class ClassifyText:
 			 "category": "injury"},
 			{"keyword": "abdomen",
 			 "category": "injury"},
+			{"keyword": "abdomin",
+			 "category": "inhury"},
+			{"keyword": "forehead",
+			 "category": "inhury"},
 			{"keyword": "pelvi",
 			 "category": "injury"},
 			{"keyword": "axilla",
@@ -235,47 +242,47 @@ class ClassifyText:
 			 "category": "injury"},
 			{"keyword": "blast",
 			 "category": "injury"},    
-			{"keyword": "pr",
+			{"keyword": "p r",
 			 "category": "signs"},
-			{"keyword": "bp",
+			{"keyword": "b p",
 			 "category": "signs"},
-			{"keyword": "gcs",
+			{"keyword": "g c s",
 			 "category": "signs"},
-			{"keyword": "evm",
+			{"keyword": "e v m",
 			 "category": "signs"},
 			{"keyword": "pupil size",
 			 "category": "signs"},
 			{"keyword": "reactiv",
 			 "category": "signs"},
-			{"keyword": "rr",
+			{"keyword": "r r",
 			 "category": "signs"},
 			{"keyword": "t degree",
 			 "category": "signs"},
-			{"keyword": "spo 2",
+			{"keyword": "s p o",
 			 "category": "signs"},
-			{"keyword": "sob",
+			{"keyword": "s o b",
 			 "category": "signs"},
-			{"keyword": "sbp",
+			{"keyword": "s b p",
 			 "category": "signs"},
 			{"keyword": "cervic collar",
 			 "category": "treatment"},
-			{"keyword": "op airway",
+			{"keyword": "o p airway",
 			 "category": "treatment"},
-			{"keyword": "np airway",
+			{"keyword": "n p airway",
 			 "category": "treatment"},
-			{"keyword": "lma",
+			{"keyword": "l m a",
 			 "category": "treatment"},
-			{"keyword": "ett",
+			{"keyword": "e t t",
 			 "category": "treatment"},
-			{"keyword": "rsi",
+			{"keyword": "r s i",
 			 "category": "treatment"},
 			{"keyword": "ventil",
 			 "category": "treatment"},
 			{"keyword": "chest decompress",
 			 "category": "treatment"},
-			{"keyword": "iv access",
+			{"keyword": "i v access",
 			 "category": "treatment"},
-			{"keyword": "iv hartmann",
+			{"keyword": "i v hartmann",
 			 "category": "treatment"},
 			{"keyword": "methoxyfluran",
 			 "category": "treatment"},
