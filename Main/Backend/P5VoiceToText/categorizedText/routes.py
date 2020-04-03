@@ -41,6 +41,13 @@ def textCategorization(filename):
 		return jsonify(message), 500
 
 
+@cross_origin(origin=cors_ip,headers=cors_header)
+@categorizedText.route('/categorizedText/add_imistambo', methods = ['POST'])
+def add_imistambot():
+	classifyText = ClassifyText()
+	classifyText.insert_into_imist_ambo_template()
+
+
 # When User selects a file, get Categorized Text from DB
 @cross_origin(origin=cors_ip,headers=cors_header)
 @categorizedText.route('/categorizedText/<filename>', methods = ['GET'])
