@@ -41,13 +41,6 @@ def textCategorization(filename):
 		return jsonify(message), 500
 
 
-@cross_origin(origin=cors_ip,headers=cors_header)
-@categorizedText.route('/categorizedText/add_imistambo', methods = ['POST'])
-def add_imistambot():
-	classifyText = ClassifyText()
-	classifyText.insert_into_imist_ambo_template()
-
-
 # When User selects a file, get Categorized Text from DB
 @cross_origin(origin=cors_ip,headers=cors_header)
 @categorizedText.route('/categorizedText/<filename>', methods = ['GET'])
@@ -71,13 +64,6 @@ def get_categorizedText(filename):
 			"message": "Internal Server Error, something went wrong"
 		}
 		return jsonify(message), 500
-
-
-# @cross_origin(origin=cors_ip,headers=cors_header)
-# @categorizedText.route('/categorizedText/add_imistambo', methods = ['POST'])
-# def add_imistambot():
-# 	classifyText = ClassifyText()
-# 	classifyText.insert_into_imist_ambo_template()
 
 
 # When User edits ConvertedText, CategorizationText is updated
@@ -105,6 +91,24 @@ def update_categorizedText(filename):
 		text = classifyText.clean_and_classify()
 		classifyText.save_categorizedText_in_db()
 		return jsonify(text)
+	except:
+		message = {
+			"message": "Internal Server Error, something went wrong"
+		}
+		return jsonify(message), 500
+
+
+
+@cross_origin(origin=cors_ip,headers=cors_header)
+@categorizedText.route('/imistambo_glossory_inbulk', methods = ['POST'])
+def add_imistambo_inbulk():
+	try:
+		classifyText = ClassifyText()
+		classifyText.insert_into_imist_ambo_template()
+		message = {
+			"message": "Successfully added"
+		}
+		return jsonify(message), 200
 	except:
 		message = {
 			"message": "Internal Server Error, something went wrong"
