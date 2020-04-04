@@ -101,14 +101,43 @@ def update_categorizedText(filename):
 
 @cross_origin(origin=cors_ip,headers=cors_header)
 @categorizedText.route('/imistambo_glossory_inbulk', methods = ['POST'])
-def add_imistambo_inbulk():
+def add_imistambo_glossory_inbulk():
 	try:
 		classifyText = ClassifyText()
-		classifyText.insert_into_imist_ambo_template()
+		classifyText.insert_into_imist_ambo_inbulk()
 		message = {
 			"message": "Successfully added"
 		}
 		return jsonify(message), 200
+	except:
+		message = {
+			"message": "Internal Server Error, something went wrong"
+		}
+		return jsonify(message), 500
+
+
+@cross_origin(origin=cors_ip,headers=cors_header)
+@categorizedText.route('/imistambo_glossory', methods = ['GET'])
+def getall_imistambo_glossory():
+	try:
+		classifyText = ClassifyText()
+		keyword_category_list = classifyText.get_imist_ambo()
+		return jsonify(keyword_category_list), 200
+	except:
+		message = {
+			"message": "Internal Server Error, something went wrong"
+		}
+		return jsonify(message), 500
+
+
+
+@cross_origin(origin=cors_ip,headers=cors_header)
+@categorizedText.route('/imistambo_glossory/<searchword>', methods = ['GET'])
+def get_imistambo_glossory(searchword):
+	try:
+		classifyText = ClassifyText()
+		keyword_category_list = classifyText.get_imist_ambo(searchword)
+		return jsonify(keyword_category_list), 200
 	except:
 		message = {
 			"message": "Internal Server Error, something went wrong"
