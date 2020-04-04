@@ -60,16 +60,22 @@ class FileUpload extends React.Component {
       method: 'POST',
       body: formData
     }).then(response => {
-      response
-        .json()
+      if(!response.ok){
+        throw response
+      }
+      response.json()
         .then(data => {
           this.setState({ isLoaded: true, filename: data['filename'] });
         })
         .then(data => {
           this.fetchcalltext(this.state.filename);
         });
-    });
+    }).catch(error=>{
+      console.log(error+" response thrown an error")
+    })
   };
+
+  
 
   OnSubmittingForm(e) {
     e.preventDefault();
@@ -95,7 +101,14 @@ class FileUpload extends React.Component {
       headers: {
         'Content-Type': 'application/json'
       }
-    }).then(response => this.updateCategorizedText());
+    }).then(response => {
+      if(!response.ok){
+        throw response
+      }
+      this.updateCategorizedText()
+    }).catch(error=>{
+      console.log(error+ " response is not accurate");
+    })
   };
 
   updateCategorizedText() {
@@ -105,7 +118,10 @@ class FileUpload extends React.Component {
         'Content-Type': 'application/json'
       }
     })
-      .then(response => response.json())
+      .then(response => {
+        
+        
+        response.json()})
       .then(textCategorized => {
         console.log(textCategorized);
         this.setState({ textCategorized: textCategorized });
