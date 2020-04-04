@@ -9,6 +9,9 @@ import re
 from P5VoiceToText import db
 from P5VoiceToText.models import Imist_ambo_template, Voice_files, Voice_text_conversion, Text_categorization
 
+ps = PorterStemmer() 
+wordnet_lemmatizer = WordNetLemmatizer()
+
 class ClassifyText:
 
 	def __init__(self): 
@@ -58,8 +61,6 @@ class ClassifyText:
 
 	# Get the root of words using Stemming and Lemmatization ....
 	def stemming_and_lemmatization_text(self, words):
-		ps = PorterStemmer() 
-		wordnet_lemmatizer = WordNetLemmatizer()
 		words = [wordnet_lemmatizer.lemmatize(ps.stem(word)) for word in words]
 		return words
 		
@@ -161,11 +162,11 @@ class ClassifyText:
 		return self.category_keyword
 
 
-	def insert_into_imist_ambo_template(self):
+	def insert_into_imist_ambo_inbulk(self):
 		map_keyword_category = [
 			{"keyword": "age",
 			 "category": "identification"},
-			{"keyword": "mal",
+			{"keyword": "male",
 			 "category": "identification"},
 			{"keyword": "femal",
 			 "category": "identification"},
@@ -338,6 +339,22 @@ class ClassifyText:
 			]
 		arr = [Imist_ambo_template(**data) for data in map_keyword_category]
 		Imist_ambo_template.objects.insert(arr, load_bulk=True)
+
+
+	def get_imist_ambo(self):
+		keyword_category_list = Imist_ambo_template.objects
+		return keyword_category_list
+
+
+	def get_imist_ambo(self, searchword):
+		keyword_category_list = Imist_ambo_template.objects.filter(category=searchword)
+		if len(keyword_category_list)>0:
+			return keyword_category_list
+		searchword = wordnet_lemmatizer.lemmatize(ps.stem(searchword))
+		keyword_category_list = Imist_ambo_template.objects.filter(keyword=searchword)
+		if len(keyword_category_list)>0:
+			return keyword_category_list
+		return []
 
 
 	def test_db(self):
