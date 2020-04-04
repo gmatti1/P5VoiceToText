@@ -73,6 +73,8 @@ class ClassifyText:
 
 	# Classify the specific words into IMIST_AMBO categories ....
 	def classify_text_into_categories(self, sentence, words):
+		is_category_assigned = False
+
 		idx = 0
 		age_word = ""
 		for i in range(0, len(words)):
@@ -83,8 +85,10 @@ class ClassifyText:
 
 		if (age_word=='old' or age_word=='age') and words[i-2].isnumeric() and (sentence not in self.category_keyword['identification']): #ex: 23 year old, 23 years of age
 			self.category_keyword['identification'].append(sentence)
+			is_category_assigned = True
 		elif age_word=='age' and words[i+1].isnumeric() and (sentence not in self.category_keyword['identification']): #ex. age is 23 years
 			self.category_keyword['identification'].append(sentence)
+			is_category_assigned = True
 
 
 		for i in range(0, len(words)):
@@ -92,6 +96,7 @@ class ClassifyText:
 			imist_ambos = Imist_ambo_template.objects.filter(keyword=words[i])
 			if len(imist_ambos) and (sentence not in self.category_keyword[imist_ambos[0].category]):
 				self.category_keyword[imist_ambos[0].category].append(sentence)
+				is_category_assigned = True
 
 			#bigrams
 			if i<(len(words)-1):
@@ -99,6 +104,7 @@ class ClassifyText:
 				imist_ambos = Imist_ambo_template.objects.filter(keyword=search_keyword)
 				if len(imist_ambos) and (sentence not in self.category_keyword[imist_ambos[0].category]):
 					self.category_keyword[imist_ambos[0].category].append(sentence)
+					is_category_assigned = True
 
 			#trigrams		
 			if i<(len(words)-2):
@@ -106,6 +112,11 @@ class ClassifyText:
 				imist_ambos = Imist_ambo_template.objects.filter(keyword=search_keyword)				
 				if len(imist_ambos) and (sentence not in self.category_keyword[imist_ambos[0].category]):
 					self.category_keyword[imist_ambos[0].category].append(sentence)
+					is_category_assigned = True
+
+		if is_category_assigned==False and len(words)>2 :
+			self.category_keyword['other'].append(sentence)
+
 
 
 
@@ -241,6 +252,8 @@ class ClassifyText:
 			{"keyword": "eviscer",
 			 "category": "injury"},
 			{"keyword": "blast",
+			 "category": "injury"},
+			{"keyword": "pain",
 			 "category": "injury"},    
 			{"keyword": "p r",
 			 "category": "signs"},
