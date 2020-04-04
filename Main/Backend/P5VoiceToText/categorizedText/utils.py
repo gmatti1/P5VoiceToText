@@ -210,8 +210,6 @@ class ClassifyText:
 			{"keyword": "penetr",
 			 "category": "injury"},
 			{"keyword": "blunt",
-			 "category": "injury"},
-			{"keyword": "blunt",
 			 "category": "trauma"},
 			{"keyword": "head",
 			 "category": "injury"},
