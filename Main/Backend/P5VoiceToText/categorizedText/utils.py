@@ -115,7 +115,7 @@ class ClassifyText:
 					self.category_keyword[imist_ambos[0].category].append(sentence)
 					is_category_assigned = True
 
-		if is_category_assigned==False and len(words)>2 :
+		if is_category_assigned==False and len(words)>2:
 			self.category_keyword['other'].append(sentence)
 
 
@@ -146,6 +146,18 @@ class ClassifyText:
 		text_categorization.save()
 
 
+	def update_categorizedText_in_db(self):
+		text_categorization = Text_categorization.objects.filter(voiceFile=self.voice_file)[0]
+		text_categorization.identification = self.category_keyword['identification']
+		text_categorization.mechanism = self.category_keyword['mechanism']
+		text_categorization.injury = self.category_keyword['injury']
+		text_categorization.signs = self.category_keyword['signs']
+		text_categorization.treatment = self.category_keyword['treatment']
+		text_categorization.allergy = self.category_keyword['allergy']
+		text_categorization.medication = self.category_keyword['medication']
+		text_categorization.background = self.category_keyword['background']
+		text_categorization.other = self.category_keyword['other']
+		text_categorization.save()
 
 	def get_categorizedText_from_db(self, filename):
 		self.voice_file = Voice_files.objects.filter(filename=filename)[0]
@@ -160,6 +172,16 @@ class ClassifyText:
 		self.category_keyword['background'] = text_categorization.background
 		self.category_keyword['other'] = text_categorization.other
 		return self.category_keyword
+
+
+	def update_categorized_text_forall_records(self, new_keyword_category):
+		categorized_texts = Text_categorization.objects
+		for categorized_text in categorized_texts:
+			self.voice_file = categorized_text.voiceFile
+			self.text = Voice_text_conversion.objects.filter(voiceFile=self.voice_file)[0].converted_text
+			self.clean_and_classify()
+			self.update_categorizedText_in_db()
+
 
 
 	def insert_into_imist_ambo_inbulk(self):
@@ -221,9 +243,9 @@ class ClassifyText:
 			{"keyword": "abdomen",
 			 "category": "injury"},
 			{"keyword": "abdomin",
-			 "category": "inhury"},
+			 "category": "injury"},
 			{"keyword": "forehead",
-			 "category": "inhury"},
+			 "category": "injury"},
 			{"keyword": "pelvi",
 			 "category": "injury"},
 			{"keyword": "axilla",
@@ -339,6 +361,24 @@ class ClassifyText:
 			]
 		arr = [Imist_ambo_template(**data) for data in map_keyword_category]
 		Imist_ambo_template.objects.insert(arr, load_bulk=True)
+
+
+	def insert_into_imist_ambo(self, keyword, category):
+		keyword = wordnet_lemmatizer.lemmatize(ps.stem(keyword))
+		imist_ambos = Imist_ambo_template.objects.filter(keyword=keyword)
+		if len(imist_ambos)>0:
+			imist_ambo = imist_ambos[0]
+			if imist_ambo.category==category:
+				return 2
+			else:
+				imist_ambo.category = category
+				imist_ambo.save()
+		else:
+			imist_ambo = Imist_ambo_template(keyword=keyword, category=category).save()
+		self.update_categorized_text_forall_records(imist_ambo)
+		return 1
+
+
 
 
 	def get_imist_ambo(self):
