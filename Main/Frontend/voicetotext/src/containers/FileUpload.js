@@ -60,22 +60,16 @@ class FileUpload extends React.Component {
       method: 'POST',
       body: formData
     }).then(response => {
-      if(!response.ok){
-        throw response
-      }
-      response.json()
+      response
+        .json()
         .then(data => {
           this.setState({ isLoaded: true, filename: data['filename'] });
         })
         .then(data => {
           this.fetchcalltext(this.state.filename);
         });
-    }).catch(error=>{
-      console.log(error+" response thrown an error")
-    })
+    });
   };
-
-  
 
   OnSubmittingForm(e) {
     e.preventDefault();
@@ -101,14 +95,7 @@ class FileUpload extends React.Component {
       headers: {
         'Content-Type': 'application/json'
       }
-    }).then(response => {
-      if(!response.ok){
-        throw response
-      }
-      this.updateCategorizedText()
-    }).catch(error=>{
-      console.log(error+ " response is not accurate");
-    })
+    }).then(response => this.updateCategorizedText());
   };
 
   updateCategorizedText() {
@@ -118,10 +105,7 @@ class FileUpload extends React.Component {
         'Content-Type': 'application/json'
       }
     })
-      .then(response => {
-        
-        
-        response.json()})
+      .then(response => response.json())
       .then(textCategorized => {
         console.log(textCategorized);
         this.setState({ textCategorized: textCategorized });
@@ -136,9 +120,17 @@ class FileUpload extends React.Component {
 
   handleChangeupload = event => {
     if (event.target.value != null) {
+      console.log("uploaded a file");
       this.setState({ disabled: false });
     }
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    if(prevState == this.state) {
+      this.setState({ disabled: false });
+    }
+   }
+
 
   fetchcalltext(file) {
     //event.preventDefault();
@@ -149,15 +141,15 @@ class FileUpload extends React.Component {
       headers: {
         'Content-Type': 'application/json'
       }
-    })
-      .then(response => response.json())
+    }).
+      then(response => response.json())
       .then(title =>
         this.setState({
           convertedText: title['text'],
           stats: title['stats']
         })
       )
-      .then(data => this.fecthcallcategory(file));
+      .then(data => this.fecthcallcategory(file))
   }
 
   fecthcallcategory(file) {
@@ -171,27 +163,17 @@ class FileUpload extends React.Component {
       .then(response => response.json())
       .then(textCategorized => {
         this.setState({ textCategorized: textCategorized });
-      });
+      })
 
-    /*  componentDidMount() {
-		let v = {
-		"filename":"test_shefali1.mp3"
-		}
-		fetch('/savedCategorizeText',{
-        method: 'POST',
-        body: JSON.stringify(v),
-        headers: { 'Content-type': 'application/json' }
-		})
-		.then(response =>
-        response.json().then(data => {
-        this.setState({ isLoaded: true, textCategorized: data });
-        console.log(this.state.textCategorized);      
-		})
-		);
-		}   */
+   
   }
 
-  componentShouldUpdate(prevProps) {
+      
+
+
+
+
+  shouldComponentUpdate(prevProps) {
     if (!equal(this.props.filename, prevProps.filename)) {
       console.log('rerender the component');
     }
