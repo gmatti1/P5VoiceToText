@@ -41,6 +41,7 @@ def textCategorization(filename):
 		return jsonify(message), 500
 
 
+
 # When User selects a file, get Categorized Text from DB
 @cross_origin(origin=cors_ip,headers=cors_header)
 @categorizedText.route('/categorizedText/<filename>', methods = ['GET'])
@@ -66,6 +67,7 @@ def get_categorizedText(filename):
 		return jsonify(message), 500
 
 
+
 # When User edits ConvertedText, CategorizationText is updated
 @cross_origin(origin=cors_ip,headers=cors_header)
 @categorizedText.route('/categorizedText/<filename>', methods = ['PUT'])
@@ -89,7 +91,7 @@ def update_categorizedText(filename):
 			return jsonify(message), 404
 
 		text = classifyText.clean_and_classify()
-		classifyText.save_categorizedText_in_db()
+		classifyText.update_categorizedText_in_db()
 		return jsonify(text)
 	except:
 		message = {
@@ -114,6 +116,33 @@ def add_imistambo_glossory_inbulk():
 			"message": "Internal Server Error, something went wrong"
 		}
 		return jsonify(message), 500
+
+
+
+@cross_origin(origin=cors_ip,headers=cors_header)
+@categorizedText.route('/imistambo_glossory', methods = ['POST'])
+def add_imistambo_glossory():
+	try:
+		keyword = request.json['keyword']
+		category = request.json['category']
+		classifyText = ClassifyText()
+		result = classifyText.insert_into_imist_ambo(keyword, category)
+		if result == 2:
+			message = {
+				"message": "Keyword-Category Pair already exists"
+			}
+			return jsonify(message), 200
+		else:
+			message = {
+				"message": "Keyword-Category Pair added and all the CategorizedTexts are updated"
+			}
+			return jsonify(message), 200
+	except:
+		message = {
+			"message": "Internal Server Error, something went wrong"
+		}
+		return jsonify(message), 500
+
 
 
 @cross_origin(origin=cors_ip,headers=cors_header)
