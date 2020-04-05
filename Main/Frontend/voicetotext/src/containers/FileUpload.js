@@ -87,6 +87,7 @@ class FileUpload extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    console.log("after change");
     const data = this.state.convertedText;
 
     var myBody = {
