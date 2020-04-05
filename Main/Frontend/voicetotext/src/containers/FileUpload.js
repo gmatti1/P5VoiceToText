@@ -41,7 +41,9 @@ class FileUpload extends React.Component {
       loading: false,
       filename: '',
       convertedText: '',
+      textdone:false,
       disabled: false,
+      istextupdated:false,
       stats: []
     };
 
@@ -65,11 +67,13 @@ class FileUpload extends React.Component {
         .then(data => {
           this.setState({ isLoaded: true, filename: data['filename'] });
         })
-        .then(data => {
-          this.fetchcalltext(this.state.filename);
-        });
+        // .then(data => {
+        //   this.fetchcalltext(this.state.filename);
+        // });
     });
   };
+
+
 
   OnSubmittingForm(e) {
     e.preventDefault();
@@ -120,15 +124,23 @@ class FileUpload extends React.Component {
 
   handleChangeupload = event => {
     if (event.target.value != null) {
-      console.log("uploaded a file");
+      console.log(event.target.value);
+      localStorage.setItem('value', event.target.value);
       this.setState({ disabled: false });
     }
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    if(prevState == this.state) {
-      this.setState({ disabled: false });
-    }
+  componentDidUpdate() {
+   if(this.state.isLoaded){
+    this.fetchcalltext(this.state.filename);
+  this.state.isLoaded= false;
+   }
+   if(this.state.textdone){
+    this.fecthcallcategory(this.state.filename);
+    this.state.textdone=false;
+
+   }
+
    }
 
 
@@ -146,10 +158,12 @@ class FileUpload extends React.Component {
       .then(title =>
         this.setState({
           convertedText: title['text'],
-          stats: title['stats']
+          stats: title['stats'],
+          textdone:true
         })
+      
       )
-      .then(data => this.fecthcallcategory(file))
+     //.then(data => this.fecthcallcategory(file))
   }
 
   fecthcallcategory(file) {
@@ -173,11 +187,7 @@ class FileUpload extends React.Component {
 
 
 
-  shouldComponentUpdate(prevProps) {
-    if (!equal(this.props.filename, prevProps.filename)) {
-      console.log('rerender the component');
-    }
-  }
+ 
 
   render() {
     return (
@@ -193,6 +203,7 @@ class FileUpload extends React.Component {
             name='voiceFile'
             required
             onChange={this.handleChangeupload}
+
           />
           <button
             className='Buttonformat'
