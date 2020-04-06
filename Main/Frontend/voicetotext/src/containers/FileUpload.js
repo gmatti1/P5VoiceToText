@@ -183,6 +183,22 @@ class FileUpload extends React.Component {
    
   }
 
+  getConfidence(){
+    console.log(this.state.stats);
+    var arr = this.state.stats;
+    var total = 0;
+    var count = 0;
+    for(var i = 0; i<arr.length;i++){
+      if(arr[i].type === "pronunciation"){
+        total += parseFloat(arr[i].alternatives[0].confidence)
+        count++;
+      }
+    }
+    total /= count;
+    return total.toString();
+  }
+
+
       
 
 
@@ -238,14 +254,17 @@ class FileUpload extends React.Component {
           {!this.state.loading ? (
             <div></div>
           ) : (
-            <Suspense fallback={<Loader />}>
-              <ConvertedText
-                loading={this.state.loading}
-                convertedText={this.state.convertedText}
-                handleSubmit={this.handleSubmit.bind(this)}
-                handleChange={this.handleChange.bind(this)}
-              />
-            </Suspense>
+              <div>
+                <label className='LabelTextdata'>Total Confidence : {this.getConfidence()}</label>
+                <Suspense fallback={<Loader />}>
+                  <ConvertedText
+                    loading={this.state.loading}
+                    convertedText={this.state.convertedText}
+                    handleSubmit={this.handleSubmit.bind(this)}
+                    handleChange={this.handleChange.bind(this)}
+                  />
+                </Suspense>
+            </div>
           )}
         </div>
 
