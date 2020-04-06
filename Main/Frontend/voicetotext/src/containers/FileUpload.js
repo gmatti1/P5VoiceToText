@@ -6,6 +6,7 @@ import { slowImport } from '../containers/Helper';
 //import CategorizedText from '../containers/CategorizedText';
 import Thirdpage from '../components/Thirdpage';
 import Loader from '../containers/Loader';
+import PopUp from '../containers/PopUp';
 import { PropTypes } from 'react';
 import equal from 'fast-deep-equal';
 //import styled from 'styled-components';
@@ -263,7 +264,13 @@ class FileUpload extends React.Component {
             </Suspense>
           )}
         </div>
-      </div>
+		
+		<a class="button" href="#popup1">Let me Pop up</a>
+
+		<div id="popup1" class="overlay">
+		<PopUp />
+		</div>
+		</div>
     );
   }
 }
