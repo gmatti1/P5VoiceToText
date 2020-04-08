@@ -39,6 +39,7 @@ class FileUpload extends React.Component {
 							  "background": [],
 							  "other": [] } ,  */
       loading: false,
+      history:false,
       filename: '',
       convertedText: '',
       textdone:false,
@@ -54,6 +55,48 @@ class FileUpload extends React.Component {
   Upload_file(file) {
     this.getTextHelper();
   }
+Upload_History_file(file1){
+
+  fetch('http://localhost:5000/convertedText/' + file1, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).
+    then(response => response.json())
+    .then(title =>
+      {
+        console.log(title)
+       this.state.convertedText= title['text'],
+        this.state.stats= title['stats']
+  
+     
+    
+      });
+      
+  
+    fetch('http://localhost:5000/categorizedText/' + file1, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(textCategorized => {
+        console.log(textCategorized);
+        this.state.textCategorized=textCategorized ;
+      })
+      this.state.loading =true;
+      this.forceUpateHandler();
+      console.log(this.state.loading);
+      
+
+}
+
+forceUpateHandler(){
+  this.forceUpdate();
+
+}
 
   getTextHelper = () => {
     const formData = new FormData();
@@ -272,6 +315,10 @@ class FileUpload extends React.Component {
               />
             </Suspense>
           )}
+           
+
+
+
         </div>
 
         <div className='Categorydata'>

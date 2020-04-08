@@ -1,13 +1,14 @@
 import React, { Component } from './../../node_modules/react';
 import './../styles/index.css';
 import './../styles/App.css';
+import FileUpload from './FileUpload';
 //import Select, { components } from 'react-select';
 //import Files from '../containers/Files';
 //import FileUpload from './FileUpload';
 class History extends Component {
   constructor(props) {
     super(props);
-
+    
     this.state = {
       files: [],
       selected: null,
@@ -27,8 +28,11 @@ class History extends Component {
   
   OnSubmitForm(e) {
     e.preventDefault();
-  
+    
     console.log(this.state.selected);
+    
+
+    new FileUpload().Upload_History_file(this.state.selected);
     
 	alert('This functionality is under construction. Sorry for the inconvenience');
   }
