@@ -130,8 +130,25 @@ class FileUpload extends React.Component {
       this.setState({ disabled: false });
     }
   };
+  componentDidMount() {
+    window.addEventListener('beforeunload', this.beforeunload);
+  }
 
+  componentWillUnmount() {
+    window.removeEventListener('beforeunload', this.beforeunload);
+  }
+
+  beforeunload=e=> {
+
+      e.preventDefault();
+      e.returnValue = true;
+      
+    
+  }
+
+ 
   componentDidUpdate() {
+    
    if(this.state.isLoaded){
     this.fetchcalltext(this.state.filename);
     this.setState({isLoaded:false});
@@ -146,6 +163,12 @@ class FileUpload extends React.Component {
 
    }
 
+//    window.onbeforeunload = function() {
+//     return "Leaving this page will reset the wizard";
+// };
+
+
+  
 
   fetchcalltext(file) {
     //event.preventDefault();
