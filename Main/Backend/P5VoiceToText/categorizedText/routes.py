@@ -1,17 +1,13 @@
 from flask import request, flash, jsonify, Blueprint
-from flask_cors import cross_origin
 
 from P5VoiceToText.config import Config
 from P5VoiceToText.categorizedText.utils import ClassifyText
 
 categorizedText = Blueprint('categorizedText', __name__)
 
-cors_ip = Config.DEV_IP
-cors_header = Config.CORS_HEADERS
 
 # When User uploads the file, Categorization is done
-@cross_origin(origin=cors_ip,headers=cors_header)
-@categorizedText.route('/categorizedText/<filename>', methods = ['POST'])
+@categorizedText.route('/api/categorizedText/<filename>', methods = ['POST'])
 def textCategorization(filename):
 	try:
 		classifyText = ClassifyText()
@@ -43,8 +39,7 @@ def textCategorization(filename):
 
 
 # When User selects a file, get Categorized Text from DB
-@cross_origin(origin=cors_ip,headers=cors_header)
-@categorizedText.route('/categorizedText/<filename>', methods = ['GET'])
+@categorizedText.route('/api/categorizedText/<filename>', methods = ['GET'])
 def get_categorizedText(filename):
 	try:
 		classifyText = ClassifyText()
@@ -69,8 +64,7 @@ def get_categorizedText(filename):
 
 
 # When User edits ConvertedText, CategorizationText is updated
-@cross_origin(origin=cors_ip,headers=cors_header)
-@categorizedText.route('/categorizedText/<filename>', methods = ['PUT'])
+@categorizedText.route('/api/categorizedText/<filename>', methods = ['PUT'])
 def update_categorizedText(filename):
 	try:
 		classifyText = ClassifyText()
@@ -100,9 +94,7 @@ def update_categorizedText(filename):
 		return jsonify(message), 500
 
 
-
-@cross_origin(origin=cors_ip,headers=cors_header)
-@categorizedText.route('/imistambo_glossory_inbulk', methods = ['POST'])
+@categorizedText.route('/api/imistambo_glossory_inbulk', methods = ['POST'])
 def add_imistambo_glossory_inbulk():
 	try:
 		classifyText = ClassifyText()
@@ -118,9 +110,7 @@ def add_imistambo_glossory_inbulk():
 		return jsonify(message), 500
 
 
-
-@cross_origin(origin=cors_ip,headers=cors_header)
-@categorizedText.route('/imistambo_glossory', methods = ['POST'])
+@categorizedText.route('/api/imistambo_glossory', methods = ['POST'])
 def add_imistambo_glossory():
 	try:
 		keyword = request.json['keyword']
@@ -145,8 +135,7 @@ def add_imistambo_glossory():
 
 
 
-@cross_origin(origin=cors_ip,headers=cors_header)
-@categorizedText.route('/imistambo_glossory', methods = ['GET'])
+@categorizedText.route('/api/imistambo_glossory', methods = ['GET'])
 def getall_imistambo_glossory():
 	try:
 		classifyText = ClassifyText()
@@ -160,8 +149,7 @@ def getall_imistambo_glossory():
 
 
 
-@cross_origin(origin=cors_ip,headers=cors_header)
-@categorizedText.route('/imistambo_glossory/<searchword>', methods = ['GET'])
+@categorizedText.route('/api/imistambo_glossory/<searchword>', methods = ['GET'])
 def get_imistambo_glossory(searchword):
 	try:
 		classifyText = ClassifyText()

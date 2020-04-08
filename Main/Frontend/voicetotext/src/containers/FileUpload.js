@@ -63,7 +63,7 @@ class FileUpload extends React.Component {
   getTextHelper = () => {
     const formData = new FormData();
     formData.append('file', this.uploadInput.files[0]);
-    fetch('http://localhost:5000/files', {
+    fetch('/api/files', {
       method: 'POST',
       body: formData
     }).then(response => {
@@ -99,7 +99,7 @@ class FileUpload extends React.Component {
       text: data
     };
 
-    fetch('http://localhost:5000/convertedText/' + this.state.filename, {
+    fetch('/api/convertedText/' + this.state.filename, {
       method: 'PUT',
       body: JSON.stringify(myBody),
       headers: {
@@ -109,7 +109,7 @@ class FileUpload extends React.Component {
   };
 
   updateCategorizedText() {
-    fetch('http://localhost:5000/categorizedText/' + this.state.filename, {
+    fetch('/api/categorizedText/' + this.state.filename, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -179,7 +179,7 @@ class FileUpload extends React.Component {
     //event.preventDefault();
     console.log('here');
     this.setState({ loading: true });
-    fetch('http://localhost:5000/convertedText/' + file, {
+    fetch('/api/convertedText/' + file, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -199,7 +199,7 @@ class FileUpload extends React.Component {
 
   fecthcallcategory(file) {
     this.setState({ loading: true });
-    fetch('http://localhost:5000/categorizedText/' + file, {
+    fetch('/api/categorizedText/' + file, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

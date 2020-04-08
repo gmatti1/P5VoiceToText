@@ -18,7 +18,7 @@ class History extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:5000/files')
+    fetch('/api/files')
       .then(response =>
         
         response.json()).then(files => this.setState({ files: files['files'] }))
