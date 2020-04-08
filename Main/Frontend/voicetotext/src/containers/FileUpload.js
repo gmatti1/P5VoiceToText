@@ -9,6 +9,7 @@ import Loader from '../containers/Loader';
 import PopUp from '../containers/PopUp';
 import { PropTypes } from 'react';
 import equal from 'fast-deep-equal';
+import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 //import styled from 'styled-components';
 
 const ConvertedText = React.lazy(() =>
@@ -45,6 +46,7 @@ class FileUpload extends React.Component {
       textdone:false,
       disabled: false,
       istextupdated:false,
+	  targetElement:null,
       stats: []
     };
 
@@ -183,15 +185,31 @@ class FileUpload extends React.Component {
 
    
   }
+  
+  componentDidMount() {
+    this.targetElement = document.querySelector('#popup1');
+  }
 
       
+	showTargetElement = () => {
+    // ... some logic to show target element
+ 
+    // 3. Disable body scroll
+    disableBodyScroll(this.targetElement);
+  };
 
 
-
-
+	hideTargetElement = () => {
+    // ... some logic to hide target element
+ 
+    // 4. Re-enable body scroll
+    enableBodyScroll(this.targetElement);
+  };
  
 
   render() {
+	  
+	const triggerText = "Open form";
     return (
       <div>
         <form onSubmit={this.OnSubmittingForm}>
@@ -265,11 +283,9 @@ class FileUpload extends React.Component {
           )}
         </div>
 		
-		<a class="button" href="#popup1">Let me Pop up</a>
-
-		<div id="popup1" class="overlay">
-		<PopUp />
-		</div>
+		
+		<PopUp triggerText={triggerText} />
+		
 		</div>
     );
   }
