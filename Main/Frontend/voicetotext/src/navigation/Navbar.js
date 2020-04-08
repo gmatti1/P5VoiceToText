@@ -1,7 +1,7 @@
 import React from 'react';
 import './../styles/App.css';
 import logo from './../assets/pchlogo.png';
-import baby from './../assets/baby.png';
+//import baby from './../assets/baby.png';
 
 function Navbar() {
   return (

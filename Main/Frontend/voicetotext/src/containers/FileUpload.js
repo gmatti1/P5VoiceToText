@@ -4,10 +4,10 @@ import { Link } from './../../node_modules/react-scroll';
 import { slowImport } from '../containers/Helper';
 //import ConvertedText from '../containers/ConvertedText';
 //import CategorizedText from '../containers/CategorizedText';
-import Thirdpage from '../components/Thirdpage';
+//import Thirdpage from '../components/Thirdpage';
 import Loader from '../containers/Loader';
-import { PropTypes } from 'react';
-import equal from 'fast-deep-equal';
+//import { PropTypes } from 'react';
+//import equal from 'fast-deep-equal';
 //import styled from 'styled-components';
 
 const ConvertedText = React.lazy(() =>
@@ -134,11 +134,13 @@ class FileUpload extends React.Component {
   componentDidUpdate() {
    if(this.state.isLoaded){
     this.fetchcalltext(this.state.filename);
-  this.state.isLoaded= false;
+    this.setState({isLoaded:false});
+  //this.state.isLoaded= false;
    }
    if(this.state.textdone){
     this.fecthcallcategory(this.state.filename);
-    this.state.textdone=false;
+    this.setState({textdone:false});
+    //this.state.textdone=false;
 
    }
 
