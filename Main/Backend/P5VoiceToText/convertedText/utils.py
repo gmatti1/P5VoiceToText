@@ -66,6 +66,10 @@ class VoiceText:
         )
 
         JOB_NAME = audiofile.filename
+        try:
+            transcribe.delete_transcription_job(TranscriptionJobName=JOB_NAME)
+        except:
+            print("Job is not available")
 
         transcribe.start_transcription_job(
             TranscriptionJobName=JOB_NAME,
