@@ -4,12 +4,14 @@ import { Link } from './../../node_modules/react-scroll';
 import { slowImport } from '../containers/Helper';
 //import ConvertedText from '../containers/ConvertedText';
 //import CategorizedText from '../containers/CategorizedText';
-import Thirdpage from '../components/Thirdpage';
+//import Thirdpage from '../components/Thirdpage';
 import Loader from '../containers/Loader';
 import PopUp from '../containers/PopUp';
 import { PropTypes } from 'react';
 import equal from 'fast-deep-equal';
 import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
+//import { PropTypes } from 'react';
+//import equal from 'fast-deep-equal';
 //import styled from 'styled-components';
 
 const ConvertedText = React.lazy(() =>
@@ -133,20 +135,45 @@ class FileUpload extends React.Component {
       this.setState({ disabled: false });
     }
   };
+  componentDidMount() {
+    window.addEventListener('beforeunload', this.beforeunload);
+  }
 
+  componentWillUnmount() {
+    window.removeEventListener('beforeunload', this.beforeunload);
+  }
+
+  beforeunload=e=> {
+
+      e.preventDefault();
+      e.returnValue = true;
+      
+    
+  }
+
+ 
   componentDidUpdate() {
+    
    if(this.state.isLoaded){
     this.fetchcalltext(this.state.filename);
-  this.state.isLoaded= false;
+    this.setState({isLoaded:false});
+  //this.state.isLoaded= false;
    }
    if(this.state.textdone){
     this.fecthcallcategory(this.state.filename);
-    this.state.textdone=false;
+    this.setState({textdone:false});
+    //this.state.textdone=false;
 
    }
 
    }
 
+//    window.onbeforeunload = function() {
+//     return "Leaving this page will reset the wizard";
+// };
+
+
+  
 
   fetchcalltext(file) {
     //event.preventDefault();
@@ -189,6 +216,22 @@ class FileUpload extends React.Component {
   componentDidMount() {
     this.targetElement = document.querySelector('#popup1');
   }
+
+  getConfidence(){
+    console.log(this.state.stats);
+    var arr = this.state.stats;
+    var total = 0;
+    var count = 0;
+    for(var i = 0; i<arr.length;i++){
+      if(arr[i].type === "pronunciation"){
+        total += parseFloat(arr[i].alternatives[0].confidence)
+        count++;
+      }
+    }
+    total /= count;
+    return total.toString();
+  }
+
 
       
 	showTargetElement = () => {
@@ -257,14 +300,17 @@ class FileUpload extends React.Component {
           {!this.state.loading ? (
             <div></div>
           ) : (
-            <Suspense fallback={<Loader />}>
-              <ConvertedText
-                loading={this.state.loading}
-                convertedText={this.state.convertedText}
-                handleSubmit={this.handleSubmit.bind(this)}
-                handleChange={this.handleChange.bind(this)}
-              />
-            </Suspense>
+              <div>
+                <label className='LabelTextdata'>Total Confidence : {this.getConfidence()}</label>
+                <Suspense fallback={<Loader />}>
+                  <ConvertedText
+                    loading={this.state.loading}
+                    convertedText={this.state.convertedText}
+                    handleSubmit={this.handleSubmit.bind(this)}
+                    handleChange={this.handleChange.bind(this)}
+                  />
+                </Suspense>
+            </div>
           )}
         </div>
 
