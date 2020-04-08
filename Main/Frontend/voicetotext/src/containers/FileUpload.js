@@ -6,6 +6,10 @@ import { slowImport } from '../containers/Helper';
 //import CategorizedText from '../containers/CategorizedText';
 //import Thirdpage from '../components/Thirdpage';
 import Loader from '../containers/Loader';
+import PopUp from '../containers/PopUp';
+import { PropTypes } from 'react';
+import equal from 'fast-deep-equal';
+import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 //import { PropTypes } from 'react';
 //import equal from 'fast-deep-equal';
 //import styled from 'styled-components';
@@ -44,6 +48,7 @@ class FileUpload extends React.Component {
       textdone:false,
       disabled: false,
       istextupdated:false,
+	  targetElement:null,
       stats: []
     };
 
@@ -207,6 +212,10 @@ class FileUpload extends React.Component {
 
    
   }
+  
+  componentDidMount() {
+    this.targetElement = document.querySelector('#popup1');
+  }
 
   getConfidence(){
     console.log(this.state.stats);
@@ -225,13 +234,25 @@ class FileUpload extends React.Component {
 
 
       
+	showTargetElement = () => {
+    // ... some logic to show target element
+ 
+    // 3. Disable body scroll
+    disableBodyScroll(this.targetElement);
+  };
 
 
-
-
+	hideTargetElement = () => {
+    // ... some logic to hide target element
+ 
+    // 4. Re-enable body scroll
+    enableBodyScroll(this.targetElement);
+  };
  
 
   render() {
+	  
+	const triggerText = "Open form";
     return (
       <div>
         <form onSubmit={this.OnSubmittingForm}>
@@ -307,7 +328,11 @@ class FileUpload extends React.Component {
             </Suspense>
           )}
         </div>
-      </div>
+		
+		
+		<PopUp triggerText={triggerText} />
+		
+		</div>
     );
   }
 }
