@@ -33,7 +33,7 @@ class ConvertedText extends Component {
                 onChange={this.props.handleChange}
                 required
               />
-			  <span className="texttooltip">Text Accuracy:   </span>
+			 
             </div>
 
             <Button className='Save' type='submit'>

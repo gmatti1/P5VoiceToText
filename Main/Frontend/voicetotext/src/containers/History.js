@@ -1,4 +1,5 @@
 import React, { Component } from './../../node_modules/react';
+import HistPopUp from '../containers/HistPopUp';
 import './../styles/index.css';
 import './../styles/App.css';
 //import Select, { components } from 'react-select';
@@ -9,12 +10,19 @@ class History extends Component {
     super(props);
 
     this.state = {
+		invalue:'hgjhgjhghjgjhgj',
+      invalueother:{
+        "userId": 1,
+        "id": 1,
+        "title": "delectus aut autem",
+        "completed": false
+	  },
       files: [],
       selected: null,
 	  search: ''
     };
-    this.OnSubmitForm = this.OnSubmitForm.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+  
+    this.handleChangeselect = this.handleChangeselect.bind(this);
   }
 
   componentDidMount() {
@@ -23,17 +31,19 @@ class History extends Component {
         
         response.json()).then(files => this.setState({ files: files['files'] }))
   }
+
+ 
+  onSubmit = event => {
+    event.preventDefault(event);
+    console.log(this.state.invalue);
+  }
   
-  
-  OnSubmitForm(e) {
-    e.preventDefault();
-  
-    console.log(this.state.selected);
-    
-	alert('This functionality is under construction. Sorry for the inconvenience');
+  handleChangeTeatarea = event => {
+	  this.setState({invalue: event.target.value});
+	  
   }
  
-  handleChange(event){
+  handleChangeselect(event){
     console.log(event.target.value);
     this.setState({selected: event.target.value});
   }
@@ -49,18 +59,16 @@ class History extends Component {
 	  }	
 	);  
 	  
+	const triggerText = "See saved result";  
     return (
       <div className='HistoryComponent'>
-        <form onSubmit={this.OnSubmitForm}>
+        <form>
           <div className='Historytext'>
             History
-            <button className='HistoryUploadbutton' type='submit'>
-              Upload selected file
-            </button>
           </div>
 
           <div className='Historylist'>
-            <select size='10' value={this.state.select} onChange={this.handleChange}  className='Historyselect' required>
+            <select size='10' value={this.state.select} onChange={this.handleChangeselect}  className='Historyselect' required>
               {filteredFiles.map(file => (
                 <option value={file}>{file}</option>
               ))}
@@ -73,6 +81,7 @@ class History extends Component {
 		  />
 		  </div>
         </form>
+		 <HistPopUp invalueother={this.state.invalueother} invalue={this.state.invalue} triggerText={triggerText} onSubmit={this.onSubmit.bind(this)} handleChangeTeatarea={this.handleChangeTeatarea.bind(this)}/>
       </div>
     );
   }

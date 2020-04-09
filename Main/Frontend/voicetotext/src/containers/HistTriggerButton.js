@@ -3,7 +3,7 @@ const Trigger = ({ triggerText, buttonRef, showModal }) => {
 return (
 	<button
 		className="btn btn-danger center"
-		id="calltopopup"
+		id="histcalltopopup"
 		ref={buttonRef}
 		onClick={showModal}
 		>

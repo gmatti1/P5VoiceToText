@@ -242,7 +242,7 @@ class FileUpload extends React.Component {
   };
 
   render() {
-    const triggerText = 'Open form';
+    const triggerText = 'Add new keyword for IMIST-AMBO Category';
     return (
       <div>
         <form onSubmit={this.OnSubmittingForm}>
@@ -290,9 +290,7 @@ class FileUpload extends React.Component {
             <div></div>
           ) : (
             <div>
-              <label className='LabelTextdata'>
-                Total Confidence : {this.getConfidence()}
-              </label>
+              
               <Suspense fallback={<Loader />}>
                 <ConvertedText
                   loading={this.state.loading}
@@ -300,9 +298,14 @@ class FileUpload extends React.Component {
                   handleSubmit={this.handleSubmit.bind(this)}
                   handleChange={this.handleChange.bind(this)}
                 />
+				
               </Suspense>
+			  
             </div>
           )}
+		  <label className='Confi'>
+                Converted Text Confidence : {this.getConfidence()}
+          </label>
         </div>
 
         <div className='Categorydata'>
@@ -316,6 +319,7 @@ class FileUpload extends React.Component {
                 loading={this.state.loading}
                 textCategorized={this.state.textCategorized}
               />
+			  
             </Suspense>
           )}
         </div>
