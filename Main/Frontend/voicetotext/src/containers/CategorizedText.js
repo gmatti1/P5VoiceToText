@@ -3,6 +3,7 @@ import Table from 'react-bootstrap/Table';
 import './../../node_modules/ag-grid-community/dist/styles/ag-grid.css';
 import './../../node_modules/ag-grid-community/dist/styles/ag-theme-balham.css';
 import './../styles/index.css';
+import nl2br from 'react-newline-to-break';
 
 class CategorizedText extends Component {
   constructor(props) {
@@ -67,6 +68,7 @@ class CategorizedText extends Component {
     if (!this.props.loading) {
       return null;
     } else {
+      console.log(this.props.CategorizedText);
       return (
         <div className='Tablesize'>
           <Table striped bordered hover size='sm' responsive id='TableText'>
@@ -79,39 +81,39 @@ class CategorizedText extends Component {
             <tbody>
               <tr>
                 <td>Identification</td>
-                <td>{this.props.textCategorized.identification}</td>
+                <td>{nl2br(this.props.textCategorized.identification)}</td>
               </tr>
               <tr>
                 <td>Mechanism</td>
-                <td>{this.props.textCategorized.mechanism}</td>
+                <td>{nl2br(this.props.textCategorized.mechanism)}</td>
               </tr>
               <tr>
                 <td>Injuries</td>
-                <td>{this.props.textCategorized.injury}</td>
+                <td>{nl2br(this.props.textCategorized.injury)}</td>
               </tr>
               <tr>
                 <td>Signs</td>
-                <td colSpan='2'>{this.props.textCategorized.signs}</td>
+                <td colSpan='2'>{nl2br(this.props.textCategorized.signs)}</td>
               </tr>
               <tr>
                 <td>Treatment</td>
-                <td>{this.props.textCategorized.treatment}</td>
+                <td>{nl2br(this.props.textCategorized.treatment)}</td>
               </tr>
               <tr>
                 <td>Allergies</td>
-                <td>{this.props.textCategorized.allergy}</td>
+                <td>{nl2br(this.props.textCategorized.allergy)}</td>
               </tr>
               <tr>
                 <td>Medications</td>
-                <td>{this.props.textCategorized.medication}</td>
+                <td>{nl2br(this.props.textCategorized.medication)}</td>
               </tr>
               <tr>
                 <td>Background</td>
-                <td>{this.props.textCategorized.background}</td>
+                <td>{nl2br(this.props.textCategorized.background)}</td>
               </tr>
               <tr>
                 <td>Other Info</td>
-                <td>{this.props.textCategorized.other}</td>
+                <td >{nl2br(this.props.textCategorized.other)}</td>
               </tr>
             </tbody>
           </Table>

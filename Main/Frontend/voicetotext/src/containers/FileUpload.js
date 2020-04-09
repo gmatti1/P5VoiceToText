@@ -36,7 +36,7 @@ class FileUpload extends React.Component {
     this.state = {
       isFileUploaded: null,
       title: '',
-      textCategorized: '',
+      textCategorized: [],
       /*textCategorized:{ "identification" : [],
 							  "mechanism" : [],
 							  "injury": [],
@@ -92,7 +92,6 @@ class FileUpload extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log('after change');
     const data = this.state.convertedText;
 
     var myBody = {
@@ -117,20 +116,17 @@ class FileUpload extends React.Component {
     })
       .then((response) => response.json())
       .then((textCategorized) => {
-        console.log(textCategorized);
-        this.setState({ textCategorized: textCategorized });
+        this.formatCategories(textCategorized);
       });
   }
 
   handleChange = (event) => {
     event.preventDefault();
-    console.log(event.target.value);
     this.setState({ convertedText: event.target.value });
   };
 
   handleChangeupload = (event) => {
     if (event.target.value != null) {
-      console.log(event.target.value);
       localStorage.setItem('value', event.target.value);
       this.setState({ disabled: false });
     }
@@ -167,7 +163,6 @@ class FileUpload extends React.Component {
 
   fetchcalltext(file) {
     //event.preventDefault();
-    console.log('here');
     this.setState({ loading: true });
     fetch('/api/convertedText/' + file, {
       method: 'POST',
@@ -196,8 +191,22 @@ class FileUpload extends React.Component {
     })
       .then((response) => response.json())
       .then((textCategorized) => {
-        this.setState({ textCategorized: textCategorized });
+        this.formatCategories(textCategorized);
       });
+  }
+
+  formatCategories(textCategorized){
+    var i = 0;
+    var textArr = [];
+    Object.keys(textCategorized).forEach(key => {
+      var temp = ""
+      for(var j=0; j < textCategorized[key].length; j++){
+        temp += textCategorized[key][j];
+        if(j!=textCategorized[key].length-1) temp+="\n"
+      }
+      textCategorized[key] = temp;
+    })
+    this.setState({ textCategorized: textCategorized });
   }
 
   componentDidMount() {
@@ -205,7 +214,6 @@ class FileUpload extends React.Component {
   }
 
   getConfidence() {
-    console.log(this.state.stats);
     var arr = this.state.stats;
     var total = 0;
     var count = 0;
