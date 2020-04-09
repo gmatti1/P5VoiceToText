@@ -92,3 +92,6 @@ class VoiceText:
         # Voice to text -> can display in frontend
         self.text_stats = data['results']['items']
         self.converted_text = data['results']['transcripts'][0]['transcript']
+
+        # delete the job
+        transcribe.delete_transcription_job(TranscriptionJobName=JOB_NAME)
