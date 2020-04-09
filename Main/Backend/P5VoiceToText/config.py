@@ -16,6 +16,14 @@ class Config:
 	ACCESS_SECRET_KEY = 'tGTLObhHlXXfu24Z/hXMM7EaPnsh7KfgYM1Wap3g'
 	BUCKET_NAME = 'voicetotextsourcefile'
 
+	#MongoDB DEV
 	MONGODB_SETTINGS = {
 		'host': 'mongodb://localhost/P5VoiceToText'
 	}
+
+	'''
+	#MongoDB PROD
+	MONGODB_SETTINGS = {
+		'host': 'mongodb://54.214.166.253:27017/P5VoiceToText'
+	}
+	'''
