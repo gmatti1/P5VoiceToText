@@ -242,7 +242,7 @@ class FileUpload extends React.Component {
   };
 
   render() {
-    const triggerText = 'Add new keyword for IMIST-AMBO Category';
+    const triggerText = 'Add keyword for IMIST-AMBO';
     return (
       <div>
         <form onSubmit={this.OnSubmittingForm}>
@@ -304,7 +304,7 @@ class FileUpload extends React.Component {
             </div>
           )}
 		  <label className='Confi'>
-                Converted Text Confidence : {this.getConfidence()}
+                Text Confidence : {this.getConfidence()}
           </label>
         </div>
 
