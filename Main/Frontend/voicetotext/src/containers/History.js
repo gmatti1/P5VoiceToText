@@ -26,11 +26,23 @@ class History extends Component {
   }
 
   componentDidMount() {
+    window.addEventListener('beforeunload', this.beforeunload);
     fetch('/api/files')
       .then(response =>
         
         response.json()).then(files => this.setState({ files: files['files'] }))
   }
+
+  
+
+  componentWillUnmount() {
+    window.removeEventListener('beforeunload', this.beforeunload);
+  }
+
+  beforeunload = (e) => {
+    e.preventDefault();
+    e.returnValue = true;
+  };
 
  
   onSubmit = event => {
@@ -46,8 +58,53 @@ class History extends Component {
   handleChangeselect(event){
     console.log(event.target.value);
     this.setState({selected: event.target.value});
+    this.Upload_History_file(event.target.value);
+
   }
+  Upload_History_file(file1){
+
+  fetch('/api/convertedText/' + file1, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).
+    then(response => response.json())
+    .then(title =>
+      {
+       // console.log(title),
+        this.setState({ invalueother:title['text'],
+        stats:title['stats']
+      });
+       
+        
+      console.log(this.state.invalueother);
+     
+    
+      });
+      
   
+    fetch('/api/categorizedText/' + file1, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(textCategorized => {
+        console.log(textCategorized);
+        this.setState({ invalue:textCategorized
+       
+      });
+      console.log(this.state.invalue);
+      })
+      //this.state.loading =true;
+      
+      //console.log(this.state.loading);
+      
+
+}
+
   updateSearch(event) {
 	  this.setState({search: event.target.value.substr(0,20)});
   }	  
