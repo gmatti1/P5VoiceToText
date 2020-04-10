@@ -2,8 +2,8 @@ import React from 'react';
 const Trigger = ({ triggerText, buttonRef, showModal }) => {
 return (
 	<button
-		className="btn btn-danger"
-		id="calltopopup"
+		className="btn btn-danger center"
+		id="histcalltopopup"
 		ref={buttonRef}
 		onClick={showModal}
 		>

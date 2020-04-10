@@ -3,7 +3,7 @@
 }
 
 .Navbarsize {
-  padding: 13px;
+  padding: 1%;
 }
 
 #navbg {
@@ -27,7 +27,7 @@
   background-image: url(./../assets/medical-wallpaper.jpg);
   opacity: 0.95;
   width: 100%;
-  height: 400px;
+  height: 65%;
   top: 56%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
@@ -43,7 +43,7 @@
     102,
     0.75
   ); /* Black background with 0.5     opacity */
-  height: 150px;
+  height: 25%;
   color: #f1f1f1;
   width: 100%;
   top: 56%;
@@ -52,9 +52,8 @@
 }
 
 .App-footer {
-  position: absolute;
-  padding: 30px;
-  height: 80px;
+  position: absolute; 
+  height: 13%;
   width: 100%;
   top: 88.8%;
 }
@@ -109,7 +108,7 @@
   position: absolute;
   left: 17.5%;
   top: 118%;
-  height: 6.3%;
+  height: 5.8%;
   width: 32.5%;
   border-radius: 5px;
 }
@@ -122,7 +121,7 @@
   position: absolute;
   right: 40%;
   top: 118%;
-  height: 6.3%;
+  height: 5.8%;
   width: 10%;
   border-radius: 5px;
 }
@@ -135,7 +134,7 @@
   position: absolute;
   right: 40%;
   top: 118%;
-  height: 6.3%;
+  height: 5.8%;
   width: 10%;
   border-radius: 5px;
 }
@@ -152,7 +151,7 @@
   position: absolute;
   right: 37%;
   top: 118%;
-  height: 6.3%;
+  height: 5.8%;
   width: 3%;
   border: 2px solid #32cd32;
   border-radius: 5px;
@@ -167,7 +166,7 @@
   position: absolute;
   right: 17.5%;
   top: 118%;
-  height: 6.3%;
+  height: 5.8%;
   width: 19.5%;
   border-radius: 5px;
 }
@@ -222,15 +221,16 @@
 
 #Textarea {
   font-family: Josefin Sans;
-  font-size: 0.43em;
+  font-size: 0.5em;
   background-color: #e6faff;
-  height: 310px;
+  height: 100%;
 }
 
 .Textareasize {
   position: absolute;
   width: 100%;
-  height: 310px;
+  height: 68.5%;
+top:15.3%;
 }
 
 .Textareasize .texttooltip {
@@ -268,18 +268,35 @@
   visibility: visible;
 }
 
+.Confi{
+padding:0.5%;
+  font-size: 0.45em;
+  border: 2px solid #32cd32;
+  font-family: Josefin Sans;
+  position: absolute;
+  left: 0%;
+  top: 92%;
+  border-radius: 5px;
+  color: black;
+  width: 100%;
+  height: 8%;
+  text-align:center;
+ background-color: #e6faff;
+}
+
+
 .Save {
-  font-size: 0.4em;
+  font-size: 0.45em;
   background-color: #e6faff;
   border: 2px solid #32cd32;
   font-family: Josefin Sans;
   position: absolute;
   left: 0%;
-  top: 87%;
+  top: 83.8%;
   border-radius: 5px;
   color: black;
   width: 100%;
-  height: 8%;
+  height: 8.2%;
 }
 
 .Save:hover {
@@ -299,122 +316,15 @@
 .Tablesize {
   position: absolute;
   width: 100%;
-  height: 340px;
-  overflow: scroll;     
+  height: 80%;
+  overflow: scroll; 
+top:15.3%;    
 }
 
 #TableText {
   font-family: Josefin Sans;
-  font-size: 0.39559em;
+  font-size: 0.45em;
   background-color: #e6faff;
-}
-
-
-.button {
-  font-size: 1em;
-  padding: 10px;
-  color: #fff;
-  border: 2px solid #06D85F;
-  border-radius: 20px/50px;
-  text-decoration: none;
-  cursor: pointer;
-  
-  transition: all 0.3s ease-out;
-}
-.button:hover {
-  background: #06D85F;
-}
-
-
-
-
-
-.InputBorder{
-border-radius: 5px;
-border: 3px solid #32cd32;
-position:absolute;
-top:35%; 
-left:10%;
-width:80%;
-height:11.5%;
-}
-
-.PopUpText{
-  position:relative;
-  font-family: Josefin Sans;
-  font-size: 0.6em;
-  top:0%;
-  color: white;
-  left:0%;
-  width:23%;
-  height:100%;
-  background-color: #003652;
-  padding:1%;
-}
-
-.PopUpInput{
-  position:relative; 
-  font-family: Josefin Sans;
-  font-size: 0.55em;  
-  top:0%; 
-  width:100%;
-  height:100%;
-  color: black;
-  left:0%; 
-}
-
-.Inputwidth{
-position:relative;
-width:100%;
-height:100%;
-}
-
-
-
-.PopUpSelect{
-  font-family: Josefin Sans;
-  font-size: 0.55em;
-  position: absolute;
-  top: 15%;
-  width: 80%;
-  height: 12%;
-  border-radius: 5px;
-  border: 2px solid #32cd32;
-  
-  background-color: #003652;
-  color: white;
-  left:10%;
-  right:10%;
-}   
-
-.PopUpButton{
-  font-size: 0.55em;
-  background-color: #e6faff;
-  border: 2px solid #32cd32;
-  font-family: Josefin Sans;
-  position: absolute;
-  left: 35%;
-  top: 70%;
-  border-radius: 5px;
-  color: #4d4d4d;
-  width: 30%;
-  height: 10%;
-}
-
-.PopUpButton:hover {
-  background-color: #32cd32;
-  color: white;
-}
-
-
-
-@media screen and (max-width: 700px){
-  .box{
-    width: 70%;
-  }
-  .popup{
-    width: 70%;
-  }
 }
 
 .Thirdpage {
@@ -426,11 +336,9 @@ height:100%;
 .HistoryComponent {
   border: 2px solid #32cd32;
   border-radius: 5px;
-  padding: 2%;
-  margin-left: 3%;
-  margin-right: 3%;
-  flex-direction: column;
-  height: 550px;
+  height:94%;
+margin-left:2%;
+margin-right:2%;
 }
 
 .Historytext {
@@ -439,36 +347,46 @@ height:100%;
   color: white;
   padding: 1%;
   border: 4px solid #32cd32;
-  border-radius: 5px;
+  border-radius: 4px;
+  position:absolute;
+width:90%;
+left:5%;
+top:215%;
+height:11%;
 }
 
-.HistoryUploadbutton {
-  font-size: 0.8em;
+#histcalltopopup{
+font-size: 1.0em;
   background-color: white;
   border: 2px solid #32cd32;
   font-family: Josefin Sans;
-  position: absolute;
-  height: 6.3%;
-  width: 30%;
   border-radius: 5px;
-  right: 6%;
+  color:black;
+position:absolute;
+  height: 7%;
+  width: 20%;
+right:7%;
+top:217%;
+  border-radius: 5px;
 }
 
-.HistoryUploadbutton:hover {
-  background-color: #32cd32;
+#histcalltopopup:hover{
+background-color: #32cd32;
   color: white;
 }
 
 .Historylist {
 }
 
+
 .Historyselect {
   font-family: Josefin Sans;
   font-size: 1.4em;
   position: absolute;
   width: 90%;
-  height: 40%;
+  height: 51%;
   top: 238%;
+  left:5%;
   border-radius: 5px;
   border: 2px solid #32cd32;
   padding: 1%;
@@ -481,6 +399,7 @@ height:100%;
   width: 90%;
   height: 8%;
   top: 230%;
+  left:5%;
   border-radius: 5px;
   border: 2px solid #32cd32;
   padding: 1%;
@@ -489,7 +408,7 @@ height:100%;
 
 .Search {
   font-size: 1.2em;
-  padding: 10px;
+  padding: 1%;
   position: absolute;
   background-color: #003652;
   width: 100%;
@@ -499,6 +418,147 @@ height:100%;
   font-family: FontAwesome, 'Josefin Sans';
   color: white;
   border: transparent;
+}
+
+.histmodal-cover {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+  transition: opacity 500ms;
+}
+
+.histmodal-area {
+    background: rgb(0, 102, 102); /* Fallback color */
+  background: rgba(0, 102, 102, 0.7); /* Black background with 0.5     opacity */
+  border-radius: 5px;
+  width: 86%;
+  height:76%;
+  top:12%;
+  left:7%;
+  position: relative;
+  transition: all 5s ease-in-out;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+
+
+.histpopinputbox{
+  border-radius: 5px;
+border: 2px solid #32cd32;
+position:absolute;
+width:43%;
+top:10%;
+left:3%;
+height: 80%;
+}
+
+.histpopname{
+  position: absolute;
+  border-radius: 5px;
+  width:100%;
+  top:0%;
+  left:0%;
+  height: 100%;
+font-family: Josefin Sans;
+  font-size: 1.2em;
+  background-color: white;
+}
+
+
+
+
+.histpopbutton{
+  position: absolute;
+  border-radius: 5px;
+  width:7%;
+  top:46%;
+  left:46.5%;
+  height: 8%;
+font-size: 1.2em;
+  background-color: #32cd32;
+  border: 2px solid #32cd32;
+  font-family: Josefin Sans;
+color:black;
+  text-align: center;
+}
+
+.histpopbutton:hover{
+ background-color: green;
+color:white;
+
+}
+
+
+.histpopcatbox{
+  position: absolute;
+  border-radius: 5px;
+  border: 2px solid #32cd32;
+  width:43%;
+  top:10%;
+  right:3%;
+  height:80%;
+}
+
+.histTablesize {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: scroll; 
+top:0%;    
+}
+
+#histTableText {
+  font-family: Josefin Sans;
+  font-size: 1.2em;
+  background-color: white;
+}
+
+
+._histmodal-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.5em;
+  line-height: 1;
+  background:transparent;
+  border: 0;
+  box-shadow: 0;
+  cursor: pointer;
+}
+
+._histhide-visual {
+  border: 0 !important;
+  clip: rect(0 0 0 0) !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+  white-space: nowrap !important;
+}
+
+._histmodal-close-icon {
+  width: 25px;
+  height: 25px;
+  fill: transparent;
+  stroke: black;
+  stroke-linecap: round;
+  stroke-width: 2;
+}
+
+
+.histmodal-body {
+  padding-top: 0.25em;
+}
+
+.histscroll-lock {
+  overflow: hidden;
+  margin-right: 17px;
 }
 
 /* width scrollbar */
@@ -619,7 +679,7 @@ height:100%;
   }
 
   .Navbarsize {
-    padding: 30px 10px 30px;
+    padding: 10px 10px 10px;
   }
 
   #navbg {
@@ -643,8 +703,8 @@ height:100%;
     background-image: url(./../assets/medical-wallpaper.jpg);
     opacity: 0.95;
     width: 100%;
-    height: 400px;
-    top: 55%;
+    height: 380px;
+    top: 54%;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
   }
@@ -725,7 +785,7 @@ height:100%;
     position: absolute;
     left: 12%;
     top: 113%;
-    height: 5.7%;
+    height: 5%;
     width: 76%;
     border-radius: 5px;
   }
@@ -738,7 +798,7 @@ height:100%;
     position: absolute;
     left: 12%;
     top: 120%;
-    height: 5.7%;
+    height: 5%;
     width: 20%;
     border-radius: 5px;
   }
@@ -751,7 +811,7 @@ height:100%;
     position: absolute;
     left: 12%;
     top: 120%;
-    height: 5.7%;
+    height: 5%;
     width: 20%;
     border-radius: 5px;
   }
@@ -771,18 +831,21 @@ height:100%;
     width: 90%;
   }
 
-  #Textarea {
-    height: 320px;
-  }
 
-  .Textareasize {
-    position: absolute;
-    width: 100%;
-    height: 320px;
-  }
+#Textarea {
+ 
+  height: 100%;
+}
+
+.Textareasize {
+  position: absolute;
+  width: 100%;
+  height: 68.5%;
+top:15.3%;
+}
 
   .Save {
-    top: 87.3%;
+    top: 83.7%;
   }
 
   .Save:hover {
@@ -813,7 +876,7 @@ height:100%;
     position: absolute;
     left: 32%;
     top: 120%;
-    height: 5.7%;
+    height: 5%;
     width: 8%;
     border: 2px solid #32cd32;
     border-radius: 5px;
@@ -828,7 +891,7 @@ height:100%;
     position: absolute;
     right: 12%;
     top: 120%;
-    height: 5.7%;
+    height: 5%;
     width: 48%;
     border-radius: 5px;
   }
@@ -862,18 +925,36 @@ height:100%;
     width: 100%;
   }
 
-  .HistoryUploadbutton {
-    font-size: 0.7em;
-    width: 50%;
-    right: 7%;
-  }
+  .Historytext {
+  position:absolute;
+width:90%;
+left:5%;
+top:290%;
+height:11%;
+}
+
+#histcalltopopup{
+position:absolute;
+  height: 7%;
+  width: 40%;
+right:7%;
+top:292%;
+}
+
+.SearchHist {
+  position: absolute;
+  width: 90%;
+  height: 8%;
+  top: 307%;
+  left:5%;
+}
 
   .Historyselect {
     position: absolute;
     font-size: 1.4em;
     width: 90%;
     height: 40%;
-    top: 302%;
+    top: 315%;
   }
 
   .Thirdpage {
@@ -881,6 +962,59 @@ height:100%;
     background-color: #004466;
     padding-top: 3%;
   }
+
+.histmodal-area {
+  width: 95%;
+  height:85%;
+  top:7.5%;
+  left:2.5%;
+  position: relative;
+}
+
+.histpopinputbox{
+position:absolute;
+width:94%;
+top:7%;
+left:3%;
+height: 30%;
+}
+
+.histpopname{
+  font-size: 1.0em; 
+}
+
+.histpopbutton{
+  position: absolute; 
+  width:20%;
+  top:37.5%;
+  left:40%;
+  height: 7%;
+background-color:#32cd32;
+}
+
+.histpopbutton:hover{
+ background-color: green;
+
+}
+
+
+
+.histpopcatbox{
+  position: absolute;
+  width:94%;
+  top:45%;
+  right:3%;
+  height:50%;
+}
+
+
+#histTableText {
+ 
+  font-size: 1.0em;
+ 
+}
+
+
 }
 
 @media only screen and (max-width: 1000px) {
@@ -899,7 +1033,7 @@ height:100%;
     position: absolute;
     left: 15%;
     top: 113%;
-    height: 5.6%;
+    
     width: 70%;
   }
 
@@ -907,8 +1041,7 @@ height:100%;
     font-size: 0.4em;
     position: absolute;
     left: 15%;
-    top: 120%;
-    height: 5.6%;
+    top: 120%;    
     width: 20%;
   }
 
@@ -916,8 +1049,7 @@ height:100%;
     font-size: 0.4em;
     position: absolute;
     left: 15%;
-    top: 120%;
-    height: 5.6%;
+    top: 120%;  
     width: 20%;
   }
 
@@ -925,8 +1057,7 @@ height:100%;
     font-size: 0.5em;
     position: absolute;
     left: 35%;
-    top: 120%;
-    height: 5.7%;
+    top: 120%;   
     width: 10%;
     text-align: center;
   }
@@ -936,13 +1067,12 @@ height:100%;
     position: absolute;
     right: 15%;
     top: 120%;
-    height: 5.7%;
     width: 40%;
   }
 
-  .HistoryUploadbutton {
-    font-size: 0.7em;
-    width: 60%;
-    right: 7%;
-  }
+
+ #histcalltopopup{
+  width: 40%;
+
+}
 }
