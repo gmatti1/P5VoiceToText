@@ -22,7 +22,7 @@ export const HistForm = ({ onSubmit, invalue, invalueother, handleChangeTeatarea
 			 
       </div>
 		<button className="histpopbutton" type="submit">  
-          >>
+          Save>>
         </button>
       
 		</form>
