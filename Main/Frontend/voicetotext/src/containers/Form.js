@@ -25,7 +25,23 @@ class Form extends React.Component{
 		const selectedValue = this.state.selectedValue;
 		console.log("inputValue:",inputValue);
 		console.log("selectedValue:",selectedValue);
-		alert('Your changes have been saved');
+		var myBody = {
+			keyword: inputValue,
+			identification: selectedValue
+		};
+	  
+		fetch('/api/imistambo_glossory' , {
+			method: 'POST',
+			body: JSON.stringify(myBody),
+			headers: {
+			  'Content-Type': 'application/json',
+			},
+		  })
+		.then((response) => response.json())
+		.then((title) => {
+			alert(title['message']);
+		});
+		
 		this.setState({inputValue: ''});
 		this.setState({selectedValue: 0});	 
     }
