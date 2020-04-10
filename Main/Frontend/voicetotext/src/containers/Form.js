@@ -40,10 +40,10 @@ class Form extends React.Component{
 		.then((response) => response.json())
 		.then((title) => {
 			alert(title['message']);
+			this.setState({inputValue: ''});
+			this.setState({selectedValue: 0});
 		});
-		
-		this.setState({inputValue: ''});
-		this.setState({selectedValue: 0});	 
+		 
     }
 
     handleChange = (event) => {
