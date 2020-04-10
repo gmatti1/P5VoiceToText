@@ -27,7 +27,7 @@ class Form extends React.Component{
 		console.log("selectedValue:",selectedValue);
 		var myBody = {
 			keyword: inputValue,
-			identification: selectedValue
+			category: selectedValue
 		};
 	  
 		fetch('/api/imistambo_glossory' , {
