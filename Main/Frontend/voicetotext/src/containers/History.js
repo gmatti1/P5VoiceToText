@@ -18,6 +18,7 @@ class History extends Component {
         "completed": false
 	  },
       files: [],
+      filename: '',
       selected: null,
 	  search: ''
     };
@@ -47,11 +48,55 @@ class History extends Component {
  
   onSubmit = event => {
     event.preventDefault(event);
-    console.log(this.state.invalue);
+    // console.log("something changed")
+    // console.log(this.state.invalueother);
+
+    
+    const data = this.state.invalueother;
+
+    var myBody = {
+      text: data
+    };
+
+    fetch('/api/convertedText/' + this.state.selected, {
+      method: 'PUT',
+      body: JSON.stringify(myBody),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then((response) => this.updateCategorizedText());
+
+
+  }
+  updateCategorizedText() {
+    fetch('/api/categorizedText/' + this.state.selected, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((invalue) => {
+        this.formatCategories(invalue);
+      });
+  }
+  formatCategories(invalue){
+    var i = 0;
+    var textArr = [];
+    Object.keys(invalue).forEach(key => {
+      var temp = ""
+      for(var j=0; j < invalue[key].length; j++){
+        temp += invalue[key][j];
+        if(j!=invalue[key].length-1) temp+="\n"
+      }
+      invalue[key] = temp;
+    })
+    this.setState({ invalue: invalue });
   }
   
   handleChangeTeatarea = event => {
-	  this.setState({invalue: event.target.value});
+    event.preventDefault();
+	  this.setState({invalueother: event.target.value});
 	  
   }
  

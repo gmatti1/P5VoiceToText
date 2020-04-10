@@ -3,7 +3,9 @@ import Table from 'react-bootstrap/Table';
 import './../../node_modules/ag-grid-community/dist/styles/ag-grid.css';
 import './../../node_modules/ag-grid-community/dist/styles/ag-theme-balham.css';
 import './../styles/index.css';
+import './../styles/demo.css';
 import nl2br from 'react-newline-to-break';
+
 
 export const HistForm = ({ onSubmit, invalue, invalueother, handleChangeTeatarea }) => {
   return (
@@ -19,9 +21,10 @@ export const HistForm = ({ onSubmit, invalue, invalueother, handleChangeTeatarea
               />
 			 
       </div>
-		<button className="histpopbutton" type="submit">
+		<button className="histpopbutton" type="submit">  
           >>
         </button>
+      
 		</form>
       <div className="histpopcatbox">
 	  <div className="histTablesize">
