@@ -35,39 +35,39 @@ export const HistForm = ({ onSubmit, invalue, invalueother, handleChangeTeatarea
             <tbody>
               <tr>
                 <td>Identification</td>
-                <td>{(invalue.identification)}</td>
+                <td>{nl2br(invalue.identification)}</td>
               </tr>
               <tr>
                 <td>Mechanism</td>
-                <td>{(invalue.mechanism)}</td>
+                <td>{nl2br(invalue.mechanism)}</td>
               </tr>
               <tr>
                 <td>Injuries</td>
-                <td> {(invalue.injury)}</td>
+                <td> {nl2br(invalue.injury)}</td>
               </tr>
               <tr>
                 <td>Signs</td>
-                <td colSpan='2'> {(invalue.signs)} </td>
+                <td colSpan='2'> {nl2br(invalue.signs)} </td>
               </tr>
               <tr>
                 <td>Treatment</td>
-                <td> {(invalue.treatment)}</td>
+                <td> {nl2br(invalue.treatment)}</td>
               </tr>
               <tr>
                 <td>Allergies</td>
-                <td> {(invalue.allergy)}</td>
+                <td> {nl2br(invalue.allergy)}</td>
               </tr>
               <tr>
                 <td>Medications</td>
-                <td> {(invalue.medication)}</td>
+                <td> {nl2br(invalue.medication)}</td>
               </tr>
               <tr>
                 <td>Background</td>
-                <td>{(invalue.background)}</td>
+                <td>{nl2br(invalue.background)}</td>
               </tr>
               <tr>
                 <td>Other Info</td>
-                <td >{(invalue.other)}</td>
+                <td >{nl2br(invalue.other)}</td>
               </tr>
             </tbody>
           </Table>

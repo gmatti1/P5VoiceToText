@@ -97,12 +97,27 @@ class History extends Component {
        
       });
       console.log(this.state.invalue);
+      this.formatCategories(this.state.invalue)
       })
       //this.state.loading =true;
       
       //console.log(this.state.loading);
       
 
+}
+
+formatCategories(textCategorized){
+  var i = 0;
+  var textArr = [];
+  Object.keys(textCategorized).forEach(key => {
+    var temp = ""
+    for(var j=0; j < textCategorized[key].length; j++){
+      temp += textCategorized[key][j];
+      if(j!=textCategorized[key].length-1) temp+="\n"
+    }
+    textCategorized[key] = temp;
+  })
+  this.setState({ invalue: textCategorized });
 }
 
   updateSearch(event) {
