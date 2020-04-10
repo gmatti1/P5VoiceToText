@@ -20,7 +20,6 @@ class Config:
 	MONGODB_SETTINGS = {
 		'host': 'mongodb://localhost/P5VoiceToText'
 	}
-
 	'''
 	#MongoDB PROD
 	MONGODB_SETTINGS = {
