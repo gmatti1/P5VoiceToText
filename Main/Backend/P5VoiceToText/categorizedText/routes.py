@@ -139,7 +139,7 @@ def add_imistambo_glossory():
 def getall_imistambo_glossory():
 	try:
 		classifyText = ClassifyText()
-		keyword_category_list = classifyText.get_imist_ambo()
+		keyword_category_list = classifyText.getall_imist_ambo()
 		return jsonify(keyword_category_list), 200
 	except:
 		message = {

@@ -177,7 +177,20 @@ class ClassifyText:
 	def update_categorized_text_forall_records(self, new_keyword_category):
 		categorized_texts = Text_categorization.objects
 		for categorized_text in categorized_texts:
+			self.voice_file = None
+			self.text = ""
+			self.sentences = []
+			self.category_keyword = { "identification" : [],
+								  "mechanism" : [],
+								  "injury": [],
+								  "signs": [],
+								  "treatment": [],
+								  "allergy": [],
+								  "medication": [],
+								  "background": [],
+								  "other": [] }
 			self.voice_file = categorized_text.voiceFile
+			self.category_keyword
 			self.text = Voice_text_conversion.objects.filter(voiceFile=self.voice_file)[0].converted_text
 			self.clean_and_classify()
 			self.update_categorizedText_in_db()
@@ -381,7 +394,7 @@ class ClassifyText:
 
 
 
-	def get_imist_ambo(self):
+	def getall_imist_ambo(self):
 		keyword_category_list = Imist_ambo_template.objects
 		return keyword_category_list
 
