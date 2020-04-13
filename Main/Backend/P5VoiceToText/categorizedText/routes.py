@@ -66,32 +66,32 @@ def get_categorizedText(filename):
 # When User edits ConvertedText, CategorizationText is updated
 @categorizedText.route('/api/categorizedText/<filename>', methods = ['PUT'])
 def update_categorizedText(filename):
-	
-	classifyText = ClassifyText()
-	if not classifyText.if_voice_file_exists(filename):
-		message = {
-			"message": "File not found in our records"
-		}
-		return jsonify(message), 404
-	if not classifyText.if_converted_text_exists(filename):
-		message = {
-				"message": "Converted Text not found in our records"
+	try:
+		classifyText = ClassifyText()
+		if not classifyText.if_voice_file_exists(filename):
+			message = {
+				"message": "File not found in our records"
 			}
-		return jsonify(message), 404
-	if not classifyText.if_categorized_text_exists(filename):
-		message = {
-			"message": "Categorized Text not found in our records"
-			}
-		return jsonify(message), 404
+			return jsonify(message), 404
+		if not classifyText.if_converted_text_exists(filename):
+			message = {
+					"message": "Converted Text not found in our records"
+				}
+			return jsonify(message), 404
+		if not classifyText.if_categorized_text_exists(filename):
+			message = {
+				"message": "Categorized Text not found in our records"
+				}
+			return jsonify(message), 404
 
 		text = classifyText.clean_and_classify()
 		classifyText.update_categorizedText_in_db()
 		return jsonify(text)
-	#except:
-		#message = {
-			#"message": "Internal Server Error, something went wrong"
-		#}
-		#return jsonify(message), 500
+	except:
+		message = {
+			"message": "Internal Server Error, something went wrong"
+		}
+		return jsonify(message), 500
 
 
 @categorizedText.route('/api/imistambo_glossory_inbulk', methods = ['POST'])
