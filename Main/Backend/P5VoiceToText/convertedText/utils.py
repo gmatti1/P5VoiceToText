@@ -19,6 +19,7 @@ class VoiceText:
     def __init__(self):
         self.voice_file = None
         self.converted_text = ""
+        self.text_stats = []
 
     # test_gangadhar1.mp3
     def get_voice_text_from_db(self, filename):
@@ -31,6 +32,7 @@ class VoiceText:
             self.converted_text = ""
             return
         self.converted_text = text[0].converted_text
+        self.text_stats = text[0].text_stats
 
 
     def check_voice_text_exists(self, filename):
@@ -52,7 +54,8 @@ class VoiceText:
         audio_file = AudioFile()
         audio_file.filename = filename
         self.voice_file = audio_file.get_voice_file_from_db()
-        voice_text_conversion = Voice_text_conversion(voiceFile=self.voice_file, converted_text=self.converted_text).save()
+        voice_text_conversion = Voice_text_conversion(voiceFile=self.voice_file, converted_text=self.converted_text,
+                                                      text_stats=self.text_stats).save()
 
     def aws_voice_to_text(self, audiofile):
         transcribe = boto3.client(
@@ -63,6 +66,10 @@ class VoiceText:
         )
 
         JOB_NAME = audiofile.filename
+        try:
+            transcribe.delete_transcription_job(TranscriptionJobName=JOB_NAME)
+        except:
+            print("Job is not available")
 
         transcribe.start_transcription_job(
             TranscriptionJobName=JOB_NAME,
@@ -83,4 +90,8 @@ class VoiceText:
         data = audio_text.json()
 
         # Voice to text -> can display in frontend
+        self.text_stats = data['results']['items']
         self.converted_text = data['results']['transcripts'][0]['transcript']
+
+        # delete the job
+        transcribe.delete_transcription_job(TranscriptionJobName=JOB_NAME)

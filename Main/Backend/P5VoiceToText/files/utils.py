@@ -1,6 +1,7 @@
 from P5VoiceToText.models import Voice_files
 from pydub import AudioSegment
 from P5VoiceToText.config import Config
+from datetime import date
 import boto3
 import os
 
@@ -48,6 +49,7 @@ class AudioFile:
     def store_file_aws(self, complete_file_path):
         # Step2: Store the file in AWS S3
         data = open(complete_file_path, 'rb')
+        folder_name = date.today()
 
         s3 = boto3.resource(
             's3',
@@ -56,8 +58,8 @@ class AudioFile:
             config=ConfigAWS(signature_version='s3v4')
         )
         try:
-            s3.Bucket(aws_bucket_name).upload_file(complete_file_path, '%s' % (self.filename))
-            s3Link = "s3://" + aws_bucket_name + "/" + self.filename
+            s3.Bucket(aws_bucket_name).upload_file(complete_file_path, '%s/%s' % (folder_name, self.filename))
+            s3Link = "s3://" + aws_bucket_name + "/" + str(folder_name) + "/" + self.filename
             return s3Link
         except FileNotFoundError:
             print("Error: The file was not found")

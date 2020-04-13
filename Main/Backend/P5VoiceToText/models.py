@@ -1,4 +1,5 @@
 from P5VoiceToText import db
+from datetime import datetime
 
 class Imist_ambo_template(db.Document):
 	keyword = db.StringField(required=True, unique=True)
@@ -7,13 +8,15 @@ class Imist_ambo_template(db.Document):
 class Voice_files(db.Document):
 	filename = db.StringField(required=True, unique=True)
 	s3link = db.StringField(unique=True)
+	creation_date = db.DateTimeField(default=datetime.now())
 
 class Voice_text_conversion(db.Document):
-	voiceFile = db.ReferenceField(Voice_files)
+	voiceFile = db.ReferenceField(Voice_files, unique=True)
 	converted_text = db.StringField(required=True)
+	text_stats = db.ListField(required=True)
 
 class Text_categorization(db.Document):
-	voiceFile = db.ReferenceField(Voice_files)
+	voiceFile = db.ReferenceField(Voice_files, unique=True)
 	identification = db.ListField(db.StringField())
 	mechanism = db.ListField(db.StringField())
 	injury = db.ListField(db.StringField())

@@ -1,17 +1,13 @@
 from flask import request, flash, jsonify, Blueprint
-from flask_cors import cross_origin
 
 from P5VoiceToText.config import Config
 from P5VoiceToText.categorizedText.utils import ClassifyText
 
 categorizedText = Blueprint('categorizedText', __name__)
 
-cors_ip = Config.DEV_IP
-cors_header = Config.CORS_HEADERS
 
 # When User uploads the file, Categorization is done
-@cross_origin(origin=cors_ip,headers=cors_header)
-@categorizedText.route('/categorizedText/<filename>', methods = ['POST'])
+@categorizedText.route('/api/categorizedText/<filename>', methods = ['POST'])
 def textCategorization(filename):
 	try:
 		classifyText = ClassifyText()
@@ -41,9 +37,9 @@ def textCategorization(filename):
 		return jsonify(message), 500
 
 
+
 # When User selects a file, get Categorized Text from DB
-@cross_origin(origin=cors_ip,headers=cors_header)
-@categorizedText.route('/categorizedText/<filename>', methods = ['GET'])
+@categorizedText.route('/api/categorizedText/<filename>', methods = ['GET'])
 def get_categorizedText(filename):
 	try:
 		classifyText = ClassifyText()
@@ -66,9 +62,9 @@ def get_categorizedText(filename):
 		return jsonify(message), 500
 
 
+
 # When User edits ConvertedText, CategorizationText is updated
-@cross_origin(origin=cors_ip,headers=cors_header)
-@categorizedText.route('/categorizedText/<filename>', methods = ['PUT'])
+@categorizedText.route('/api/categorizedText/<filename>', methods = ['PUT'])
 def update_categorizedText(filename):
 	try:
 		classifyText = ClassifyText()
@@ -79,18 +75,86 @@ def update_categorizedText(filename):
 			return jsonify(message), 404
 		if not classifyText.if_converted_text_exists(filename):
 			message = {
-				"message": "Converted Text not found in our records"
-			}
+					"message": "Converted Text not found in our records"
+				}
 			return jsonify(message), 404
 		if not classifyText.if_categorized_text_exists(filename):
 			message = {
 				"message": "Categorized Text not found in our records"
-			}
+				}
 			return jsonify(message), 404
 
 		text = classifyText.clean_and_classify()
-		classifyText.save_categorizedText_in_db()
+		classifyText.update_categorizedText_in_db()
 		return jsonify(text)
+	except:
+		message = {
+			"message": "Internal Server Error, something went wrong"
+		}
+		return jsonify(message), 500
+
+
+@categorizedText.route('/api/imistambo_glossory_inbulk', methods = ['POST'])
+def add_imistambo_glossory_inbulk():
+	try:
+		classifyText = ClassifyText()
+		classifyText.insert_into_imist_ambo_inbulk()
+		message = {
+			"message": "Successfully added"
+		}
+		return jsonify(message), 200
+	except:
+		message = {
+			"message": "Internal Server Error, something went wrong"
+		}
+		return jsonify(message), 500
+
+
+@categorizedText.route('/api/imistambo_glossory', methods = ['POST'])
+def add_imistambo_glossory():
+	try:
+		keyword = request.json['keyword']
+		category = request.json['category']
+		classifyText = ClassifyText()
+		result = classifyText.insert_into_imist_ambo(keyword, category)
+		if result == 2:
+			message = {
+				"message": "Keyword-Category Pair already exists"
+			}
+			return jsonify(message), 200
+		else:
+			message = {
+				"message": "Keyword-Category Pair added and all the CategorizedTexts are updated"
+			}
+			return jsonify(message), 200
+	except:
+		message = {
+			"message": "Internal Server Error, something went wrong"
+		}
+		return jsonify(message), 500
+
+
+
+@categorizedText.route('/api/imistambo_glossory', methods = ['GET'])
+def getall_imistambo_glossory():
+	try:
+		classifyText = ClassifyText()
+		keyword_category_list = classifyText.getall_imist_ambo()
+		return jsonify(keyword_category_list), 200
+	except:
+		message = {
+			"message": "Internal Server Error, something went wrong"
+		}
+		return jsonify(message), 500
+
+
+
+@categorizedText.route('/api/imistambo_glossory/<searchword>', methods = ['GET'])
+def get_imistambo_glossory(searchword):
+	try:
+		classifyText = ClassifyText()
+		keyword_category_list = classifyText.get_imist_ambo(searchword)
+		return jsonify(keyword_category_list), 200
 	except:
 		message = {
 			"message": "Internal Server Error, something went wrong"

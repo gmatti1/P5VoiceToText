@@ -1,5 +1,4 @@
 from flask import request, flash, jsonify, Blueprint, render_template
-from flask_cors import cross_origin
 from P5VoiceToText.config import Config
 
 import os
@@ -11,13 +10,11 @@ files = Blueprint('files', __name__)
 
 # Import all config related variables
 upload_folder = Config.UPLOAD_FOLDER
-cors_ip = Config.DEV_IP
-cors_header = Config.CORS_HEADERS
 allowed_extensions = Config.ALLOWED_EXTENSIONS
 aws_allowed_extensions = Config.AWS_ALLOWED_EXTENSIONS
 
 
-@files.route("/files", methods=['GET'])
+@files.route("/api/files", methods=['GET'])
 def get_all_files():
 	try:
 		audio_file = AudioFile()
@@ -36,7 +33,7 @@ def get_all_files():
 		return jsonify(message), 500
 
 
-@files.route("/files/<filename>", methods=['GET'])
+@files.route("/api/files/<filename>", methods=['GET'])
 def get_file(filename):
 	try:
 		audio_file = AudioFile()
@@ -60,8 +57,7 @@ def get_file(filename):
 		return jsonify(message), 500
 
 
-@cross_origin(origin=cors_ip,headers=cors_header)
-@files.route("/files", methods=['POST'])
+@files.route("/api/files", methods=['POST'])
 def add_new_file():
 	try:
 		# if the file is not present in the request, reject it

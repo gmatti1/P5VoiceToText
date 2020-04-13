@@ -1,17 +1,12 @@
 from flask import request, flash, jsonify, Blueprint, render_template
-from flask_cors import cross_origin
 from P5VoiceToText.config import Config
 from P5VoiceToText.convertedText.utils import VoiceText
 from P5VoiceToText.files.utils import AudioFile
 
 convertedText = Blueprint('convertedText', __name__)
 
-cors_ip = Config.DEV_IP
-cors_header = Config.CORS_HEADERS
-
 # When User uploads the file, Voice to Text Conversion is done
-@cross_origin(origin=cors_ip,headers=cors_header)
-@convertedText.route("/convertedText/<filename>", methods=['POST'])
+@convertedText.route("/api/convertedText/<filename>", methods=['POST'])
 def voiceToTextConversion(filename):
 	audiofile = AudioFile()
 	voice_text = VoiceText()
@@ -22,7 +17,8 @@ def voiceToTextConversion(filename):
 		if len(voice_text.converted_text) > 0:
 			print("The entry is already present")
 			message = {
-				"text": voice_text.converted_text
+				"text": voice_text.converted_text,
+				"stats": voice_text.text_stats
 			}
 			return jsonify(message), 200
 
@@ -31,7 +27,8 @@ def voiceToTextConversion(filename):
 		# audiofile has s3Link and filename
 		voice_text.aws_voice_to_text(audiofile)
 		message = {
-			"text": voice_text.converted_text
+			"text": voice_text.converted_text,
+			"stats": voice_text.text_stats
 		}
 		voice_text.store_voice_text(filename)
 		return jsonify(message), 200
@@ -48,8 +45,7 @@ def voiceToTextConversion(filename):
 
 
 # When User selects the file, get Converted Text from DB
-@cross_origin(origin=cors_ip,headers=cors_header)
-@convertedText.route("/convertedText/<filename>", methods=['GET'])
+@convertedText.route("/api/convertedText/<filename>", methods=['GET'])
 def get_convertedText(filename):
 	audiofile = AudioFile()
 	voice_text = VoiceText()
@@ -59,7 +55,8 @@ def get_convertedText(filename):
 			voice_text.get_voice_text_from_db(filename)
 			if len(voice_text.converted_text) > 0:
 				message = {
-					"text": voice_text.converted_text
+					"text": voice_text.converted_text,
+					"stats": voice_text.text_stats
 				}
 				return jsonify(message), 200
 
@@ -81,8 +78,7 @@ def get_convertedText(filename):
 
 
 # When User Edits ConvertedText Textbox, update Converted Text in DB
-@cross_origin(origin=cors_ip,headers=cors_header)
-@convertedText.route("/convertedText/<filename>", methods=['PUT'])
+@convertedText.route("/api/convertedText/<filename>", methods=['PUT'])
 def update_convertedText(filename):
 	content = request.json
 	if content and 'text' not in content:

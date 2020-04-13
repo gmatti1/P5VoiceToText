@@ -4,9 +4,13 @@ from nltk.tokenize import word_tokenize
 from nltk.stem import PorterStemmer
 from string import punctuation
 from nltk.stem import WordNetLemmatizer
+import re
 
 from P5VoiceToText import db
 from P5VoiceToText.models import Imist_ambo_template, Voice_files, Voice_text_conversion, Text_categorization
+
+ps = PorterStemmer() 
+wordnet_lemmatizer = WordNetLemmatizer()
 
 class ClassifyText:
 
@@ -57,8 +61,6 @@ class ClassifyText:
 
 	# Get the root of words using Stemming and Lemmatization ....
 	def stemming_and_lemmatization_text(self, words):
-		ps = PorterStemmer() 
-		wordnet_lemmatizer = WordNetLemmatizer()
 		words = [wordnet_lemmatizer.lemmatize(ps.stem(word)) for word in words]
 		return words
 		
@@ -72,6 +74,8 @@ class ClassifyText:
 
 	# Classify the specific words into IMIST_AMBO categories ....
 	def classify_text_into_categories(self, sentence, words):
+		is_category_assigned = False
+
 		idx = 0
 		age_word = ""
 		for i in range(0, len(words)):
@@ -82,8 +86,10 @@ class ClassifyText:
 
 		if (age_word=='old' or age_word=='age') and words[i-2].isnumeric() and (sentence not in self.category_keyword['identification']): #ex: 23 year old, 23 years of age
 			self.category_keyword['identification'].append(sentence)
+			is_category_assigned = True
 		elif age_word=='age' and words[i+1].isnumeric() and (sentence not in self.category_keyword['identification']): #ex. age is 23 years
 			self.category_keyword['identification'].append(sentence)
+			is_category_assigned = True
 
 
 		for i in range(0, len(words)):
@@ -91,6 +97,7 @@ class ClassifyText:
 			imist_ambos = Imist_ambo_template.objects.filter(keyword=words[i])
 			if len(imist_ambos) and (sentence not in self.category_keyword[imist_ambos[0].category]):
 				self.category_keyword[imist_ambos[0].category].append(sentence)
+				is_category_assigned = True
 
 			#bigrams
 			if i<(len(words)-1):
@@ -98,6 +105,7 @@ class ClassifyText:
 				imist_ambos = Imist_ambo_template.objects.filter(keyword=search_keyword)
 				if len(imist_ambos) and (sentence not in self.category_keyword[imist_ambos[0].category]):
 					self.category_keyword[imist_ambos[0].category].append(sentence)
+					is_category_assigned = True
 
 			#trigrams		
 			if i<(len(words)-2):
@@ -105,13 +113,20 @@ class ClassifyText:
 				imist_ambos = Imist_ambo_template.objects.filter(keyword=search_keyword)				
 				if len(imist_ambos) and (sentence not in self.category_keyword[imist_ambos[0].category]):
 					self.category_keyword[imist_ambos[0].category].append(sentence)
+					is_category_assigned = True
+
+		if is_category_assigned==False and len(words)>2:
+			self.category_keyword['other'].append(sentence)
+
 
 
 
 	def clean_and_classify(self):
+		self.text = re.sub(r"(\d)\.(\d)", r"\1[PROTECTED_DOT]\2", self.text)
 		self.sentences = self.text.split('.')
 
 		for sentence in self.sentences:
+			sentence = sentence.replace("[PROTECTED_DOT]", ".")
 			words = self.clean_text(sentence)
 			self.classify_text_into_categories(sentence, words)
 		return self.category_keyword
@@ -131,6 +146,18 @@ class ClassifyText:
 		text_categorization.save()
 
 
+	def update_categorizedText_in_db(self):
+		text_categorization = Text_categorization.objects.filter(voiceFile=self.voice_file)[0]
+		text_categorization.identification = self.category_keyword['identification']
+		text_categorization.mechanism = self.category_keyword['mechanism']
+		text_categorization.injury = self.category_keyword['injury']
+		text_categorization.signs = self.category_keyword['signs']
+		text_categorization.treatment = self.category_keyword['treatment']
+		text_categorization.allergy = self.category_keyword['allergy']
+		text_categorization.medication = self.category_keyword['medication']
+		text_categorization.background = self.category_keyword['background']
+		text_categorization.other = self.category_keyword['other']
+		text_categorization.save()
 
 	def get_categorizedText_from_db(self, filename):
 		self.voice_file = Voice_files.objects.filter(filename=filename)[0]
@@ -147,11 +174,34 @@ class ClassifyText:
 		return self.category_keyword
 
 
-	def insert_into_imist_ambo_template(self):
+	def update_categorized_text_forall_records(self, new_keyword_category):
+		categorized_texts = Text_categorization.objects
+		for categorized_text in categorized_texts:
+			self.voice_file = None
+			self.text = ""
+			self.sentences = []
+			self.category_keyword = { "identification" : [],
+								  "mechanism" : [],
+								  "injury": [],
+								  "signs": [],
+								  "treatment": [],
+								  "allergy": [],
+								  "medication": [],
+								  "background": [],
+								  "other": [] }
+			self.voice_file = categorized_text.voiceFile
+			self.category_keyword
+			self.text = Voice_text_conversion.objects.filter(voiceFile=self.voice_file)[0].converted_text
+			self.clean_and_classify()
+			self.update_categorizedText_in_db()
+
+
+
+	def insert_into_imist_ambo_inbulk(self):
 		map_keyword_category = [
 			{"keyword": "age",
 			 "category": "identification"},
-			{"keyword": "mal",
+			{"keyword": "male",
 			 "category": "identification"},
 			{"keyword": "femal",
 			 "category": "identification"},
@@ -196,8 +246,6 @@ class ClassifyText:
 			{"keyword": "penetr",
 			 "category": "injury"},
 			{"keyword": "blunt",
-			 "category": "injury"},
-			{"keyword": "blunt",
 			 "category": "trauma"},
 			{"keyword": "head",
 			 "category": "injury"},
@@ -206,6 +254,10 @@ class ClassifyText:
 			{"keyword": "chest",
 			 "category": "injury"},
 			{"keyword": "abdomen",
+			 "category": "injury"},
+			{"keyword": "abdomin",
+			 "category": "injury"},
+			{"keyword": "forehead",
 			 "category": "injury"},
 			{"keyword": "pelvi",
 			 "category": "injury"},
@@ -234,48 +286,50 @@ class ClassifyText:
 			{"keyword": "eviscer",
 			 "category": "injury"},
 			{"keyword": "blast",
+			 "category": "injury"},
+			{"keyword": "pain",
 			 "category": "injury"},    
-			{"keyword": "pr",
+			{"keyword": "p r",
 			 "category": "signs"},
-			{"keyword": "bp",
+			{"keyword": "b p",
 			 "category": "signs"},
-			{"keyword": "gcs",
+			{"keyword": "g c s",
 			 "category": "signs"},
-			{"keyword": "evm",
+			{"keyword": "e v m",
 			 "category": "signs"},
 			{"keyword": "pupil size",
 			 "category": "signs"},
 			{"keyword": "reactiv",
 			 "category": "signs"},
-			{"keyword": "rr",
+			{"keyword": "r r",
 			 "category": "signs"},
 			{"keyword": "t degree",
 			 "category": "signs"},
-			{"keyword": "spo 2",
+			{"keyword": "s p o",
 			 "category": "signs"},
-			{"keyword": "sob",
+			{"keyword": "s o b",
 			 "category": "signs"},
-			{"keyword": "sbp",
+			{"keyword": "s b p",
 			 "category": "signs"},
 			{"keyword": "cervic collar",
 			 "category": "treatment"},
-			{"keyword": "op airway",
+			{"keyword": "o p airway",
 			 "category": "treatment"},
-			{"keyword": "np airway",
+			{"keyword": "n p airway",
 			 "category": "treatment"},
-			{"keyword": "lma",
+			{"keyword": "l m a",
 			 "category": "treatment"},
-			{"keyword": "ett",
+			{"keyword": "e t t",
 			 "category": "treatment"},
-			{"keyword": "rsi",
+			{"keyword": "r s i",
 			 "category": "treatment"},
 			{"keyword": "ventil",
 			 "category": "treatment"},
 			{"keyword": "chest decompress",
 			 "category": "treatment"},
-			{"keyword": "iv access",
+			{"keyword": "i v access",
 			 "category": "treatment"},
-			{"keyword": "iv hartmann",
+			{"keyword": "i v hartmann",
 			 "category": "treatment"},
 			{"keyword": "methoxyfluran",
 			 "category": "treatment"},
@@ -320,6 +374,40 @@ class ClassifyText:
 			]
 		arr = [Imist_ambo_template(**data) for data in map_keyword_category]
 		Imist_ambo_template.objects.insert(arr, load_bulk=True)
+
+
+	def insert_into_imist_ambo(self, keyword, category):
+		keyword = wordnet_lemmatizer.lemmatize(ps.stem(keyword))
+		imist_ambos = Imist_ambo_template.objects.filter(keyword=keyword)
+		if len(imist_ambos)>0:
+			imist_ambo = imist_ambos[0]
+			if imist_ambo.category==category:
+				return 2
+			else:
+				imist_ambo.category = category
+				imist_ambo.save()
+		else:
+			imist_ambo = Imist_ambo_template(keyword=keyword, category=category).save()
+		self.update_categorized_text_forall_records(imist_ambo)
+		return 1
+
+
+
+
+	def getall_imist_ambo(self):
+		keyword_category_list = Imist_ambo_template.objects
+		return keyword_category_list
+
+
+	def get_imist_ambo(self, searchword):
+		keyword_category_list = Imist_ambo_template.objects.filter(category=searchword)
+		if len(keyword_category_list)>0:
+			return keyword_category_list
+		searchword = wordnet_lemmatizer.lemmatize(ps.stem(searchword))
+		keyword_category_list = Imist_ambo_template.objects.filter(keyword=searchword)
+		if len(keyword_category_list)>0:
+			return keyword_category_list
+		return []
 
 
 	def test_db(self):
