@@ -44,6 +44,11 @@ Application is live on - http://ser517phcvoicetotext.s3-website-us-west-2.amazon
 		pip3 install requests <br>
 		pip3 install botocore <br>
 		pip3 install nltk <br>
+		python3 <br>
+		>>> import nltk <br>
+		>>> nltk.download('stopwords') <br>
+		>>> nltk.download('punkt') <br>
+		>>> nltk.download('wordnet') <br>
 2. Run Flask by writing "python Main/Backend/run.py" in command prompt.
 3. Launch "localhost:5000" in the browser to access APIs.
 
