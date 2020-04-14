@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"P5VoiceToText.text_categorization"},{"v":{"$numberInt":"2"},"unique":true,"key":{"voiceFile":{"$numberInt":"1"}},"name":"voiceFile_1","ns":"P5VoiceToText.text_categorization","background":false,"sparse":false}],"uuid":"634053ca92da4a2399a842cb0aad38ba"}

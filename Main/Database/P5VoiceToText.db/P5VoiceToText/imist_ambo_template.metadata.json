@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"P5VoiceToText.imist_ambo_template"},{"v":{"$numberInt":"2"},"unique":true,"key":{"keyword":{"$numberInt":"1"}},"name":"keyword_1","ns":"P5VoiceToText.imist_ambo_template","background":false,"sparse":false}],"uuid":"4462622bd03e43b0b7591f10386d38fc"}
