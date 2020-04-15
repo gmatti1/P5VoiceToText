@@ -1,14 +1,55 @@
+# -*- coding: utf-8 -*-
+
+"""This file contains all the APIs for categorizedText and imistambo_glossary
+
+For every voice file, voice-to-text conversion takes place which gives us 
+convertedText. The sentences of every convertedText, needs to be classified 
+into imist-ambo categories. The classification results are called 
+categorizedTexts. This file provides POST, PUT and GET request APIs for 
+categorizedTexts.
+
+The classification into IMIST-AMBO categories depends on IMIST-AMBO Glossary
+which is saved into the database as Imist_ambo_template. This Glossary contains
+keyword-category pairs. If a word in a sentence, matches with a keyword in 
+Imist_ambo_template, then that sentence will belong to the corresponding 
+category of the keyword-category pair. This file provides, POST and GET request
+APIs for IMIST-AMBO Glossary.
+"""
+
 from flask import request, flash, jsonify, Blueprint
 
 from P5VoiceToText.config import Config
 from P5VoiceToText.categorizedText.utils import ClassifyText
 
+
+__author__ = "Shefali Anand"
+__copyright__ = "Copyright 2020, P5VoiceToText"
+__credits__ = ["Shefali Anand", "Surya Cherukuri"]
+__version__ = "1.0"
+__maintainer__ = "Shefali Anand"
+__email__ = "sanand22@asu.edu"
+__status__ = "Production"
+
+
 categorizedText = Blueprint('categorizedText', __name__)
 
 
-# When User uploads the file, Categorization is done
 @categorizedText.route('/api/categorizedText/<filename>', methods = ['POST'])
 def textCategorization(filename):
+	"""This is a POST API request for categorizedText. It takes the filename
+	of the voice file, performs categorization and save the categorizedText 
+	result for that voice file in the Text_categorization db collection.
+
+	Parameters
+	----------
+	filename : str
+		name of the voice file for which categorization needs to be done
+
+	Returns
+	-------
+	JSON object 
+		Error Message or reults of convertedText
+	"""
 	try:
 		classifyText = ClassifyText()
 		if not classifyText.if_voice_file_exists(filename):
@@ -38,9 +79,23 @@ def textCategorization(filename):
 
 
 
-# When User selects a file, get Categorized Text from DB
 @categorizedText.route('/api/categorizedText/<filename>', methods = ['GET'])
 def get_categorizedText(filename):
+	"""This is a GET API request for categorizedText. It takes the filename
+	of the voice file, and retrieves the categorizedText result for that 
+	voice file in the Text_categorization db collection.
+
+	Parameters
+	----------
+	filename : str
+		name of the voice file for which categorizedText results have to be 
+		obtained
+
+	Returns
+	-------
+	JSON object 
+		Error Message or reults of convertedText
+	"""
 	try:
 		classifyText = ClassifyText()
 		if not classifyText.if_voice_file_exists(filename):
@@ -63,9 +118,24 @@ def get_categorizedText(filename):
 
 
 
-# When User edits ConvertedText, CategorizationText is updated
 @categorizedText.route('/api/categorizedText/<filename>', methods = ['PUT'])
 def update_categorizedText(filename):
+	"""This is a PUT API request for categorizedText. It takes the filename
+	of the voice file, and updates the categorizedText result for that 
+	voice file in the Text_categorization db collection. The categorizedText is
+	updated when the convertedText is edited by the user.
+
+	Parameters
+	----------
+	filename : str
+		name of the voice file for which categorizedText results have to be 
+		updated
+
+	Returns
+	-------
+	JSON object 
+		Error Message or reults of convertedText
+	"""
 	try:
 		classifyText = ClassifyText()
 		if not classifyText.if_voice_file_exists(filename):
@@ -94,8 +164,20 @@ def update_categorizedText(filename):
 		return jsonify(message), 500
 
 
-@categorizedText.route('/api/imistambo_glossory_inbulk', methods = ['POST'])
-def add_imistambo_glossory_inbulk():
+
+@categorizedText.route('/api/imistambo_glossary_inbulk', methods = ['POST'])
+def add_imistambo_glossary_inbulk():
+	"""This is a POST API request for imistambo_glossary. It inserts all the 
+	initial keyword-category pairs in the imist_ambo_template db collection.
+
+	Parameters
+	----------
+
+	Returns
+	-------
+	JSON object 
+		Error Message or Success Message
+	"""
 	try:
 		classifyText = ClassifyText()
 		classifyText.insert_into_imist_ambo_inbulk()
@@ -110,8 +192,20 @@ def add_imistambo_glossory_inbulk():
 		return jsonify(message), 500
 
 
-@categorizedText.route('/api/imistambo_glossory', methods = ['POST'])
-def add_imistambo_glossory():
+@categorizedText.route('/api/imistambo_glossary', methods = ['POST'])
+def add_imistambo_glossary():
+	"""This is a POST API request for imistambo_glossary. It inserts a new 
+	keyword-category pair or update the older pair in the Imist_ambo_template
+	db collection.
+
+	Parameters
+	----------
+
+	Returns
+	-------
+	JSON object 
+		Error Message or Success Message
+	"""
 	try:
 		keyword = request.json['keyword']
 		category = request.json['category']
@@ -135,8 +229,19 @@ def add_imistambo_glossory():
 
 
 
-@categorizedText.route('/api/imistambo_glossory', methods = ['GET'])
-def getall_imistambo_glossory():
+@categorizedText.route('/api/imistambo_glossary', methods = ['GET'])
+def getall_imistambo_glossary():
+	"""This is a GET API request for imistambo_glossary to get all the 
+	keyword-category pairs of the Imist_ambo_template db collection.
+
+	Parameters
+	----------
+
+	Returns
+	-------
+	JSON object 
+		Error Message or List of keyword-category pairs of IMISTAMBO glossary
+	"""
 	try:
 		classifyText = ClassifyText()
 		keyword_category_list = classifyText.getall_imist_ambo()
@@ -149,8 +254,24 @@ def getall_imistambo_glossory():
 
 
 
-@categorizedText.route('/api/imistambo_glossory/<searchword>', methods = ['GET'])
-def get_imistambo_glossory(searchword):
+@categorizedText.route('/api/imistambo_glossary/<searchword>', \
+methods = ['GET'])
+def get_imistambo_glossary(searchword):
+	"""This is a GET API request for imistambo_glossary to get a list of the 
+	keyword-category pairs, filtered by keyword or category, of the 
+	Imist_ambo_template db collection.
+
+	Parameters
+	----------
+	searchword : str
+		use this to get filtered list of keyword-category pairs of IMISTAMBO
+		glossary.
+
+	Returns
+	-------
+	JSON object 
+		Error Message or List of keyword-category pairs of IMISTAMBO glossary
+	"""
 	try:
 		classifyText = ClassifyText()
 		keyword_category_list = classifyText.get_imist_ambo(searchword)
