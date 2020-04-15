@@ -30,7 +30,7 @@ class Form extends React.Component{
 			category: selectedValue
 		};
 	  
-		fetch('/api/imistambo_glossory' , {
+		fetch('/api/imistambo_glossary' , {
 			method: 'POST',
 			body: JSON.stringify(myBody),
 			headers: {
