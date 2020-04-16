@@ -31,7 +31,7 @@ __author__ = "Shefali Anand"
 __copyright__ = "Copyright 2020, P5VoiceToText"
 __credits__ = ["Shefali Anand", "Surya Cherukuri"]
 __version__ = "1.0"
-__maintainer__ = "Shefali Anand"
+__maintainer__ = ["Shefali Anand"]
 __email__ = "sanand22@asu.edu"
 __status__ = "Production"
 
