@@ -1,14 +1,53 @@
+# -*- coding: utf-8 -*-
+
+"""Creates the Flask app with DB, CORS and route configurations
+
+It creates "db" object of MongoEngine class. The necessary configurations
+including MongoDB configurations defined in config.py are loaded in app. 
+The app initializes "db" object with it's loaded configurations. 
+
+The app registers the routes of the three subpackages - files, convertedText 
+and categorizedText, allowing to access their routes or APIs. 
+"""
+
 from flask import Flask
 from flask import jsonify
 from flask_cors import CORS, cross_origin
-from P5VoiceToText.config import Config
 from flask_mongoengine import MongoEngine
+
+from P5VoiceToText.config import Config
+
+
+__author__ = "Shefali Anand"
+__copyright__ = "Copyright 2020, P5VoiceToText"
+__credits__ = ["Shefali Anand"]
+__version__ = "1.0"
+__maintainer__ = ["Shefali Anand"]
+__email__ = "sanand22@asu.edu"
+__status__ = "Production"
 
 
 db = MongoEngine()
 
 
 def create_app(config_class=Config):
+	"""Creates Flask app
+
+	1. necessary configurations in config.py is loaded in app.
+	2. initializes "db" object.
+	3. registers app with CORS
+	4. routes in subpackages are registered in app
+
+	Parameters
+	----------
+	Config : config.py
+		all the necessary configurations required to setup app
+
+	Return
+	------
+	Flask app
+		Flask Project app
+	"""
 	app = Flask(__name__)
 	app.config.from_object(Config)
 	CORS(app, resources={r"/*": {"origins": "*"}})
