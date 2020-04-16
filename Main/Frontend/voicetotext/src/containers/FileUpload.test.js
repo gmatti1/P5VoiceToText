@@ -5,9 +5,14 @@ import { configure } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
 configure({ adapter: new Adapter() });
+beforeAll(() => {
+    global.fetch = jest.fn();
+    //window.fetch = jest.fn(); if running browser environment
+  });
+  let wrapper;
 
 describe("FileUpload", () => {
-    let wrapper;
+    
     let mockSubmit;
     beforeEach(() => {
       mockSubmit = jest.fn();
@@ -56,50 +61,8 @@ describe("handleChange", () => {
   });
   
   
-  it("should call preventDefault", () => {
-    const mockPreventDefault = jest.fn();
-    const mockEvent = {
-      preventDefault: mockPreventDefault
-    };
-    wrapper.instance().handleSubmit(mockEvent);
-    expect(mockPreventDefault).toHaveBeenCalled();
-  });
-  it("should return if submitActive is false", () => {
-    const mockPreventDefault = jest.fn();
-    const mockEvent = {
-      preventDefault: mockPreventDefault
-    };
-    
-    const spy = jest.spyOn(wrapper.instance(), "handleSubmit");
-    wrapper.instance().forceUpdate();
-    
-    wrapper.instance().handleSubmit(mockEvent);
-    expect(spy).toReturn();
-  });
-  it("should call submit with the correct params", () => {
-    wrapper.setState({
-        isFileUploaded: null,
-        title: '',
-        textCategorized: [],
-        loading: false,
-        filename: '',
-        convertedText: '',
-        textdone: false,
-        disabled: false,
-        istextupdated: false,
-        targetElement: null,
-        stats: [],
-    });
-    const expected = {
-      title: "test title",
-      description: "test description"
-    };
-    const mockPreventDefault = jest.fn();
-    const mockEvent = {
-      preventDefault: mockPreventDefault
-    };
-    wrapper.instance().handleSubmit(mockEvent);
-    expect(mockSubmit).toHaveBeenCalledWith(expected);
-  });
+
+  
+ 
 })
   
