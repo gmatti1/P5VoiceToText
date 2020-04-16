@@ -76,12 +76,11 @@ class Config(object):
 		'host': 'mongodb://localhost/P5VoiceToText'
 	}
 
-	'''
-	#MongoDB PROD
-	MONGODB_SETTINGS = {
-		'host': 'mongodb://54.214.166.253:27017/P5VoiceToText'
-	}
-	'''
+	
+class DevelopmentConfig(Config):
+    """Configurations for Development"""
+    DEBUG = True
+
 
 class TestingConfig(Config):
     """Configurations for Testing, with a separate test database."""
@@ -91,13 +90,20 @@ class TestingConfig(Config):
 	}
     DEBUG = True
 
-class DevelopmentConfig(Config):
-    """Configurations for Development."""
-    DEBUG = True
+
+class ProductionConfig(Config):
+	"""Configurations for Testing, with a database hosted in Production Server."""
+	TESTING = False
+	#MongoDB PROD
+	MONGODB_SETTINGS = {
+		'host': 'mongodb://54.214.166.253:27017/P5VoiceToText'
+	}
+	DEBUG = False
+
 
 app_config = {
     'development': DevelopmentConfig,
     'testing': TestingConfig,
     # 'staging': StagingConfig,
-    # 'production': ProductionConfig,
+    'production': ProductionConfig,
 }
