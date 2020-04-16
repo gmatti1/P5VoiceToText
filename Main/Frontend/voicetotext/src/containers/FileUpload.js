@@ -114,10 +114,10 @@ class FileUpload extends React.Component {
         'Content-Type': 'application/json',
       },
     })
-      .then((response) => response.json())
-      .then((textCategorized) => {
-        this.formatCategories(textCategorized);
-      });
+    .then((response) => response.json())
+    .then((textCategorized) => {
+      this.formatCategories(textCategorized);
+    });
   }
 
   handleChange = (event) => {
@@ -223,8 +223,9 @@ class FileUpload extends React.Component {
         count++;
       }
     }
-    total /= count;
-    return total.toString();
+    if(count !== 0)
+      total /= count;
+    return Math.round((total) * 100).toString() + '%'
   }
 
   showTargetElement = () => {
