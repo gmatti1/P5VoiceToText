@@ -3,7 +3,8 @@
 """Let's you start the Flask Project app
 
 Calls create_app() function to create Flask's app that once started or run, 
-let's you access all the backend APIs
+let's you access all the backend APIs. The app is launched here in development
+environment. 
 
 The create_app() can be accessed in P5VoiceToText directory's __init__.py
 """
@@ -22,4 +23,4 @@ __status__ = "Production"
 app = create_app(config_name="development")
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

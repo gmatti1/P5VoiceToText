@@ -15,7 +15,7 @@ from flask import jsonify
 from flask_cors import CORS, cross_origin
 from flask_mongoengine import MongoEngine
 
-from P5VoiceToText.config import Config
+from P5VoiceToText.config import Config, app_config
 
 
 __author__ = "Shefali Anand"
@@ -49,7 +49,8 @@ def create_app(config_name):
 		Flask Project app
 	"""
 	app = Flask(__name__)
-	app.config.from_object(Config)
+	app.config.from_object(app_config[config_name])
+	app.config.from_pyfile('config.py')
 	CORS(app, resources={r"/*": {"origins": "*"}})
 
 	db.init_app(app)

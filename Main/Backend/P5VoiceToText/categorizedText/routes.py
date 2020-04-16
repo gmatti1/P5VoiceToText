@@ -66,11 +66,11 @@ def textCategorization(filename):
 		if classifyText.if_categorized_text_exists(filename):
 			print("Categorized Text already exists")
 			text = classifyText.get_categorizedText_from_db(filename)
-			return jsonify(text)
+			return jsonify(text), 200
 
 		text = classifyText.clean_and_classify()
 		classifyText.save_categorizedText_in_db()
-		return jsonify(text)
+		return jsonify(text), 201
 	except:
 		message = {
 			"message": "Internal Server Error, something went wrong"
@@ -109,7 +109,7 @@ def get_categorizedText(filename):
 			}
 			return jsonify(message), 404
 		text = classifyText.get_categorizedText_from_db(filename)
-		return jsonify(text)
+		return jsonify(text), 200
 	except:
 		message = {
 			"message": "Internal Server Error, something went wrong"
@@ -156,7 +156,7 @@ def update_categorizedText(filename):
 
 		text = classifyText.clean_and_classify()
 		classifyText.update_categorizedText_in_db()
-		return jsonify(text)
+		return jsonify(text), 200
 	except:
 		message = {
 			"message": "Internal Server Error, something went wrong"
@@ -184,7 +184,7 @@ def add_imistambo_glossary_inbulk():
 		message = {
 			"message": "Successfully added"
 		}
-		return jsonify(message), 200
+		return jsonify(message), 201
 	except:
 		message = {
 			"message": "Internal Server Error, something went wrong"
@@ -220,7 +220,7 @@ def add_imistambo_glossary():
 			message = {
 				"message": "Keyword-Category Pair added and all the CategorizedTexts are updated"
 			}
-			return jsonify(message), 200
+			return jsonify(message), 201
 	except:
 		message = {
 			"message": "Internal Server Error, something went wrong"
