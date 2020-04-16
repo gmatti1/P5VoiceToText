@@ -13,13 +13,13 @@ import os
 
 __author__ = "Shefali Anand"
 __copyright__ = "Copyright 2020, P5VoiceToText"
-__credits__ = ["Shefali Anand", "Gangadhar Matti"]
+__credits__ = ["Shefali Anand", "Gangadhar Matti", "Surya Cherukuri"]
 __version__ = "1.0"
-__maintainer__ = ["Shefali Anand", "Gangadhar Matti"]
+__maintainer__ = ["Shefali Anand", "Gangadhar Matti", "Surya Cherukuri"]
 __email__ = "sanand22@asu.edu"
 __status__ = "Production"
 
-class Config:
+class Config(object):
 	"""Defines "System Property" variables
 
 	Attributes
@@ -54,6 +54,7 @@ class Config:
 	MONGODB_SETTINGS : dictionary
 		specifies where the MongoDB is hosted
 	"""
+	DEBUG = False
 	SECRET_KEY = os.urandom(24)
 	CORS_HEADERS = ['Content-Type','Authorization']
 	UPLOAD_FOLDER = os.path.abspath(os.path.dirname(__file__)) \
@@ -81,3 +82,22 @@ class Config:
 		'host': 'mongodb://54.214.166.253:27017/P5VoiceToText'
 	}
 	'''
+
+class TestingConfig(Config):
+    """Configurations for Testing, with a separate test database."""
+    TESTING = True
+    MONGODB_SETTINGS = {
+		'host': 'mongodb://localhost/test_P5VoiceToText'
+	}
+    DEBUG = True
+
+class DevelopmentConfig(Config):
+    """Configurations for Development."""
+    DEBUG = True
+
+app_config = {
+    'development': DevelopmentConfig,
+    'testing': TestingConfig,
+    # 'staging': StagingConfig,
+    # 'production': ProductionConfig,
+}

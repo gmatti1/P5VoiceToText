@@ -30,7 +30,7 @@ __status__ = "Production"
 db = MongoEngine()
 
 
-def create_app(config_class=Config):
+def create_app(config_name):
 	"""Creates Flask app
 
 	1. necessary configurations in config.py is loaded in app.
