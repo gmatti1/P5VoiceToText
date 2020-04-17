@@ -28,10 +28,16 @@ class History extends Component {
 
   componentDidMount() {
     window.addEventListener('beforeunload', this.beforeunload);
-    fetch('/api/files')
-      .then(response =>
-        
-        response.json()).then(files => this.setState({ files: files['files'] }))
+
+    fetch('/api/files').then(response =>
+        response.json()
+        ).then(files =>{
+          //console.log(files);
+           this.setState({
+          
+           files: files['files'] })}).catch((error) => {
+            console.log(error);
+        });
   }
 
   

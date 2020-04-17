@@ -37,15 +37,14 @@ exports[`should take a snapshot 1`] = `
       <header
         class="App-footer"
       >
-        <a />
-        <a
-          href=""
-        >
-          <img
-            alt="arrow"
-            class="Arrow"
-            src="arrow.png"
-          />
+        <a>
+          <button>
+            <img
+              alt="arrow"
+              class="Arrow"
+              src="arrow.png"
+            />
+          </button>
         </a>
       </header>
     </div>
