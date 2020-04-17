@@ -2,21 +2,16 @@ import React, { Suspense } from 'react';
 import './../styles/App.css';
 import { Link } from './../../node_modules/react-scroll';
 import { slowImport } from '../containers/Helper';
-//import ConvertedText from '../containers/ConvertedText';
-//import CategorizedText from '../containers/CategorizedText';
-//import Thirdpage from '../components/Thirdpage';
+
 import Loader from '../containers/Loader';
 import PopUp from '../containers/PopUp';
-import { PropTypes } from 'react';
-import equal from 'fast-deep-equal';
+
 import {
   disableBodyScroll,
   enableBodyScroll,
   clearAllBodyScrollLocks,
 } from 'body-scroll-lock';
-//import { PropTypes } from 'react';
-//import equal from 'fast-deep-equal';
-//import styled from 'styled-components';
+
 
 const ConvertedText = React.lazy(() =>
   slowImport(import('../containers/ConvertedText'), 65000)
@@ -278,7 +273,7 @@ class FileUpload extends React.Component {
           <button
             className='Historybutton'
             type='submit'
-            onclick={this.fetchlist}
+            onClick={this.fetchlist}
           >
             Go To History
             <span className='tooltiptext'>Previously uploaded files</span>

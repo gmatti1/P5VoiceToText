@@ -68,7 +68,7 @@ class CategorizedText extends Component {
     if (!this.props.loading) {
       return null;
     } else {
-      console.log(this.props.CategorizedText);
+      console.log(this.props.textCategorized);
       return (
         <div className='Tablesize'>
           <Table striped bordered hover size='sm' responsive id='TableText'>
