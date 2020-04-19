@@ -1,18 +1,16 @@
 import React from './../../node_modules/react';
 import './../styles/App.css';
 import './../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import FileUpload from '../containers/FileUpload';
+import FileUpload from '../containers/FileUploadNew';
 
-import ErrorHandler from  './ErrorHandler';
+import ErrorHandler from './ErrorHandler';
 
 function Secondpage() {
   return (
     <div className='Secondpage' id='main'>
       <ErrorHandler>
-      <FileUpload /> 
-</ErrorHandler> 
-      
-
+        <FileUpload />
+      </ErrorHandler>
     </div>
   );
 }
