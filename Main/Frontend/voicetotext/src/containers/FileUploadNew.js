@@ -7,6 +7,7 @@ import Loader from '../containers/Loader';
 import PopUp from '../containers/PopUp';
 import ConvertedText from '../containers/ConvertedText';
 import CategorizedText from '../containers/CategorizedText';
+// import History from '../containers/History';
 
 import {
   disableBodyScroll,
@@ -21,9 +22,9 @@ import {
 //   slowImport(import('../containers/CategorizedText'), 0)
 // );
 
-const History = React.lazy(() =>
-  slowImport(import('../containers/History'), 1000)
-);
+// const History = React.lazy(() =>
+//   slowImport(import('../containers/History'), 1000)
+// );
 
 class FileUpload extends React.Component {
   constructor(props) {
