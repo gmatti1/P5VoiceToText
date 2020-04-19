@@ -7,24 +7,12 @@ import Loader from '../containers/Loader';
 import PopUp from '../containers/PopUp';
 import ConvertedText from '../containers/ConvertedText';
 import CategorizedText from '../containers/CategorizedText';
-// import History from '../containers/History';
 
 import {
   disableBodyScroll,
   enableBodyScroll,
   clearAllBodyScrollLocks,
 } from 'body-scroll-lock';
-
-// const ConvertedText = React.lazy(() =>
-//   slowImport(import('../containers/ConvertedText'), 0)
-// );
-// const CategorizedText = React.lazy(() =>
-//   slowImport(import('../containers/CategorizedText'), 0)
-// );
-
-// const History = React.lazy(() =>
-//   slowImport(import('../containers/History'), 1000)
-// );
 
 class FileUpload extends React.Component {
   constructor(props) {
@@ -75,9 +63,6 @@ class FileUpload extends React.Component {
       response.json().then((data) => {
         this.setState({ isLoaded: true, filename: data['filename'] });
       });
-      // .then(data => {
-      //   this.fetchcalltext(this.state.filename);
-      // });
     });
   };
 
@@ -158,10 +143,6 @@ class FileUpload extends React.Component {
     }
   }
 
-  //    window.onbeforeunload = function() {
-  //     return "Leaving this page will reset the wizard";
-  // };
-
   fetchcalltext(file) {
     //event.preventDefault();
     this.setState({ loading: true });
@@ -179,7 +160,6 @@ class FileUpload extends React.Component {
           textdone: true,
         })
       );
-    //.then(data => this.fecthcallcategory(file))
   }
 
   fecthcallcategory(file) {

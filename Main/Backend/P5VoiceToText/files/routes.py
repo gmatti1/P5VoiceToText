@@ -52,9 +52,9 @@ def get_file(filename):
 			return jsonify(message), 404
 	except:
 		message = {
-			"message": "Internal Server Error, something went wrong"
+			"message": "File not found"
 		}
-		return jsonify(message), 500
+		return jsonify(message), 404
 
 
 @files.route("/api/files", methods=['POST'])
