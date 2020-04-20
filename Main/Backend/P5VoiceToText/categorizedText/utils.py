@@ -39,6 +39,7 @@ __status__ = "Production"
 ps = PorterStemmer() 
 wordnet_lemmatizer = WordNetLemmatizer()
 
+
 class ClassifyText:
 
 	"""
@@ -134,6 +135,71 @@ class ClassifyText:
 		return len(text_categorization) > 0 
 
 
+	def split_into_sentences(self):
+		"""Splits the convertedText into separate sentences
+
+		It splits the convertedText into sentences by "." (period). However, 
+		the text might also include decimals and abbreviations which includes 
+		"." (periods). Hence, the text is split into sentences, taking decimals
+		and abbreviations into consideration.
+
+		Returns
+		-------
+		list of string
+			returns a list of all sentences belonging to convertedText
+		"""
+		text = self.text
+
+		#Split not by decimals e.g 3.14
+		digits = "([0-9])"
+		text = re.sub(digits + "[.]" + digits,"\\1<prd>\\2", text)
+		
+		#Split not by abbreviations
+		alphabets= "([A-Za-z])"
+		#e.g: G.C.S.
+		text = re.sub(" " + alphabets + "[.]" + alphabets + "[.]" + alphabets \
+	 		+ "[.] "," \\1<abbr>\\2<abbr>\\3<abbr> ",text)
+	  	#e.g: G.C.S
+		text = re.sub(" " + alphabets + "[.]" + alphabets + "[.]" + alphabets \
+	 		+ " "," \\1<abbr>\\2<abbr>\\3<abbr> ",text)
+	  	#e.g: G. C. S
+		text = re.sub(" " + alphabets + "[.] " + alphabets + "[.] " + alphabets \
+	 		+ " " ," \\1<abbr>\\2<abbr>\\3<abbr> ",text)
+	  	#e.g: G. C. S.
+		text = re.sub(" " + alphabets + "[.] " + alphabets + "[.] " + alphabets \
+	 		+ "[.] "," \\1<abbr>\\2<abbr>\\3<abbr> ",text)
+	  	#e.g: G C S
+		text = re.sub(" " + alphabets + " " + alphabets + " " + alphabets \
+	 		+ " "," \\1<abbr>\\2<abbr>\\3<abbr> ",text)
+	    #e.g: R.R.
+		text = re.sub(" "+alphabets + "[.]" + alphabets + "[.] ",\
+			" \\1<abbr>\\2<abbr> ",text)
+	  	#e.g: R.R
+		text = re.sub(" "+alphabets + "[.]" + alphabets + " ",\
+			" \\1<abbr>\\2<abbr> ",text)
+	  	#e.g: R. R
+		text = re.sub(" " +alphabets + "[.] " + alphabets +" " ,\
+			" \\1<abbr>\\2<abbr> ",text)
+	  	#e.g: R. R.
+		text = re.sub(" " + alphabets + "[.] " + alphabets + "[.] ",\
+			" \\1<abbr>\\2<abbr> ",text)
+	  	#e.g: R R
+		text = re.sub(" " + alphabets + " " + alphabets + " " ,\
+			"  \\1<abbr>\\2<abbr> ",text)
+
+		if "”" in text: text = text.replace(".”","”.")
+		if "\"" in text: text = text.replace(".\"","\".")
+		if "!" in text: text = text.replace("!\"","\"!")
+		text = text.replace(".",".<stop>")
+		text = text.replace("!","!<stop>")
+		text = text.replace("<prd>",".")
+		text = text.replace("<abbr>",".")
+		sentences = text.split("<stop>")
+		sentences = sentences[:-1]
+		sentences = [s.strip() for s in sentences]
+		return sentences
+
+
 	def remove_stopwords(self, sentence):
 		"""The function to filter the sentence by removing stopwords 
 		(e.g. punctuations, articles)
@@ -163,6 +229,7 @@ class ClassifyText:
 
 	def stemming_and_lemmatization_text(self, words):
 		"""The function to get root of words using Stemming and Lemmatization
+		It avoids abbreviations.
 
 		Parameters
 		----------
@@ -174,8 +241,19 @@ class ClassifyText:
 		list of str
 			list of root of the given words.
 		"""
-		words = [wordnet_lemmatizer.lemmatize(ps.stem(word)) for word in words]
-		return words
+		alphabets= "([A-Za-z])"
+		abbr_3letter = alphabets+"[.]"+alphabets+"[.]"+alphabets
+		abbr_2letter = alphabets+"[.]"+alphabets
+		res_words = []
+		for word in words:
+			if re.search(abbr_3letter, word):
+				word = re.sub(abbr_3letter, "\\1\\2\\3", word)
+			elif re.search(abbr_2letter, word):
+				word = re.sub(abbr_2letter, "\\1\\2", word)
+			else:
+				word = wordnet_lemmatizer.lemmatize(ps.stem(word))
+			res_words.append(word)
+		return res_words
 		
 
 	def clean_text(self, sentence):
@@ -286,7 +364,8 @@ class ClassifyText:
 
 
 	def clean_and_classify(self):
-		"""This function will first call clean_text() function to filter the 
+		"""This function will first call split_into_sentences() to split the 
+		convertedTet into sentences, then clean_text() function to filter the 
 		sentences of convertedText and then call classify_text_into_categories()
 		function to classify the sentences of convertedText into IMIST-AMBO 
 		categories.
@@ -301,8 +380,7 @@ class ClassifyText:
 			given sentence as value to the corresponding key (category)
 
 		"""
-		self.text = re.sub(r"(\d)\.(\d)", r"\1[PROTECTED_DOT]\2", self.text)
-		self.sentences = self.text.split('.')
+		self.sentences = self.split_into_sentences()
 
 		for sentence in self.sentences:
 			sentence = sentence.replace("[PROTECTED_DOT]", ".")
