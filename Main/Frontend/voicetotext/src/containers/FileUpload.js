@@ -1,4 +1,5 @@
 import React, { Suspense } from 'react';
+import Form from 'react-bootstrap/Form';
 import './../styles/App.css';
 import { Link } from './../../node_modules/react-scroll';
 import { slowImport } from '../containers/Helper';
@@ -247,6 +248,7 @@ class FileUpload extends React.Component {
       <div>
         <form onSubmit={this.OnSubmittingForm}>
           <h1 className='Uploadheader'>Please upload the audio file</h1>
+		  
 		  <input           
             type='file'
 			className="Input"
