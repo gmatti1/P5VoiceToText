@@ -19,7 +19,8 @@ APIs for IMIST-AMBO Glossary.
 from flask import request, flash, jsonify, Blueprint
 
 from P5VoiceToText.config import Config
-from P5VoiceToText.categorizedText.utils import ClassifyText
+from P5VoiceToText.categorizedText.utils_classifytext import ClassifyText
+from P5VoiceToText.categorizedText.utils_imistambo import ImistAmbo
 
 
 __author__ = "Shefali Anand"
@@ -179,8 +180,8 @@ def add_imistambo_glossary_inbulk():
 		Error Message or Success Message
 	"""
 	try:
-		classifyText = ClassifyText()
-		classifyText.insert_into_imist_ambo_inbulk()
+		imistAmbo = ImistAmbo()
+		imistAmbo.insert_into_imist_ambo_inbulk()
 		message = {
 			"message": "Successfully added"
 		}
@@ -209,8 +210,8 @@ def add_imistambo_glossary():
 	try:
 		keyword = request.json['keyword']
 		category = request.json['category']
-		classifyText = ClassifyText()
-		result = classifyText.insert_into_imist_ambo(keyword, category)
+		imistAmbo = ImistAmbo()
+		result = imistAmbo.insert_into_imist_ambo(keyword, category)
 		if result == 2:
 			message = {
 				"message": "Keyword-Category Pair already exists"
@@ -243,8 +244,8 @@ def getall_imistambo_glossary():
 		Error Message or List of keyword-category pairs of IMISTAMBO glossary
 	"""
 	try:
-		classifyText = ClassifyText()
-		keyword_category_list = classifyText.getall_imist_ambo()
+		imistAmbo = ImistAmbo()
+		keyword_category_list = imistAmbo.getall_imist_ambo()
 		return jsonify(keyword_category_list), 200
 	except:
 		message = {
@@ -273,8 +274,8 @@ def get_imistambo_glossary(searchword):
 		Error Message or List of keyword-category pairs of IMISTAMBO glossary
 	"""
 	try:
-		classifyText = ClassifyText()
-		keyword_category_list = classifyText.get_imist_ambo(searchword)
+		imistAmbo = ImistAmbo()
+		keyword_category_list = imistAmbo.get_imist_ambo(searchword)
 		return jsonify(keyword_category_list), 200
 	except:
 		message = {
