@@ -728,6 +728,8 @@ class ClassifyText:
 		----------
 		keyword : str
 			a word which will be stemmed and lemmatized to store its root word
+			but if it's an acronym or abbreviation then it won't be stemmed or
+			lemmatized
 		category : str
 			any of the IMIST or O category
 
@@ -736,8 +738,21 @@ class ClassifyText:
 		int
 		status telling if the keyword-category pair is stored
 
-		"""		
-		keyword = wordnet_lemmatizer.lemmatize(ps.stem(keyword))
+		"""	
+		alphabets= "([A-Za-z])"
+		abbr_3letter = alphabets+"[.]"+alphabets+"[.]"+alphabets+"[.]"
+		abbr_2letter = alphabets+"[.]"+alphabets+"[.]"
+
+		keyword_arr = keyword.split(" ")
+		keyword = ""
+		for key in keyword_arr:
+			if re.search(abbr_3letter, key):
+				keyword += re.sub(abbr_3letter, "\\1\\2\\3", key) + " "
+			elif re.search(abbr_2letter, key):
+				keyword += re.sub(abbr_2letter, "\\1\\2", key) + " "
+			else:	
+				keyword += wordnet_lemmatizer.lemmatize(ps.stem(key)) + " "
+		keyword = keyword.strip()
 		imist_ambos = Imist_ambo_template.objects.filter(keyword=keyword)
 		if len(imist_ambos)>0:
 			imist_ambo = imist_ambos[0]
