@@ -26,7 +26,6 @@ from P5VoiceToText import db
 from P5VoiceToText.models import Imist_ambo_template, Voice_files
 from P5VoiceToText.models import Voice_text_conversion, Text_categorization
 
-
 __author__ = "Shefali Anand"
 __copyright__ = "Copyright 2020, P5VoiceToText"
 __credits__ = ["Shefali Anand", "Surya Cherukuri"]
@@ -34,7 +33,6 @@ __version__ = "1.0"
 __maintainer__ = ["Shefali Anand"]
 __email__ = "sanand22@asu.edu"
 __status__ = "Production"
-
 
 ps = PorterStemmer() 
 wordnet_lemmatizer = WordNetLemmatizer()
@@ -126,7 +124,6 @@ class ClassifyText:
 		-------
 		bool 
 			returns true if the text exists, otherwise false
-
 		"""
 		self.voice_file = Voice_files.objects.filter(filename=filename)[0]
 		text_categorization = Text_categorization.objects\

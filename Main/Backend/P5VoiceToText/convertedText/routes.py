@@ -1,3 +1,36 @@
+# -*- coding: utf-8 -*-
+
+"""This file contains all the APIs for audio files
+
+All the audio files are physically stored in Amazon S3, and a copy of
+filename, along with the S3 link for that file is stored in local MongoDB
+document named "voice_files". In S3 the files are store in the sub-folders,
+and these folders are arranged and "MM-DD-YYYY" format of their submission date.
+
+For each audio file, it should be first be called with a POST /api/files and
+the body containing the actual file in JSON format. This does 3 operations
+1. Check if the file name already exists in the system, if yes rename it by appending
+timestamp at the end of the file or else proceed.
+2. If the audio file extension is supported by AWS, else convert it to the format
+which AWS Transcribe expects.
+3. Store the file in AWS S3 and add an entry into "voice_files".
+
+
+
+For every voice file, voice-to-text conversion takes place which gives us
+convertedText. The sentences of every convertedText, needs to be classified
+into imist-ambo categories. The classification results are called
+categorizedTexts. This file provides POST, PUT and GET request APIs for
+categorizedTexts.
+
+The classification into IMIST-AMBO categories depends on IMIST-AMBO Glossary
+which is saved into the database as Imist_ambo_template. This Glossary contains
+keyword-category pairs. If a word in a sentence, matches with a keyword in
+Imist_ambo_template, then that sentence will belong to the corresponding
+category of the keyword-category pair. This file provides, POST and GET request
+APIs for IMIST-AMBO Glossary.
+"""
+
 from flask import request, flash, jsonify, Blueprint, render_template
 from P5VoiceToText.config import Config
 from P5VoiceToText.convertedText.utils import VoiceText
