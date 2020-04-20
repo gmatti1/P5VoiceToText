@@ -76,19 +76,21 @@ class Config(object):
 		'host': 'mongodb://localhost/P5VoiceToText'
 	}
 
+
 	
 class DevelopmentConfig(Config):
-    """Configurations for Development"""
-    DEBUG = True
+	"""Configurations for Development"""
+	DEBUG = True
 
 
 class TestingConfig(Config):
-    """Configurations for Testing, with a separate test database."""
-    TESTING = True
-    MONGODB_SETTINGS = {
+	"""Configurations for Testing, with a separate test database."""
+	TESTING = True
+	MONGODB_SETTINGS = {
 		'host': 'mongodb://localhost/test_P5VoiceToText'
 	}
-    DEBUG = True
+	Config.BUCKET_NAME = 'testvoicetotextbucket'
+	DEBUG = True
 
 
 class ProductionConfig(Config):
@@ -102,8 +104,8 @@ class ProductionConfig(Config):
 
 
 app_config = {
-    'development': DevelopmentConfig,
-    'testing': TestingConfig,
-    # 'staging': StagingConfig,
-    'production': ProductionConfig,
+	'development': DevelopmentConfig,
+	'testing': TestingConfig,
+	# 'staging': StagingConfig,
+	'production': ProductionConfig,
 }

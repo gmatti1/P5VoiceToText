@@ -81,7 +81,7 @@ def get_convertedText(filename):
 @convertedText.route("/api/convertedText/<filename>", methods=['PUT'])
 def update_convertedText(filename):
 	content = request.json
-	if content and 'text' not in content:
+	if not bool(content) or 'text' not in content:
 		print("In here")
 		message = {
 			"message": "text is not present in the request"
