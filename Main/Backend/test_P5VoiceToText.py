@@ -72,7 +72,7 @@ class P5VoiceToTextTestCase(unittest.TestCase):
         self.assertEqual(res1.status, '200 OK')
 
     def test_get_single_file_without_file_in_database(self):
-        res = self.client().get('/api/files/random.wav')
+        res = self.client().get('/api/files/test.wav')
         self.assertEqual(res.status, '404 NOT FOUND')
 
     
@@ -88,7 +88,6 @@ class P5VoiceToTextTestCase(unittest.TestCase):
         self.assertEqual(res1.status, '200 OK')
     
     def test_voice_to_text_conversion_with_duplicate_file(self):
-        #doubt
         path = 'test.wav'
         with open(path, 'rb') as f:
             byteIO1 = BytesIO(f.read())
@@ -100,7 +99,7 @@ class P5VoiceToTextTestCase(unittest.TestCase):
         self.assertEqual(res2.status, '200 OK')
 
     def test_voice_to_text_conversion_without_file_in_database(self):
-        res = self.client().post('/api/convertedText/random.wav')
+        res = self.client().post('/api/convertedText/test.wav')
         self.assertEqual(res.status, '404 NOT FOUND')
     
     def test_get_converted_text(self):
@@ -124,7 +123,7 @@ class P5VoiceToTextTestCase(unittest.TestCase):
         self.assertEqual(res1.status, '404 NOT FOUND')
 
     def test_get_converted_text_without_file_in_database(self):
-        res = self.client().get('/api/convertedText/random.wav')
+        res = self.client().get('/api/convertedText/test.wav')
         self.assertEqual(res.status, '404 NOT FOUND')
 
     def test_update_converted_text(self):
@@ -152,7 +151,7 @@ class P5VoiceToTextTestCase(unittest.TestCase):
         
 
     def test_update_converted_text_without_file_in_database(self):
-        res = self.client().put('/api/convertedText/random.wav', json={'text':'Updated Text'})
+        res = self.client().put('/api/convertedText/test.wav', json={'text':'Updated Text'})
         self.assertEqual(res.status, '404 NOT FOUND')
         
     
@@ -166,7 +165,47 @@ class P5VoiceToTextTestCase(unittest.TestCase):
         self.assertEqual(res1.status, '404 NOT FOUND')
         
 
+#_______________________________________Test Cases for categorizedText_______________________________________
 
+
+    def test_text_categorization(self):
+        path = 'test.wav'
+        with open(path, 'rb') as f:
+            byteIO1 = BytesIO(f.read())
+        res = self.client().post('/api/files',data = {'file': (byteIO1, path)})
+
+        res1 = self.client().post('/api/convertedText/test.wav')
+        
+        res2 = self.client().post('/api/categorizedText/test.wav')
+        self.assertEqual(res2.status, '201 CREATED')
+
+    def test_text_categorization_if_categorized_text_exists(self):
+        path = 'test.wav'
+        with open(path, 'rb') as f:
+            byteIO1 = BytesIO(f.read())
+        res = self.client().post('/api/files',data = {'file': (byteIO1, path)})
+
+        res1 = self.client().post('/api/convertedText/test.wav')
+        
+        res2 = self.client().post('/api/categorizedText/test.wav')
+        
+        res3 = self.client().post('/api/categorizedText/test.wav')
+        self.assertEqual(res3.status, '200 OK')
+
+    def test_text_categorization_without_converted_text(self):
+        path = 'test.wav'
+        with open(path, 'rb') as f:
+            byteIO1 = BytesIO(f.read())
+        res = self.client().post('/api/files',data = {'file': (byteIO1, path)})
+        
+        res1 = self.client().post('/api/categorizedText/test.wav')
+        self.assertEqual(res1.status, '404 NOT FOUND')
+
+    def test_text_categorization_without_file_in_database(self):      
+        res = self.client().post('/api/categorizedText/test.wav')
+        self.assertEqual(res.status, '404 NOT FOUND')
+
+    
 
     def tearDown(self):
         """teardown all initialized variables."""
