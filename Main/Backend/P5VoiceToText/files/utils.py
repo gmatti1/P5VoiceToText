@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 
-"""A utility for performing Text Conversion of the audio file
+"""A utility for performing storing and retrieving information of the audio file
 
-Provides a class 'AudioFile' that is responsible for converting the audio file to text.
-The text conversion is done with the help of AWS transcribe.
+Provides a class 'AudioFile' that is responsible for storing the audio file and to track all
+the required details for that file.
+
+The hard copy of the audio file is stored in Amazon S3 and its metadata in the local mongoDB
+document.
 """
 
 from P5VoiceToText.models import Voice_files
@@ -30,9 +33,10 @@ aws_bucket_name = Config.BUCKET_NAME
 
 upload_folder = Config.UPLOAD_FOLDER
 
+
 class AudioFile:
     """
-    This is a class for converting the audio file to text.
+    This is a class for storing the audio file.
 
     Attributes
     ----------

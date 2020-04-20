@@ -44,6 +44,7 @@ upload_folder = Config.UPLOAD_FOLDER
 allowed_extensions = Config.ALLOWED_EXTENSIONS
 aws_allowed_extensions = Config.AWS_ALLOWED_EXTENSIONS
 
+
 @files.route("/api/files", methods=['GET'])
 def get_all_files():
 	"""This is a GET API request for files. It does not take an input
@@ -84,7 +85,7 @@ def get_file(filename):
 	Parameters
 	----------
 	filename : str
-		name of the voice file for which categorization needs to be done
+		name of the voice file
 
 	Returns
 	-------
@@ -128,7 +129,7 @@ def add_new_file():
 	Parameters
 	----------
 	filename : str
-		name of the voice file for which categorization needs to be done
+		name of the voice file
 
 	Body:
 	-----
