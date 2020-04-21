@@ -10,7 +10,8 @@ class CategorizedText extends Component {
     super(props);
 	}
 
-	render() {
+	render() 
+	{
     // var identification_keywords = "";
     // if(this.props.textCategorized.identification.length >= 1)
     //   identification_keywords = this.props.textCategorized.identification[0];
@@ -65,63 +66,64 @@ class CategorizedText extends Component {
     // for(var i = 1; i< this.props.textCategorized.other.length; i++)
     //   other_keywords+= ', ' + this.props.textCategorized.other[i];    
 
-    if (!this.props.loading) {
-		return null;
-	} 
-	else 
-	{
-		console.log(this.props.textCategorized);
-		return (
-			<div className='Tablesize'>
-				<Table striped bordered hover size='sm' responsive id='TableText'>
-					<thead>
-						<tr>
-							<th>Category</th>
-							<th>Value</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>Identification</td>
-							<td>{nl2br(this.props.textCategorized.identification)}</td>
-						</tr>
-						<tr>
-							<td>Mechanism</td>
-							<td>{nl2br(this.props.textCategorized.mechanism)}</td>
-						</tr>
-						<tr>
-							<td>Injuries</td>
-							<td>{nl2br(this.props.textCategorized.injury)}</td>
-						</tr>
-						<tr>
-							<td>Signs</td>
-							<td colSpan='2'>{nl2br(this.props.textCategorized.signs)}</td>
-						</tr>
-						<tr>
-							<td>Treatment</td>
-							<td>{nl2br(this.props.textCategorized.treatment)}</td>
-						</tr>
-						<tr>
-							<td>Allergies</td>
-							<td>{nl2br(this.props.textCategorized.allergy)}</td>
-						</tr>
-						<tr>
-							<td>Medications</td>
-							<td>{nl2br(this.props.textCategorized.medication)}</td>
-						</tr>
-						<tr>
-							<td>Background</td>
-							<td>{nl2br(this.props.textCategorized.background)}</td>
-						</tr>
-						<tr>
-							<td>Other Info</td>
-							<td >{nl2br(this.props.textCategorized.other)}</td>
-						</tr>
-					</tbody>
-				</Table>
-			</div>
-		);
-    }
+		if (!this.props.loading) 
+		{
+			return null;
+		} 
+		else 
+		{
+			console.log(this.props.textCategorized);
+			return (
+				<div className='Tablesize'>
+					<Table striped bordered hover size='sm' responsive id='TableText'>
+						<thead>
+							<tr>
+								<th>Category</th>
+								<th>Value</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Identification</td>
+								<td>{nl2br(this.props.textCategorized.identification)}</td>
+							</tr>
+							<tr>
+								<td>Mechanism</td>
+								<td>{nl2br(this.props.textCategorized.mechanism)}</td>
+							</tr>
+							<tr>
+								<td>Injuries</td>
+								<td>{nl2br(this.props.textCategorized.injury)}</td>
+							</tr>
+							<tr>
+								<td>Signs</td>
+								<td colSpan='2'>{nl2br(this.props.textCategorized.signs)}</td>
+							</tr>
+							<tr>
+								<td>Treatment</td>
+								<td>{nl2br(this.props.textCategorized.treatment)}</td>
+							</tr>
+							<tr>
+								<td>Allergies</td>
+								<td>{nl2br(this.props.textCategorized.allergy)}</td>
+							</tr>
+							<tr>
+								<td>Medications</td>
+								<td>{nl2br(this.props.textCategorized.medication)}</td>
+							</tr>
+							<tr>
+								<td>Background</td>
+								<td>{nl2br(this.props.textCategorized.background)}</td>
+							</tr>
+							<tr>
+								<td>Other Info</td>
+								<td >{nl2br(this.props.textCategorized.other)}</td>
+							</tr>
+						</tbody>
+					</Table>
+				</div>
+			);
+		}
 	}
 }
 export default CategorizedText;

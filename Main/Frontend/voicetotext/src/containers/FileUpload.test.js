@@ -16,39 +16,39 @@ import Adapter from "enzyme-adapter-react-16";
  */
 
 configure({ adapter: new Adapter() });
+
 beforeAll(() => {
     global.fetch = jest.fn();
-    
+   
   });
   let wrapper;
+
 
 describe("FileUpload", () => {
     
     let mockSubmit;
     beforeEach(() => {
-      mockSubmit = jest.fn();
-      wrapper = shallow(<FileUpload submit={mockSubmit} />);
+		mockSubmit = jest.fn();
+		wrapper = shallow(<FileUpload submit={mockSubmit} />);
     });
    
     it("should match the snapshot", () => {
-        expect(wrapper).toMatchSnapshot();
-      });
-
-
+			expect(wrapper).toMatchSnapshot();
+    });
 
 
 describe("handleChange", () => {
     it("should call setState on title", () => {
         const mockPreventDefault = jest.fn();
-    const mockEvent = {
-      preventDefault: mockPreventDefault,
-      target: {
-            
-        value: "test"
-
-    }
-    };
+		const mockEvent = {
+			preventDefault: mockPreventDefault,
+			target: {           
+				value: "test"
+			}
+		};
       
+
+	
       const expected = {
         isFileUploaded: null,
       title: '',
