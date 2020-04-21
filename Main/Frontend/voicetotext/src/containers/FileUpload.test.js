@@ -18,7 +18,7 @@ import Adapter from "enzyme-adapter-react-16";
 configure({ adapter: new Adapter() });
 beforeAll(() => {
     global.fetch = jest.fn();
-    //window.fetch = jest.fn(); if running browser environment
+    
   });
   let wrapper;
 
@@ -61,6 +61,7 @@ describe("handleChange", () => {
       disabled: false,
       istextupdated: false,
       targetElement: null,
+      uploadButtonClicked: false,
       stats: [],
         convertedText:"test"
       };
