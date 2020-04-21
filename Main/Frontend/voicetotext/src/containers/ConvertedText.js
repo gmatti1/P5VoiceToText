@@ -14,36 +14,36 @@ const HoverText = styled.textarea`
 `
 
 class ConvertedText extends Component {
-  constructor(props) {
+	constructor(props) {
     super(props);
   }
 
-  render() {
-    if (!this.props.loading) {
-      return null;
-    } else {
-      return (
-        <div>
-          <form onSubmit={this.props.handleSubmit}>
-            <div className='Textareasize'>
-              <HoverText
-                className='form-control'
-                id='Textarea'
-                value={this.props.convertedText}
-                onChange={this.props.handleChange}
-                required
-              />
-			 
-            </div>
-
-            <Button className='Save' type='submit'>
-              Save
-            </Button>
-          </form>
-        </div>
-      );
-    }
-  }
+	render() {
+		if (!this.props.loading) {
+			return null;
+		} 
+		else 
+		{
+			return (
+				<div>
+					<form onSubmit={this.props.handleSubmit}>
+						<div className='Textareasize'>
+							<HoverText
+								className='form-control'
+								id='Textarea'
+								value={this.props.convertedText}
+								onChange={this.props.handleChange}
+								required
+							/>
+						</div>
+						<Button className='Save' type='submit'>
+							Save
+						</Button>
+					</form>
+				</div>
+			);
+		}
+	}
 }
 
 export default ConvertedText;

@@ -9,17 +9,17 @@ class Loader extends React.Component {
 	
 	render() {
 	  
-    return (
+		return (
 	
-	<div>
-	<div className ="Textloader"> 
-		<div class="loadingio-spinner-wedges-bdyr6gdft3b"><div class="ldio-fbwe939p7j">
-		<div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div></div>
-		</div></div>
-	</div>
-	</div>
+		<div>
+			<div className ="Textloader"> 
+				<div class="loadingio-spinner-wedges-bdyr6gdft3b"><div class="ldio-fbwe939p7j">
+				<div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div></div>
+				</div></div>
+			</div>
+		</div>
 		
-	)
-}
+		)
+	}
 }
 export default Loader;

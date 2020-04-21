@@ -1,29 +1,18 @@
 import React, { Suspense } from 'react';
-import Form from 'react-bootstrap/Form';
 import './../styles/App.css';
 import { Link } from './../../node_modules/react-scroll';
 import { slowImport } from '../containers/Helper';
 
 import Loader from '../containers/Loader';
 import PopUp from '../containers/PopUp';
+import ConvertedText from '../containers/ConvertedText';
+import CategorizedText from '../containers/CategorizedText';
 
 import {
   disableBodyScroll,
   enableBodyScroll,
   clearAllBodyScrollLocks,
 } from 'body-scroll-lock';
-
-
-const ConvertedText = React.lazy(() =>
-  slowImport(import('../containers/ConvertedText'), 65000)
-);
-const CategorizedText = React.lazy(() =>
-  slowImport(import('../containers/CategorizedText'), 65000)
-);
-
-const History = React.lazy(() =>
-  slowImport(import('../containers/History'), 1000)
-);
 
 class FileUpload extends React.Component {
   constructor(props) {
@@ -50,6 +39,7 @@ class FileUpload extends React.Component {
       istextupdated: false,
       targetElement: null,
       stats: [],
+      uploadButtonClicked: false,
     };
 
     this.OnSubmittingForm = this.OnSubmittingForm.bind(this);
@@ -57,6 +47,9 @@ class FileUpload extends React.Component {
   }
 
   Upload_file(file) {
+    this.setState({
+      uploadButtonClicked: true,
+    });
     this.getTextHelper();
   }
 
@@ -70,9 +63,6 @@ class FileUpload extends React.Component {
       response.json().then((data) => {
         this.setState({ isLoaded: true, filename: data['filename'] });
       });
-      // .then(data => {
-      //   this.fetchcalltext(this.state.filename);
-      // });
     });
   };
 
@@ -110,10 +100,10 @@ class FileUpload extends React.Component {
         'Content-Type': 'application/json',
       },
     })
-    .then((response) => response.json())
-    .then((textCategorized) => {
-      this.formatCategories(textCategorized);
-    });
+      .then((response) => response.json())
+      .then((textCategorized) => {
+        this.formatCategories(textCategorized);
+      });
   }
 
   handleChange = (event) => {
@@ -153,10 +143,6 @@ class FileUpload extends React.Component {
     }
   }
 
-  //    window.onbeforeunload = function() {
-  //     return "Leaving this page will reset the wizard";
-  // };
-
   fetchcalltext(file) {
     //event.preventDefault();
     this.setState({ loading: true });
@@ -174,7 +160,6 @@ class FileUpload extends React.Component {
           textdone: true,
         })
       );
-    //.then(data => this.fecthcallcategory(file))
   }
 
   fecthcallcategory(file) {
@@ -191,18 +176,19 @@ class FileUpload extends React.Component {
       });
   }
 
-  formatCategories(textCategorized){
+  formatCategories(textCategorized) {
     var i = 0;
     var textArr = [];
-    Object.keys(textCategorized).forEach(key => {
-      var temp = ""
-      for(var j=0; j < textCategorized[key].length; j++){
+    Object.keys(textCategorized).forEach((key) => {
+      var temp = '';
+      for (var j = 0; j < textCategorized[key].length; j++) {
         temp += textCategorized[key][j];
-        if(j!=textCategorized[key].length-1) temp+="\n"
+        if (j != textCategorized[key].length - 1) temp += '\n';
       }
       textCategorized[key] = temp;
-    })
+    });
     this.setState({ textCategorized: textCategorized });
+    this.setState({ uploadButtonClicked: false });
   }
 
   componentDidMount() {
@@ -219,22 +205,15 @@ class FileUpload extends React.Component {
         count++;
       }
     }
-    if(count !== 0)
-      total /= count;
-    return Math.round((total) * 100).toString() + '%'
+    if (count !== 0) total /= count;
+    return Math.round(total * 100).toString() + '%';
   }
 
   showTargetElement = () => {
-    // ... some logic to show target element
-
-    // 3. Disable body scroll
     disableBodyScroll(this.targetElement);
   };
 
   hideTargetElement = () => {
-    // ... some logic to hide target element
-
-    // 4. Re-enable body scroll
     enableBodyScroll(this.targetElement);
   };
 
@@ -244,10 +223,9 @@ class FileUpload extends React.Component {
       <div>
         <form onSubmit={this.OnSubmittingForm}>
           <h1 className='Uploadheader'>Please upload the audio file</h1>
-		  
-		  <input           
+          <input
+            className='Input'
             type='file'
-			className="Input"
             ref={(ref) => {
               this.uploadInput = ref;
             }}
@@ -284,41 +262,33 @@ class FileUpload extends React.Component {
 
         <div className='Textdata'>
           <label className='LabelTextdata'>Converted Text</label>
-          {!this.state.loading ? (
-            <div></div>
+          {this.state.uploadButtonClicked ? (
+            <Loader />
           ) : (
             <div>
-              
-              <Suspense fallback={<Loader />}>
-                <ConvertedText
-                  loading={this.state.loading}
-                  convertedText={this.state.convertedText}
-                  handleSubmit={this.handleSubmit.bind(this)}
-                  handleChange={this.handleChange.bind(this)}
-                />
-				
-              </Suspense>
-			  
+              <ConvertedText
+                loading={this.state.loading}
+                convertedText={this.state.convertedText}
+                handleSubmit={this.handleSubmit.bind(this)}
+                handleChange={this.handleChange.bind(this)}
+              />
             </div>
           )}
-		  <label className='Confi'>
-                Text Confidence : {this.getConfidence()}
+          <label className='Confi'>
+            Text Confidence : {this.getConfidence()}
           </label>
         </div>
 
         <div className='Categorydata'>
           <label className='LabelTextdata'>Categorized Text</label>
 
-          {!this.state.loading ? (
-            <div></div>
+          {this.state.uploadButtonClicked ? (
+            <Loader />
           ) : (
-            <Suspense fallback={<Loader />}>
-              <CategorizedText
-                loading={this.state.loading}
-                textCategorized={this.state.textCategorized}
-              />
-			  
-            </Suspense>
+            <CategorizedText
+              loading={this.state.loading}
+              textCategorized={this.state.textCategorized}
+            />
           )}
         </div>
 
@@ -329,3 +299,4 @@ class FileUpload extends React.Component {
 }
 
 export default FileUpload;
+

@@ -6,8 +6,8 @@ return (
 		id="calltopopup"
 		ref={buttonRef}
 		onClick={showModal}
-		>
-	{triggerText}
+	>
+		{triggerText}
 	</button>
 );
 };
