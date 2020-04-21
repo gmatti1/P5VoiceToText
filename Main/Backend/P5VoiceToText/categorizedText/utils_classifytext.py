@@ -12,6 +12,9 @@ the corresponding category of the keyword-category pair.
 
 To fetch the words from sentences, Natural Language Processing (NLP) is done
 for cleaning and filtering.
+
+It saves and updates the categorizedText in db and is also responsible in 
+retrieving the categorizedText from db
 """
 
 import nltk
@@ -283,9 +286,6 @@ class ClassifyText:
 		collection. Hence, one sentence can be classified into more than one 
 		IMIST-AMBO categories. 
 
-		If a sentence has no word that could be matched to any keyword, it will 
-		be classified into 'Other' category.
-
 		Parameters
 		----------
 		sentence : str 
@@ -303,6 +303,8 @@ class ClassifyText:
 		"""
 		is_category_assigned = False
 
+		# To get age identification, we look for 'old' or 'age' words. The 
+		# words before or after them will give the age information
 		idx = 0
 		age_word = ""
 		for i in range(0, len(words)):
@@ -324,6 +326,9 @@ class ClassifyText:
 			is_category_assigned = True
 
 
+		# Every word of the sentence is matched. There are cases when there are
+		# keywords with two words (bigram) or three words (trigram). Hence 
+		# unigram, bigrams and trigrams are matched. 
 		for i in range(0, len(words)):
 			#unigrams
 			imist_ambos = Imist_ambo_template.objects.filter(keyword=words[i])
@@ -354,6 +359,8 @@ class ClassifyText:
 						.append(sentence)
 					is_category_assigned = True
 
+		# If a sentence has no word that could be matched to any keyword, it 
+		# will be classified into 'Other' category.
 		if is_category_assigned==False and len(words)>2:
 			self.category_keyword['other'].append(sentence)
 
@@ -394,7 +401,7 @@ class ClassifyText:
 
 		Returns
 		-------
-
+		
 		"""
 		text_categorization = Text_categorization(voiceFile=self.voice_file)
 		text_categorization.identification = \

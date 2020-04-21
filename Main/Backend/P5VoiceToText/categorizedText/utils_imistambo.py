@@ -1,3 +1,14 @@
+# -*- coding: utf-8 -*-
+
+"""A utility for inserting, updating and retrieving IMIST-AMBO keyword-category
+   
+Provides a class 'ImistAmbo' that helps in handling inserting, updating and 
+retrieving keyword-category pais requests into the Imist_AMBO_template db.
+
+Also, when a keyword-pair is added it is responsible for updating all the 
+existing categorizedText.
+"""
+
 import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize 
@@ -12,7 +23,7 @@ from P5VoiceToText.categorizedText.utils_classifytext import ClassifyText
 
 __author__ = "Shefali Anand"
 __copyright__ = "Copyright 2020, P5VoiceToText"
-__credits__ = ["Shefali Anand", "Surya Cherukuri"]
+__credits__ = ["Shefali Anand"]
 __version__ = "1.0"
 __maintainer__ = ["Shefali Anand"]
 __email__ = "sanand22@asu.edu"
@@ -22,6 +33,18 @@ ps = PorterStemmer()
 wordnet_lemmatizer = WordNetLemmatizer()
 
 class ImistAmbo:
+
+	"""
+	This is a class for helping in performing DB operations for 
+	Imist_ambo_template db collection
+
+	Attributes
+	----------
+	classifyText : ClassifyText
+		object for ClassifyText class. It is used when a new keyword-category 
+		pair is added and this object's functions needs to be called to update 
+		all the categorizedText.
+	"""
 
 	def __init__(self):
 		self.classifyText = ClassifyText()
@@ -253,6 +276,9 @@ class ImistAmbo:
 		status telling if the keyword-category pair is stored
 
 		"""	
+
+		# if the keyword is not an abbreviation, we need to get its stemmed and
+		# lemmatized root word. 
 		alphabets= "([A-Za-z])"
 		abbr_3letter = alphabets+"[.]"+alphabets+"[.]"+alphabets+"[.]"
 		abbr_2letter = alphabets+"[.]"+alphabets+"[.]"
@@ -267,6 +293,12 @@ class ImistAmbo:
 			else:	
 				keyword += wordnet_lemmatizer.lemmatize(ps.stem(key)) + " "
 		keyword = keyword.strip()
+
+		# If keyword exits in DB
+		# 	corresponding category is same as that given by user then exit.
+		#	corresponding category not same then update the category in DB.
+		# If it doesn't exist
+		# 	new keyword-category pair is inserted in DB.
 		imist_ambos = Imist_ambo_template.objects.filter(keyword=keyword)
 		if len(imist_ambos)>0:
 			imist_ambo = imist_ambos[0]
@@ -278,6 +310,10 @@ class ImistAmbo:
 		else:
 			imist_ambo = \
 				Imist_ambo_template(keyword=keyword, category=category).save()
+
+		# When the keyword-category pair is updated or new one is inserted, 
+		# all the categorizedTexts in DB needs to be updated to reflect the 
+		# change in IMIST-AMBO Glossary.
 		self.classifyText.update_categorized_text_forall_records()
 		return 1
 
