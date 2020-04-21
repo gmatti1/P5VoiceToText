@@ -71,16 +71,13 @@ class Config(object):
 	ACCESS_SECRET_KEY = 'tGTLObhHlXXfu24Z/hXMM7EaPnsh7KfgYM1Wap3g'
 	BUCKET_NAME = 'voicetotextsourcefile'
 
-	#MongoDB DEV
-	MONGODB_SETTINGS = {
-		'host': 'mongodb://localhost/P5VoiceToText'
-	}
-
-
 	
 class DevelopmentConfig(Config):
 	"""Configurations for Development"""
 	DEBUG = True
+	MONGODB_SETTINGS = {
+		'host': 'mongodb://localhost/P5VoiceToText'
+	}
 
 
 class TestingConfig(Config):
