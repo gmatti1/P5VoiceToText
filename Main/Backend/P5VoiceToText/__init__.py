@@ -33,11 +33,6 @@ db = MongoEngine()
 def create_app(config_name):
 	"""Creates Flask app
 
-	1. necessary configurations in config.py is loaded in app.
-	2. initializes "db" object.
-	3. registers app with CORS
-	4. routes in subpackages are registered in app
-
 	Parameters
 	----------
 	Config : config.py
@@ -48,17 +43,22 @@ def create_app(config_name):
 	Flask app
 		Flask Project app
 	"""
+
+	# necessary configurations in config.py is loaded in app.
 	app = Flask(__name__)
 	app.config.from_object(app_config[config_name])
 	app.config.from_pyfile('config.py')
+
+	# registers app with CORS
 	CORS(app, resources={r"/*": {"origins": "*"}})
 
+	# initializes "db" object.
 	db.init_app(app)
-
+	
+	# routes in subpackages are registered in app
 	from P5VoiceToText.files.routes import files
 	from P5VoiceToText.convertedText.routes import convertedText
 	from P5VoiceToText.categorizedText.routes import categorizedText
-
 	app.register_blueprint(files)
 	app.register_blueprint(convertedText)
 	app.register_blueprint(categorizedText)
