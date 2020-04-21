@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should take a snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="Thirdpage"
+    id="hist"
+  >
+    <div
+      class="HistoryComponent"
+    >
+      <form>
+        <div
+          class="Historytext"
+        >
+          History
+        </div>
+        <div
+          class="Historylist"
+        >
+          <select
+            class="Historyselect"
+            required=""
+            size="10"
+          />
+        </div>
+        <div
+          class="SearchHist"
+        >
+          <input
+            class="Search"
+            placeholder=" Search filename.."
+            type="text"
+            value=""
+          />
+        </div>
+      </form>
+      <button
+        class="btn btn-danger center"
+        id="histcalltopopup"
+      >
+        See saved result
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;

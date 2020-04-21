@@ -3,6 +3,17 @@ import HistPopUp from '../containers/HistPopUp';
 import './../styles/index.css';
 import './../styles/App.css';
 
+
+/**
+ * 
+ *
+ * @version 1.0
+ * @author [Shashidhar Reddy Vanteru]
+ * @copyright [Copyright 2020, P5VoiceToText]
+ * @credits  [Shashidhar Reddy Vanteru]
+ * @email "svanter1@asu.edu"
+ * 
+ */
 class History extends Component {
 	constructor(props) 
 	{
@@ -77,13 +88,11 @@ class History extends Component {
 	}
 	
 	formatCategories(invalue){
-		var i = 0;
-		var textArr = [];
 		Object.keys(invalue).forEach(key => {
 		var temp = ""
 		for(var j=0; j < invalue[key].length; j++){
 			temp += invalue[key][j];
-			if(j!=invalue[key].length-1) temp+="\n"
+			if(j!==invalue[key].length-1) temp+="\n"
 		}
 		invalue[key] = temp;
 		})
@@ -109,10 +118,10 @@ class History extends Component {
 		headers: {
 			'Content-Type': 'application/json'
 		}
-		}).
-		then(response => response.json())
+		}).then(response => response.json())
 		.then(title =>
 		{
+
 			this.setState({ invalueother:title['text'],
 			stats:title['stats']
 		});
@@ -130,15 +139,13 @@ class History extends Component {
         console.log(textCategorized);
         this.setState({ invalue:textCategorized
 		});
-		console.log(this.state.invalue);
+		console.log(this.state.invalue);	
 		this.formatCategories(this.state.invalue)
 		})
     }
 
 	formatCategories(textCategorized)
 	{
-		var i = 0;
-		var textArr = [];
 		Object.keys(textCategorized).forEach(key => {
 		var temp = ""
 		for(var j=0; j < textCategorized[key].length; j++){

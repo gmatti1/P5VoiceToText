@@ -1,7 +1,8 @@
 import React from 'react';
 
 import {render, cleanup} from '@testing-library/react';
-import App from './App';
+
+import Thirdpage from './Thirdpage';
 
 /**
  * 
@@ -16,8 +17,8 @@ import App from './App';
 
 afterEach(cleanup)
 it('should take a snapshot', () => {
-  const { asFragment } = render(<App />)
+  const { asFragment } = render(<Thirdpage />)
   
-  expect(asFragment(<App />)).toMatchSnapshot()
+  expect(asFragment(<Thirdpage />)).toMatchSnapshot()
  });
 

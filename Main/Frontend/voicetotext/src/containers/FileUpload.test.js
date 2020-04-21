@@ -4,13 +4,25 @@ import FileUpload from "./FileUpload";
 import { configure } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
+/**
+ * 
+ *
+ * @version 1.0
+ * @author [Shashidhar Reddy Vanteru]
+ * @copyright [Copyright 2020, P5VoiceToText]
+ * @credits  [Shashidhar Reddy Vanteru]
+ * @email "svanter1@asu.edu"
+ * 
+ */
+
 configure({ adapter: new Adapter() });
 
 beforeAll(() => {
     global.fetch = jest.fn();
-    //window.fetch = jest.fn(); if running browser environment
-});
-let wrapper;
+   
+  });
+  let wrapper;
+
 
 describe("FileUpload", () => {
     
@@ -35,22 +47,30 @@ describe("handleChange", () => {
 			}
 		};
       
-		const expected = {
-			isFileUploaded: null,
-			title: '',
-			textCategorized: [],     
-			loading: false,
-			filename: '',   
-			textdone: false,
-			disabled: false,
-			istextupdated: false,
-			targetElement: null,
-			stats: [],
-			convertedText:"test"
-		};
-		wrapper.instance().handleChange(mockEvent);
-		expect(wrapper.state()).toEqual(expected);
-		});
-	});
+
+	
+      const expected = {
+        isFileUploaded: null,
+      title: '',
+      textCategorized: [],
+     
+      loading: false,
+      filename: '',
+      
+      textdone: false,
+      disabled: false,
+      istextupdated: false,
+      targetElement: null,
+      uploadButtonClicked: false,
+      stats: [],
+        convertedText:"test"
+      };
+      wrapper.instance().handleChange(mockEvent);
+      
+      expect(wrapper.state()).toEqual(expected);
+    });
+   
+  });
+  
 })
   

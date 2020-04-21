@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import './../styles/App.css';
 import { Link } from './../../node_modules/react-scroll';
 import { slowImport } from '../containers/Helper';
@@ -7,6 +7,16 @@ import PopUp from '../containers/PopUp';
 import ConvertedText from '../containers/ConvertedText';
 import CategorizedText from '../containers/CategorizedText';
 
+/**
+ * 
+ *
+ * @version 1.0
+ * @author [Shashidhar Reddy Vanteru]
+ * @copyright [Copyright 2020, P5VoiceToText]
+ * @credits  [Shashidhar Reddy Vanteru]
+ * @email "svanter1@asu.edu"
+ * 
+ */
 
 class FileUpload extends React.Component {
 	constructor(props) 
@@ -97,17 +107,17 @@ class FileUpload extends React.Component {
 		this.setState({ convertedText: event.target.value });
 	};
 
-	handleChangeupload = (event) => {
-		if (event.target.value != null) {
-		localStorage.setItem('value', event.target.value);
-		this.setState({ disabled: false });
-		}
-	};
-  
-	componentDidMount() 
-	{
-		window.addEventListener('beforeunload', this.beforeunload);
-	}
+
+  handleChangeupload = (event) => {
+    if (event.target.value != null) {
+      localStorage.setItem('value', event.target.value);
+      this.setState({ disabled: false });
+    }
+  };
+  componentDidMount() {
+    this.targetElement = document.querySelector('#popup1');
+    window.addEventListener('beforeunload', this.beforeunload);
+  }
 
 	componentWillUnmount() {
 		window.removeEventListener('beforeunload', this.beforeunload);
@@ -160,6 +170,7 @@ class FileUpload extends React.Component {
 		.then((response) => response.json())
 		.then((textCategorized) => {
         this.formatCategories(textCategorized);
+
 		});
 	}
 

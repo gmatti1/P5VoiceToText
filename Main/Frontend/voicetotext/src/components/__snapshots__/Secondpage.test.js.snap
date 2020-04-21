@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should take a snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="Secondpage"
+    id="main"
+  >
+    <div>
+      <form>
+        <h1
+          class="Uploadheader"
+        >
+          Please upload the audio file
+        </h1>
+        <input
+          class="Input"
+          name="voiceFile"
+          required=""
+          type="file"
+        />
+        <button
+          class="Buttonformat"
+          type="submit"
+        >
+          Upload
+        </button>
+      </form>
+      <div
+        class="ORtext"
+      >
+        or
+      </div>
+      <a>
+        <button
+          class="Historybutton"
+          type="submit"
+        >
+          Go To History
+          <span
+            class="tooltiptext"
+          >
+            Previously uploaded files
+          </span>
+        </button>
+      </a>
+      <div
+        class="Textdata"
+      >
+        <label
+          class="LabelTextdata"
+        >
+          Converted Text
+        </label>
+        <div />
+        <label
+          class="Confi"
+        >
+          Text Confidence : 0%
+        </label>
+      </div>
+      <div
+        class="Categorydata"
+      >
+        <label
+          class="LabelTextdata"
+        >
+          Categorized Text
+        </label>
+      </div>
+      <button
+        class="btn btn-danger"
+        id="calltopopup"
+      >
+        Add keyword for IMIST-AMBO
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;
