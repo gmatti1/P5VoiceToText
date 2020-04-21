@@ -1,14 +1,19 @@
 import React from 'react';
-const Trigger = ({ triggerText, buttonRef, showModal }) => {
-return (
-	<button
+
+const Trigger = ({ 
+	triggerText, 
+	buttonRef, 
+	showModal 
+	}) => {
+	return (
+		<button
 		className="btn btn-danger"
 		id="calltopopup"
 		ref={buttonRef}
 		onClick={showModal}
-	>
-		{triggerText}
-	</button>
-);
+		>
+			{triggerText}
+		</button>
+	);
 };
 export default Trigger;

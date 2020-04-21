@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should take a snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="Firstpage"
+  >
+    <div
+      class="Navbarsize"
+    >
+      <nav
+        class="navbar sticky-top justify-content-center"
+        id="navbg"
+      >
+        <img
+          alt="Website logo"
+          class="App-logobig"
+          src="pchlogo.png"
+        />
+      </nav>
+    </div>
+    <div
+      class="App-bg"
+    />
+    <header
+      class="Appheaderfp"
+    >
+      <h1
+        class="Apptitlefp"
+      >
+        Voice-To-Text Application of Pediatric IMIST-AMBO Criteria
+      </h1>
+    </header>
+    <header
+      class="App-footer"
+    >
+      <a>
+        <button>
+          <img
+            alt="arrow"
+            class="Arrow"
+            src="arrow.png"
+          />
+        </button>
+      </a>
+    </header>
+  </div>
+</DocumentFragment>
+`;

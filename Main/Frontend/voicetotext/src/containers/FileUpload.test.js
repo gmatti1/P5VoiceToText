@@ -4,40 +4,51 @@ import FileUpload from "./FileUpload";
 import { configure } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
+/**
+ * 
+ *
+ * @version 1.0
+ * @author [Shashidhar Reddy Vanteru]
+ * @copyright [Copyright 2020, P5VoiceToText]
+ * @credits  [Shashidhar Reddy Vanteru]
+ * @email "svanter1@asu.edu"
+ * 
+ */
+
 configure({ adapter: new Adapter() });
+
 beforeAll(() => {
     global.fetch = jest.fn();
-    //window.fetch = jest.fn(); if running browser environment
+   
   });
   let wrapper;
+
 
 describe("FileUpload", () => {
     
     let mockSubmit;
     beforeEach(() => {
-      mockSubmit = jest.fn();
-      wrapper = shallow(<FileUpload submit={mockSubmit} />);
+		mockSubmit = jest.fn();
+		wrapper = shallow(<FileUpload submit={mockSubmit} />);
     });
    
     it("should match the snapshot", () => {
-        expect(wrapper).toMatchSnapshot();
-      });
-
-
+			expect(wrapper).toMatchSnapshot();
+    });
 
 
 describe("handleChange", () => {
     it("should call setState on title", () => {
         const mockPreventDefault = jest.fn();
-    const mockEvent = {
-      preventDefault: mockPreventDefault,
-      target: {
-            
-        value: "test"
-
-    }
-    };
+		const mockEvent = {
+			preventDefault: mockPreventDefault,
+			target: {           
+				value: "test"
+			}
+		};
       
+
+	
       const expected = {
         isFileUploaded: null,
       title: '',
@@ -50,6 +61,7 @@ describe("handleChange", () => {
       disabled: false,
       istextupdated: false,
       targetElement: null,
+      uploadButtonClicked: false,
       stats: [],
         convertedText:"test"
       };

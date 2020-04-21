@@ -1,11 +1,9 @@
 import React from 'react';
 
 import {render, cleanup} from '@testing-library/react';
-import App from './App';
 
 /**
  * 
- *
  * @version 1.0
  * @author [Shashidhar Reddy Vanteru]
  * @copyright [Copyright 2020, P5VoiceToText]
@@ -15,9 +13,8 @@ import App from './App';
  */
 
 afterEach(cleanup)
-it('should take a snapshot', () => {
-  const { asFragment } = render(<App />)
+it('should render a div', () => {
+  const { container } = render(<button />)
   
-  expect(asFragment(<App />)).toMatchSnapshot()
+  expect(container.firstChild);
  });
-

@@ -1,9 +1,16 @@
 import React from './../../node_modules/react';
 import './../styles/App.css';
 import './../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-//import Navbar from './../navigation/Navbar';
-//import arrow from './../assets/arrow.png';
-//import { Link } from './../../node_modules/react-scroll';
+/**
+ * 
+ *
+ * @version 1.0
+ * @author [Shashidhar Reddy Vanteru]
+ * @copyright [Copyright 2020, P5VoiceToText]
+ * @credits  [Shashidhar Reddy Vanteru]
+ * @email "svanter1@asu.edu"
+ * 
+ */
 
 class ErrorHandler extends React.Component {
     constructor(props) {
