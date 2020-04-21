@@ -2,8 +2,6 @@ import React from 'react';
 
 import {render, cleanup} from '@testing-library/react';
 
-
-
 /**
  * 
  * @version 1.0
@@ -16,8 +14,7 @@ import {render, cleanup} from '@testing-library/react';
 
 afterEach(cleanup)
 it('should render a div', () => {
-  const { container } = render(<div />)
+  const { container } = render(<button />)
   
-  expect(container.firstChild.Loader);
+  expect(container.firstChild);
  });
-
