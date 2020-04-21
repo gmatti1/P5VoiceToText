@@ -1,7 +1,6 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import './../styles/App.css';
 import { Link } from './../../node_modules/react-scroll';
-import { slowImport } from '../containers/Helper';
 
 import Loader from '../containers/Loader';
 import PopUp from '../containers/PopUp';
@@ -11,7 +10,6 @@ import CategorizedText from '../containers/CategorizedText';
 import {
   disableBodyScroll,
   enableBodyScroll,
-  clearAllBodyScrollLocks,
 } from 'body-scroll-lock';
 
 /**
@@ -129,6 +127,7 @@ class FileUpload extends React.Component {
     }
   };
   componentDidMount() {
+    this.targetElement = document.querySelector('#popup1');
     window.addEventListener('beforeunload', this.beforeunload);
   }
 
@@ -188,8 +187,6 @@ class FileUpload extends React.Component {
   }
 
   formatCategories(textCategorized) {
-    var i = 0;
-    var textArr = [];
     Object.keys(textCategorized).forEach((key) => {
       var temp = '';
       for (var j = 0; j < textCategorized[key].length; j++) {
@@ -202,10 +199,7 @@ class FileUpload extends React.Component {
     this.setState({ uploadButtonClicked: false });
   }
 
-  componentDidMount() {
-    this.targetElement = document.querySelector('#popup1');
-  }
-
+ 
   getConfidence() {
     var arr = this.state.stats;
     var total = 0;

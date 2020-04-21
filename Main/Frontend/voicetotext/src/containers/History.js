@@ -87,13 +87,11 @@ class History extends Component {
 	}
 	
 	formatCategories(invalue){
-		var i = 0;
-		var textArr = [];
 		Object.keys(invalue).forEach(key => {
 		var temp = ""
 		for(var j=0; j < invalue[key].length; j++){
 			temp += invalue[key][j];
-			if(j!=invalue[key].length-1) temp+="\n"
+			if(j!==invalue[key].length-1) temp+="\n"
 		}
 		invalue[key] = temp;
 		})
@@ -119,11 +117,10 @@ class History extends Component {
 		headers: {
 			'Content-Type': 'application/json'
 		}
-		}).
-		then(response => response.json())
+		}).then(response => response.json())
 		.then(title =>
 		{
-			// console.log(title),
+		
 			this.setState({ invalueother:title['text'],
 			stats:title['stats']
 		});
@@ -142,7 +139,7 @@ class History extends Component {
         console.log(textCategorized);
         this.setState({ invalue:textCategorized
 		});
-		console.log(this.state.invalue);
+		console.log(this.state.invalue);	
 		this.formatCategories(this.state.invalue)
 		})
 		//this.state.loading =true;    
@@ -151,8 +148,6 @@ class History extends Component {
 
 	formatCategories(textCategorized)
 	{
-		var i = 0;
-		var textArr = [];
 		Object.keys(textCategorized).forEach(key => {
 		var temp = ""
 		for(var j=0; j < textCategorized[key].length; j++){
