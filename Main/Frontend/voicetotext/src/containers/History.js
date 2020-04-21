@@ -3,6 +3,17 @@ import HistPopUp from '../containers/HistPopUp';
 import './../styles/index.css';
 import './../styles/App.css';
 
+
+/**
+ * 
+ *
+ * @version 1.0
+ * @author [Shashidhar Reddy Vanteru]
+ * @copyright [Copyright 2020, P5VoiceToText]
+ * @credits  [Shashidhar Reddy Vanteru]
+ * @email "svanter1@asu.edu"
+ * 
+ */
 class History extends Component {
 	constructor(props) {
 		super(props);

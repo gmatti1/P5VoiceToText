@@ -7,6 +7,17 @@ import { configure } from "enzyme";
 configure({ adapter: new Adapter() });
 let wrapper;
 
+/**
+ * 
+ *
+ * @version 1.0
+ * @author [Shashidhar Reddy Vanteru]
+ * @copyright [Copyright 2020, P5VoiceToText]
+ * @credits  [Shashidhar Reddy Vanteru]
+ * @email "svanter1@asu.edu"
+ * 
+ */
+
 describe('Hitsory', () => {
     
    

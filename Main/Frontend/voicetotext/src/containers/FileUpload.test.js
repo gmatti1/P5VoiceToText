@@ -4,6 +4,17 @@ import FileUpload from "./FileUpload";
 import { configure } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
+/**
+ * 
+ *
+ * @version 1.0
+ * @author [Shashidhar Reddy Vanteru]
+ * @copyright [Copyright 2020, P5VoiceToText]
+ * @credits  [Shashidhar Reddy Vanteru]
+ * @email "svanter1@asu.edu"
+ * 
+ */
+
 configure({ adapter: new Adapter() });
 beforeAll(() => {
     global.fetch = jest.fn();

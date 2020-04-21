@@ -14,6 +14,17 @@ import {
   clearAllBodyScrollLocks,
 } from 'body-scroll-lock';
 
+/**
+ * 
+ *
+ * @version 1.0
+ * @author [Shashidhar Reddy Vanteru]
+ * @copyright [Copyright 2020, P5VoiceToText]
+ * @credits  [Shashidhar Reddy Vanteru]
+ * @email "svanter1@asu.edu"
+ * 
+ */
+
 class FileUpload extends React.Component {
   constructor(props) {
     super(props);
