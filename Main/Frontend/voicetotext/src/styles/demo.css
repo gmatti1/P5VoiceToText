@@ -6,30 +6,29 @@
   height: 100%;
   z-index: 10;
   transform: translateZ(0);
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.86);
 }
 
 .modal-area {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 20%;
+  left: 10%;
+  width: 80%;
+  height: 60%;
   padding: 4.5em 2.4em 4.5em 2.4em;
   background: rgb(0, 102, 102); /* Fallback color */
   background: rgba(0, 102, 102, 0.7); /* Black background with 0.5     opacity */
 
 border-radius: 6px;
   box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  
 }
 
 #inputPopUp{
 border-radius: 6px;
 border: 2px solid #32cd32;
 font-family: Josefin Sans;
-font-size: 1.2em;
+font-size: 3vh;
 background-color: #003652;
 color: white;
 }
@@ -38,15 +37,37 @@ color: white;
 border-radius: 6px;
 border: 2px solid #32cd32;
 font-family: Josefin Sans;
-font-size: 1.2em;
+font-size: 3vh;
 background-color: #003652;
 color: white;
+}
+
+#calltopopup{
+font-size: 2.5vh;
+background-color: #e6faff;
+border: 2px solid #32cd32;
+font-family: Josefin Sans;
+color:black;
+border-radius: 5px;
+position:absolute;
+left:5%;
+top:269%;
+height:5.7%;
+width:90%;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+#calltopopup:hover{
+background-color:#32cd32;
+color:white;
 }
 
 #buttonPopUp{
 background-color: white;
 font-family: Josefin Sans;
-font-size: 1.2em;
+font-size: 3vh;
 border-radius: 6px;
 border: 2px solid #32cd32;
 color: black;
@@ -57,17 +78,6 @@ background-color: #32cd32;
 color: white;
 }
 
-@media screen and (min-width: 500px) {
-  /* Center the Modal! */
-  .modal-area {
-    left: 50%;
-    top: 50%;
-    height: auto;
-    transform: translate(-50%, -50%);
-    max-width: 30em;
-    max-height: calc(100% - 1em);
-  }
-}
 
 ._modal-close {
   position: absolute;
@@ -109,3 +119,70 @@ color: white;
   overflow: hidden;
   margin-right: 17px;
 }
+
+
+
+@media only screen and (min-width:769px) {
+  /* Center the Modal! */
+ 
+
+.modal-area {
+  position: fixed;
+  top: 20%;
+  left: 25%;
+  width: 50%;
+  height: 60%;
+ 
+  
+}
+
+#calltopopup{
+font-size: 2.8vh;
+background-color: #e6faff;
+border: 2px solid #32cd32;
+font-family: Josefin Sans;
+color:black;
+border-radius: 5px;
+position:absolute;
+left:52%;
+top:193.8%;
+height:5.7%;
+width:45%;
+
+}
+
+}
+
+@media only screen and (min-width:1000px) {
+  /* Center the Modal! */
+ 
+
+.modal-area {
+  position: fixed;
+  top: 20%;
+  left: 25%;
+  width: 50%;
+  height: 60%;
+ 
+  
+}
+
+#calltopopup{
+font-size: 3vh;
+background-color: #e6faff;
+border: 2px solid #32cd32;
+font-family: Josefin Sans;
+color:black;
+border-radius: 5px;
+position:absolute;
+left:52%;
+top:192.9%;
+height:6.5%;
+width:45%;
+
+vertical-align: middle;
+text-align: center;
+}
+
+}
+

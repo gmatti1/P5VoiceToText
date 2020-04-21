@@ -24,9 +24,9 @@ function Firstpage() {
           offset={0}
           duration={500}
         >
-          <a href=''>
+          <button >
             <img src={arrow} className='Arrow' alt='arrow' />
-          </a>
+          </button>
         </Link>
       </header>
     </div>

@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 
 """Provides all the necessary configurations needed to setup the Flask app.
+<<<<<<< HEAD
+=======
+
+>>>>>>> d0b6e9fdd895c147ea86c3d1c9a5f812c111c9c4
 It will contain all the variables which could be used anywhere in the project. 
 This defines the "system properties", all the necessary variables, required
 anywhere in the project, which has to be hardcoded should be initialized and 
@@ -41,14 +45,13 @@ class Config(object):
 		IP address for 'staging' environment
 	PROD_IP : str
 		IP address for 'profuction' environment
+
 	ACCESS_KEY_ID : str
 		AWS Crediatial - required to access AWS
 	ACCESS_SECRET_KEY : str
 		AWS Crediatial - required to access AWS
 	BUCKET_NAME : str
 		AWS S3 Bucket
-	MONGODB_SETTINGS : dictionary
-		specifies where the MongoDB is hosted
 	"""
 	DEBUG = False
 	SECRET_KEY = os.urandom(24)

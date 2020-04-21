@@ -1,8 +1,8 @@
 import React from 'react';
-import { Modal } from '../containers/Modal';
-import TriggerButton from '../containers/TriggerButton';
+import { HistModal } from '../containers/HistModal';
+import HistTriggerButton from '../containers/HistTriggerButton';
 
-class PopUp extends React.Component {
+class HistPopUp extends React.Component {
 	
 	state = { isShown: false };
 
@@ -21,7 +21,7 @@ class PopUp extends React.Component {
 
 	onKeyDown = (event) => {
 		if (event.keyCode === 27) {
-		this.closeModal();
+			this.closeModal();
 		}
 	};
  
@@ -31,28 +31,33 @@ class PopUp extends React.Component {
 	};
  
 	toggleScrollLock = () => {
-		document.querySelector('html').classList.toggle('scroll-lock');
+		document.querySelector('html').classList.toggle('histscroll-lock');
 	};
 
 	render() {
 		return (
 			<React.Fragment>
-				<TriggerButton
+				<HistTriggerButton
 					showModal={this.showModal}
 					buttonRef={(n) => (this.TriggerButton = n)}
 					triggerText={this.props.triggerText}
 				/>
 				{this.state.isShown ? (
-				<Modal
+				<HistModal
+					onSubmit={this.props.onSubmit}
 					modalRef={(n) => (this.modal = n)}
 					buttonRef={(n) => (this.closeButton = n)}
 					closeModal={this.closeModal}
 					onKeyDown={this.onKeyDown}
 					onClickOutside={this.onClickOutside}
+					invalue={this.props.invalue}
+					invalueother={this.props.invalueother}
+					handleChangeTeatarea={this.props.handleChangeTeatarea}
 				/>
 				) : null}
 			</React.Fragment>
 		);
 	}
 }
-export default PopUp;
+
+export default HistPopUp;

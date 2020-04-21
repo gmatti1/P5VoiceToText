@@ -1,11 +1,26 @@
+# -*- coding: utf-8 -*-
+
+"""A utility for performing Text Conversion of the audio file
+
+Provides a class 'VoiceText' that is responsible for converting the audio file to text.
+The text conversion is done with the help of AWS transcribe.
+"""
+
 import boto3
 import time
 import requests
 
 from P5VoiceToText.models import Voice_text_conversion
 from P5VoiceToText.files.utils import AudioFile
-
 from P5VoiceToText.config import Config
+
+__author__ = "Gangadhara Matti"
+__copyright__ = "Copyright 2020, P5VoiceToText"
+__credits__ = ["Gangadhara Matti"]
+__version__ = "1.0"
+__maintainer__ = ["Gangadhara Matti"]
+__email__ = "gmatti1@asu.edu"
+__status__ = "Production"
 
 # AWS required
 from botocore.exceptions import NoCredentialsError
@@ -16,13 +31,40 @@ aws_bucket_name = Config.BUCKET_NAME
 
 
 class VoiceText:
+    """
+    This is a class for converting the audio file to text.
+
+    Attributes
+    ----------
+    voice_file : voice_file object reference
+        reference of the audio file stored in voice_file
+
+    converted_text : str
+        text of the audio file
+
+    text_stats : list
+        This list contains the words of the text along with accuracy details
+        start time, end time, pronunciation/punctuation, accuracy
+    """
     def __init__(self):
         self.voice_file = None
         self.converted_text = ""
         self.text_stats = []
 
-    # test_gangadhar1.mp3
     def get_voice_text_from_db(self, filename):
+        """The function get the voice text data for a filename stored
+        in mmondoDB document
+
+        Parameters
+        ----------
+        filename: str
+            name of the file for which text needs to be retrieved
+
+        Returns
+        -------
+        VoiceText: object
+            VoiceText object containing the converted text and statistics of that text
+        """
         audio_file = AudioFile()
         audio_file.filename = filename
         self.voice_file = audio_file.get_voice_file_from_db()
@@ -43,6 +85,17 @@ class VoiceText:
         return len(text) > 0
 
     def update_voice_text(self, filename):
+        """The function updates the voice text data for a filename stored
+        in mondoDB document
+
+        Parameters
+        ----------
+        filename: str
+            name of the file for which text needs to be updated
+
+        Returns
+        -------
+        """
         audio_file = AudioFile()
         audio_file.filename = filename
         self.voice_file = audio_file.get_voice_file_from_db()
@@ -51,6 +104,17 @@ class VoiceText:
         text.save()
 
     def store_voice_text(self, filename):
+        """The function stores the voice text data for a filename in the mongoDB
+        document
+
+        Parameters
+        ----------
+        filename: str
+            name of the file for which text needs to be stored
+
+        Returns
+        -------
+        """
         audio_file = AudioFile()
         audio_file.filename = filename
         self.voice_file = audio_file.get_voice_file_from_db()
@@ -58,6 +122,18 @@ class VoiceText:
                                                       text_stats=self.text_stats).save()
 
     def aws_voice_to_text(self, audiofile):
+        """The function converts the audio file to text using Amazon Transcribe service
+
+        Parameters
+        ----------
+        Audiofile: object
+            Audiofile object containing the filename and S3 link of the audio file
+
+        Returns
+        -------
+        VoiceText: object
+            VoiceText object containing the converted text and statistics of that text
+        """
         transcribe = boto3.client(
             'transcribe',
             region_name="us-west-2",
@@ -85,7 +161,7 @@ class VoiceText:
 
         text_uri = status.get("TranscriptionJob").get("Transcript").get("TranscriptFileUri")
 
-        # Step4: Retrieve the text
+        # Retrieve the text
         audio_text = requests.get(url=text_uri)
         data = audio_text.json()
 

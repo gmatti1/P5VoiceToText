@@ -1,0 +1,168 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should take a snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="App"
+  >
+    <div
+      class="Firstpage"
+    >
+      <div
+        class="Navbarsize"
+      >
+        <nav
+          class="navbar sticky-top justify-content-center"
+          id="navbg"
+        >
+          <img
+            alt="Website logo"
+            class="App-logobig"
+            src="pchlogo.png"
+          />
+        </nav>
+      </div>
+      <div
+        class="App-bg"
+      />
+      <header
+        class="Appheaderfp"
+      >
+        <h1
+          class="Apptitlefp"
+        >
+          Voice-To-Text Application of Pediatric IMIST-AMBO Criteria
+        </h1>
+      </header>
+      <header
+        class="App-footer"
+      >
+        <a>
+          <button>
+            <img
+              alt="arrow"
+              class="Arrow"
+              src="arrow.png"
+            />
+          </button>
+        </a>
+      </header>
+    </div>
+    <div
+      class="Secondpage"
+      id="main"
+    >
+      <div>
+        <form>
+          <h1
+            class="Uploadheader"
+          >
+            Please upload the audio file
+          </h1>
+          <input
+            class="Input"
+            name="voiceFile"
+            required=""
+            type="file"
+          />
+          <button
+            class="Buttonformat"
+            type="submit"
+          >
+            Upload
+          </button>
+        </form>
+        <div
+          class="ORtext"
+        >
+          or
+        </div>
+        <a>
+          <button
+            class="Historybutton"
+            type="submit"
+          >
+            Go To History
+            <span
+              class="tooltiptext"
+            >
+              Previously uploaded files
+            </span>
+          </button>
+        </a>
+        <div
+          class="Textdata"
+        >
+          <label
+            class="LabelTextdata"
+          >
+            Converted Text
+          </label>
+          <div />
+          <label
+            class="Confi"
+          >
+            Text Confidence : 0%
+          </label>
+        </div>
+        <div
+          class="Categorydata"
+        >
+          <label
+            class="LabelTextdata"
+          >
+            Categorized Text
+          </label>
+        </div>
+        <button
+          class="btn btn-danger"
+          id="calltopopup"
+        >
+          Add keyword for IMIST-AMBO
+        </button>
+      </div>
+    </div>
+    <div
+      class="Thirdpage"
+      id="hist"
+    >
+      <div
+        class="HistoryComponent"
+      >
+        <form>
+          <div
+            class="Historytext"
+          >
+            History
+          </div>
+          <div
+            class="Historylist"
+          >
+            <select
+              class="Historyselect"
+              required=""
+              size="10"
+            />
+          </div>
+          <div
+            class="SearchHist"
+          >
+            <input
+              class="Search"
+              placeholder=" Search filename.."
+              type="text"
+              value=""
+            />
+          </div>
+        </form>
+        <button
+          class="btn btn-danger center"
+          id="histcalltopopup"
+        >
+          See saved result
+        </button>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
