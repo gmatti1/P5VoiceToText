@@ -9,7 +9,7 @@ import ErrorHandler from './ErrorHandler';
  * 
  *
  * @version 1.0
- * @author [Shashidhar Reddy Vanteru]
+ * @author [Yuti Desai]
  * @copyright [Copyright 2020, P5VoiceToText]
  * @credits  [Shashidhar Reddy Vanteru]
  * @email "svanter1@asu.edu"

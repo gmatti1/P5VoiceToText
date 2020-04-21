@@ -102,7 +102,7 @@ exports[`should take a snapshot 1`] = `
           <label
             class="Confi"
           >
-            Text Confidence : NaN
+            Text Confidence : 0%
           </label>
         </div>
         <div
@@ -113,7 +113,6 @@ exports[`should take a snapshot 1`] = `
           >
             Categorized Text
           </label>
-          <div />
         </div>
         <button
           class="btn btn-danger"
