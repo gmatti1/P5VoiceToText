@@ -14,7 +14,7 @@ from flask import Flask
 from flask import jsonify
 from flask_cors import CORS, cross_origin
 from flask_mongoengine import MongoEngine
-
+import mongoengine as me
 from P5VoiceToText.config import Config, app_config
 
 
@@ -53,6 +53,9 @@ def create_app(config_name):
 	CORS(app, resources={r"/*": {"origins": "*"}})
 
 	# initializes "db" object.
+	db_config = DevelopmentConfig.MONGODB_SETTINGS
+	connection = me.connect(**db_config)
+	me.connection.disconnect()
 	db.init_app(app)
 	
 	# routes in subpackages are registered in app
