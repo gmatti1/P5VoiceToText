@@ -7,7 +7,12 @@ import './../styles/demo.css';
 import nl2br from 'react-newline-to-break';
 
 
-export const HistForm = ({ onSubmit, invalue, invalueother, handleChangeTeatarea }) => {
+export const HistForm = ({ 
+	onSubmit, 
+	invalue, 
+	invalueother, 
+	handleChangeTeatarea 
+	}) => {
 	return (
 		<div class="histpopformcss">
 			<form onSubmit={onSubmit}>
@@ -21,7 +26,7 @@ export const HistForm = ({ onSubmit, invalue, invalueother, handleChangeTeatarea
 					/>
 				</div>
 				<button className="histpopbutton" type="submit">  
-				Save>>
+					Save>>
 				</button>
 			</form>
 			<div className="histpopcatbox">

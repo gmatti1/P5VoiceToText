@@ -16,10 +16,12 @@ const HoverText = styled.textarea`
 class ConvertedText extends Component {
 	constructor(props) {
     super(props);
-  }
+	}
 
-	render() {
-		if (!this.props.loading) {
+	render() 
+	{
+		if (!this.props.loading) 
+		{
 			return null;
 		} 
 		else 
