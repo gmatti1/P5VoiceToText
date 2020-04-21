@@ -189,7 +189,7 @@ def add_new_file():
 		# If file exists in DB rename it
 		if audio_file.check_filename_exists() :
 			timestamp = time.strftime('%Y%m%d%H%M%S')
-			filename = filename_without_extension + timestamp + extension
+			filename = filename_without_extension + "_" + timestamp + extension
 			rename_file_path = upload_folder + filename
 			os.rename(file_complete_path, rename_file_path)
 			file_complete_path = rename_file_path
