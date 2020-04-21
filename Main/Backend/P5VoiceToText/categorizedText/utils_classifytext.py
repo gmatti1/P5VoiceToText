@@ -386,7 +386,6 @@ class ClassifyText:
 		self.sentences = self.split_into_sentences()
 
 		for sentence in self.sentences:
-			sentence = sentence.replace("[PROTECTED_DOT]", ".")
 			words = self.clean_text(sentence)
 			self.classify_text_into_categories(sentence, words)
 		return self.category_keyword
