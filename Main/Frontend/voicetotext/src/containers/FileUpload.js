@@ -8,16 +8,19 @@ import ConvertedText from '../containers/ConvertedText';
 import CategorizedText from '../containers/CategorizedText';
 
 /**
- * 
+ * This is the Upload file component. 
+ * It includes all the event handling for second page and backend API calls. 
+ * It calls ConvertedText, CategorizedText and PopUp components.
  *
  * @version 1.0
- * @author [Shashidhar Reddy Vanteru]
- * @copyright [Copyright 2020, P5VoiceToText]
- * @credits  [Shashidhar Reddy Vanteru]
- * @email "svanter1@asu.edu"
+ * @author [Shashidhar Reddy Vanteru] <svanter1@asu.edu>
+ * @author [Yuti Desai] <yrdesai@asu.edu>
+ * @author [Surya Cherukuri] <scheruk5@asu.edu>
+ * @author [Gangadhara Matti] <gmatti1@asu.edu>
+ * @copyright [Copyright 2020, P5VoiceToText] (https://github.com/gmatti1/P5VoiceToText)
  * 
  */
-
+ 
 class FileUpload extends React.Component {
 	constructor(props) 
 	{
@@ -41,7 +44,7 @@ class FileUpload extends React.Component {
 		this.OnSubmittingForm = this.OnSubmittingForm.bind(this);
 		this.Upload_file = this.Upload_file.bind(this);
 	}
-
+	
 	Upload_file(file) 
 	{
 		this.setState({
@@ -108,16 +111,17 @@ class FileUpload extends React.Component {
 	};
 
 
-  handleChangeupload = (event) => {
-    if (event.target.value != null) {
-      localStorage.setItem('value', event.target.value);
-      this.setState({ disabled: false });
-    }
-  };
-  componentDidMount() {
-    this.targetElement = document.querySelector('#popup1');
-    window.addEventListener('beforeunload', this.beforeunload);
-  }
+	handleChangeupload = (event) => {
+		if (event.target.value != null) {
+			localStorage.setItem('value', event.target.value);
+			this.setState({ disabled: false });
+		}
+	};
+	
+	componentDidMount() {
+		this.targetElement = document.querySelector('#popup1');
+		window.addEventListener('beforeunload', this.beforeunload);
+	}
 
 	componentWillUnmount() {
 		window.removeEventListener('beforeunload', this.beforeunload);
@@ -230,7 +234,7 @@ class FileUpload extends React.Component {
 					type='submit'
 					disabled={this.state.disabled}
 					>
-					Upload
+						Upload
 					</button>
 				</form>
 				<div className='ORtext'>or</div>

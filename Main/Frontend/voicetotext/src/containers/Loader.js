@@ -1,6 +1,16 @@
 import React from 'react';
 import './../styles/App.css';
 
+/**
+ * 
+ * This is the Loader component. 
+ * It is the loading indicator for API calls.
+ *
+ * @version 1.0
+ * @author [Yuti Desai] <yrdesai@asu.edu>
+ * @copyright [Copyright 2020, P5VoiceToText] (https://github.com/gmatti1/P5VoiceToText)
+ *
+ */
 
 class Loader extends React.Component {
 	constructor(props) {

@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from 'react';
 
+/**
+ * 
+ * THis is the Helper component for slowImport.
+ *
+ * @version 1.0
+ * @author [Yuti Desai] <yrdesai@asu.edu>
+ * @copyright [Copyright 2020, P5VoiceToText] (https://github.com/gmatti1/P5VoiceToText)
+ *
+ */
+
 export function slowImport(value, ms = 1000) 
 {
 	return new Promise(resolve => {

@@ -2,18 +2,19 @@ import React, { Component } from './../../node_modules/react';
 import HistPopUp from '../containers/HistPopUp';
 import './../styles/index.css';
 import './../styles/App.css';
-
-
-/**
- * 
+ 
+ /**
+ * This is the History component which displays previously uploaded files.
+ * It makes a call to HistPopUp component.
  *
  * @version 1.0
- * @author [Shashidhar Reddy Vanteru]
- * @copyright [Copyright 2020, P5VoiceToText]
- * @credits  [Shashidhar Reddy Vanteru]
- * @email "svanter1@asu.edu"
- * 
+ * @author [Yuti Desai] <yrdesai@asu.edu>
+ * @author [Shashidhar Reddy Vanteru] <svanter1@asu.edu>
+ * @author [Surya Cherukuri] <scheruk5@asu.edu>
+ * @copyright [Copyright 2020, P5VoiceToText] (https://github.com/gmatti1/P5VoiceToText)
+ *
  */
+ 
 class History extends Component {
 	constructor(props) 
 	{
@@ -189,8 +190,8 @@ class History extends Component {
 						<input className='Search' 
 						type = "text" 
 						placeholder="&#xf002; Search filename.."
-							value={this.state.search}
-							onChange={this.updateSearch.bind(this)}
+						value={this.state.search}
+						onChange={this.updateSearch.bind(this)}
 						/>
 					</div>
 				</form>
