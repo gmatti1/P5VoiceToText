@@ -2,6 +2,16 @@ import React from 'react';
 import { Modal } from '../containers/Modal';
 import TriggerButton from '../containers/TriggerButton';
 
+/**
+ * This is the PopUp Component called from FileUpload component. 
+ * It calls the TriggerButton and Modal components.
+ *
+ * @version 1.0
+ * @author [Yuti Desai] <yrdesai@asu.edu>
+ * @copyright [Copyright 2020, P5VoiceToText] (https://github.com/gmatti1/P5VoiceToText)
+ *
+ */
+
 class PopUp extends React.Component {
 	
 	state = { isShown: false };

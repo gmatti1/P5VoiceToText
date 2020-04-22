@@ -3,6 +3,16 @@ import ReactDOM from 'react-dom';
 import Form from '../containers/Form';
 import FocusTrap from 'focus-trap-react';
 
+/**
+ * This is the Modal component for 'Add new keyword for IMIST-AMBO'. 
+ * It handles the modal PopUp close button and calls Form component.
+ *
+ * @version 1.0
+ * @author [Yuti Desai] <yrdesai@asu.edu>
+ * @copyright [Copyright 2020, P5VoiceToText] (https://github.com/gmatti1/P5VoiceToText)
+ *
+ */
+
 export const Modal = ({
 	onClickOutside,
 	onKeyDown,

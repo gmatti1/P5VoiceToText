@@ -1,6 +1,16 @@
 import React from 'react';
 import './../styles/App.css';
 
+/**
+ * This is the Form component. 
+ * It is the PopUp Modal form to add new keyword for IMIST-AMBO.
+ *
+ * @version 1.0
+ * @author [Yuti Desai] <yrdesai@asu.edu>
+ * @copyright [Copyright 2020, P5VoiceToText] (https://github.com/gmatti1/P5VoiceToText)
+ * 
+ */
+
 class Form extends React.Component{
 	constructor(props) {
 		super(props);
@@ -51,8 +61,6 @@ class Form extends React.Component{
 		event.preventDefault()   
 		this.setState({selectedValue: event.target.value});
     }
-	
-	
 	
 	render() {
 		return (
