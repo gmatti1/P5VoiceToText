@@ -26,6 +26,11 @@ class Form extends React.Component{
 		this.handleChangeSelect.bind(this);
     }
 
+	
+	/**
+	 *
+     * Gets called when the user click on the submit button on PopUp Modal Form component
+     */
     handleSubmit = (event) => {
 		event.preventDefault()	 
 		const inputValue = this.state.inputValue;
@@ -36,7 +41,8 @@ class Form extends React.Component{
 			keyword: inputValue,
 			category: selectedValue
 		};
-	  
+		
+	    // Use POST request to save inserted value for selected category 
 		fetch('/api/imistambo_glossary' , {
 			method: 'POST',
 			body: JSON.stringify(myBody),
@@ -52,11 +58,21 @@ class Form extends React.Component{
 		});		 
     }
 
+	/**
+	 *
+     * Gets called when user try to insert a value in the input box on the Modal Form.
+	 * It handles the change in the input box.
+     */
     handleChange = (event) => {
 		event.preventDefault()	
 		this.setState({inputValue: event.target.value});
     } 	
- 
+	
+	/**
+	 *
+     * Gets called when user selects a category from select box on the Modal Form.
+	 * It handles the change in the select options.
+     */
     handleChangeSelect = (event) => {
 		event.preventDefault()   
 		this.setState({selectedValue: event.target.value});

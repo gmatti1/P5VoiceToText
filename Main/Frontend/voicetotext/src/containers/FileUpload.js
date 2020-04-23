@@ -45,6 +45,10 @@ class FileUpload extends React.Component {
 		this.Upload_file = this.Upload_file.bind(this);
 	}
 	
+	/**
+     * This method gets called by OnSubmittingForm event handler.
+     *
+     */
 	Upload_file(file) 
 	{
 		this.setState({
@@ -52,7 +56,12 @@ class FileUpload extends React.Component {
 		});
 		this.getTextHelper();
 	}
-
+	
+	/**
+     * This method gets called by Upload_file method.
+	 * It uploads the file on the backend using PSOT request.
+     *
+     */
 	getTextHelper = () => {
 		const formData = new FormData();
 		formData.append('file', this.uploadInput.files[0]);
@@ -65,7 +74,11 @@ class FileUpload extends React.Component {
 		});
 		});
 	};
-
+	
+	/**
+	 *
+     * Gets called when the user clicks on the upload button and form is submitted.
+     */
 	OnSubmittingForm(e) 
 	{
 		e.preventDefault();
@@ -75,7 +88,13 @@ class FileUpload extends React.Component {
 		);
 		this.setState({ disabled: true });
 	}
-
+	
+	/**
+	 *
+     * Gets called when the user click on the save button in ConvertedText component.
+	 * It uses the PUT request for saving the changes made to converted text 
+	 * and calls the updateCategorizedText method.
+     */
 	handleSubmit = (event) => {
 		event.preventDefault();
 		const data = this.state.convertedText;
@@ -90,7 +109,12 @@ class FileUpload extends React.Component {
 		},
 		}).then((response) => this.updateCategorizedText());
 	};
-
+	
+	/**
+	 *
+     * Gets called by handleSubmit event handler for save button in ConvertedText component.
+	 * It calls formatCategories method to reflect changes on the categorizedText component.
+     */
 	updateCategorizedText() 
 	{
 		fetch('/api/categorizedText/' + this.state.filename, {
@@ -105,12 +129,20 @@ class FileUpload extends React.Component {
 		});
 	}
 
+	
+	/**
+	 *
+     * Gets called when user try to edit the text in the ConvertedText component textarea.
+     */
 	handleChange = (event) => {
 		event.preventDefault();
 		this.setState({ convertedText: event.target.value });
 	};
 
-
+	/**
+	 *
+     * Gets called when the user selects a file to upload.
+     */
 	handleChangeupload = (event) => {
 		if (event.target.value != null) {
 			localStorage.setItem('value', event.target.value);
@@ -119,7 +151,6 @@ class FileUpload extends React.Component {
 	};
 	
 	componentDidMount() {
-		this.targetElement = document.querySelector('#popup1');
 		window.addEventListener('beforeunload', this.beforeunload);
 	}
 
@@ -132,6 +163,12 @@ class FileUpload extends React.Component {
 		e.returnValue = true;
 	};
 
+	
+	/**
+	 *
+     * Once file is uploaded, this gets called.
+	 * It calls fetchcalltext and fecthcallcategory methods.
+     */
 	componentDidUpdate() {
 		if (this.state.isLoaded) {
 		  this.fetchcalltext(this.state.filename);
@@ -142,7 +179,12 @@ class FileUpload extends React.Component {
 		  this.setState({ textdone: false });
 		}
 	}
-
+	
+	/**
+	 *
+     * It uses POST request for backend API to get converted text 
+	 * and confidence of the words in the converted text
+     */
 	fetchcalltext(file) 
 	{
 		this.setState({ loading: true });
@@ -162,6 +204,10 @@ class FileUpload extends React.Component {
 		);
 	}
 
+	/**
+	 *
+     * It uses POST request for backend API to get values of IMIST-AMBO categories. 
+     */
 	fecthcallcategory(file) 
 	{
 		this.setState({ loading: true });
@@ -178,6 +224,11 @@ class FileUpload extends React.Component {
 		});
 	}
 
+	/**
+	 *
+     * Gets called by updateCategorizedText method.
+	 * It reflects the changes made to converted text on the categorizedText component.
+     */
 	formatCategories(textCategorized) {
 		var i = 0;
 		var textArr = [];
@@ -193,10 +244,12 @@ class FileUpload extends React.Component {
 		this.setState({ uploadButtonClicked: false });
 	}
 
-	componentDidMount() {
-		this.targetElement = document.querySelector('#popup1');
-	}
-
+	/**
+	 *
+     * It calculates the average confidence of the entire converted text by 
+	 * using confidence of the words in the converted text.
+	 * 
+     */
 	getConfidence() {
 		var arr = this.state.stats;
 		var total = 0;
@@ -212,8 +265,9 @@ class FileUpload extends React.Component {
 		return Math.round(total * 100).toString() + '%';
 	}
 
-
 	render() {
+		
+		// Name of the button that opens the PopUp Modal to add new keywords for IMIST-AMBO.
 		const triggerText = 'Add keyword for IMIST-AMBO';
 		return (
 			<div>
