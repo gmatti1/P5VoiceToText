@@ -11,6 +11,7 @@ import nl2br from 'react-newline-to-break';
  *
  * @version 1.0
  * @author [Yuti Desai] <yrdesai@asu.edu>
+ * @author [Surya Cherukuri] <scheruk5@asu.edu>
  * @copyright [Copyright 2020, P5VoiceToText] (https://github.com/gmatti1/P5VoiceToText)
  *
  */

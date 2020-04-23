@@ -269,6 +269,25 @@ class P5VoiceToTextTestCase(unittest.TestCase):
         res4 = self.client().put('api/categorizedText/test.wav')
         self.assertEqual(res4.status, '404 NOT FOUND')
         
+    def test_add_imistambo_glossary_inbulk(self):
+        res = self.client().post('/api/imistambo_glossary_inbulk')
+        self.assertEqual(res.status, '201 CREATED')
+    
+    def test_add_imistambo_glossary(self):
+        res = self.client().post('/api/imistambo_glossary', json = {'keyword':'test', 'category':'identification'})
+        self.assertEqual(res.status, '201 CREATED')
+    
+    def test_add_duplicate_imistambo_glossary(self):
+        res = self.client().post('/api/imistambo_glossary', json = {'keyword':'test', 'category':'identification'})
+        
+        res1 = self.client().post('/api/imistambo_glossary', json = {'keyword':'test', 'category':'identification'})
+        self.assertEqual(res1.status, '200 OK')
+
+    def test_get_imistambo_glossary(self):
+        res = self.client().post('/api/imistambo_glossary', json = {'keyword':'test', 'category':'identification'})
+        
+        res1 = self.client().get('/api/imistambo_glossary/test')
+        self.assertEqual(res1.status, '200 OK')
 
     def tearDown(self):
         """teardown all initialized variables."""
