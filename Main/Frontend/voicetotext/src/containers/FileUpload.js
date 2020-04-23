@@ -22,8 +22,7 @@ import CategorizedText from '../containers/CategorizedText';
  */
  
 class FileUpload extends React.Component {
-	constructor(props) 
-	{
+	constructor(props) {
 		super(props);
 
 		this.state = {
@@ -49,10 +48,9 @@ class FileUpload extends React.Component {
      * This method gets called by OnSubmittingForm event handler.
      *
      */
-	Upload_file(file) 
-	{
+	Upload_file(file) {
 		this.setState({
-		uploadButtonClicked: true,
+			uploadButtonClicked: true,
 		});
 		this.getTextHelper();
 	}
@@ -66,12 +64,12 @@ class FileUpload extends React.Component {
 		const formData = new FormData();
 		formData.append('file', this.uploadInput.files[0]);
 		fetch('/api/files', {
-		method: 'POST',
-		body: formData,
-		}).then((response) => {
-		response.json().then((data) => {
-		this.setState({ isLoaded: true, filename: data['filename'] });
-		});
+			method: 'POST',
+			body: formData,
+		})
+		.then((response) => response.json())
+		.then((data) => {
+			this.setState({ isLoaded: true, filename: data['filename'] });
 		});
 	};
 	
@@ -79,8 +77,7 @@ class FileUpload extends React.Component {
 	 *
      * Gets called when the user clicks on the upload button and form is submitted.
      */
-	OnSubmittingForm(e) 
-	{
+	OnSubmittingForm(e) {
 		e.preventDefault();
 		this.Upload_file();
 		alert(
@@ -102,12 +99,13 @@ class FileUpload extends React.Component {
 		  text: data,
 		};
 		fetch('/api/convertedText/' + this.state.filename, {
-		method: 'PUT',
-		body: JSON.stringify(myBody),
-		headers: {
-		'Content-Type': 'application/json',
-		},
-		}).then((response) => this.updateCategorizedText());
+			method: 'PUT',
+			body: JSON.stringify(myBody),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		})
+		.then((response) => this.updateCategorizedText());
 	};
 	
 	/**
@@ -115,17 +113,16 @@ class FileUpload extends React.Component {
      * Gets called by handleSubmit event handler for save button in ConvertedText component.
 	 * It calls formatCategories method to reflect changes on the categorizedText component.
      */
-	updateCategorizedText() 
-	{
+	updateCategorizedText() {
 		fetch('/api/categorizedText/' + this.state.filename, {
-		method: 'PUT',
-		headers: {
-        'Content-Type': 'application/json',
-		},
+			method: 'PUT',
+			headers: {
+        		'Content-Type': 'application/json',
+			},
 		})
 		.then((response) => response.json())
 		.then((textCategorized) => {
-        this.formatCategories(textCategorized);
+        	this.formatCategories(textCategorized);
 		});
 	}
 
@@ -185,22 +182,21 @@ class FileUpload extends React.Component {
      * It uses POST request for backend API to get converted text 
 	 * and confidence of the words in the converted text
      */
-	fetchcalltext(file) 
-	{
+	fetchcalltext(file) {
 		this.setState({ loading: true });
 		fetch('/api/convertedText/' + file, {
-		method: 'POST',
-		headers: {
-        'Content-Type': 'application/json',
-		},
+			method: 'POST',
+			headers: {
+        		'Content-Type': 'application/json',
+			},
 		})
 		.then((response) => response.json())
 		.then((title) =>
-        this.setState({
-        convertedText: title['text'],
-        stats: title['stats'],
-        textdone: true,
-        })
+        	this.setState({
+        		convertedText: title['text'],
+        		stats: title['stats'],
+        		textdone: true,
+        	})
 		);
 	}
 
@@ -208,19 +204,17 @@ class FileUpload extends React.Component {
 	 *
      * It uses POST request for backend API to get values of IMIST-AMBO categories. 
      */
-	fecthcallcategory(file) 
-	{
+	fecthcallcategory(file) {
 		this.setState({ loading: true });
 		fetch('/api/categorizedText/' + file, {
-		method: 'POST',
-		headers: {
-        'Content-Type': 'application/json',
-		},
+			method: 'POST',
+			headers: {
+        		'Content-Type': 'application/json',
+			},
 		})
 		.then((response) => response.json())
 		.then((textCategorized) => {
-        this.formatCategories(textCategorized);
-
+        	this.formatCategories(textCategorized);
 		});
 	}
 
@@ -230,15 +224,13 @@ class FileUpload extends React.Component {
 	 * It reflects the changes made to converted text on the categorizedText component.
      */
 	formatCategories(textCategorized) {
-		var i = 0;
-		var textArr = [];
 		Object.keys(textCategorized).forEach((key) => {
-		var temp = '';
-		for (var j = 0; j < textCategorized[key].length; j++) {
-			temp += textCategorized[key][j];
-			if (j != textCategorized[key].length - 1) temp += '\n';
-		}
-		textCategorized[key] = temp;
+			var temp = '';
+			for (var j = 0; j < textCategorized[key].length; j++) {
+				temp += textCategorized[key][j];
+				if (j != textCategorized[key].length - 1) temp += '\n';
+			}
+			textCategorized[key] = temp;
 		});
 		this.setState({ textCategorized: textCategorized });
 		this.setState({ uploadButtonClicked: false });
@@ -255,8 +247,7 @@ class FileUpload extends React.Component {
 		var total = 0;
 		var count = 0;
 		for (var i = 0; i < arr.length; i++) {
-			if (arr[i].type === 'pronunciation') 
-			{
+			if (arr[i].type === 'pronunciation') {
 				total += parseFloat(arr[i].alternatives[0].confidence);
 				count++;
 			}
@@ -274,40 +265,32 @@ class FileUpload extends React.Component {
 				<form onSubmit={this.OnSubmittingForm}>
 					<h1 className='Uploadheader'>Please upload the audio file</h1>
 					<input
-					className='Input'
-					type='file'
-					ref={(ref) => {
-					  this.uploadInput = ref;
-					}}
-					name='voiceFile'
-					required
-					onChange={this.handleChangeupload}
+						className='Input'
+						type='file'
+						ref={(ref) => {
+						  	this.uploadInput = ref;
+						}}
+						name='voiceFile'
+						required
+						onChange={this.handleChangeupload}
 					/>
-					<button
-					className='Buttonformat'
-					type='submit'
-					disabled={this.state.disabled}
-					>
+					<button className='Buttonformat' type='submit' disabled={this.state.disabled}>
 						Upload
 					</button>
 				</form>
 				<div className='ORtext'>or</div>
 				<Link
-				activeClass='active'
-				to='hist'
-				spy={true}
-				smooth={true}
-				offset={0}
-				duration={500}
+					activeClass='active'
+					to='hist'
+					spy={true}
+					smooth={true}
+					offset={0}
+					duration={500}
 				>
-					<button
-					className='Historybutton'
-					type='submit'
-					onClick={this.fetchlist}
-					>
-						Go To History
-						<span className='tooltiptext'>Previously uploaded files</span>
-					</button>
+				<button className='Historybutton' type='submit' onClick={this.fetchlist}>
+					Go To History
+					<span className='tooltiptext'>Previously uploaded files</span>
+				</button>
 				</Link>
 				<div className='Textdata'>
 					<label className='LabelTextdata'>Converted Text</label>
