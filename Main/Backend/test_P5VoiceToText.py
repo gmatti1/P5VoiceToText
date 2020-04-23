@@ -18,12 +18,7 @@ class P5VoiceToTextTestCase(unittest.TestCase):
     def setUp(self):
         """Define test variables and initialize app."""
         self.app = create_app(config_name="testing")
-        self.client = self.app.test_client
-
-    def test_imist_ambo_template_creation(self):
-        setup = False
-        res = self.client().post('/api/imistambo_glossary_inbulk')
-        self.assertEqual(res.status, '201 CREATED') 
+        self.client = self.app.test_client 
 
     #_______________________________________Test Cases for files_______________________________________
     
@@ -205,7 +200,75 @@ class P5VoiceToTextTestCase(unittest.TestCase):
         res = self.client().post('/api/categorizedText/test.wav')
         self.assertEqual(res.status, '404 NOT FOUND')
 
+    def test_get_categorized_text(self):
+        path = 'test.wav'
+        with open(path, 'rb') as f:
+            byteIO1 = BytesIO(f.read())
+        res = self.client().post('/api/files',data = {'file': (byteIO1, path)})
+
+        res1 = self.client().post('/api/convertedText/test.wav')
+        
+        res2 = self.client().post('/api/categorizedText/test.wav')
+        
+        res3 = self.client().get('/api/categorizedText/test.wav')
+        self.assertEqual(res3.status, '200 OK')
     
+    def test_get_categorized_text_without_file_in_database(self):
+        res = self.client().get('/api/categorizedText/test.wav')
+        self.assertEqual(res.status, '404 NOT FOUND')
+
+    def test_get_categorized_text_without_categorized_text_in_database(self):
+        path = 'test.wav'
+        with open(path, 'rb') as f:
+            byteIO1 = BytesIO(f.read())
+        res = self.client().post('/api/files',data = {'file': (byteIO1, path)})
+
+        res1 = self.client().post('/api/convertedText/test.wav')
+    
+        res2 = self.client().get('/api/categorizedText/test.wav')
+        self.assertEqual(res2.status, '404 NOT FOUND')
+
+    def test_update_categorized_text(self):
+        path = 'test.wav'
+        with open(path, 'rb') as f:
+            byteIO1 = BytesIO(f.read())
+        res = self.client().post('/api/files',data = {'file': (byteIO1, path)})
+
+        res1 = self.client().post('/api/convertedText/test.wav')
+
+        res2 = self.client().post('api/categorizedText/test.wav')
+        
+        res3 = self.client().put('/api/convertedText/test.wav', json={'text':'Updated Text'})
+        
+        res4 = self.client().put('api/categorizedText/test.wav')
+        self.assertEqual(res4.status, '200 OK')
+    
+    def test_update_categorized_text_without_file_in_database(self):
+        res = self.client().put('api/categorizedText/test.wav')
+        self.assertEqual(res.status, '404 NOT FOUND')
+
+    def test_update_categorized_text_without_convertedText_in_database(self):
+        path = 'test.wav'
+        with open(path, 'rb') as f:
+            byteIO1 = BytesIO(f.read())
+        res = self.client().post('/api/files',data = {'file': (byteIO1, path)})
+        
+        res1 = self.client().put('api/categorizedText/test.wav')
+        self.assertEqual(res1.status, '404 NOT FOUND')
+
+    def test_update_categorized_text_without_categorizedText_in_database(self):
+        path = 'test.wav'
+        with open(path, 'rb') as f:
+            byteIO1 = BytesIO(f.read())
+        res = self.client().post('/api/files',data = {'file': (byteIO1, path)})
+
+        res1 = self.client().post('/api/convertedText/test.wav')
+        
+        res3 = self.client().put('/api/convertedText/test.wav', json={'text':'Updated Text'})
+        
+        res4 = self.client().put('api/categorizedText/test.wav')
+        self.assertEqual(res4.status, '404 NOT FOUND')
+        
 
     def tearDown(self):
         """teardown all initialized variables."""
