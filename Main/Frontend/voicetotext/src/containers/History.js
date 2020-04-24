@@ -103,18 +103,6 @@ class History extends Component {
      * Gets called by updateCategorizedText method.
 	 * It reflects the changes made to converted text on the categorizedText window.
      */
-	formatCategories(invalue){
-		Object.keys(invalue).forEach(key => {
-		var temp = ""
-		for(var j=0; j < invalue[key].length; j++){
-			temp += invalue[key][j];
-			if(j!==invalue[key].length-1) temp+="\n"
-		}
-		invalue[key] = temp;
-		})
-		this.setState({ invalue: invalue });
-	}
-	
 	formatCategories(textCategorized)
 	{
 		Object.keys(textCategorized).forEach(key => {
