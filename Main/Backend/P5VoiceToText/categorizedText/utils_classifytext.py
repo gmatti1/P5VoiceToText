@@ -302,30 +302,7 @@ class ClassifyText:
 
 		"""
 		is_category_assigned = False
-
-		# To get age identification, we look for 'old' or 'age' words. The 
-		# words before or after them will give the age information
-		idx = 0
-		age_word = ""
-		for i in range(0, len(words)):
-			if words[i]=='age' or words[i]=='old':
-				age_word = words[i]
-				idx = i
-				break
-
-		if (age_word=='old' or age_word=='age') and words[i-2].isnumeric() \
-				and (sentence not in self.category_keyword['identification']): 
-		 	#ex: 23 year old, 23 years of age
-			self.category_keyword['identification'].append(sentence)
-			is_category_assigned = True
-
-		elif age_word=='age' and words[i+1].isnumeric() and (sentence \
-				not in self.category_keyword['identification']): 
-			#ex. age is 23 years
-			self.category_keyword['identification'].append(sentence)
-			is_category_assigned = True
-
-
+		
 		# Every word of the sentence is matched. There are cases when there are
 		# keywords with two words (bigram) or three words (trigram). Hence 
 		# unigram, bigrams and trigrams are matched. 
