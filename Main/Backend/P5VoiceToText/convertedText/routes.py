@@ -143,7 +143,6 @@ def update_convertedText(filename):
 	"""
 	content = request.json
 	if not bool(content) or 'text' not in content:
-		print("In here")
 		message = {
 			"message": "text is not present in the request"
 		}

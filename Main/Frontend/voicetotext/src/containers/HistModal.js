@@ -3,6 +3,16 @@ import ReactDOM from 'react-dom';
 import HistForm from '../containers/HistForm';
 import FocusTrap from 'focus-trap-react';
 
+/**
+ * This is the HistModal component for History tab.
+ * It handles the modal PopUp close button and calls HistForm component.
+ *
+ * @version 1.0
+ * @author [Yuti Desai] <yrdesai@asu.edu>
+ * @copyright [Copyright 2020, P5VoiceToText] (https://github.com/gmatti1/P5VoiceToText)
+ *
+ */
+
 export const HistModal = ({
 	onClickOutside,
 	onKeyDown,
@@ -17,22 +27,22 @@ export const HistModal = ({
 	return ReactDOM.createPortal(
 		<FocusTrap>
 			<aside
-				tag="aside"
-				role="dialog"
-				tabIndex="-1"
-				aria-modal="true"
-				className="histmodal-cover"
-				onClick={onClickOutside}
-				onKeyDown={onKeyDown}
+			tag="aside"
+			role="dialog"
+			tabIndex="-1"
+			aria-modal="true"
+			className="histmodal-cover"
+			onClick={onClickOutside}
+			onKeyDown={onKeyDown}
 			>
 				<div className="histmodal-area" ref={modalRef}>
 					<button
-						ref={buttonRef}
-						aria-label="Close Modal"
-						aria-labelledby="close-modal"
-						className="_histmodal-close"
-						onClick={closeModal}
-						>
+					ref={buttonRef}
+					aria-label="Close Modal"
+					aria-labelledby="close-modal"
+					className="_histmodal-close"
+					onClick={closeModal}
+					>
 						<span id="histclose-modal" className="_histhide-visual">
 							Close
 						</span>
@@ -53,4 +63,5 @@ export const HistModal = ({
 		document.body
 	);
 };
+
 export default HistModal;

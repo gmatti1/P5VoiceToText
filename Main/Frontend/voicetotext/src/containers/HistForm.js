@@ -6,6 +6,15 @@ import './../styles/index.css';
 import './../styles/demo.css';
 import nl2br from 'react-newline-to-break';
 
+/**
+ * This is the PopUp Modal form to display ConvertedText and CategorizedText for History component.
+ *
+ * @version 1.0
+ * @author [Yuti Desai] <yrdesai@asu.edu>
+ * @author [Surya Cherukuri] <scheruk5@asu.edu>
+ * @copyright [Copyright 2020, P5VoiceToText] (https://github.com/gmatti1/P5VoiceToText)
+ *
+ */
 
 export const HistForm = ({ 
 	onSubmit, 
@@ -18,11 +27,11 @@ export const HistForm = ({
 			<form onSubmit={onSubmit}>
 				<div className="histpopinputbox">
 					<textarea
-						className='histpopname'
-						id='histTextarea'
-						value={invalueother}
-						required
-						onChange={handleChangeTeatarea}
+					className='histpopname'
+					id='histTextarea'
+					value={invalueother}
+					required
+					onChange={handleChangeTeatarea}
 					/>
 				</div>
 				<button className="histpopbutton" type="submit">  

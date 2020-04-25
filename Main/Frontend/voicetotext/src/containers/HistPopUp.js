@@ -2,6 +2,16 @@ import React from 'react';
 import { HistModal } from '../containers/HistModal';
 import HistTriggerButton from '../containers/HistTriggerButton';
 
+/**
+ * This is the HistPopUp Component called from History component. 
+ * It calls the HistTriggerButton and HistModal components.
+ *
+ * @version 1.0
+ * @author [Yuti Desai] <yrdesai@asu.edu>
+ * @copyright [Copyright 2020, P5VoiceToText] (https://github.com/gmatti1/P5VoiceToText)
+ *
+ */
+
 class HistPopUp extends React.Component {
 	
 	state = { isShown: false };
@@ -38,12 +48,12 @@ class HistPopUp extends React.Component {
 		return (
 			<React.Fragment>
 				<HistTriggerButton
-					showModal={this.showModal}
-					buttonRef={(n) => (this.TriggerButton = n)}
-					triggerText={this.props.triggerText}
+				showModal={this.showModal}
+				buttonRef={(n) => (this.TriggerButton = n)}
+				triggerText={this.props.triggerText}
 				/>
 				{this.state.isShown ? (
-				<HistModal
+					<HistModal
 					onSubmit={this.props.onSubmit}
 					modalRef={(n) => (this.modal = n)}
 					buttonRef={(n) => (this.closeButton = n)}
@@ -53,7 +63,7 @@ class HistPopUp extends React.Component {
 					invalue={this.props.invalue}
 					invalueother={this.props.invalueother}
 					handleChangeTeatarea={this.props.handleChangeTeatarea}
-				/>
+					/>
 				) : null}
 			</React.Fragment>
 		);

@@ -1,28 +1,36 @@
+/* --------------------------------------------------------
+Style Sheet for P5VoiceToText
+
+version: 1.0
+last modified: 04.20.2020 by Yuti Desai
+author: Yuti Desai
+email: yrdesai@asu.edu
+----------------------------------------------------------*/
+
 .Firstpage {
     height: 102vh;
+}
 
-  }
-
-  .Navbarsize {
+.Navbarsize {
     padding: 2%;
-  }
+}
 
-  #navbg {
+#navbg {
     background-color: #004466;
     border-radius: 6px;
-  }
+}
 
-  .App-logobig {
+.App-logobig {
     height: 90px;
     justify-content: center;
-  }
+}
 
-  .App-baby {
+.App-baby {
     height: 100px;
     justify-content: center;
-  }
+}
 
-  .App-bg {
+.App-bg {
     margin: 0;
     position: absolute;
     background-image: url(./../assets/medical-wallpaper.jpg);
@@ -32,9 +40,9 @@
     top: 54%;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
-  }
+}
 
-  .Appheaderfp {
+.Appheaderfp {
     margin: 0;
     position: absolute;
     background: rgb(0, 68, 102); /* Fallback color */
@@ -43,36 +51,35 @@
       68,
       102,
       0.8
-    ); /* Black background with 0.5     opacity */
+    ); 
     height: 30%;
     color: #f1f1f1;
     width: 100%;
     top: 56%;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
-  }
+}
 
-  .App-footer {
-    position: absolute;
-    
+.App-footer {
+    position: absolute;    
     height: 15%;
     width: 100%;
     top: 86.8%;
-  }
+}
 
-  .Arrow {
+.Arrow {
     position: absolute;
     height: 78%;
     width: 20%;
     left: 40%;
     top: 3%;
-  }
+}
 
-  .Arrow:hover {
+.Arrow:hover {
     opacity: 0.8;
-  }
+}
 
-  .Apptitlefp {
+.Apptitlefp {
     margin: 0;
     position: relative;
     text-align: center;
@@ -81,16 +88,16 @@
     top: 50%;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
-  }
+}
 
-  .Secondpage {
+.Secondpage {
     height: 178vh;
     background-color: #004466;
     font-color: white;
    
-  }
+}
 
-  .Uploadheader {
+.Uploadheader {
     font-size: 3vh;
     color: white;
     font-family: Josefin Sans;
@@ -99,28 +106,25 @@
     text-align: center;
     top: 105%;
     left: 15%;
-  right: 15%;
- width:70%;
-  }
-
-
+    right: 15%;
+    width:70%;
+}
 
 .Input{
-border: 2px solid #32cd32;
- border-radius: 5px;
-font-size: 2.5vh;
-background-color: white;
-font-family: Josefin Sans;
-position:absolute;
-left: 12%;
-top: 112%;
-height: 5%;
-width:76%;
-   
+    border: 2px solid #32cd32;
+    border-radius: 5px;
+    font-size: 2.5vh;
+    background-color: white;
+    font-family: Josefin Sans;
+    position:absolute;
+    left: 12%;
+    top: 112%;
+    height: 5%;
+    width:76%;   
 }
 
 
-  .Buttonformat:disabled {
+.Buttonformat:disabled {
     font-size: 2.5vh;
     background-color: white;
     border: 2px solid #32cd32;
@@ -131,12 +135,12 @@ width:76%;
     height: 5%;
     width: 20%;
     border-radius: 5px;
-display: flex;
-align-items: center;
-justify-content: center;
-  }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-  .Buttonformat:enabled {
+.Buttonformat:enabled {
     font-size: 2.5vh;
     background-color: white;
     border: 2px solid #32cd32;
@@ -147,17 +151,17 @@ justify-content: center;
     height: 5%;
     width: 20%;
     border-radius: 5px;
-display: flex;
-align-items: center;
-justify-content: center;
-  }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-  .Buttonformat:enabled:hover {
+.Buttonformat:enabled:hover {
     background-color: #32cd32;
     color: white;
-  }
+}
 
- .ORtext {
+.ORtext {
     font-size: 2.5vh;
     color: white;
     font-family: Josefin Sans;
@@ -169,10 +173,10 @@ justify-content: center;
     border: 2px solid #32cd32;
     border-radius: 5px;
     text-align: center;
-display: flex;
-align-items: center;
-justify-content: center;
-  }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
  .Historybutton {
     font-size: 2.5vh;
