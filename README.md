@@ -28,7 +28,7 @@ styles - All style sheets go here
 
 #### Follow below steps to run the project:
 
-1. Install libraries using pip3 in command prompt.
+1. Install libraries using pip3 in command prompt. <br>
    	pip3 install flask <br>
 		pip3 install python-dotenv <br>
 		pip3 install flask-cors <br>
@@ -71,4 +71,4 @@ categorizedText - package that contains APIs for categorizing the text into IMIS
 
 <br>
 
-## Application is live on: http://54.189.169.94/
+## Application is live on: http://54.245.193.222/
