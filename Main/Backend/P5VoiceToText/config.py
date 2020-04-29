@@ -67,9 +67,9 @@ class Config(object):
 	PROD_IP = '54.189.169.94'
 
 	#AWS credentials
-	ACCESS_KEY_ID = 'AKIARH6IQHSVXUVLENNE'
-	ACCESS_SECRET_KEY = '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'
-	BUCKET_NAME = 'voicetotextsourcefile'
+	ACCESS_KEY_ID = 'AKIAS67A3UNUTCNUO2VJ'
+	ACCESS_SECRET_KEY = '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'
+	BUCKET_NAME = 'voicetotextaudiofiles'
 
 	
 class DevelopmentConfig(Config):
@@ -86,7 +86,7 @@ class TestingConfig(Config):
 	MONGODB_SETTINGS = {
 		'host': 'mongodb://localhost/test_P5VoiceToText'
 	}
-	Config.BUCKET_NAME = 'testvoicetotextbucket'
+	Config.BUCKET_NAME = 'voicetotextaudiofiles'
 	DEBUG = True
 
 
