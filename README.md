@@ -24,10 +24,6 @@ components - Has all the presentational/functional components <br>
 naviagtion - Since this web app has a single page all the general nav related components go in here <br>
 styles - All style sheets go here
 
-
-Application is live on - http://ser517phcvoicetotext.s3-website-us-west-2.amazonaws.com/
-
-
 ### Backend:
 
 #### Follow below steps to run the project:
