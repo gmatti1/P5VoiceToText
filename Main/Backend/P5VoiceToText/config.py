@@ -67,8 +67,8 @@ class Config(object):
 	PROD_IP = '54.189.169.94'
 
 	#AWS credentials
-	ACCESS_KEY_ID = 'AKIAS67A3UNUTCNUO2VJ'
-	ACCESS_SECRET_KEY = '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'
+	ACCESS_KEY_ID = ''
+	ACCESS_SECRET_KEY = ''
 	BUCKET_NAME = 'voicetotextaudiofiles'
 
 	
