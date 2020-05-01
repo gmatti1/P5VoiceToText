@@ -3,7 +3,7 @@
 
 Project is divided as Frontend(React) and Backend(Python, Flask)
 
-### Prerequisties:
+### Prerequisites:
 1. <a href="https://realpython.com/installing-python/"> Python 3.x </a> 
 2. <a href="https://pip.pypa.io/en/stable/installing/"> pip3 </a>
 3. <a href="https://docs.npmjs.com/downloading-and-installing-node-js-and-npm"> Node and NPM </a>
@@ -16,12 +16,12 @@ Project is divided as Frontend(React) and Backend(Python, Flask)
 1. Go inside Main/Frontend/voicetotext directory
 2. run "npm install" through command prompt
 3. run "npm start"
-4. Launch "localhost:3000" in the brower to view the application
+4. Launch "localhost:3000" in the browser to view the application
 
-#### Project Struture: <br>
+#### Project Structure: <br>
 containers - Has all the components with state <br>
 components - Has all the presentational/functional components <br>
-naviagtion - Since this web app has a single page all the general nav related components go in here <br>
+navigation - Since this web app has a single page all the general nav related components go in here <br>
 styles - All style sheets go here
 
 ### Backend:
@@ -45,14 +45,14 @@ styles - All style sheets go here
 		>>> nltk.download('stopwords') <br>
 		>>> nltk.download('punkt') <br>
 		>>> nltk.download('wordnet') <br>
-2. Run Flask by writing "python Main/Backend/run.py" in command prompt.
+2. Run Flask by writing "python Main/Backend/run.py" in the command prompt.
 3. Launch "localhost:5000" in the browser to access APIs.
 
 #### Project Structure: <br>
 ##### In Backend directory: <br>
 run.py - used for running the backend server of the application. <br>
 ##### In Backend/P5VoiceToText directory: <br>
-resources - contains all the file resouces <br>
+resources - contains all the file resources <br>
 config.py - contains all the configuration properties related to Database connection and Folder/File Path <br>
 models.py - contains models that helps to connect, create and edit the schema in database <br>
 main - package that contains basic pages of the application - Home, About Us <br>
