@@ -71,6 +71,11 @@ categorizedText - package that contains APIs for categorizing the text into IMIS
 1. In command prompt, go inside Main/Database directory
 2. write "mongorestore P5VoiceToText.db"
 
+
+### AWS Account Set up
+1. We need to set up IAM to access S3. Follow the steps in the <a href = "https://www.youtube.com/watch?v=v33Kl-Kx30o&t=476s"> YouTube video.</a>
+2. Access Transbcribe using python boto 3. Follow the steps in the <a href = "https://www.youtube.com/watch?v=SGRFNmIuX8Q"> YouTube Video. </a>
+
 <br>
 
 ## Application is live on: http://54.245.193.222/
