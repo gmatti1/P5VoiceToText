@@ -51,7 +51,7 @@ styles - All style sheets go here
 #### Project Structure: <br>
 ##### In Backend directory: <br>
 run.py - used for running the backend server of the application. <br>
-test_P5VoiceToText - package that tests the Backend APIs. <br>
+test_P5VoiceToText - file that tests the Backend APIs. <br>
 node_modules - stores the NLTK library and modules<br>
 ##### In Backend/P5VoiceToText directory: <br>
 resources - contains all the file resources <br>
