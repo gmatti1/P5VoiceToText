@@ -94,7 +94,7 @@ class ProductionConfig(Config):
 	TESTING = False
 	#MongoDB PROD
 	MONGODB_SETTINGS = {
-		'host': 'mongodb://54.214.166.253:27017/P5VoiceToText'
+		'host': 'mongodb://54.188.70.48:27017/P5VoiceToText'
 	}
 	DEBUG = False
 
