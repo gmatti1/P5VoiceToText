@@ -20,7 +20,7 @@ __maintainer__ = ["Shefali Anand"]
 __email__ = "sanand22@asu.edu"
 __status__ = "Production"
 
-app = create_app(config_name="development")
+app = create_app(config_name="production")
 
 if __name__ == '__main__':
     app.run()
