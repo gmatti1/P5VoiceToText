@@ -51,6 +51,8 @@ styles - All style sheets go here
 #### Project Structure: <br>
 ##### In Backend directory: <br>
 run.py - used for running the backend server of the application. <br>
+test_P5VoiceToText - package that tests the Backend APIs. <br>
+node_modules - stores the NLTK library and modules<br>
 ##### In Backend/P5VoiceToText directory: <br>
 resources - contains all the file resources <br>
 config.py - contains all the configuration properties related to Database connection and Folder/File Path <br>
@@ -60,7 +62,6 @@ errors - package that contains APIs for Error Handling <br>
 files - package that contains APIs for uploading or selecting audio files <br>
 convertedText - package that contains APIs for voice to text conversion functionality <br>
 categorizedText - package that contains APIs for categorizing the text into IMIST-AMBO categories <br>
-test_P5VoiceToText - file that tests the Backend APIs
 
 
 ### Database:
